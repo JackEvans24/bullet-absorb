@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dahpvdvtv4c1c"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_yp7k1"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_h27nb"]
+emission_enabled = true
+emission = Color(1, 1, 0.26, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_6vkiy"]
+material = SubResource("ORMMaterial3D_h27nb")
+radius = 0.3
+height = 0.6
+
+[node name="Bullet" type="Node3D"]
+script = ExtResource("1_yp7k1")
+speed = 10
+accuracy = 0.02
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_6vkiy")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 1, 0.607843, 1)
+light_energy = 2.0
+omni_attenuation = 0.435275
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+aabb = AABB(-0.5, -0.5, -0.5, 1, 1, 1)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_screen_exited"]
