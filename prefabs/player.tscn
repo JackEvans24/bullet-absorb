@@ -14,7 +14,7 @@ material = SubResource("StandardMaterial3D_se4rt")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 script = ExtResource("1_u023k")
-speed = 10.0
+speed = 12.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_xm2o2")
