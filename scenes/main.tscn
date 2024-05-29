@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccgpc6v5lruew"]
+
+[ext_resource type="PackedScene" uid="uid://c3tj0pdcum4wd" path="res://prefabs/player.tscn" id="1_e5x1h"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_id486"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2d6ir"]
+points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85wj3"]
+albedo_color = Color(1, 0.583333, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ugq1f"]
+material = SubResource("StandardMaterial3D_85wj3")
+
+[node name="Main" type="Node"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 0)
+mesh = SubResource("PlaneMesh_id486")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_2d6ir")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 20, 8)
+projection = 1
+size = 25.0
+far = 200.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.492404, 0.0868241, 0, 0.173648, 0.984808, -0.5, -0.852868, 0.150384, 0, 0, 0)
+layers = 0
+
+[node name="CameraPoles" type="Node3D" parent="."]
+visible = false
+
+[node name="Pole1" type="MeshInstance3D" parent="CameraPoles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -18)
+mesh = SubResource("CylinderMesh_ugq1f")
+
+[node name="Pole2" type="MeshInstance3D" parent="CameraPoles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 11)
+mesh = SubResource("CylinderMesh_ugq1f")
+
+[node name="Pole3" type="MeshInstance3D" parent="CameraPoles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -18)
+mesh = SubResource("CylinderMesh_ugq1f")
+
+[node name="Pole4" type="MeshInstance3D" parent="CameraPoles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 11)
+mesh = SubResource("CylinderMesh_ugq1f")
+
+[node name="Player" parent="." instance=ExtResource("1_e5x1h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
+speed = 15.0
