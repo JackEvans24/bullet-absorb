@@ -1,4 +1,4 @@
-extends Node3D
+class_name Bullet extends Node3D
 
 @export var speed = 5
 @export var accuracy = 1.0 / 6.0
@@ -16,3 +16,6 @@ func _physics_process(_delta):
 
 func _on_screen_exited():
 	queue_free()
+
+func absorb():
+	call_deferred("queue_free")

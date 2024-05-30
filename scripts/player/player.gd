@@ -5,6 +5,13 @@ extends CharacterBody3D
 @export var deceleration = 3.0
 @export var fall_acceleration = 10
 
+@onready var absorb: Absorb = $Absorb
+
+var absorb_count = 0
+
+func _ready():
+	absorb.bullet_absorbed.connect(_on_absorb)
+
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
@@ -23,3 +30,7 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, deceleration)
 
 	move_and_slide()
+
+func _on_absorb():
+	absorb_count += 1
+	print('current absorb count: %s' % absorb_count)

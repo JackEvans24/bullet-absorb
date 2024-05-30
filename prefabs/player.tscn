@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=9 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_u023k"]
+[ext_resource type="Script" path="res://scripts/player/absorb.gd" id="2_sawo1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_se4rt"]
 albedo_color = Color(0.33, 0.732, 1, 1)
@@ -9,6 +10,18 @@ albedo_color = Color(0.33, 0.732, 1, 1)
 material = SubResource("StandardMaterial3D_se4rt")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b08da"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4kfv7"]
+radius = 5.0
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_xjiou"]
+transparency = 1
+albedo_color = Color(0.2, 0.639216, 1, 0.756863)
+
+[sub_resource type="SphereMesh" id="SphereMesh_epkrr"]
+material = SubResource("ORMMaterial3D_xjiou")
+radius = 5.0
+height = 10.0
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -21,3 +34,19 @@ mesh = SubResource("CapsuleMesh_xm2o2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_b08da")
+
+[node name="Absorb" type="Node3D" parent="."]
+script = ExtResource("2_sawo1")
+absorb_cooldown = 1.0
+
+[node name="AbsorbArea" type="Area3D" parent="Absorb"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Absorb/AbsorbArea"]
+shape = SubResource("SphereShape3D_4kfv7")
+
+[node name="AbsorbMesh" type="MeshInstance3D" parent="Absorb"]
+visible = false
+mesh = SubResource("SphereMesh_epkrr")
+skeleton = NodePath("../AbsorbArea")
