@@ -13,8 +13,8 @@ var absorb_count = 0
 
 func _ready():
 	absorb.bullet_absorbed.connect(_on_absorb)
-	absorb.absorb_started.connect(_on_absorb_started)
-	absorb.absorb_ended.connect(_on_absorb_ended)
+	absorb.slowdown_started.connect(_on_slowdown_started)
+	absorb.slowdown_ended.connect(_on_slowdown_ended)
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -39,8 +39,8 @@ func _on_absorb():
 	absorb_count += 1
 	print('current absorb count: %s' % absorb_count)
 
-func _on_absorb_started():
+func _on_slowdown_started():
 	speed = absorb_speed
 
-func _on_absorb_ended():
+func _on_slowdown_ended():
 	speed = default_speed
