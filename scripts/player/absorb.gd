@@ -11,6 +11,7 @@ signal slowdown_ended
 
 @onready var area: Area3D = $AbsorbArea
 @onready var mesh: MeshInstance3D = $AbsorbMesh
+@onready var particles: GPUParticles3D = $AbsorbParticles
 
 var is_absorb_started = false
 var is_absorbing = false
@@ -27,19 +28,15 @@ func process_absorb_state(delta):
 		return
 
 	if not Input.is_action_pressed("absorb"):
-		end_absorb()
+		end_windup()
 		return
 
 	current_windup_time += delta
 	if not current_windup_time > absorb_windup:
 		return
 
-	print("ABSORB TRIGGER")
-
-	slowdown_ended.emit()
-	await trigger_absorb()
-
-	print("ABSORB END")
+	trigger_absorb()
+	end_windup()
 
 func trigger_absorb():
 	is_absorbing = true
@@ -52,17 +49,22 @@ func trigger_absorb():
 	await display_mesh()
 	await handle_cooldown()
 
-	end_absorb()
+	is_absorbing = false
 
 func process_absorb_start():
-	print("ABSORB START")
 	slowdown_started.emit()
 	is_absorb_started = true
+	enable_particles(true)
 
-func end_absorb():
+func end_windup():
 	is_absorb_started = false
-	is_absorbing = false
 	current_windup_time = 0.0
+	slowdown_ended.emit()
+	enable_particles(false)
+
+func enable_particles(enabled: bool):
+	particles.emitting = enabled
+	particles.visible = enabled
 
 func absorb_bullet(bullet_area: Area3D):
 	var bullet = type_convert(bullet_area, typeof(Bullet))
