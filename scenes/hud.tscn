@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhxrs6pph350t"]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_fnqek"]
+
+[node name="HUD" type="Node"]
+script = ExtResource("1_fnqek")
+
+[node name="PowerLabel" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -60.0
+offset_right = 100.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 30
+text = "Power: 0"

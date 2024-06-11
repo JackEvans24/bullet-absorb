@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccgpc6v5lruew"]
+[gd_scene load_steps=11 format=3 uid="uid://ccgpc6v5lruew"]
 
 [ext_resource type="PackedScene" uid="uid://c3tj0pdcum4wd" path="res://prefabs/player.tscn" id="1_e5x1h"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_rtjol"]
+[ext_resource type="PackedScene" uid="uid://bhxrs6pph350t" path="res://scenes/hud.tscn" id="2_bqahq"]
 [ext_resource type="PackedScene" uid="uid://bj8n5y46nf5wq" path="res://prefabs/turret.tscn" id="3_5441h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1hrq"]
@@ -58,6 +59,11 @@ layers = 0
 light_energy = 0.2
 shadow_enabled = true
 
+[node name="HUD" parent="." instance=ExtResource("2_bqahq")]
+
+[node name="Player" parent="." instance=ExtResource("1_e5x1h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
+
 [node name="CameraPoles" type="Node3D" parent="."]
 visible = false
 
@@ -76,9 +82,6 @@ mesh = SubResource("CylinderMesh_ugq1f")
 [node name="Pole4" type="MeshInstance3D" parent="CameraPoles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 11)
 mesh = SubResource("CylinderMesh_ugq1f")
-
-[node name="Player" parent="." instance=ExtResource("1_e5x1h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
 
 [node name="Turret" parent="." instance=ExtResource("3_5441h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -13)
