@@ -79,7 +79,6 @@ mesh = SubResource("CylinderMesh_ugq1f")
 
 [node name="Player" parent="." instance=ExtResource("1_e5x1h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
-speed = 15.0
 
 [node name="Turret" parent="." instance=ExtResource("3_5441h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -13)

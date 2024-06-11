@@ -2,6 +2,8 @@ class_name Absorb
 extends Node3D
 
 signal bullet_absorbed
+signal absorb_started
+signal absorb_ended
 
 @export var absorb_cooldown = 0.5
 @export var mesh_display_time = 0.2
@@ -19,6 +21,7 @@ func _process(_delta):
 
 func handle_absorb():
 	is_absorbing = true
+	absorb_started.emit()
 
 	var overlapping_areas: Array[Area3D] = area.get_overlapping_areas()
 	for overlapping_area in overlapping_areas:
@@ -28,6 +31,7 @@ func handle_absorb():
 	display_mesh()
 	await handle_cooldown()
 
+	absorb_ended.emit()
 	is_absorbing = false
 
 func absorb_bullet(bullet_area: Area3D):
