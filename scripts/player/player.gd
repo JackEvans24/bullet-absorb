@@ -5,6 +5,7 @@ signal absorb_count_changed(count: int)
 
 @export var fall_acceleration = 10
 
+@onready var pivot: Node3D = $Pivot
 @onready var move: PlayerMovement = $Move
 @onready var aim: PlayerAim = $Aim
 @onready var absorb: Absorb = $Absorb
@@ -21,6 +22,7 @@ func _physics_process(delta):
 		velocity.y -= fall_acceleration * delta
 
 	velocity = move.movement
+	pivot.look_at(pivot.global_position + aim.aim_direction)
 
 	move_and_slide()
 
