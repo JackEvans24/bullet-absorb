@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://cm1wj0vbe4wn8"]
+
+[ext_resource type="Script" path="res://scripts/power_ball.gd" id="1_nwg2l"]
+[ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/power.tres" id="2_netkk"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_6vkiy"]
+material = ExtResource("2_netkk")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8p8c6"]
+radius = 0.3
+
+[sub_resource type="Animation" id="Animation_41a3g"]
+resource_name = "default"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, -0.1, 0, 2, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_52ggg"]
+_data = {
+"default": SubResource("Animation_41a3g")
+}
+
+[node name="Power" type="Area3D" groups=["bullet"]]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_nwg2l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_6vkiy")
+
+[node name="BulletLight" type="OmniLight3D" parent="."]
+light_color = Color(0.607843, 1, 1, 1)
+light_energy = 0.5
+omni_range = 2.0
+omni_attenuation = 0.435275
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+shape = SubResource("SphereShape3D_8p8c6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_52ggg")
+}
+autoplay = "default"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
