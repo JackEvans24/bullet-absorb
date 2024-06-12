@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=15 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_u023k"]
 [ext_resource type="Material" uid="uid://beaa2b7evhbjh" path="res://materials/player/player.tres" id="2_di4ke"]
@@ -13,6 +13,10 @@ material = ExtResource("2_di4ke")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4kfv7"]
 radius = 5.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sdjtx"]
+radius = 0.4
+height = 1.8
 
 [sub_resource type="SphereMesh" id="SphereMesh_epkrr"]
 material = ExtResource("4_poddg")
@@ -56,17 +60,26 @@ script = ExtResource("2_sawo1")
 absorb_cooldown = 0.9
 mesh_display_time = 0.1
 
-[node name="AbsorbArea" type="Area3D" parent="Absorb"]
+[node name="DestroyArea" type="Area3D" parent="Absorb"]
 collision_layer = 0
 collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Absorb/DestroyArea"]
+shape = SubResource("SphereShape3D_4kfv7")
+
+[node name="AbsorbArea" type="Area3D" parent="Absorb"]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Absorb/AbsorbArea"]
-shape = SubResource("SphereShape3D_4kfv7")
+shape = SubResource("CapsuleShape3D_sdjtx")
 
 [node name="AbsorbMesh" type="MeshInstance3D" parent="Absorb"]
 visible = false
 mesh = SubResource("SphereMesh_epkrr")
-skeleton = NodePath("../AbsorbArea")
+skeleton = NodePath("../DestroyArea")
 
 [node name="AbsorbParticles" type="GPUParticles3D" parent="Absorb"]
 emitting = false

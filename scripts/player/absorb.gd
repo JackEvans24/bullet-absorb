@@ -9,13 +9,17 @@ signal slowdown_ended
 @export var absorb_cooldown = 0.5
 @export var mesh_display_time = 0.2
 
-@onready var area: Area3D = $AbsorbArea
+@onready var destoy_area: Area3D = $DestroyArea
+@onready var absorb_area: Area3D = $AbsorbArea
 @onready var mesh: MeshInstance3D = $AbsorbMesh
 @onready var particles: GPUParticles3D = $AbsorbParticles
 
 var is_absorb_started = false
 var is_absorbing = false
 var current_windup_time = 0.0
+
+func _ready():
+	absorb_area.area_entered.connect(absorb_power)
 
 func _process(delta):
 	if is_absorb_started:
@@ -41,10 +45,10 @@ func process_absorb_state(delta):
 func trigger_absorb():
 	is_absorbing = true
 
-	var overlapping_areas: Array[Area3D] = area.get_overlapping_areas()
+	var overlapping_areas: Array[Area3D] = destoy_area.get_overlapping_areas()
 	for overlapping_area in overlapping_areas:
 		if overlapping_area.is_in_group('bullet'):
-			absorb_bullet(overlapping_area)
+			destroy_bullet(overlapping_area)
 
 	await display_mesh()
 	await handle_cooldown()
@@ -66,10 +70,13 @@ func enable_particles(enabled: bool):
 	particles.emitting = enabled
 	particles.visible = enabled
 
-func absorb_bullet(bullet_area: Area3D):
+func destroy_bullet(bullet_area: Area3D):
 	var bullet = type_convert(bullet_area, typeof(Bullet))
-	bullet.absorb()
+	bullet.destroy()
 
+func absorb_power(area: Area3D):
+	print("AREA ENTERED")
+	(area.get_parent() as PowerBall).call_deferred("queue_free")
 	bullet_absorbed.emit()
 
 func handle_cooldown():

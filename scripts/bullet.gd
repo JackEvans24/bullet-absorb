@@ -25,13 +25,13 @@ func _physics_process(_delta):
 func _on_screen_exited():
 	queue_free()
 
-func absorb():
-	call_deferred("create_power")
+func destroy():
+	call_deferred("handle_destruction")
 
-func create_power():
+func handle_destruction():
 	var power = power_scene.instantiate()
-	power.global_position = global_position
-
 	get_tree().root.add_child(power)
+
+	power.global_position = global_position
 
 	queue_free()

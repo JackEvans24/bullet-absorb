@@ -1,5 +1,5 @@
 class_name PowerBall
-extends Area3D
+extends Node3D
 
 @export var max_speed = 5.0
 @export var acceleration = 0.1
@@ -7,8 +7,10 @@ extends Area3D
 var player: Node3D = null
 var current_speed = 0.0
 
+@onready var attraction_area = $PlayerAttractionArea
+
 func _ready():
-	body_entered.connect(_on_body_entered)
+	attraction_area.body_entered.connect(_on_body_entered)
 
 func _physics_process(delta):
 	if player == null:

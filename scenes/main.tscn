@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://ccgpc6v5lruew"]
+[gd_scene load_steps=12 format=3 uid="uid://ccgpc6v5lruew"]
 
 [ext_resource type="PackedScene" uid="uid://c3tj0pdcum4wd" path="res://prefabs/player.tscn" id="1_e5x1h"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_rtjol"]
 [ext_resource type="PackedScene" uid="uid://bhxrs6pph350t" path="res://scenes/hud.tscn" id="2_bqahq"]
 [ext_resource type="PackedScene" uid="uid://bj8n5y46nf5wq" path="res://prefabs/turret.tscn" id="3_5441h"]
+[ext_resource type="PackedScene" uid="uid://cm1wj0vbe4wn8" path="res://prefabs/power_ball.tscn" id="5_axmlc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1hrq"]
 albedo_color = Color(0.36875, 0.59, 0.3245, 1)
@@ -88,3 +89,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -13)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_v60oa")
+
+[node name="Power" parent="." instance=ExtResource("5_axmlc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -9)
+
+[node name="Power2" parent="." instance=ExtResource("5_axmlc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -12)
+
+[node name="Power3" parent="." instance=ExtResource("5_axmlc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, -9)
