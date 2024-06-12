@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dahpvdvtv4c1c"]
+[gd_scene load_steps=6 format=3 uid="uid://dahpvdvtv4c1c"]
 
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_yp7k1"]
+[ext_resource type="PackedScene" uid="uid://cm1wj0vbe4wn8" path="res://prefabs/power_ball.tscn" id="2_n13p0"]
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_h27nb"]
 emission_enabled = true
@@ -22,6 +23,7 @@ monitoring = false
 script = ExtResource("1_yp7k1")
 speed = 10
 accuracy = 0.02
+power_scene = ExtResource("2_n13p0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_6vkiy")

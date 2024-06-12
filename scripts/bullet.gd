@@ -5,6 +5,8 @@ class_name Bullet extends Node3D
 @export var illuminate_time = 0.2
 @export var illuminate_range = 5
 
+@export var power_scene: PackedScene
+
 @onready var light: OmniLight3D = $BulletLight
 
 func _ready():
@@ -26,4 +28,12 @@ func _on_screen_exited():
 	queue_free()
 
 func absorb():
-	call_deferred("queue_free")
+	call_deferred("create_power")
+
+func create_power():
+	var power = power_scene.instantiate()
+	power.global_position = global_position
+
+	get_tree().root.add_child(power)
+
+	queue_free()
