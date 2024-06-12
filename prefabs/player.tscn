@@ -1,9 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=17 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_u023k"]
 [ext_resource type="Material" uid="uid://beaa2b7evhbjh" path="res://materials/player/player.tres" id="2_di4ke"]
 [ext_resource type="Script" path="res://scripts/player/absorb.gd" id="2_sawo1"]
+[ext_resource type="Script" path="res://scripts/player/player_movement.gd" id="3_1eoos"]
 [ext_resource type="Material" uid="uid://f41eu4cbvian" path="res://materials/player/player_absorb.tres" id="4_ep8r4"]
+[ext_resource type="Script" path="res://scripts/player/player_aim.gd" id="4_owsoe"]
 [ext_resource type="Material" uid="uid://dq2ufo1kpypca" path="res://materials/player/player_absorb_halo.tres" id="4_poddg"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xm2o2"]
@@ -54,6 +56,14 @@ mesh = SubResource("CapsuleMesh_xm2o2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_b08da")
+
+[node name="Move" type="Node" parent="."]
+script = ExtResource("3_1eoos")
+movement_deadzone = 0.01
+deceleration = 180.0
+
+[node name="Aim" type="Node3D" parent="."]
+script = ExtResource("4_owsoe")
 
 [node name="Absorb" type="Node3D" parent="."]
 script = ExtResource("2_sawo1")
