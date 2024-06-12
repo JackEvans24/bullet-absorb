@@ -16,11 +16,9 @@ func _process(delta: float):
 	var direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
 
 	if direction:
-		movement.x = direction.x * speed
-		movement.z = direction.z * speed
+		movement = direction * speed
 	else:
-		movement.x = move_toward(movement.x, 0, deceleration * delta)
-		movement.z = move_toward(movement.z, 0, deceleration * delta)
+		movement = movement.move_toward(Vector3.ZERO, deceleration * delta)
 
 func set_default_speed():
 	speed = default_speed
