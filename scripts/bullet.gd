@@ -13,10 +13,8 @@ func _ready():
 	var tween = get_tree().create_tween()
 	tween.tween_property(light, "omni_range", illuminate_range, illuminate_time)
 
-func initialise(start_position: Vector3, turret_basis: Basis):
+func initialise(turret_basis: Basis):
 	basis = turret_basis.orthonormalized()
-	position = start_position
-
 	# add some random rotation to look direction
 	rotate_y(randf_range( - PI * accuracy, PI * accuracy))
 
