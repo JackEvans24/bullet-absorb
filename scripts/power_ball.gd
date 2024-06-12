@@ -1,5 +1,27 @@
 class_name PowerBall
 extends Area3D
 
+@export var max_speed = 5.0
+@export var acceleration = 0.1
+
+var player: Node3D = null
+var current_speed = 0.0
+
+func _ready():
+	body_entered.connect(_on_body_entered)
+
+func _physics_process(delta):
+	if player == null:
+		return
+
+	var offset = player.position - position
+
+	current_speed = min(current_speed + (acceleration * delta), max_speed)
+	current_speed = min(current_speed, offset.length())
+
+	translate(offset.normalized() * current_speed)
+
 func _on_body_entered(body: Node3D):
-	print("BODY ENTERED")
+	if body == null or player != null:
+		return
+	player = body

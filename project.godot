@@ -68,3 +68,4 @@ absorb={
 3d_physics/layer_1="ground"
 3d_physics/layer_2="player"
 3d_physics/layer_3="bullet"
+3d_physics/layer_4="power"
