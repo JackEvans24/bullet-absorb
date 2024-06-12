@@ -1,23 +1,91 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=15 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_u023k"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_se4rt"]
-albedo_color = Color(0.33, 0.732, 1, 1)
+[ext_resource type="Material" uid="uid://beaa2b7evhbjh" path="res://materials/player/player.tres" id="2_di4ke"]
+[ext_resource type="Script" path="res://scripts/player/absorb.gd" id="2_sawo1"]
+[ext_resource type="Material" uid="uid://f41eu4cbvian" path="res://materials/player/player_absorb.tres" id="4_ep8r4"]
+[ext_resource type="Material" uid="uid://dq2ufo1kpypca" path="res://materials/player/player_absorb_halo.tres" id="4_poddg"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xm2o2"]
-material = SubResource("StandardMaterial3D_se4rt")
+material = ExtResource("2_di4ke")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b08da"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4kfv7"]
+radius = 5.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sdjtx"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_epkrr"]
+material = ExtResource("4_poddg")
+radius = 5.0
+height = 10.0
+
+[sub_resource type="Curve" id="Curve_syo44"]
+_data = [Vector2(0, 0), -2.37274, -2.37274, 0, 0, Vector2(0.104623, 1), -1.13942e-06, -1.13942e-06, 0, 0, Vector2(1, 0), -0.0990366, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_isa1t"]
+curve = SubResource("Curve_syo44")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jewto"]
+emission_shape = 2
+emission_sphere_radius = 5.0
+radial_velocity_min = -20.0
+radial_velocity_max = -10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_isa1t")
+
+[sub_resource type="SphereMesh" id="SphereMesh_cp26l"]
+material = ExtResource("4_ep8r4")
+radius = 0.2
+height = 0.4
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 script = ExtResource("1_u023k")
-speed = 12.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_xm2o2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_b08da")
+
+[node name="Absorb" type="Node3D" parent="."]
+script = ExtResource("2_sawo1")
+absorb_cooldown = 0.9
+mesh_display_time = 0.1
+
+[node name="DestroyArea" type="Area3D" parent="Absorb"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Absorb/DestroyArea"]
+shape = SubResource("SphereShape3D_4kfv7")
+
+[node name="AbsorbArea" type="Area3D" parent="Absorb"]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Absorb/AbsorbArea"]
+shape = SubResource("CapsuleShape3D_sdjtx")
+
+[node name="AbsorbMesh" type="MeshInstance3D" parent="Absorb"]
+visible = false
+mesh = SubResource("SphereMesh_epkrr")
+skeleton = NodePath("../DestroyArea")
+
+[node name="AbsorbParticles" type="GPUParticles3D" parent="Absorb"]
+emitting = false
+amount = 20
+interpolate = false
+fract_delta = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_jewto")
+draw_pass_1 = SubResource("SphereMesh_cp26l")

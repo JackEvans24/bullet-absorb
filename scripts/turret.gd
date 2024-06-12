@@ -22,8 +22,7 @@ func _process(_delta):
 func _on_fire():
 	var bullet = bullet_scene.instantiate()
 
-	var global_fire_point = fire_point.global_position
-	var local_fire_point = to_local(global_fire_point)
+	bullet.position = to_local(fire_point.global_position)
+	bullet.initialise(pivot.basis)
 
-	bullet.initialise(local_fire_point, pivot.basis)
 	add_child(bullet)
