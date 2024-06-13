@@ -10,7 +10,7 @@ signal health_changed(current_health: float)
 @onready var move: PlayerMovement = $Move
 @onready var aim: PlayerAim = $Aim
 @onready var absorb: Absorb = $Absorb
-@onready var pivot: Node3D = $Pivot
+@onready var body: PlayerBody = $Pivot
 @onready var hit_detection: Area3D = $HitDetection
 
 var power_count: int = 0
@@ -22,6 +22,7 @@ func _ready():
 	power_count_changed.connect(aim._on_power_count_changed)
 
 	health.damage_taken.connect(_on_damage_taken)
+	health.recovery_changed.connect(body._on_recovery_changed)
 
 	absorb.bullet_absorbed.connect(_on_absorb)
 	absorb.slowdown_started.connect(_on_slowdown_started)
@@ -31,14 +32,14 @@ func _ready():
 
 	hit_detection.area_entered.connect(_on_hit)
 
-	aim.initialise(pivot)
+	aim.initialise(body)
 
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= fall_acceleration * delta
 
 	velocity = move.movement
-	pivot.look_at(pivot.global_position + aim.aim_direction)
+	body.look_at(body.global_position + aim.aim_direction)
 
 	move_and_slide()
 
