@@ -13,6 +13,8 @@ signal absorb_count_changed(count: int)
 var absorb_count: int = 0
 
 func _ready():
+	aim.initialise(pivot)
+
 	absorb.bullet_absorbed.connect(_on_absorb)
 	absorb.slowdown_started.connect(_on_slowdown_started)
 	absorb.slowdown_ended.connect(_on_slowdown_ended)

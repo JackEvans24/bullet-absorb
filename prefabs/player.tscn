@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=20 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_u023k"]
 [ext_resource type="Material" uid="uid://beaa2b7evhbjh" path="res://materials/player/player.tres" id="2_di4ke"]
@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://f41eu4cbvian" path="res://materials/player/player_absorb.tres" id="4_ep8r4"]
 [ext_resource type="Script" path="res://scripts/player/player_aim.gd" id="4_owsoe"]
 [ext_resource type="Material" uid="uid://dq2ufo1kpypca" path="res://materials/player/player_absorb_halo.tres" id="4_poddg"]
+[ext_resource type="PackedScene" uid="uid://dl5unqhv0x3ox" path="res://prefabs/bullets/player_bullet.tscn" id="5_twt6l"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xm2o2"]
 material = ExtResource("2_di4ke")
@@ -68,7 +69,7 @@ mesh = SubResource("CapsuleMesh_xm2o2")
 skeleton = NodePath("../..")
 
 [node name="Nose" type="MeshInstance3D" parent="Pivot"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.00900269, 0.5, 0.799512)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.5, -0.8)
 mesh = SubResource("CylinderMesh_ugy6r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -79,8 +80,9 @@ script = ExtResource("3_1eoos")
 movement_deadzone = 0.01
 deceleration = 180.0
 
-[node name="Aim" type="Node3D" parent="."]
+[node name="Aim" type="Node" parent="."]
 script = ExtResource("4_owsoe")
+bullet_scene = ExtResource("5_twt6l")
 
 [node name="Absorb" type="Node3D" parent="."]
 script = ExtResource("2_sawo1")
