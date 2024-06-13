@@ -1,10 +1,13 @@
 class_name PlayerAim
 extends Node
 
+@export var cooldown = 0.05
 @export var bullet_scene: PackedScene
 
 var pivot: Node3D
 var aim_direction: Vector3 = Vector3.FORWARD
+
+var is_doing_cooldown = false
 
 func initialise(body_pivot: Node3D):
 	pivot = body_pivot
@@ -22,8 +25,16 @@ func _input(event: InputEvent):
 	fire()
 
 func fire():
+	if is_doing_cooldown:
+		return
+	is_doing_cooldown = true
+
+	var tree = get_tree()
 	var bullet = bullet_scene.instantiate()
-	get_tree().root.add_child(bullet)
+	tree.root.add_child(bullet)
 
 	bullet.global_position = pivot.global_position
 	bullet.initialise(pivot.basis)
+
+	await tree.create_timer(cooldown).timeout
+	is_doing_cooldown = false

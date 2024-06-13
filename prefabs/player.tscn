@@ -9,21 +9,6 @@
 [ext_resource type="Material" uid="uid://dq2ufo1kpypca" path="res://materials/player/player_absorb_halo.tres" id="4_poddg"]
 [ext_resource type="PackedScene" uid="uid://dl5unqhv0x3ox" path="res://prefabs/bullets/player_bullet.tscn" id="5_twt6l"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_xm2o2"]
-material = ExtResource("2_di4ke")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g7u2v"]
-albedo_color = Color(0.936667, 0.24, 1, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ugy6r"]
-material = SubResource("StandardMaterial3D_g7u2v")
-top_radius = 0.01
-bottom_radius = 0.3
-height = 1.0
-radial_segments = 8
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b08da"]
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_4kfv7"]
 radius = 5.0
 
@@ -57,23 +42,25 @@ material = ExtResource("4_ep8r4")
 radius = 0.2
 height = 0.4
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xm2o2"]
+material = ExtResource("2_di4ke")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g7u2v"]
+albedo_color = Color(0.936667, 0.24, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ugy6r"]
+material = SubResource("StandardMaterial3D_g7u2v")
+top_radius = 0.01
+bottom_radius = 0.3
+height = 1.0
+radial_segments = 8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b08da"]
+
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 script = ExtResource("1_u023k")
-
-[node name="Pivot" type="Node3D" parent="."]
-
-[node name="Body" type="MeshInstance3D" parent="Pivot"]
-mesh = SubResource("CapsuleMesh_xm2o2")
-skeleton = NodePath("../..")
-
-[node name="Nose" type="MeshInstance3D" parent="Pivot"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.5, -0.8)
-mesh = SubResource("CylinderMesh_ugy6r")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_b08da")
 
 [node name="Move" type="Node" parent="."]
 script = ExtResource("3_1eoos")
@@ -118,3 +105,16 @@ fract_delta = false
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_jewto")
 draw_pass_1 = SubResource("SphereMesh_cp26l")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Body" type="MeshInstance3D" parent="Pivot"]
+mesh = SubResource("CapsuleMesh_xm2o2")
+skeleton = NodePath("../..")
+
+[node name="Nose" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.5, -0.8)
+mesh = SubResource("CylinderMesh_ugy6r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_b08da")
