@@ -75,7 +75,6 @@ func destroy_bullet(bullet_area: Area3D):
 	bullet.destroy()
 
 func absorb_power(area: Area3D):
-	print("AREA ENTERED")
 	(area.get_parent() as PowerBall).call_deferred("queue_free")
 	bullet_absorbed.emit()
 
