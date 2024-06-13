@@ -2,16 +2,8 @@ class_name Bullet extends Node3D
 
 @export var speed = 5
 @export var accuracy = 1.0 / 6.0
-@export var illuminate_time = 0.2
-@export var illuminate_range = 5
 
 @export var power_scene: PackedScene
-
-@onready var light: OmniLight3D = $BulletLight
-
-func _ready():
-	var tween = get_tree().create_tween()
-	tween.tween_property(light, "omni_range", illuminate_range, illuminate_time)
 
 func initialise(turret_basis: Basis):
 	basis = turret_basis.orthonormalized()
@@ -29,9 +21,13 @@ func destroy():
 	call_deferred("handle_destruction")
 
 func handle_destruction():
+	drop_power()
+	queue_free()
+
+func drop_power():
+	if power_scene == null:
+		return
+
 	var power = power_scene.instantiate()
 	get_tree().root.add_child(power)
-
 	power.global_position = global_position
-
-	queue_free()

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bj8n5y46nf5wq"]
 
 [ext_resource type="Script" path="res://scripts/turret.gd" id="1_scne1"]
-[ext_resource type="PackedScene" uid="uid://dahpvdvtv4c1c" path="res://prefabs/bullet.tscn" id="2_gt5n0"]
+[ext_resource type="PackedScene" uid="uid://coogevjwgwbft" path="res://prefabs/bullets/default_bullet.tscn" id="2_1m3sq"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/turret_body.tres" id="2_lg5m1"]
 [ext_resource type="Material" uid="uid://detsid8q81d1o" path="res://materials/turret_gun.tres" id="3_72na1"]
 
@@ -18,7 +18,7 @@ height = 0.4
 
 [node name="Turret" type="Node3D"]
 script = ExtResource("1_scne1")
-bullet_scene = ExtResource("2_gt5n0")
+bullet_scene = ExtResource("2_1m3sq")
 
 [node name="Pivot" type="Node3D" parent="."]
 
