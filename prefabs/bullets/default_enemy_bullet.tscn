@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://coogevjwgwbft"]
+
+[ext_resource type="PackedScene" uid="uid://dl5unqhv0x3ox" path="res://prefabs/bullets/player_bullet.tscn" id="1_yy0xb"]
+[ext_resource type="PackedScene" uid="uid://cm1wj0vbe4wn8" path="res://prefabs/power_ball.tscn" id="2_0sm5q"]
+[ext_resource type="SphereMesh" uid="uid://dwfxlir86ljls" path="res://models/bullets/default_bullet.tres" id="3_a6lo4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_viiis"]
+radius = 0.22
+
+[node name="PlayerBullet" instance=ExtResource("1_yy0xb")]
+collision_layer = 4
+speed = 10
+power_scene = ExtResource("2_0sm5q")
+
+[node name="MeshInstance3D" parent="." index="0"]
+mesh = ExtResource("3_a6lo4")
+
+[node name="CollisionShape3D" parent="." index="2"]
+shape = SubResource("SphereShape3D_viiis")
