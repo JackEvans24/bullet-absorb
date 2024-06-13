@@ -5,10 +5,11 @@ signal power_count_changed(count: int)
 
 @export var fall_acceleration = 10
 
-@onready var pivot: Node3D = $Pivot
+@onready var health: Health = $Health
 @onready var move: PlayerMovement = $Move
 @onready var aim: PlayerAim = $Aim
 @onready var absorb: Absorb = $Absorb
+@onready var pivot: Node3D = $Pivot
 
 var power_count: int = 0
 
