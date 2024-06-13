@@ -10,3 +10,5 @@ signal damage_taken(damage_taken: float, current_health: float)
 func take_damage(damage: float):
 	current_health = max(0.0, current_health - damage)
 	damage_taken.emit(damage, current_health)
+
+	print("DAMAGE TAKEN %s, NEW HEALTH: %s" % [damage, current_health])

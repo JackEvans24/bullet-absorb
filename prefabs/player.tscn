@@ -9,13 +9,11 @@
 [ext_resource type="Script" path="res://scripts/player/player_aim.gd" id="4_owsoe"]
 [ext_resource type="Material" uid="uid://dq2ufo1kpypca" path="res://materials/player/player_absorb_halo.tres" id="4_poddg"]
 [ext_resource type="PackedScene" uid="uid://dl5unqhv0x3ox" path="res://prefabs/bullets/player_bullet.tscn" id="5_twt6l"]
+[ext_resource type="Shape3D" uid="uid://c4tuvev8wasc3" path="res://models/player/player_internal.tres" id="7_iumbl"]
+[ext_resource type="Shape3D" uid="uid://b143a5k1xv5rx" path="res://models/player/player_external.tres" id="11_p7nyd"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4kfv7"]
 radius = 5.0
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sdjtx"]
-radius = 0.4
-height = 1.8
 
 [sub_resource type="SphereMesh" id="SphereMesh_epkrr"]
 material = ExtResource("4_poddg")
@@ -56,8 +54,6 @@ bottom_radius = 0.3
 height = 1.0
 radial_segments = 8
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b08da"]
-
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
@@ -94,7 +90,7 @@ collision_mask = 8
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Absorb/AbsorbArea"]
-shape = SubResource("CapsuleShape3D_sdjtx")
+shape = ExtResource("7_iumbl")
 
 [node name="AbsorbMesh" type="MeshInstance3D" parent="Absorb"]
 visible = false
@@ -120,5 +116,13 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.5, -0.8)
 mesh = SubResource("CylinderMesh_ugy6r")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_b08da")
+[node name="GroundDetection" type="CollisionShape3D" parent="."]
+shape = ExtResource("11_p7nyd")
+
+[node name="HitDetection" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetection"]
+shape = ExtResource("7_iumbl")

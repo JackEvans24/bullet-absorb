@@ -10,6 +10,7 @@ signal power_count_changed(count: int)
 @onready var aim: PlayerAim = $Aim
 @onready var absorb: Absorb = $Absorb
 @onready var pivot: Node3D = $Pivot
+@onready var hit_detection: Area3D = $HitDetection
 
 var power_count: int = 0
 
@@ -21,6 +22,8 @@ func _ready():
 	absorb.slowdown_ended.connect(_on_slowdown_ended)
 
 	aim.bullet_fired.connect(_on_bullet_fired)
+
+	hit_detection.area_entered.connect(_on_hit)
 
 	aim.initialise(pivot)
 
@@ -43,6 +46,9 @@ func _on_bullet_fired():
 
 func update_power_count():
 	power_count_changed.emit(power_count)
+
+func _on_hit(_area: Area3D):
+	health.take_damage(1.0)
 
 func _on_slowdown_started():
 	move.set_slower_speed()
