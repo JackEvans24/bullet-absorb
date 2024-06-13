@@ -13,11 +13,13 @@ signal power_count_changed(count: int)
 var power_count: int = 0
 
 func _ready():
-	power_count_changed.connect(aim.power_count_changed)
+	power_count_changed.connect(aim._on_power_count_changed)
 
 	absorb.bullet_absorbed.connect(_on_absorb)
 	absorb.slowdown_started.connect(_on_slowdown_started)
 	absorb.slowdown_ended.connect(_on_slowdown_ended)
+
+	aim.bullet_fired.connect(_on_bullet_fired)
 
 	aim.initialise(pivot)
 
@@ -32,6 +34,10 @@ func _physics_process(delta):
 
 func _on_absorb():
 	power_count += 1
+	update_power_count()
+
+func _on_bullet_fired():
+	power_count = max(0, power_count - 1)
 	update_power_count()
 
 func update_power_count():

@@ -1,6 +1,8 @@
 class_name PlayerAim
 extends Node
 
+signal bullet_fired
+
 @export var cooldown = 0.05
 @export var bullet_scene: PackedScene
 
@@ -37,8 +39,10 @@ func fire():
 	bullet.global_position = pivot.global_position
 	bullet.initialise(pivot.basis)
 
+	bullet_fired.emit()
+
 	await tree.create_timer(cooldown).timeout
 	is_firing = false
 
-func power_count_changed(power_count: int):
+func _on_power_count_changed(power_count: int):
 	has_ammo = power_count > 0
