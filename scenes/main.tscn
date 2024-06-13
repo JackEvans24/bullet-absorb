@@ -1,27 +1,18 @@
-[gd_scene load_steps=12 format=3 uid="uid://ccgpc6v5lruew"]
+[gd_scene load_steps=11 format=3 uid="uid://ccgpc6v5lruew"]
 
 [ext_resource type="PackedScene" uid="uid://c3tj0pdcum4wd" path="res://prefabs/player.tscn" id="1_e5x1h"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_rtjol"]
 [ext_resource type="PackedScene" uid="uid://bhxrs6pph350t" path="res://scenes/hud.tscn" id="2_bqahq"]
 [ext_resource type="PackedScene" uid="uid://bj8n5y46nf5wq" path="res://prefabs/turret.tscn" id="3_5441h"]
-[ext_resource type="PackedScene" uid="uid://cm1wj0vbe4wn8" path="res://prefabs/power_ball.tscn" id="5_axmlc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1hrq"]
-albedo_color = Color(0.36875, 0.59, 0.3245, 1)
 metallic = 1.0
-metallic_specular = 1.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_id486"]
 material = SubResource("StandardMaterial3D_r1hrq")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2d6ir"]
 points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85wj3"]
-albedo_color = Color(1, 0.583333, 0, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ugq1f"]
-material = SubResource("StandardMaterial3D_85wj3")
 
 [sub_resource type="Environment" id="Environment_v60oa"]
 glow_enabled = true
@@ -33,20 +24,39 @@ fog_light_color = Color(0.380445, 0.623552, 0.298777, 1)
 fog_light_energy = 0.1
 fog_density = 0.001
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85wj3"]
+albedo_color = Color(1, 0.583333, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ugq1f"]
+material = SubResource("StandardMaterial3D_85wj3")
+
 [node name="Main" type="Node"]
 script = ExtResource("1_rtjol")
 
-[node name="Ground" type="StaticBody3D" parent="."]
+[node name="World" type="Node" parent="."]
+
+[node name="Ground" type="StaticBody3D" parent="World"]
 collision_mask = 0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Ground"]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 0)
 mesh = SubResource("PlaneMesh_id486")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Ground"]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_2d6ir")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_v60oa")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(0.707107, -0.612372, 0.353554, 0, 0.5, 0.866025, -0.707107, -0.612372, 0.353554, 0, 0, 0)
+layers = 0
+light_energy = 0.2
+shadow_enabled = true
+
+[node name="HUD" parent="." instance=ExtResource("2_bqahq")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 20, 8)
@@ -54,47 +64,28 @@ projection = 1
 size = 25.0
 far = 200.0
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.707107, -0.612372, 0.353553, 0, 0.5, 0.866025, -0.707107, -0.612372, 0.353553, 0, 0, 0)
-layers = 0
-light_energy = 0.2
-shadow_enabled = true
+[node name="CameraPoles" type="Node3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 0, -3.0718, -21.3205)
+visible = false
 
-[node name="HUD" parent="." instance=ExtResource("2_bqahq")]
+[node name="Pole1" type="MeshInstance3D" parent="Camera3D/CameraPoles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -18)
+mesh = SubResource("CylinderMesh_ugq1f")
+
+[node name="Pole2" type="MeshInstance3D" parent="Camera3D/CameraPoles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 11)
+mesh = SubResource("CylinderMesh_ugq1f")
+
+[node name="Pole3" type="MeshInstance3D" parent="Camera3D/CameraPoles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -18)
+mesh = SubResource("CylinderMesh_ugq1f")
+
+[node name="Pole4" type="MeshInstance3D" parent="Camera3D/CameraPoles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 11)
+mesh = SubResource("CylinderMesh_ugq1f")
 
 [node name="Player" parent="." instance=ExtResource("1_e5x1h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
 
-[node name="CameraPoles" type="Node3D" parent="."]
-visible = false
-
-[node name="Pole1" type="MeshInstance3D" parent="CameraPoles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -18)
-mesh = SubResource("CylinderMesh_ugq1f")
-
-[node name="Pole2" type="MeshInstance3D" parent="CameraPoles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 11)
-mesh = SubResource("CylinderMesh_ugq1f")
-
-[node name="Pole3" type="MeshInstance3D" parent="CameraPoles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -18)
-mesh = SubResource("CylinderMesh_ugq1f")
-
-[node name="Pole4" type="MeshInstance3D" parent="CameraPoles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 11)
-mesh = SubResource("CylinderMesh_ugq1f")
-
 [node name="Turret" parent="." instance=ExtResource("3_5441h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -13)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_v60oa")
-
-[node name="Power" parent="." instance=ExtResource("5_axmlc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -9)
-
-[node name="Power2" parent="." instance=ExtResource("5_axmlc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -12)
-
-[node name="Power3" parent="." instance=ExtResource("5_axmlc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, -9)

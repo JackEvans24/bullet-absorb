@@ -6,4 +6,4 @@ extends Node
 
 func _ready():
 	turret.set_target(player)
-	player.absorb_count_changed.connect(hud._on_absorb_count_changed)
+	player.power_count_changed.connect(hud._on_absorb_count_changed)

@@ -1,0 +1,8 @@
+[gd_resource type="SphereMesh" load_steps=2 format=3 uid="uid://idlaqhuqbbdn"]
+
+[ext_resource type="Material" uid="uid://caaotrthyvusd" path="res://materials/bullets/player_bullet.tres" id="1_q33xc"]
+
+[resource]
+material = ExtResource("1_q33xc")
+radius = 0.4
+height = 0.8
