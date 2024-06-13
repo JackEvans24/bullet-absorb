@@ -7,7 +7,8 @@ extends Node
 var pivot: Node3D
 var aim_direction: Vector3 = Vector3.FORWARD
 
-var is_doing_cooldown = false
+var is_firing = false
+var has_ammo = false
 
 func initialise(body_pivot: Node3D):
 	pivot = body_pivot
@@ -25,9 +26,9 @@ func _input(event: InputEvent):
 	fire()
 
 func fire():
-	if is_doing_cooldown:
+	if is_firing or not has_ammo:
 		return
-	is_doing_cooldown = true
+	is_firing = true
 
 	var tree = get_tree()
 	var bullet = bullet_scene.instantiate()
@@ -37,4 +38,7 @@ func fire():
 	bullet.initialise(pivot.basis)
 
 	await tree.create_timer(cooldown).timeout
-	is_doing_cooldown = false
+	is_firing = false
+
+func power_count_changed(power_count: int):
+	has_ammo = power_count > 0

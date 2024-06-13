@@ -1,7 +1,7 @@
 class_name Player
 extends CharacterBody3D
 
-signal absorb_count_changed(count: int)
+signal power_count_changed(count: int)
 
 @export var fall_acceleration = 10
 
@@ -10,14 +10,16 @@ signal absorb_count_changed(count: int)
 @onready var aim: PlayerAim = $Aim
 @onready var absorb: Absorb = $Absorb
 
-var absorb_count: int = 0
+var power_count: int = 0
 
 func _ready():
-	aim.initialise(pivot)
+	power_count_changed.connect(aim.power_count_changed)
 
 	absorb.bullet_absorbed.connect(_on_absorb)
 	absorb.slowdown_started.connect(_on_slowdown_started)
 	absorb.slowdown_ended.connect(_on_slowdown_ended)
+
+	aim.initialise(pivot)
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -29,8 +31,11 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_absorb():
-	absorb_count += 1
-	absorb_count_changed.emit(absorb_count)
+	power_count += 1
+	update_power_count()
+
+func update_power_count():
+	power_count_changed.emit(power_count)
 
 func _on_slowdown_started():
 	move.set_slower_speed()
