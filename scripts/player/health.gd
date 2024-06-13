@@ -14,11 +14,18 @@ var is_recovering = false
 func take_damage(damage: float):
 	if is_recovering:
 		return
-	is_recovering = true
-	recovery_changed.emit(is_recovering)
 
 	current_health = max(0.0, current_health - damage)
 	damage_taken.emit(damage)
+
+	recover()
+
+func recover():
+	if current_health <= 0:
+		return
+
+	is_recovering = true
+	recovery_changed.emit(is_recovering)
 
 	await get_tree().create_timer(recovery_time).timeout
 

@@ -46,6 +46,13 @@ func _physics_process(delta):
 func _on_damage_taken(_damage_taken: float):
 	health_changed.emit(current_health)
 
+	if current_health <= 0:
+		die()
+
+func die():
+	move.can_move = false
+	aim.can_aim = false
+
 func _on_absorb():
 	power_count += 1
 	update_power_count()
