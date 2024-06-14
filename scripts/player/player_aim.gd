@@ -10,6 +10,7 @@ var pivot: Node3D
 var aim_direction: Vector3 = Vector3.FORWARD
 
 var can_aim = true
+var can_fire = true
 var is_firing = false
 var has_ammo = false
 
@@ -27,7 +28,7 @@ func _process(_delta: float):
 		aim_direction = direction
 
 func _input(event: InputEvent):
-	if not event.is_action_pressed("fire"):
+	if not can_fire or not event.is_action_pressed("fire"):
 		return
 	fire()
 

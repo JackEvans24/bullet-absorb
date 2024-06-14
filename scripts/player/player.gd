@@ -56,6 +56,7 @@ func _on_damage_taken(_damage_taken: float):
 func die():
 	move.can_move = false
 	aim.can_aim = false
+	aim.can_fire = false
 	absorb.can_absorb = false
 	died.emit()
 
@@ -75,6 +76,8 @@ func _on_hit(_area: Area3D):
 
 func _on_slowdown_started():
 	move.set_slower_speed()
+	aim.can_fire = false
 
 func _on_slowdown_ended():
 	move.set_default_speed()
+	aim.can_fire = true
