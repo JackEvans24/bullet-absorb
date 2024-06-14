@@ -16,6 +16,7 @@ hurt_particles_scene = ExtResource("2_e8cc4")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_pjhvc")
+starting_health = 1.0
 recovery_time = 0.01
 
 [node name="HitDetection" type="Area3D" parent="."]
