@@ -47,6 +47,7 @@ func _physics_process(delta):
 
 func _on_damage_taken(_damage_taken: float):
 	damage_taken.emit()
+	absorb.end_windup()
 
 	if current_health <= 0:
 		die()
@@ -54,6 +55,7 @@ func _on_damage_taken(_damage_taken: float):
 func die():
 	move.can_move = false
 	aim.can_aim = false
+	absorb.can_absorb = false
 	died.emit()
 
 func _on_absorb():
