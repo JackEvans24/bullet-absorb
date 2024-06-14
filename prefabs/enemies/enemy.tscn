@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3ytmjd7pe4pg"]
+
+[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_wjmkf"]
+[ext_resource type="PackedScene" uid="uid://cjvpl2fcwu246" path="res://prefabs/hurt_particles.tscn" id="2_e8cc4"]
+[ext_resource type="Script" path="res://scripts/player/health.gd" id="2_pjhvc"]
+[ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/turret_body.tres" id="3_akd7l"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_64qd1"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_jkita"]
+material = ExtResource("3_akd7l")
+
+[node name="Enemy" type="Node3D"]
+script = ExtResource("1_wjmkf")
+hurt_particles_scene = ExtResource("2_e8cc4")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_pjhvc")
+recovery_time = 0.01
+
+[node name="HitDetection" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetection"]
+shape = SubResource("SphereShape3D_64qd1")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Body" type="MeshInstance3D" parent="Pivot"]
+mesh = SubResource("SphereMesh_jkita")
