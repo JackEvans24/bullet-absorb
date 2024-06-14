@@ -11,7 +11,7 @@ extends Node3D
 func _on_recovery_changed(is_recovering: bool):
 	body.set_surface_override_material(0, recovery_material if is_recovering else default_material)
 
-func _on_damage_taken(damage_taken: float):
+func _on_damage_taken(damage_taken: float, _taken_from: Node3D):
 	if damage_taken <= 0:
 		return
 	hurt_particles.restart()
