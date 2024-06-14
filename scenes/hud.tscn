@@ -5,18 +5,31 @@
 [node name="HUD" type="Node"]
 script = ExtResource("1_fnqek")
 
-[node name="PowerLabel" type="Label" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
+[node name="HealthLabel" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -100.0
+offset_left = -160.0
 offset_top = -60.0
-offset_right = 100.0
+offset_right = -10.0
 offset_bottom = -18.0
-grow_horizontal = 2
+grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 30
+text = "Health: 0"
+
+[node name="PowerLabel" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -60.0
+offset_right = 210.0
+offset_bottom = -18.0
+grow_vertical = 0
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 30
 text = "Power: 0"

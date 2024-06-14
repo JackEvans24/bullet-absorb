@@ -1,20 +1,21 @@
-[gd_scene load_steps=20 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=27 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_u023k"]
 [ext_resource type="Material" uid="uid://beaa2b7evhbjh" path="res://materials/player/player.tres" id="2_di4ke"]
+[ext_resource type="Script" path="res://scripts/player/health.gd" id="2_pcwtq"]
 [ext_resource type="Script" path="res://scripts/player/absorb.gd" id="2_sawo1"]
 [ext_resource type="Script" path="res://scripts/player/player_movement.gd" id="3_1eoos"]
 [ext_resource type="Material" uid="uid://f41eu4cbvian" path="res://materials/player/player_absorb.tres" id="4_ep8r4"]
 [ext_resource type="Script" path="res://scripts/player/player_aim.gd" id="4_owsoe"]
 [ext_resource type="Material" uid="uid://dq2ufo1kpypca" path="res://materials/player/player_absorb_halo.tres" id="4_poddg"]
 [ext_resource type="PackedScene" uid="uid://dl5unqhv0x3ox" path="res://prefabs/bullets/player_bullet.tscn" id="5_twt6l"]
+[ext_resource type="Shape3D" uid="uid://c4tuvev8wasc3" path="res://models/player/player_internal.tres" id="7_iumbl"]
+[ext_resource type="Script" path="res://scripts/player/player_body.gd" id="10_18rdm"]
+[ext_resource type="Shape3D" uid="uid://b143a5k1xv5rx" path="res://models/player/player_external.tres" id="11_p7nyd"]
+[ext_resource type="Material" uid="uid://dlj8u7o0rqldc" path="res://materials/player/player_recovery.tres" id="12_cbt3u"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4kfv7"]
 radius = 5.0
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sdjtx"]
-radius = 0.4
-height = 1.8
 
 [sub_resource type="SphereMesh" id="SphereMesh_epkrr"]
 material = ExtResource("4_poddg")
@@ -55,12 +56,33 @@ bottom_radius = 0.3
 height = 1.0
 radial_segments = 8
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b08da"]
+[sub_resource type="Curve" id="Curve_d1fyx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.81353, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ifrih"]
+curve = SubResource("Curve_d1fyx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wwwn5"]
+direction = Vector3(0, 1, 0)
+spread = 75.0
+initial_velocity_min = 8.0
+initial_velocity_max = 8.0
+scale_curve = SubResource("CurveTexture_ifrih")
+turbulence_noise_speed_random = 0.27
+
+[sub_resource type="SphereMesh" id="SphereMesh_3tq4p"]
+material = ExtResource("2_di4ke")
+radius = 0.1
+height = 0.2
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 script = ExtResource("1_u023k")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_pcwtq")
 
 [node name="Move" type="Node" parent="."]
 script = ExtResource("3_1eoos")
@@ -90,7 +112,7 @@ collision_mask = 8
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Absorb/AbsorbArea"]
-shape = SubResource("CapsuleShape3D_sdjtx")
+shape = ExtResource("7_iumbl")
 
 [node name="AbsorbMesh" type="MeshInstance3D" parent="Absorb"]
 visible = false
@@ -107,6 +129,9 @@ process_material = SubResource("ParticleProcessMaterial_jewto")
 draw_pass_1 = SubResource("SphereMesh_cp26l")
 
 [node name="Pivot" type="Node3D" parent="."]
+script = ExtResource("10_18rdm")
+default_material = ExtResource("2_di4ke")
+recovery_material = ExtResource("12_cbt3u")
 
 [node name="Body" type="MeshInstance3D" parent="Pivot"]
 mesh = SubResource("CapsuleMesh_xm2o2")
@@ -116,5 +141,21 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.5, -0.8)
 mesh = SubResource("CylinderMesh_ugy6r")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_b08da")
+[node name="HurtParticles" type="GPUParticles3D" parent="Pivot"]
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_wwwn5")
+draw_pass_1 = SubResource("SphereMesh_3tq4p")
+
+[node name="GroundDetection" type="CollisionShape3D" parent="."]
+shape = ExtResource("11_p7nyd")
+
+[node name="HitDetection" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetection"]
+shape = ExtResource("7_iumbl")

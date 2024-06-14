@@ -14,6 +14,7 @@ signal slowdown_ended
 @onready var mesh: MeshInstance3D = $AbsorbMesh
 @onready var particles: GPUParticles3D = $AbsorbParticles
 
+var can_absorb = true
 var is_absorb_started = false
 var is_absorbing = false
 var current_windup_time = 0.0
@@ -31,7 +32,7 @@ func process_absorb_state(delta):
 	if is_absorbing:
 		return
 
-	if not Input.is_action_pressed("absorb"):
+	if not Input.is_action_pressed("absorb") or not can_absorb:
 		end_windup()
 		return
 
@@ -56,6 +57,9 @@ func trigger_absorb():
 	is_absorbing = false
 
 func process_absorb_start():
+	if not can_absorb:
+		return
+
 	slowdown_started.emit()
 	is_absorb_started = true
 	enable_particles(true)
@@ -75,7 +79,6 @@ func destroy_bullet(bullet_area: Area3D):
 	bullet.destroy()
 
 func absorb_power(area: Area3D):
-	print("AREA ENTERED")
 	(area.get_parent() as PowerBall).call_deferred("queue_free")
 	bullet_absorbed.emit()
 
