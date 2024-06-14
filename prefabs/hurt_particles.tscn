@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cjvpl2fcwu246"]
 
-[ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/turret_body.tres" id="1_0jiqj"]
+[ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="1_yf8ed"]
 [ext_resource type="Script" path="res://scripts/hurt_particles.gd" id="2_kqr2q"]
 
 [sub_resource type="Curve" id="Curve_jenfi"]
@@ -18,7 +18,7 @@ initial_velocity_max = 5.0
 scale_curve = SubResource("CurveTexture_dceoy")
 
 [sub_resource type="SphereMesh" id="SphereMesh_fhla8"]
-material = ExtResource("1_0jiqj")
+material = ExtResource("1_yf8ed")
 radius = 0.1
 height = 0.2
 

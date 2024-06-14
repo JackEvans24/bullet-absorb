@@ -2,7 +2,7 @@ extends Node
 
 @onready var hud: Hud = $HUD
 @onready var player: Player = $Player
-@onready var turret = $Turret
+@onready var turret: Turret = $Turret
 
 func _ready():
 	turret.set_target(player)
