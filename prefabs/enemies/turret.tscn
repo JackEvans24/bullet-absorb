@@ -24,7 +24,7 @@ script = ExtResource("2_2ldd0")
 bullet_scene = ExtResource("3_cdiyw")
 
 [node name="Health" parent="." index="0"]
-starting_health = 1.0
+starting_health = 10.0
 
 [node name="Knockback" parent="." index="1"]
 knockback_power = 0.0
