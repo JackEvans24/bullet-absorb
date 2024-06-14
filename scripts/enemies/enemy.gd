@@ -8,6 +8,7 @@ extends CharacterBody3D
 @onready var hit_detection: Area3D = $HitDetection
 @onready var pivot: Node3D = $Pivot
 @onready var body: MeshInstance3D = $Pivot/Body
+@onready var collider: CollisionShape3D = $Collider
 
 func _ready():
 	hit_detection.area_entered.connect(_on_area_entered)
@@ -41,3 +42,4 @@ func do_knockback(taken_from: Node3D):
 
 func die():
 	body.visible = false
+	collider.call_deferred("queue_free")
