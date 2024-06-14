@@ -2,7 +2,8 @@ class_name Player
 extends CharacterBody3D
 
 signal power_count_changed(count: int)
-signal health_changed(current_health: float)
+signal damage_taken
+signal died
 
 @export var fall_acceleration = 10
 
@@ -22,6 +23,7 @@ func _ready():
 	power_count_changed.connect(aim._on_power_count_changed)
 
 	health.damage_taken.connect(_on_damage_taken)
+	health.damage_taken.connect(body._on_damage_taken)
 	health.recovery_changed.connect(body._on_recovery_changed)
 
 	absorb.bullet_absorbed.connect(_on_absorb)
@@ -44,7 +46,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_damage_taken(_damage_taken: float):
-	health_changed.emit(current_health)
+	damage_taken.emit()
 
 	if current_health <= 0:
 		die()
@@ -52,6 +54,7 @@ func _on_damage_taken(_damage_taken: float):
 func die():
 	move.can_move = false
 	aim.can_aim = false
+	died.emit()
 
 func _on_absorb():
 	power_count += 1

@@ -12,7 +12,7 @@ signal recovery_changed(is_recovering: bool)
 var is_recovering = false
 
 func take_damage(damage: float):
-	if is_recovering:
+	if is_recovering or current_health <= 0:
 		return
 
 	current_health = max(0.0, current_health - damage)

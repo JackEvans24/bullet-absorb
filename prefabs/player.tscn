@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=27 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_u023k"]
 [ext_resource type="Material" uid="uid://beaa2b7evhbjh" path="res://materials/player/player.tres" id="2_di4ke"]
@@ -55,6 +55,26 @@ top_radius = 0.01
 bottom_radius = 0.3
 height = 1.0
 radial_segments = 8
+
+[sub_resource type="Curve" id="Curve_d1fyx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.81353, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ifrih"]
+curve = SubResource("Curve_d1fyx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wwwn5"]
+direction = Vector3(0, 1, 0)
+spread = 75.0
+initial_velocity_min = 8.0
+initial_velocity_max = 8.0
+scale_curve = SubResource("CurveTexture_ifrih")
+turbulence_noise_speed_random = 0.27
+
+[sub_resource type="SphereMesh" id="SphereMesh_3tq4p"]
+material = ExtResource("2_di4ke")
+radius = 0.1
+height = 0.2
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -120,6 +140,14 @@ skeleton = NodePath("../..")
 [node name="Nose" type="MeshInstance3D" parent="Pivot"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.5, -0.8)
 mesh = SubResource("CylinderMesh_ugy6r")
+
+[node name="HurtParticles" type="GPUParticles3D" parent="Pivot"]
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_wwwn5")
+draw_pass_1 = SubResource("SphereMesh_3tq4p")
 
 [node name="GroundDetection" type="CollisionShape3D" parent="."]
 shape = ExtResource("11_p7nyd")
