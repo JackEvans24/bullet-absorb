@@ -46,7 +46,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-func _on_damage_taken(_damage_taken: float):
+func _on_damage_taken(_damage_taken: float, _taken_from: Node3D):
 	damage_taken.emit()
 	absorb.end_windup()
 
@@ -71,8 +71,8 @@ func _on_bullet_fired():
 func update_power_count():
 	power_count_changed.emit(power_count)
 
-func _on_hit(_area: Area3D):
-	health.take_damage(1.0)
+func _on_hit(area: Area3D):
+	health.take_damage(1.0, area)
 
 func _on_slowdown_started():
 	move.set_slower_speed()

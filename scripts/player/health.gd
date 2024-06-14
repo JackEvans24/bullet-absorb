@@ -1,7 +1,7 @@
 class_name Health
 extends Node
 
-signal damage_taken(damage_taken: float)
+signal damage_taken(damage_taken: float, taken_from: Node3D)
 signal recovery_changed(is_recovering: bool)
 
 @export var starting_health = 5.0
@@ -11,12 +11,12 @@ signal recovery_changed(is_recovering: bool)
 
 var is_recovering = false
 
-func take_damage(damage: float):
+func take_damage(damage: float, taken_from: Node3D):
 	if is_recovering or current_health <= 0:
 		return
 
 	current_health = max(0.0, current_health - damage)
-	damage_taken.emit(damage)
+	damage_taken.emit(damage, taken_from)
 
 	recover()
 
