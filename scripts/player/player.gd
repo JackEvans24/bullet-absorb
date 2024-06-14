@@ -21,6 +21,7 @@ var current_health:
 
 func _ready():
 	power_count_changed.connect(aim._on_power_count_changed)
+	died.connect(body._on_player_died)
 
 	health.damage_taken.connect(_on_damage_taken)
 	health.damage_taken.connect(body._on_damage_taken)
