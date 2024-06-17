@@ -13,13 +13,13 @@ script = ExtResource("1_idcyk")
 speed = 20
 accuracy = 0.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Mesh" type="MeshInstance3D" parent="."]
 cast_shadow = 0
 gi_mode = 0
 mesh = ExtResource("2_d1la3")
 
+[node name="Collider" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_s5aai")
+
 [node name="OnScreenNotifier" type="VisibleOnScreenNotifier3D" parent="."]
 aabb = AABB(-2, -2, -2, 4, 4, 4)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_s5aai")
