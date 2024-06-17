@@ -8,6 +8,7 @@ extends Area3D
 
 @onready var mesh: MeshInstance3D = $Mesh
 @onready var collider: CollisionShape3D = $Collider
+@onready var splash_particles: GPUParticles3D = $SplashParticles
 @onready var on_screen_notifier: VisibleOnScreenNotifier3D = $OnScreenNotifier
 
 var dead = false
@@ -41,8 +42,10 @@ func handle_destruction():
 	collider.disabled = true
 	mesh.visible = false
 
-	await get_tree().create_timer(0.5).timeout
-	queue_free()
+	splash_particles.restart()
+	await splash_particles.finished
+
+	call_deferred("queue_free")
 
 func handle_destruction_with_power():
 	drop_power()
