@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c3tj0pdcum4wd" path="res://prefabs/player.tscn" id="1_e5x1h"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_rtjol"]
 [ext_resource type="PackedScene" uid="uid://bhxrs6pph350t" path="res://scenes/hud.tscn" id="2_bqahq"]
+[ext_resource type="Material" uid="uid://gclpf2kqyelh" path="res://materials/wall.tres" id="2_hxwft"]
 [ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="5_4wclf"]
 [ext_resource type="PackedScene" uid="uid://wfijrpbc1nxm" path="res://prefabs/enemies/turret.tscn" id="6_nrrgo"]
 
@@ -28,13 +29,8 @@ fog_density = 0.001
 [sub_resource type="BoxShape3D" id="BoxShape3D_stcvn"]
 size = Vector3(10, 2, 1)
 
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_crmpn"]
-emission_enabled = true
-emission = Color(0.607843, 1, 1, 1)
-emission_energy_multiplier = 0.2
-
 [sub_resource type="BoxMesh" id="BoxMesh_ughhm"]
-material = SubResource("ORMMaterial3D_crmpn")
+material = ExtResource("2_hxwft")
 size = Vector3(10, 2, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85wj3"]
