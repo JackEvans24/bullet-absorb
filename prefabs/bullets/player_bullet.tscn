@@ -48,7 +48,10 @@ shape = SubResource("SphereShape3D_s5aai")
 aabb = AABB(-2, -2, -2, 4, 4, 4)
 
 [node name="SplashParticles" type="GPUParticles3D" parent="."]
+transparency = 0.2
+cast_shadow = 0
 emitting = false
+lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_ji3k7")
