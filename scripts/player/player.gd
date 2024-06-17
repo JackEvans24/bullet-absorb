@@ -13,6 +13,7 @@ signal died
 @onready var absorb: Absorb = $Absorb
 @onready var body: PlayerBody = $Pivot
 @onready var hit_detection: Area3D = $HitDetection
+@onready var ground_detection: CollisionShape3D = $GroundDetection
 
 var power_count: int = 0
 
@@ -58,6 +59,7 @@ func die():
 	aim.can_aim = false
 	aim.can_fire = false
 	absorb.can_absorb = false
+	ground_detection.set_deferred("disabled", true)
 	died.emit()
 
 func _on_absorb():

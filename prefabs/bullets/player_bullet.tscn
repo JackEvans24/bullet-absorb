@@ -1,28 +1,58 @@
-[gd_scene load_steps=4 format=3 uid="uid://dl5unqhv0x3ox"]
+[gd_scene load_steps=9 format=3 uid="uid://dl5unqhv0x3ox"]
 
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_idcyk"]
 [ext_resource type="SphereMesh" uid="uid://idlaqhuqbbdn" path="res://models/bullets/player_bullet.tres" id="2_d1la3"]
+[ext_resource type="Material" uid="uid://caaotrthyvusd" path="res://materials/bullets/player_bullet.tres" id="3_vi40b"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_s5aai"]
 radius = 0.45
 
+[sub_resource type="Curve" id="Curve_mewlh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.35023, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4nd82"]
+curve = SubResource("Curve_mewlh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ji3k7"]
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, -20, 0)
+scale_curve = SubResource("CurveTexture_4nd82")
+
+[sub_resource type="SphereMesh" id="SphereMesh_xd53j"]
+material = ExtResource("3_vi40b")
+radius = 0.05
+height = 0.1
+radial_segments = 16
+rings = 8
+
 [node name="PlayerBullet" type="Area3D" groups=["bullet"]]
 collision_layer = 16
-collision_mask = 0
-monitoring = false
+collision_mask = 37
 script = ExtResource("1_idcyk")
 speed = 20
 accuracy = 0.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Mesh" type="MeshInstance3D" parent="."]
 cast_shadow = 0
 gi_mode = 0
 mesh = ExtResource("2_d1la3")
 
-[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
-aabb = AABB(-2, -2, -2, 4, 4, 4)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_s5aai")
 
-[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_screen_exited"]
+[node name="OnScreenNotifier" type="VisibleOnScreenNotifier3D" parent="."]
+aabb = AABB(-2, -2, -2, 4, 4, 4)
+
+[node name="SplashParticles" type="GPUParticles3D" parent="."]
+transparency = 0.2
+cast_shadow = 0
+emitting = false
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ji3k7")
+draw_pass_1 = SubResource("SphereMesh_xd53j")

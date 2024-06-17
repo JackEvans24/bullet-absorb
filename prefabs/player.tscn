@@ -68,6 +68,7 @@ direction = Vector3(0, 1, 0)
 spread = 75.0
 initial_velocity_min = 8.0
 initial_velocity_max = 8.0
+gravity = Vector3(0, -15, 0)
 scale_curve = SubResource("CurveTexture_ifrih")
 turbulence_noise_speed_random = 0.27
 
@@ -142,8 +143,10 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.5
 mesh = SubResource("CylinderMesh_ugy6r")
 
 [node name="HurtParticles" type="GPUParticles3D" parent="Pivot"]
+cast_shadow = 0
 emitting = false
 amount = 20
+lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_wwwn5")
