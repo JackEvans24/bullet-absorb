@@ -8,8 +8,7 @@ radius = 0.45
 
 [node name="PlayerBullet" type="Area3D" groups=["bullet"]]
 collision_layer = 16
-collision_mask = 0
-monitoring = false
+collision_mask = 37
 script = ExtResource("1_idcyk")
 speed = 20
 accuracy = 0.0
@@ -19,10 +18,8 @@ cast_shadow = 0
 gi_mode = 0
 mesh = ExtResource("2_d1la3")
 
-[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+[node name="OnScreenNotifier" type="VisibleOnScreenNotifier3D" parent="."]
 aabb = AABB(-2, -2, -2, 4, 4, 4)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_s5aai")
-
-[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_screen_exited"]
