@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dl5unqhv0x3ox"]
 
-[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_idcyk"]
+[ext_resource type="Script" path="res://scripts/mechanics/bullet.gd" id="1_idcyk"]
 [ext_resource type="SphereMesh" uid="uid://idlaqhuqbbdn" path="res://models/bullets/player_bullet.tres" id="2_d1la3"]
 [ext_resource type="Material" uid="uid://caaotrthyvusd" path="res://materials/bullets/player_bullet.tres" id="3_vi40b"]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://wfijrpbc1nxm"]
 
 [ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="1_rkpaq"]
-[ext_resource type="Script" path="res://scripts/enemies/turret.gd" id="2_2ldd0"]
+[ext_resource type="Script" path="res://scripts/mechanics/enemies/turret.gd" id="2_2ldd0"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="2_bqylj"]
 [ext_resource type="PackedScene" uid="uid://coogevjwgwbft" path="res://prefabs/bullets/default_enemy_bullet.tscn" id="3_cdiyw"]
 

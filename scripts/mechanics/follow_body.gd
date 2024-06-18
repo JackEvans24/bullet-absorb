@@ -1,4 +1,4 @@
-class_name PowerBall
+class_name FollowBody3D
 extends Node3D
 
 @export var max_speed = 5.0

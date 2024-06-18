@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cm1wj0vbe4wn8"]
 
-[ext_resource type="Script" path="res://scripts/power_ball.gd" id="1_nwg2l"]
+[ext_resource type="Script" path="res://scripts/mechanics/follow_body.gd" id="1_1wmtt"]
 [ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/power.tres" id="2_netkk"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_6vkiy"]
@@ -35,7 +35,7 @@ radius = 5.0
 radius = 0.1
 
 [node name="Power" type="Node3D" groups=["bullet"]]
-script = ExtResource("1_nwg2l")
+script = ExtResource("1_1wmtt")
 max_speed = 3.0
 acceleration = 0.5
 
