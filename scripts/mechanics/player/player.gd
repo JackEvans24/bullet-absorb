@@ -8,7 +8,7 @@ signal died
 @export var fall_acceleration = 10
 
 @onready var health: Health = $Health
-@onready var move_state: MoveStateMachine = $MoveStateMachine
+@onready var move_state: MoveStateMachine = $MoveState
 @onready var aim: PlayerAim = $Aim
 @onready var absorb: Absorb = $Absorb
 @onready var body: PlayerBody = $Pivot

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Material" uid="uid://beaa2b7evhbjh" path="res://materials/player/player.tres" id="2_di4ke"]
+[ext_resource type="Script" path="res://scripts/state/move_state_machine.gd" id="2_pauji"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/health.gd" id="2_pcwtq"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/absorb.gd" id="2_sawo1"]
-[ext_resource type="Script" path="res://scripts/mechanics/player/movement/move_state_machine.gd" id="2_ud6n7"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/run.gd" id="3_60agh"]
 [ext_resource type="Material" uid="uid://f41eu4cbvian" path="res://materials/player/player_absorb.tres" id="4_ep8r4"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/dead.gd" id="4_koxfs"]
@@ -84,18 +84,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 script = ExtResource("1_u023k")
 
-[node name="MoveStateMachine" type="Node" parent="."]
-script = ExtResource("2_ud6n7")
+[node name="MoveState" type="Node" parent="."]
+script = ExtResource("2_pauji")
 initial_state = NodePath("Run")
 
-[node name="Run" type="Node" parent="MoveStateMachine"]
+[node name="Run" type="Node" parent="MoveState"]
 script = ExtResource("3_60agh")
 
-[node name="Absorb" type="Node" parent="MoveStateMachine"]
+[node name="Absorb" type="Node" parent="MoveState"]
 script = ExtResource("3_60agh")
 speed = 5.0
 
-[node name="Dead" type="Node" parent="MoveStateMachine"]
+[node name="Dead" type="Node" parent="MoveState"]
 script = ExtResource("4_koxfs")
 
 [node name="Health" type="Node" parent="."]
