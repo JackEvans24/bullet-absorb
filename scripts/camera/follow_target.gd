@@ -15,18 +15,14 @@ func _process(delta):
 
 func update_position(delta: float):
 	var direction = target.global_position - global_position
-	var offset_magnitude = direction.length()
 
-	if offset_magnitude < min_speed:
-		global_position = target.global_position
+	var offset_magnitude = direction.length() * delta
+	if offset_magnitude < min_speed * 0.001:
 		return
 
 	var magnitude = get_movement_magnitude(offset_magnitude)
-	translate(direction * magnitude * delta)
+	translate(direction * magnitude)
 
 func get_movement_magnitude(offset_magnitude: float) -> float:
-	if offset_magnitude < min_speed:
-		return offset_magnitude
-
 	var desired_magnitude = offset_magnitude * actual_dampening
-	return minf(desired_magnitude, max_speed)
+	return minf(desired_magnitude, max_speed * 0.001)

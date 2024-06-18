@@ -6,7 +6,7 @@
 [ext_resource type="Material" uid="uid://gclpf2kqyelh" path="res://materials/wall.tres" id="2_hxwft"]
 [ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="5_4wclf"]
 [ext_resource type="PackedScene" uid="uid://wfijrpbc1nxm" path="res://prefabs/enemies/turret.tscn" id="6_nrrgo"]
-[ext_resource type="Script" path="res://scripts/camera/follow_body_camera.gd" id="7_haer2"]
+[ext_resource type="Script" path="res://scripts/camera/follow_target.gd" id="7_haer2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1hrq"]
 metallic = 1.0
@@ -78,11 +78,11 @@ mesh = SubResource("BoxMesh_ughhm")
 [node name="HUD" parent="." instance=ExtResource("2_bqahq")]
 
 [node name="FollowPlayer" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("7_haer2")
-max_speed = 3.0
-min_speed = 0.3
-dampening = 0.01
+max_speed = 30.0
+min_speed = 10.0
+dampening = 0.05
 
 [node name="PlayerCamera" type="Camera3D" parent="FollowPlayer"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 20, 8)
