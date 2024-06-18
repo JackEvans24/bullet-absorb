@@ -80,8 +80,9 @@ mesh = SubResource("BoxMesh_ughhm")
 [node name="FollowPlayer" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
 script = ExtResource("7_haer2")
-max_speed = 8.0
-dampening = 0.05
+max_speed = 3.0
+min_speed = 0.3
+dampening = 0.01
 
 [node name="PlayerCamera" type="Camera3D" parent="FollowPlayer"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 20, 8)
