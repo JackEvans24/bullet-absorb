@@ -14,11 +14,11 @@ func _process(delta):
 	update_position(delta)
 
 func update_position(delta: float):
-	var direction = target.position - position
+	var direction = target.global_position - global_position
 	var offset_magnitude = direction.length()
 
 	if offset_magnitude < min_speed:
-		position = target.position
+		global_position = target.global_position
 		return
 
 	var magnitude = get_movement_magnitude(offset_magnitude)
