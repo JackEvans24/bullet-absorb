@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cl1dul38xrvt2"]
+[gd_scene load_steps=6 format=3 uid="uid://cl1dul38xrvt2"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/smooth_follow_target.gd" id="1_cm6mc"]
-[ext_resource type="Script" path="res://scripts/controllers/camera_controller.gd" id="1_lvd3r"]
+[ext_resource type="Script" path="res://scripts/camera/camera_controller.gd" id="1_e4k7u"]
+[ext_resource type="Script" path="res://scripts/camera/screen_shake.gd" id="3_x5t8o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85wj3"]
 albedo_color = Color(1, 0.583333, 0, 1)
@@ -10,7 +11,7 @@ albedo_color = Color(1, 0.583333, 0, 1)
 material = SubResource("StandardMaterial3D_85wj3")
 
 [node name="Cameras" type="Node"]
-script = ExtResource("1_lvd3r")
+script = ExtResource("1_e4k7u")
 
 [node name="FollowPlayer" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -18,15 +19,17 @@ script = ExtResource("1_cm6mc")
 max_speed = 30.0
 min_speed = 10.0
 
-[node name="PlayerCamera" type="Camera3D" parent="FollowPlayer"]
+[node name="PlayerCamera" type="Node3D" parent="FollowPlayer"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 20, 8)
+
+[node name="Camera" type="Camera3D" parent="FollowPlayer/PlayerCamera"]
 projection = 1
 current = true
 size = 25.0
 far = 200.0
 
 [node name="CameraPoles" type="Node3D" parent="FollowPlayer/PlayerCamera"]
-transform = Transform3D(1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 0, -3.0718, -21.3205)
+transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 7.62939e-06, 1.90735e-06)
 visible = false
 
 [node name="Pole1" type="MeshInstance3D" parent="FollowPlayer/PlayerCamera/CameraPoles"]
@@ -44,3 +47,7 @@ mesh = SubResource("CylinderMesh_ugq1f")
 [node name="Pole4" type="MeshInstance3D" parent="FollowPlayer/PlayerCamera/CameraPoles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 11)
 mesh = SubResource("CylinderMesh_ugq1f")
+
+[node name="ScreenShake" type="Node" parent="."]
+script = ExtResource("3_x5t8o")
+trauma_amount = Vector3(2.5, 2, 0)
