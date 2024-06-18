@@ -152,6 +152,9 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_wwwn5")
 draw_pass_1 = SubResource("SphereMesh_3tq4p")
 
+[node name="CameraFollowPoint" type="Node3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
 [node name="GroundDetection" type="CollisionShape3D" parent="."]
 shape = ExtResource("11_p7nyd")
 

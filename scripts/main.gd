@@ -6,7 +6,7 @@ extends Node
 @onready var turret: Turret = $Turret
 
 func _ready():
-	player_camera.target = player
+	player_camera.target = player.camera_follow_point
 	turret.target = player
 
 	player.damage_taken.connect(_on_damage_taken)
