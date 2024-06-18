@@ -41,5 +41,5 @@ func shake():
 
 func get_offset(noise_seed: float, max_trauma: float) -> float:
 	var noise_output = noise.get_noise_2d(noise_seed, noise_y)
-	var impulse_amount = pow(impulse, punch)
-	return impulse_amount * noise_output * max_trauma
+	var active_impulse = pow(impulse, punch)
+	return active_impulse * noise_output * max_trauma
