@@ -1,3 +1,4 @@
+class_name SmoothFollowTarget
 extends Node3D
 
 @export var max_speed: float = 5.0

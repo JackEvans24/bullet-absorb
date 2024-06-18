@@ -2,7 +2,7 @@ extends Node
 
 @onready var hud: Hud = $HUD
 @onready var player: Player = $Player
-@onready var player_camera: Node3D = $FollowPlayer
+@onready var player_camera: CameraController = $Cameras
 @onready var turret: Turret = $Turret
 
 func _ready():
