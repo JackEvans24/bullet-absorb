@@ -3,6 +3,7 @@ extends Node
 @onready var hud: Hud = $HUD
 @onready var player: Player = $Player
 @onready var cameras: CameraController = $Cameras
+@onready var hit_stop: HitStop = $HitStop
 @onready var turret: Turret = $Turret
 
 func _ready():
@@ -23,5 +24,6 @@ func restart_game():
 	get_tree().reload_current_scene()
 
 func _on_damage_taken():
+	hit_stop.freeze()
 	cameras.add_impulse()
 	hud._on_health_changed(player.current_health)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ccgpc6v5lruew"]
+[gd_scene load_steps=15 format=3 uid="uid://ccgpc6v5lruew"]
 
 [ext_resource type="PackedScene" uid="uid://c3tj0pdcum4wd" path="res://prefabs/player.tscn" id="1_e5x1h"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_rtjol"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cl1dul38xrvt2" path="res://prefabs/cameras.tscn" id="4_nws0m"]
 [ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="5_4wclf"]
 [ext_resource type="PackedScene" uid="uid://wfijrpbc1nxm" path="res://prefabs/enemies/turret.tscn" id="6_nrrgo"]
+[ext_resource type="Script" path="res://scripts/effects/hit_stop.gd" id="8_dyhou"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1hrq"]
 metallic = 1.0
@@ -102,3 +103,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -11)
 
 [node name="Turret" parent="." instance=ExtResource("6_nrrgo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -13)
+
+[node name="HitStop" type="Node" parent="."]
+script = ExtResource("8_dyhou")
+freeze_duration = 0.04
