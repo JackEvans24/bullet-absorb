@@ -1,10 +1,10 @@
 class_name ScreenShake
 extends Node
 
-@export_range(1.0, 10.0) var punch: float = 2.0
+@export var punch: float = 2.0
 @export var tremolo = 5
 @export var decay = 1.5
-@export var trauma_amount = Vector3(1, 1, 0)
+@export var impulse_amount = Vector3(2.5, 2.0, 0)
 
 var cameras: Array[Node3D] = []
 
@@ -18,7 +18,7 @@ var offset = Vector3.ZERO
 func register(camera: Node3D):
 	cameras.push_back(camera)
 
-func add_trauma():
+func add_impulse():
 	impulse = 1.0
 	noise_y = 0
 	noise.seed = randi_range(0, 99999)
@@ -33,8 +33,8 @@ func _process(delta):
 func shake():
 	noise_y += tremolo
 
-	offset.x = get_offset(noise.seed, trauma_amount.x)
-	offset.y = get_offset(noise.seed * 2, trauma_amount.y)
+	offset.x = get_offset(noise.seed, impulse_amount.x)
+	offset.y = get_offset(noise.seed * 2, impulse_amount.y)
 
 	for camera in cameras:
 		camera.position = offset

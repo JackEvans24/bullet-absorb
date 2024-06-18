@@ -50,4 +50,3 @@ mesh = SubResource("CylinderMesh_ugq1f")
 
 [node name="ScreenShake" type="Node" parent="."]
 script = ExtResource("3_x5t8o")
-trauma_amount = Vector3(2.5, 2, 0)
