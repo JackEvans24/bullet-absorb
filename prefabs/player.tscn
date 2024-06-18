@@ -1,11 +1,13 @@
-[gd_scene load_steps=27 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=29 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Material" uid="uid://beaa2b7evhbjh" path="res://materials/player/player.tres" id="2_di4ke"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/health.gd" id="2_pcwtq"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/absorb.gd" id="2_sawo1"]
-[ext_resource type="Script" path="res://scripts/mechanics/player/player_movement.gd" id="3_1eoos"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/movement/move_state_machine.gd" id="2_ud6n7"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/movement/run.gd" id="3_60agh"]
 [ext_resource type="Material" uid="uid://f41eu4cbvian" path="res://materials/player/player_absorb.tres" id="4_ep8r4"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/movement/dead.gd" id="4_koxfs"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/player_aim.gd" id="4_owsoe"]
 [ext_resource type="Material" uid="uid://dq2ufo1kpypca" path="res://materials/player/player_absorb_halo.tres" id="4_poddg"]
 [ext_resource type="PackedScene" uid="uid://dl5unqhv0x3ox" path="res://prefabs/bullets/player_bullet.tscn" id="5_twt6l"]
@@ -82,13 +84,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 script = ExtResource("1_u023k")
 
+[node name="MoveStateMachine" type="Node" parent="."]
+script = ExtResource("2_ud6n7")
+initial_state = NodePath("Run")
+
+[node name="Run" type="Node" parent="MoveStateMachine"]
+script = ExtResource("3_60agh")
+
+[node name="Absorb" type="Node" parent="MoveStateMachine"]
+script = ExtResource("3_60agh")
+speed = 5.0
+
+[node name="Dead" type="Node" parent="MoveStateMachine"]
+script = ExtResource("4_koxfs")
+
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_pcwtq")
-
-[node name="Move" type="Node" parent="."]
-script = ExtResource("3_1eoos")
-movement_deadzone = 0.01
-deceleration = 180.0
+starting_health = 3.0
 
 [node name="Aim" type="Node" parent="."]
 script = ExtResource("4_owsoe")
