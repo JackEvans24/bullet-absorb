@@ -11,3 +11,6 @@ var target: Node3D:
 func _ready():
 	screen_shake.register(camera)
 	pass
+
+func add_impulse():
+	screen_shake.add_impulse()
