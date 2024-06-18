@@ -2,11 +2,12 @@ extends Node
 
 @onready var hud: Hud = $HUD
 @onready var player: Player = $Player
-@onready var player_camera: Camera3D = $PlayerCamera
+@onready var player_camera: Node3D = $FollowPlayer
 @onready var turret: Turret = $Turret
 
 func _ready():
-	turret.set_target(player)
+	player_camera.target = player
+	turret.target = player
 
 	player.damage_taken.connect(_on_damage_taken)
 	player.power_count_changed.connect(hud._on_absorb_count_changed)
