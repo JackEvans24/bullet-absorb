@@ -12,6 +12,7 @@ signal died
 @onready var aim: PlayerAim = $Aim
 @onready var absorb: Absorb = $Absorb
 @onready var body: PlayerBody = $Pivot
+@onready var camera_follow_point: Node3D = $Pivot/CameraFollowPoint
 @onready var hit_detection: Area3D = $HitDetection
 @onready var ground_detection: CollisionShape3D = $GroundDetection
 

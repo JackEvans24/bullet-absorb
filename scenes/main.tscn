@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ccgpc6v5lruew"]
+[gd_scene load_steps=16 format=3 uid="uid://ccgpc6v5lruew"]
 
 [ext_resource type="PackedScene" uid="uid://c3tj0pdcum4wd" path="res://prefabs/player.tscn" id="1_e5x1h"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_rtjol"]
@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://gclpf2kqyelh" path="res://materials/wall.tres" id="2_hxwft"]
 [ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="5_4wclf"]
 [ext_resource type="PackedScene" uid="uid://wfijrpbc1nxm" path="res://prefabs/enemies/turret.tscn" id="6_nrrgo"]
+[ext_resource type="Script" path="res://scripts/mechanics/smooth_follow_target.gd" id="7_haer2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1hrq"]
 metallic = 1.0
@@ -76,29 +77,37 @@ mesh = SubResource("BoxMesh_ughhm")
 
 [node name="HUD" parent="." instance=ExtResource("2_bqahq")]
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="FollowPlayer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("7_haer2")
+max_speed = 30.0
+min_speed = 10.0
+dampening = 0.05
+
+[node name="PlayerCamera" type="Camera3D" parent="FollowPlayer"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 20, 8)
 projection = 1
+current = true
 size = 25.0
 far = 200.0
 
-[node name="CameraPoles" type="Node3D" parent="Camera3D"]
+[node name="CameraPoles" type="Node3D" parent="FollowPlayer/PlayerCamera"]
 transform = Transform3D(1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 0, -3.0718, -21.3205)
 visible = false
 
-[node name="Pole1" type="MeshInstance3D" parent="Camera3D/CameraPoles"]
+[node name="Pole1" type="MeshInstance3D" parent="FollowPlayer/PlayerCamera/CameraPoles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -18)
 mesh = SubResource("CylinderMesh_ugq1f")
 
-[node name="Pole2" type="MeshInstance3D" parent="Camera3D/CameraPoles"]
+[node name="Pole2" type="MeshInstance3D" parent="FollowPlayer/PlayerCamera/CameraPoles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 11)
 mesh = SubResource("CylinderMesh_ugq1f")
 
-[node name="Pole3" type="MeshInstance3D" parent="Camera3D/CameraPoles"]
+[node name="Pole3" type="MeshInstance3D" parent="FollowPlayer/PlayerCamera/CameraPoles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -18)
 mesh = SubResource("CylinderMesh_ugq1f")
 
-[node name="Pole4" type="MeshInstance3D" parent="Camera3D/CameraPoles"]
+[node name="Pole4" type="MeshInstance3D" parent="FollowPlayer/PlayerCamera/CameraPoles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 11)
 mesh = SubResource("CylinderMesh_ugq1f")
 

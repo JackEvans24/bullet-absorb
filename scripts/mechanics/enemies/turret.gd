@@ -7,20 +7,17 @@ extends Enemy
 @onready var fire_point: Node3D = $Pivot/FirePoint
 @onready var fire_timer: Timer = $FireTimer
 
-var _target: Node3D = null;
+var target: Node3D = null;
 
 func _ready():
 	super()
 	fire_timer.timeout.connect(_on_fire_timeout)
 
-func set_target(target: Node3D):
-	_target = target
-
 func _process(_delta):
-	if _target == null:
+	if target == null:
 		return
 
-	var target_position = _target.position
+	var target_position = target.position
 	target_position.y = position.y
 
 	pivot.look_at(target_position)

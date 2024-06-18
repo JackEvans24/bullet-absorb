@@ -1,16 +1,16 @@
 [gd_scene load_steps=27 format=3 uid="uid://c3tj0pdcum4wd"]
 
-[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_u023k"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Material" uid="uid://beaa2b7evhbjh" path="res://materials/player/player.tres" id="2_di4ke"]
-[ext_resource type="Script" path="res://scripts/player/health.gd" id="2_pcwtq"]
-[ext_resource type="Script" path="res://scripts/player/absorb.gd" id="2_sawo1"]
-[ext_resource type="Script" path="res://scripts/player/player_movement.gd" id="3_1eoos"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/health.gd" id="2_pcwtq"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/absorb.gd" id="2_sawo1"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/player_movement.gd" id="3_1eoos"]
 [ext_resource type="Material" uid="uid://f41eu4cbvian" path="res://materials/player/player_absorb.tres" id="4_ep8r4"]
-[ext_resource type="Script" path="res://scripts/player/player_aim.gd" id="4_owsoe"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/player_aim.gd" id="4_owsoe"]
 [ext_resource type="Material" uid="uid://dq2ufo1kpypca" path="res://materials/player/player_absorb_halo.tres" id="4_poddg"]
 [ext_resource type="PackedScene" uid="uid://dl5unqhv0x3ox" path="res://prefabs/bullets/player_bullet.tscn" id="5_twt6l"]
 [ext_resource type="Shape3D" uid="uid://c4tuvev8wasc3" path="res://models/player/player_internal.tres" id="7_iumbl"]
-[ext_resource type="Script" path="res://scripts/player/player_body.gd" id="10_18rdm"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/player_body.gd" id="10_18rdm"]
 [ext_resource type="Shape3D" uid="uid://b143a5k1xv5rx" path="res://models/player/player_external.tres" id="11_p7nyd"]
 [ext_resource type="Material" uid="uid://dlj8u7o0rqldc" path="res://materials/player/player_recovery.tres" id="12_cbt3u"]
 
@@ -151,6 +151,9 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_wwwn5")
 draw_pass_1 = SubResource("SphereMesh_3tq4p")
+
+[node name="CameraFollowPoint" type="Node3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
 [node name="GroundDetection" type="CollisionShape3D" parent="."]
 shape = ExtResource("11_p7nyd")

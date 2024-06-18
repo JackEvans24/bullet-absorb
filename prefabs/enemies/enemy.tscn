@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://c3ytmjd7pe4pg"]
 
-[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_wjmkf"]
+[ext_resource type="Script" path="res://scripts/mechanics/enemies/enemy.gd" id="1_wjmkf"]
 [ext_resource type="PackedScene" uid="uid://cjvpl2fcwu246" path="res://prefabs/hurt_particles.tscn" id="2_e8cc4"]
-[ext_resource type="Script" path="res://scripts/player/health.gd" id="2_pjhvc"]
-[ext_resource type="Script" path="res://scripts/knockback.gd" id="4_0se3r"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/health.gd" id="2_pjhvc"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/knockback.gd" id="4_0se3r"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="5_d48ya"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_64qd1"]
