@@ -17,12 +17,12 @@ func _ready():
 func _process(delta):
 	state.update(delta)
 
-func transition_to(target_state_name: String):
+func transition_to(target_state_name: String, ctx: Dictionary={}):
 	if not has_node(target_state_name):
 		printerr("No move state found with name: %s" % target_state_name)
 		return
 
 	state.exit()
 	state = get_node(target_state_name)
-	state.enter()
+	state.enter(ctx)
 	state_changed.emit(state.name)

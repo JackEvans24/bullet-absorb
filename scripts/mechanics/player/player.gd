@@ -52,14 +52,27 @@ func _on_move_state_changed(_state_name: String):
 	aim.can_fire = move_state.can_fire
 	absorb.can_absorb = move_state.can_absorb
 
-func _on_damage_taken(_damage_taken: float, _taken_from: Node3D):
+func _on_damage_taken(_damage_taken: float, taken_from: Node3D):
 	damage_taken.emit()
 	absorb.end_windup()
 
 	if current_health <= 0:
-		move_state.transition_to("Dead")
-		ground_detection.set_deferred("disabled", true)
-		died.emit()
+		die()
+	else:
+		knockback(taken_from)
+
+func die():
+	move_state.transition_to(MoveStateConstants.STATE_DEAD)
+	ground_detection.set_deferred("disabled", true)
+	died.emit()
+
+func knockback(taken_from: Node3D):
+	var direction = global_position - taken_from.global_position
+	direction.y = 0
+
+	var ctx: Dictionary = {}
+	ctx[MoveStateConstants.HIT_DIRECTION] = direction
+	move_state.transition_to(MoveStateConstants.STATE_KNOCKBACK, ctx)
 
 func _on_absorb():
 	power_count += 1
@@ -76,9 +89,9 @@ func _on_hit(area: Area3D):
 	health.take_damage(1.0, area)
 
 func _on_slowdown_started():
-	move_state.transition_to("Absorb")
+	move_state.transition_to(MoveStateConstants.STATE_ABSORB)
 	aim.can_fire = false
 
 func _on_slowdown_ended():
-	move_state.transition_to("Run")
+	move_state.transition_to(MoveStateConstants.STATE_RUN)
 	aim.can_fire = true

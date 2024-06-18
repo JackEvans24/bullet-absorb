@@ -3,7 +3,7 @@ extends Node
 
 var state_machine: StateMachine
 
-func enter(msg: Dictionary={}):
+func enter(ctx: Dictionary={}):
     pass
 
 func update(delta: float):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=30 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Material" uid="uid://beaa2b7evhbjh" path="res://materials/player/player.tres" id="2_di4ke"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/mechanics/player/player_aim.gd" id="4_owsoe"]
 [ext_resource type="Material" uid="uid://dq2ufo1kpypca" path="res://materials/player/player_absorb_halo.tres" id="4_poddg"]
 [ext_resource type="PackedScene" uid="uid://dl5unqhv0x3ox" path="res://prefabs/bullets/player_bullet.tscn" id="5_twt6l"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/movement/knockback.gd" id="5_unin6"]
 [ext_resource type="Shape3D" uid="uid://c4tuvev8wasc3" path="res://models/player/player_internal.tres" id="7_iumbl"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/player_body.gd" id="10_18rdm"]
 [ext_resource type="Shape3D" uid="uid://b143a5k1xv5rx" path="res://models/player/player_external.tres" id="11_p7nyd"]
@@ -88,15 +89,18 @@ script = ExtResource("1_u023k")
 script = ExtResource("2_pauji")
 initial_state = NodePath("Run")
 
-[node name="Run" type="Node" parent="MoveState"]
-script = ExtResource("3_60agh")
-
 [node name="Absorb" type="Node" parent="MoveState"]
 script = ExtResource("3_60agh")
 speed = 5.0
 
 [node name="Dead" type="Node" parent="MoveState"]
 script = ExtResource("4_koxfs")
+
+[node name="Knockback" type="Node" parent="MoveState"]
+script = ExtResource("5_unin6")
+
+[node name="Run" type="Node" parent="MoveState"]
+script = ExtResource("3_60agh")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_pcwtq")
