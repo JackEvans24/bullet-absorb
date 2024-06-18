@@ -69,6 +69,15 @@ shape = SubResource("BoxShape3D_stcvn")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Wall"]
 mesh = SubResource("BoxMesh_ughhm")
 
+[node name="Wall2" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Wall2"]
+shape = SubResource("BoxShape3D_stcvn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Wall2"]
+mesh = SubResource("BoxMesh_ughhm")
+
 [node name="HUD" parent="." instance=ExtResource("2_bqahq")]
 
 [node name="Cameras" parent="." instance=ExtResource("4_nws0m")]
