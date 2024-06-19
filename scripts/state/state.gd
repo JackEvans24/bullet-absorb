@@ -3,10 +3,10 @@ extends Node
 
 var state_machine: StateMachine
 
-func enter(ctx: Dictionary={}):
+func enter(_ctx: Dictionary={}):
     pass
 
-func update(delta: float):
+func update(_delta: float):
     pass
 
 func exit():
