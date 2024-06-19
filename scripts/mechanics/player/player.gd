@@ -29,7 +29,6 @@ func _ready():
 
 	health.damage_taken.connect(_on_damage_taken)
 	health.damage_taken.connect(body._on_damage_taken)
-	health.recovery_changed.connect(body._on_recovery_changed)
 
 	absorb.bullet_absorbed.connect(_on_absorb)
 	absorb.slowdown_started.connect(_on_slowdown_started)
@@ -64,6 +63,7 @@ func _on_move_state_changed(_state_name: String):
 	aim.can_aim = move_state.can_aim
 	aim.can_fire = move_state.can_fire
 	absorb.can_absorb = move_state.can_absorb
+	health.can_take_damage = move_state.can_take_damage
 
 func _on_damage_taken(_damage_taken: float, taken_from: Node3D):
 	damage_taken.emit()

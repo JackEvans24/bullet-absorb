@@ -101,22 +101,29 @@ script = ExtResource("4_5ub5d")
 dash_speed = 30.0
 can_fire = false
 can_absorb = false
+can_take_damage = false
 
 [node name="DashRecovery" type="Node" parent="MoveState"]
 script = ExtResource("5_dtw6r")
-recovery_duration = 0.4
-speed = 8.0
+recovery_duration = 1.0
 
 [node name="Dead" type="Node" parent="MoveState"]
 script = ExtResource("4_koxfs")
 can_aim = false
 can_fire = false
 can_absorb = false
+can_take_damage = false
 
 [node name="Knockback" type="Node" parent="MoveState"]
 script = ExtResource("5_unin6")
 can_fire = false
 can_absorb = false
+can_take_damage = false
+
+[node name="KnockbackRecovery" type="Node" parent="MoveState"]
+script = ExtResource("5_dtw6r")
+recovery_duration = 1.0
+can_take_damage = false
 
 [node name="Run" type="Node" parent="MoveState"]
 script = ExtResource("3_60agh")
