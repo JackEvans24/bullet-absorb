@@ -5,6 +5,17 @@ extends RunMoveState
 
 var direction: Vector3 = Vector3.ZERO
 
+func get_allowed_transitions():
+	var transitions = [
+		MoveStateConstants.STATE_RUN,
+	]
+	if can_absorb:
+		transitions.push_back(MoveStateConstants.STATE_ABSORB)
+	if can_take_damage:
+		transitions.push_back(MoveStateConstants.STATE_DEAD)
+		transitions.push_back(MoveStateConstants.STATE_KNOCKBACK)
+	return transitions
+
 func enter(_ctx: Dictionary={}):
 	do_recovery_timeout()
 

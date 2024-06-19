@@ -22,6 +22,12 @@ func transition_to(target_state_name: String, ctx: Dictionary={}):
 		printerr("No move state found with name: %s" % target_state_name)
 		return
 
+	if not state.allowed_transitions.has(target_state_name):
+		print("Failed to transition from state '%s' to state '%s': not allowed" % [state.name, target_state_name])
+		return
+
+	print("Transitioned from state '%s' to state '%s'" % [state.name, target_state_name])
+
 	state.exit()
 	state = get_node(target_state_name)
 	state.enter(ctx)

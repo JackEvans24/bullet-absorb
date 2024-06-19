@@ -6,6 +6,9 @@ extends MoveState
 
 var direction: Vector3 = Vector3.ZERO
 
+func get_allowed_transitions():
+	return [MoveStateConstants.STATE_DASH_RECOVERY]
+
 func enter(ctx: Dictionary={}):
 	direction = ctx[MoveStateConstants.DASH_DIRECTION]
 

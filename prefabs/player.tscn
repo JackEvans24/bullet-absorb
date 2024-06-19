@@ -94,6 +94,7 @@ initial_state = NodePath("Run")
 
 [node name="Absorb" type="Node" parent="MoveState"]
 script = ExtResource("3_60agh")
+speed = 5.0
 can_fire = false
 
 [node name="Dash" type="Node" parent="MoveState"]
