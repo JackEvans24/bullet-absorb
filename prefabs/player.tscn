@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=31 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Material" uid="uid://beaa2b7evhbjh" path="res://materials/player/player.tres" id="2_di4ke"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/mechanics/shared/health.gd" id="2_pcwtq"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/absorb.gd" id="2_sawo1"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/run.gd" id="3_60agh"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/movement/absorb.gd" id="3_o8btm"]
 [ext_resource type="Material" uid="uid://f41eu4cbvian" path="res://materials/player/player_absorb.tres" id="4_ep8r4"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/dead.gd" id="4_koxfs"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/player_aim.gd" id="4_owsoe"]
@@ -90,7 +91,7 @@ script = ExtResource("2_pauji")
 initial_state = NodePath("Run")
 
 [node name="Absorb" type="Node" parent="MoveState"]
-script = ExtResource("3_60agh")
+script = ExtResource("3_o8btm")
 speed = 5.0
 
 [node name="Dead" type="Node" parent="MoveState"]
