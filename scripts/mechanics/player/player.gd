@@ -47,6 +47,19 @@ func _physics_process(_delta):
 
 	move_and_slide()
 
+func _process(_delta):
+	if Input.is_action_just_pressed("dash"):
+		dash()
+
+func dash():
+	var dash_direction = move_state.movement
+	if dash_direction.length() < 0.01:
+		dash_direction = camera_follow_point.global_position - body.global_position
+
+	var ctx: Dictionary = {}
+	ctx[MoveStateConstants.DASH_DIRECTION] = dash_direction
+	move_state.transition_to(MoveStateConstants.STATE_DASH, ctx)
+
 func _on_move_state_changed(_state_name: String):
 	aim.can_aim = move_state.can_aim
 	aim.can_fire = move_state.can_fire
