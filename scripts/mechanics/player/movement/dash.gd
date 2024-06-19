@@ -6,11 +6,6 @@ extends MoveState
 
 var direction: Vector3 = Vector3.ZERO
 
-func _init():
-	can_fire = false
-	can_absorb = false
-	movement = Vector3.ZERO
-
 func enter(ctx: Dictionary={}):
 	direction = ctx[MoveStateConstants.DASH_DIRECTION]
 
@@ -24,6 +19,5 @@ func enter(ctx: Dictionary={}):
 
 func do_dash_timeout():
 	await get_tree().create_timer(dash_duration).timeout
-	# TODO: transition to dash recovery state
 	# TODO: add is_invincible property to move state
-	state_machine.transition_to(MoveStateConstants.STATE_RUN)
+	state_machine.transition_to(MoveStateConstants.STATE_DASH_RECOVERY)
