@@ -12,6 +12,7 @@ func _ready():
 
 	player.damage_taken.connect(_on_damage_taken)
 	player.power_count_changed.connect(hud._on_absorb_count_changed)
+	player.died.connect(hud._on_player_died)
 
 	hud._on_health_changed(player.current_health)
 
