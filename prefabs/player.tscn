@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=35 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Material" uid="uid://beaa2b7evhbjh" path="res://materials/player/player.tres" id="2_di4ke"]
@@ -20,6 +20,7 @@
 [ext_resource type="Shape3D" uid="uid://b143a5k1xv5rx" path="res://models/player/player_external.tres" id="11_p7nyd"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/dash.gd" id="11_s2u1f"]
 [ext_resource type="Material" uid="uid://dlj8u7o0rqldc" path="res://materials/player/player_recovery.tres" id="12_cbt3u"]
+[ext_resource type="Material" uid="uid://bl15jqbmjfvys" path="res://materials/player/player_dash_particle.tres" id="20_n80do"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4kfv7"]
 radius = 5.0
@@ -71,16 +72,19 @@ point_count = 2
 curve = SubResource("Curve_d1fyx")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wwwn5"]
-direction = Vector3(0, 1, 0)
-spread = 75.0
-initial_velocity_min = 8.0
-initial_velocity_max = 8.0
-gravity = Vector3(0, -15, 0)
+emission_shape_scale = Vector3(1, 1, 0)
+emission_shape = 1
+emission_sphere_radius = 0.3
+direction = Vector3(0, 1, 1)
+spread = 30.0
+initial_velocity_min = 4.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, -5, 0)
 scale_curve = SubResource("CurveTexture_ifrih")
 turbulence_noise_speed_random = 0.27
 
 [sub_resource type="SphereMesh" id="SphereMesh_3tq4p"]
-material = ExtResource("2_di4ke")
+material = ExtResource("20_n80do")
 radius = 0.1
 height = 0.2
 
@@ -193,6 +197,16 @@ amount = 20
 lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_wwwn5")
+draw_pass_1 = SubResource("SphereMesh_3tq4p")
+
+[node name="DashParticles" type="GPUParticles3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
+cast_shadow = 0
+emitting = false
+amount = 20
+lifetime = 0.2
+one_shot = true
 process_material = SubResource("ParticleProcessMaterial_wwwn5")
 draw_pass_1 = SubResource("SphereMesh_3tq4p")
 

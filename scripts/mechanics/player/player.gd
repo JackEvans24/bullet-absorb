@@ -36,6 +36,7 @@ func _ready():
 	aim.bullet_fired.connect(_on_bullet_fired)
 
 	dash.dash_triggered.connect(_on_dash_triggered)
+	dash.dash_triggered.connect(body._on_dash_triggered)
 
 	absorb.bullet_absorbed.connect(_on_absorb)
 	absorb.slowdown_started.connect(_on_slowdown_started)

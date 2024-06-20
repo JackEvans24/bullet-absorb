@@ -7,6 +7,7 @@ extends Node3D
 @onready var body: MeshInstance3D = $Body
 @onready var nose: MeshInstance3D = $Nose
 @onready var hurt_particles: GPUParticles3D = $HurtParticles
+@onready var dash_particles: GPUParticles3D = $DashParticles
 
 var current_move_state: MoveState
 var is_invincible: bool = false
@@ -40,3 +41,6 @@ func _on_damage_taken(damage_taken: float, _taken_from: Node3D):
 func _on_player_died():
 	body.visible = false
 	nose.visible = false
+
+func _on_dash_triggered(_direction: Vector3):
+	dash_particles.restart()
