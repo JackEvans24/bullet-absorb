@@ -23,17 +23,25 @@ func _ready():
 	absorb_area.area_entered.connect(absorb_power)
 
 func _process(delta):
-	if is_absorb_started:
-		process_absorb_state(delta)
-	elif Input.is_action_just_pressed("absorb"):
+	if Input.is_action_just_pressed("absorb"):
 		process_absorb_start()
+	elif is_absorb_started:
+		process_absorb_state(delta)
 
-func process_absorb_state(delta):
-	if is_absorbing:
+func process_absorb_start():
+	if not can_absorb:
 		return
 
-	if not Input.is_action_pressed("absorb") or not can_absorb:
-		end_windup()
+	slowdown_started.emit()
+	is_absorb_started = true
+	enable_particles(true)
+
+func process_absorb_state(delta):
+	if is_absorbing or not can_absorb:
+		return
+
+	if not Input.is_action_pressed("absorb"):
+		end_absorb()
 		return
 
 	current_windup_time += delta
@@ -41,7 +49,7 @@ func process_absorb_state(delta):
 		return
 
 	trigger_absorb()
-	end_windup()
+	end_absorb()
 
 func trigger_absorb():
 	is_absorbing = true
@@ -56,18 +64,13 @@ func trigger_absorb():
 
 	is_absorbing = false
 
-func process_absorb_start():
-	if not can_absorb:
-		return
-
-	slowdown_started.emit()
-	is_absorb_started = true
-	enable_particles(true)
+func end_absorb():
+	end_windup()
+	slowdown_ended.emit()
 
 func end_windup():
 	is_absorb_started = false
 	current_windup_time = 0.0
-	slowdown_ended.emit()
 	enable_particles(false)
 
 func enable_particles(enabled: bool):

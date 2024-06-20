@@ -3,11 +3,19 @@ extends Node
 
 var state_machine: StateMachine
 
-func enter(ctx: Dictionary={}):
-    pass
+var allowed_transitions: Array = []
 
-func update(delta: float):
-    pass
+func get_allowed_transitions() -> Array:
+	return []
+
+func _init():
+	allowed_transitions = get_allowed_transitions()
+
+func enter(_ctx: Dictionary={}):
+	pass
+
+func update(_delta: float):
+	pass
 
 func exit():
-    pass
+	pass

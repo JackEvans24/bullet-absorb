@@ -6,9 +6,3 @@ var move_state: MoveState:
 
 var movement: Vector3:
     get: return move_state.movement
-var can_aim: bool:
-    get: return move_state.can_aim
-var can_fire: bool:
-    get: return move_state.can_fire
-var can_absorb: bool:
-    get: return move_state.can_absorb

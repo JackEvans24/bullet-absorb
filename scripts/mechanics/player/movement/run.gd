@@ -4,6 +4,15 @@ extends MoveState
 @export var speed: float = 15.0
 @export var deceleration: float = 180
 
+func get_allowed_transitions():
+    return [
+        MoveStateConstants.STATE_ABSORB,
+        MoveStateConstants.STATE_DASH,
+        MoveStateConstants.STATE_DEAD,
+        MoveStateConstants.STATE_KNOCKBACK,
+        MoveStateConstants.STATE_RUN
+    ]
+
 func update(delta: float):
     super(delta)
 

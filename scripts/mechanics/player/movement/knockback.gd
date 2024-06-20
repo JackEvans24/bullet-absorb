@@ -6,6 +6,9 @@ extends MoveState
 
 var direction: Vector3
 
+func get_allowed_transitions():
+    return [MoveStateConstants.STATE_RUN]
+
 func enter(ctx: Dictionary={}):
     direction = ctx[MoveStateConstants.HIT_DIRECTION]
 

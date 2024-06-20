@@ -7,9 +7,10 @@ signal died
 
 @export var fall_acceleration = 10
 
-@onready var health: Health = $Health
 @onready var move_state: MoveStateMachine = $MoveState
+@onready var health: Health = $Health
 @onready var aim: PlayerAim = $Aim
+@onready var dash: Dash = $Dash
 @onready var absorb: Absorb = $Absorb
 @onready var body: PlayerBody = $Pivot
 @onready var camera_follow_point: Node3D = $Pivot/CameraFollowPoint
@@ -26,20 +27,25 @@ func _ready():
 	died.connect(body._on_player_died)
 
 	move_state.state_changed.connect(_on_move_state_changed)
+	move_state.state_changed.connect(body._on_move_state_changed)
 
 	health.damage_taken.connect(_on_damage_taken)
 	health.damage_taken.connect(body._on_damage_taken)
-	health.recovery_changed.connect(body._on_recovery_changed)
+	health.invincibility_changed.connect(body._on_invincibility_changed)
+
+	aim.bullet_fired.connect(_on_bullet_fired)
+
+	dash.dash_triggered.connect(_on_dash_triggered)
+	dash.dash_triggered.connect(body._on_dash_triggered)
 
 	absorb.bullet_absorbed.connect(_on_absorb)
 	absorb.slowdown_started.connect(_on_slowdown_started)
 	absorb.slowdown_ended.connect(_on_slowdown_ended)
 
-	aim.bullet_fired.connect(_on_bullet_fired)
-
 	hit_detection.area_entered.connect(_on_hit)
 
 	aim.initialise(body)
+	dash.initialise(move_state, body)
 
 func _physics_process(_delta):
 	velocity = move_state.movement
@@ -47,14 +53,23 @@ func _physics_process(_delta):
 
 	move_and_slide()
 
-func _on_move_state_changed(_state_name: String):
-	aim.can_aim = move_state.can_aim
-	aim.can_fire = move_state.can_fire
-	absorb.can_absorb = move_state.can_absorb
+func _on_move_state_changed(state: MoveState):
+	aim.can_aim = state.can_aim
+	aim.can_fire = state.can_fire
+
+	absorb.can_absorb = state.can_absorb
+	if not state.can_absorb:
+		absorb.end_windup()
+
+	health.can_take_damage = state.can_take_damage
+
+func _on_dash_triggered(dash_direction: Vector3):
+	var ctx: Dictionary = {}
+	ctx[MoveStateConstants.DASH_DIRECTION] = dash_direction
+	move_state.transition_to(MoveStateConstants.STATE_DASH, ctx)
 
 func _on_damage_taken(_damage_taken: float, taken_from: Node3D):
 	damage_taken.emit()
-	absorb.end_windup()
 
 	if current_health <= 0:
 		die()
