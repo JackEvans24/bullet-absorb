@@ -22,5 +22,4 @@ func enter(ctx: Dictionary={}):
 
 func do_dash_timeout():
 	await get_tree().create_timer(dash_duration).timeout
-	# TODO: add is_invincible property to move state
 	state_machine.transition_to(MoveStateConstants.STATE_DASH_RECOVERY)
