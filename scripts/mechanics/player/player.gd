@@ -27,9 +27,11 @@ func _ready():
 	died.connect(body._on_player_died)
 
 	move_state.state_changed.connect(_on_move_state_changed)
+	move_state.state_changed.connect(body._on_move_state_changed)
 
 	health.damage_taken.connect(_on_damage_taken)
 	health.damage_taken.connect(body._on_damage_taken)
+	health.invincibility_changed.connect(body._on_invincibility_changed)
 
 	aim.bullet_fired.connect(_on_bullet_fired)
 
@@ -50,11 +52,11 @@ func _physics_process(_delta):
 
 	move_and_slide()
 
-func _on_move_state_changed(_state_name: String):
-	aim.can_aim = move_state.can_aim
-	aim.can_fire = move_state.can_fire
-	absorb.can_absorb = move_state.can_absorb
-	health.can_take_damage = move_state.can_take_damage
+func _on_move_state_changed(state: MoveState):
+	aim.can_aim = state.can_aim
+	aim.can_fire = state.can_fire
+	absorb.can_absorb = state.can_absorb
+	health.can_take_damage = state.can_take_damage
 
 func _on_dash_triggered(dash_direction: Vector3):
 	var ctx: Dictionary = {}

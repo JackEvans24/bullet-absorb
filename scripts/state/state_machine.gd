@@ -1,7 +1,7 @@
 class_name StateMachine
 extends Node
 
-signal state_changed(state_name: String)
+signal state_changed(state: State)
 
 @export var initial_state := NodePath()
 
@@ -12,7 +12,7 @@ func _ready():
 		child.state_machine = self
 
 	state.enter()
-	state_changed.emit(state.name)
+	state_changed.emit(state)
 
 func _process(delta):
 	state.update(delta)
@@ -31,4 +31,4 @@ func transition_to(target_state_name: String, ctx: Dictionary={}):
 	state.exit()
 	state = get_node(target_state_name)
 	state.enter(ctx)
-	state_changed.emit(state.name)
+	state_changed.emit(state)
