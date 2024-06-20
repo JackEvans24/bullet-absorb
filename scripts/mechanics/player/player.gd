@@ -56,7 +56,11 @@ func _physics_process(_delta):
 func _on_move_state_changed(state: MoveState):
 	aim.can_aim = state.can_aim
 	aim.can_fire = state.can_fire
+
 	absorb.can_absorb = state.can_absorb
+	if not state.can_absorb:
+		absorb.end_windup()
+
 	health.can_take_damage = state.can_take_damage
 
 func _on_dash_triggered(dash_direction: Vector3):
@@ -66,7 +70,6 @@ func _on_dash_triggered(dash_direction: Vector3):
 
 func _on_damage_taken(_damage_taken: float, taken_from: Node3D):
 	damage_taken.emit()
-	absorb.end_windup()
 
 	if current_health <= 0:
 		die()
