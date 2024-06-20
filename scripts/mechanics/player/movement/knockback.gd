@@ -7,7 +7,7 @@ extends MoveState
 var direction: Vector3
 
 func get_allowed_transitions():
-    return [MoveStateConstants.STATE_KNOCKBACK_RECOVERY]
+    return [MoveStateConstants.STATE_RUN]
 
 func enter(ctx: Dictionary={}):
     direction = ctx[MoveStateConstants.HIT_DIRECTION]
@@ -23,4 +23,4 @@ func enter(ctx: Dictionary={}):
 
 func do_knockback_timeout():
     await get_tree().create_timer(knockback_duration).timeout
-    state_machine.transition_to(MoveStateConstants.STATE_KNOCKBACK_RECOVERY)
+    state_machine.transition_to(MoveStateConstants.STATE_RUN)

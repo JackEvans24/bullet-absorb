@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=32 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Material" uid="uid://beaa2b7evhbjh" path="res://materials/player/player.tres" id="2_di4ke"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/dead.gd" id="4_koxfs"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/player_aim.gd" id="4_owsoe"]
 [ext_resource type="Material" uid="uid://dq2ufo1kpypca" path="res://materials/player/player_absorb_halo.tres" id="4_poddg"]
-[ext_resource type="Script" path="res://scripts/mechanics/player/movement/recovery.gd" id="5_dtw6r"]
 [ext_resource type="PackedScene" uid="uid://dl5unqhv0x3ox" path="res://prefabs/bullets/player_bullet.tscn" id="5_twt6l"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/knockback.gd" id="5_unin6"]
 [ext_resource type="Shape3D" uid="uid://c4tuvev8wasc3" path="res://models/player/player_internal.tres" id="7_iumbl"]
@@ -120,17 +119,13 @@ can_fire = false
 can_absorb = false
 can_take_damage = false
 
-[node name="KnockbackRecovery" type="Node" parent="MoveState"]
-script = ExtResource("5_dtw6r")
-recovery_duration = 1.0
-can_take_damage = false
-
 [node name="Run" type="Node" parent="MoveState"]
 script = ExtResource("3_60agh")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_pcwtq")
 starting_health = 3.0
+recovery_time = 1.6
 
 [node name="Aim" type="Node" parent="."]
 script = ExtResource("4_owsoe")
