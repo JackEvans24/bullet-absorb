@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bcjb1jnr0y5mb"]
+[gd_scene load_steps=13 format=3 uid="uid://bcjb1jnr0y5mb"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/power_generator.gd" id="1_btbyj"]
 [ext_resource type="PackedScene" uid="uid://evlhef456yfc" path="res://prefabs/power/generated_power_ball.tscn" id="2_uxx3a"]
+[ext_resource type="Material" uid="uid://f41eu4cbvian" path="res://materials/player/player_absorb.tres" id="3_88q7i"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1bsd3"]
 
@@ -10,6 +11,27 @@ size = Vector3(0.8, 0.1, 0.8)
 
 [sub_resource type="BoxMesh" id="BoxMesh_wd12u"]
 size = Vector3(0.5, 0.1, 0.5)
+
+[sub_resource type="Curve" id="Curve_m6hh0"]
+_data = [Vector2(0, 0), -2.37274, -2.37274, 0, 0, Vector2(0.104623, 1), -1.13942e-06, -1.13942e-06, 0, 0, Vector2(1, 0), -0.0990366, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_isa1t"]
+curve = SubResource("Curve_m6hh0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6vtgr"]
+emission_shape = 2
+emission_sphere_radius = 2.0
+radial_velocity_min = -10.0
+radial_velocity_max = -8.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_isa1t")
+
+[sub_resource type="SphereMesh" id="SphereMesh_fhuju"]
+material = ExtResource("3_88q7i")
+radius = 0.1
+height = 0.2
 
 [sub_resource type="Animation" id="Animation_0en0q"]
 resource_name = "power_generator_idle"
@@ -48,6 +70,7 @@ _data = {
 [node name="PowerGenerator" type="Node3D"]
 script = ExtResource("1_btbyj")
 power_scene = ExtResource("2_uxx3a")
+cooldown = 0.5
 
 [node name="PowerCheckArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -68,9 +91,22 @@ mesh = SubResource("BoxMesh_lgj11")
 skeleton = NodePath("../..")
 
 [node name="Head" type="MeshInstance3D" parent="Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0)
 mesh = SubResource("BoxMesh_wd12u")
 skeleton = NodePath("../..")
+
+[node name="SpawnParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+emitting = false
+amount = 20
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.4
+interpolate = false
+fract_delta = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_6vtgr")
+draw_pass_1 = SubResource("SphereMesh_fhuju")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

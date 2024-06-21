@@ -7,6 +7,7 @@ extends Node3D
 
 @onready var power_check_area: Area3D = $PowerCheckArea
 @onready var spawn_point: Node3D = $SpawnPoint
+@onready var particles: GPUParticles3D = $SpawnParticles
 
 var can_spawn := true
 
@@ -20,6 +21,8 @@ func spawn_power():
     if not can_spawn:
         return
     can_spawn = false
+
+    particles.restart()
 
     await get_tree().create_timer(cooldown).timeout
 
