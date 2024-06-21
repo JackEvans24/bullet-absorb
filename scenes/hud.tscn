@@ -1,26 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhxrs6pph350t"]
+[gd_scene load_steps=3 format=3 uid="uid://bhxrs6pph350t"]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_fnqek"]
+[ext_resource type="PackedScene" uid="uid://dnhgfpvh8onaq" path="res://prefabs/ui/bar.tscn" id="2_pxq8q"]
 
 [node name="HUD" type="Node"]
 script = ExtResource("1_fnqek")
 death_overlay_timer = 1.2
 
-[node name="HealthLabel" type="Label" parent="."]
+[node name="HealthBar" parent="." instance=ExtResource("2_pxq8q")]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -160.0
-offset_top = -60.0
-offset_right = -10.0
-offset_bottom = -18.0
+offset_left = -50.0
+offset_top = -120.0
+offset_right = -20.0
+offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
-size_flags_horizontal = 8
-theme_override_font_sizes/font_size = 30
-text = "Health: 0"
 
 [node name="PowerLabel" type="Label" parent="."]
 anchors_preset = 2
