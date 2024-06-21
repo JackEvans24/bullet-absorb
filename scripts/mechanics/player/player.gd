@@ -21,6 +21,8 @@ var power_count: int = 0
 
 var current_health:
 	get: return health.current_health
+var max_health:
+	get: return health.starting_health
 
 func _ready():
 	power_count_changed.connect(aim._on_power_count_changed)
