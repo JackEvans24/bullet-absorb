@@ -32,5 +32,5 @@ func _on_fire_timeout():
 
 func die():
 	super()
-	gun_mesh.visible = false
+	target = null
 	fire_timer.stop()

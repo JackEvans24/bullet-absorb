@@ -41,5 +41,5 @@ func do_knockback(taken_from: Node3D):
 	knockback.set_knockback_direction(direction)
 
 func die():
-	body.visible = false
+	pivot.visible = false
 	collider.call_deferred("queue_free")
