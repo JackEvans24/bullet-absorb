@@ -9,13 +9,14 @@ extends Control
 @onready var foreground: ColorRect = $Foreground
 
 var max_value := 1.0
-var current_value := 1.0
+var current_value := 0.0
 var new_value := 0.0
 
 var color_lerp := 0.0
 
 func _ready():
 	foreground.color = bar_colour
+	current_value = foreground.size.y / size.y
 
 func update_value(value: float):
 	new_value = value
