@@ -2,12 +2,16 @@ class_name Bar
 extends Control
 
 @export var bar_speed = 1.0
+@export var bar_colour: Color = Color.RED
 
 @onready var foreground: ColorRect = $Foreground
 
 var max_value := 1.0
 var current_value := 1.0
 var new_value := 0.0
+
+func _ready():
+	foreground.color = bar_colour
 
 func update_value(value: float):
 	new_value = value

@@ -18,18 +18,17 @@ offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="PowerLabel" type="Label" parent="."]
-anchors_preset = 2
+[node name="PowerBar" parent="." instance=ExtResource("2_pxq8q")]
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = -60.0
-offset_right = 210.0
-offset_bottom = -18.0
+offset_left = -570.0
+offset_top = -120.0
+offset_right = -540.0
+offset_bottom = -20.0
+grow_horizontal = 0
 grow_vertical = 0
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 30
-text = "Power: 0"
+bar_colour = Color(0.37, 0.958, 1, 1)
 
 [node name="DeathOverlay" type="ColorRect" parent="."]
 visible = false
