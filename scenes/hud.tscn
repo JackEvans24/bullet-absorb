@@ -12,19 +12,33 @@ anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 offset_left = -580.0
-offset_top = -170.0
+offset_top = -100.0
 offset_right = -560.0
 offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="PowerBar" parent="." instance=ExtResource("2_pxq8q")]
+[node name="StaminaBar" parent="." instance=ExtResource("2_pxq8q")]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 offset_left = -550.0
-offset_top = -170.0
+offset_top = -100.0
 offset_right = -530.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+bar_colour = Color(0.1672, 0.76, 0.24624, 1)
+color_decay = 2.0
+flash_colour = Color(0.1166, 0.53, 0.17172, 1)
+
+[node name="PowerBar" parent="." instance=ExtResource("2_pxq8q")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+offset_left = -520.0
+offset_top = -170.0
+offset_right = -500.0
 offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0

@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 signal power_count_changed(count: int)
 signal damage_taken
+signal can_dash_changed(can_dash: bool)
 signal died
 
 @export var max_power = 20
@@ -39,6 +40,7 @@ func _ready():
 
 	dash.dash_triggered.connect(_on_dash_triggered)
 	dash.dash_triggered.connect(body._on_dash_triggered)
+	dash.can_dash_changed.connect(_on_can_dash_changed)
 
 	absorb.bullet_absorbed.connect(_on_absorb)
 	absorb.slowdown_started.connect(_on_slowdown_started)
@@ -69,6 +71,10 @@ func _on_dash_triggered(dash_direction: Vector3):
 	var ctx: Dictionary = {}
 	ctx[MoveStateConstants.DASH_DIRECTION] = dash_direction
 	move_state.transition_to(MoveStateConstants.STATE_DASH, ctx)
+	can_dash_changed.emit(false)
+
+func _on_can_dash_changed(can_dash: bool):
+	can_dash_changed.emit(can_dash)
 
 func _on_damage_taken(_damage_taken: float, taken_from: Node3D):
 	damage_taken.emit()
