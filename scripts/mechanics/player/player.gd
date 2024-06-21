@@ -5,7 +5,7 @@ signal power_count_changed(count: int)
 signal damage_taken
 signal died
 
-@export var fall_acceleration = 10
+@export var max_power = 20
 
 @onready var move_state: MoveStateMachine = $MoveState
 @onready var health: Health = $Health
@@ -92,6 +92,8 @@ func knockback(taken_from: Node3D):
 	move_state.transition_to(MoveStateConstants.STATE_KNOCKBACK, ctx)
 
 func _on_absorb():
+	if power_count == max_power:
+		return
 	power_count += 1
 	update_power_count()
 
