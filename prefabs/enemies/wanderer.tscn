@@ -1,0 +1,73 @@
+[gd_scene load_steps=13 format=3 uid="uid://btfsstt1biti7"]
+
+[ext_resource type="PackedScene" uid="uid://bxkdcki5vdm0x" path="res://prefabs/behaviours/look_at_target.tscn" id="2_4ualn"]
+[ext_resource type="Script" path="res://scripts/mechanics/enemies/wanderer.gd" id="2_ga1uy"]
+[ext_resource type="PackedScene" uid="uid://cjvpl2fcwu246" path="res://prefabs/hurt_particles.tscn" id="2_mpnm2"]
+[ext_resource type="PackedScene" uid="uid://uqduo71b13ee" path="res://prefabs/behaviours/fire_bullet.tscn" id="3_vvdtc"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/health.gd" id="3_wq884"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/knockback.gd" id="4_mqcuu"]
+[ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="5_auu40"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="5_b2h5o"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer_config.gd" id="6_wqc6m"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_64qd1"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_jkita"]
+material = ExtResource("5_auu40")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vhdor"]
+radius = 0.45
+
+[node name="Wanderer" type="CharacterBody3D"]
+collision_layer = 32
+collision_mask = 17
+script = ExtResource("2_ga1uy")
+hurt_particles_scene = ExtResource("2_mpnm2")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_wq884")
+starting_health = 3.0
+recovery_time = 0.01
+
+[node name="Knockback" type="Node" parent="."]
+script = ExtResource("4_mqcuu")
+knockback_time = 0.05
+knockback_power = 15.0
+
+[node name="HitDetection" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetection"]
+shape = SubResource("SphereShape3D_64qd1")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Body" type="MeshInstance3D" parent="Pivot"]
+mesh = SubResource("SphereMesh_jkita")
+
+[node name="FirePoint" type="Node3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_vhdor")
+
+[node name="LookAtTarget" parent="." instance=ExtResource("2_4ualn")]
+
+[node name="Fire" parent="." instance=ExtResource("3_vvdtc")]
+timer_ref = NodePath("../FireTimer")
+
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+script = ExtResource("5_b2h5o")
+
+[node name="Wait" type="Node" parent="FireTimer"]
+script = ExtResource("6_wqc6m")
+duration = 3.0
+
+[node name="Fire" type="Node" parent="FireTimer"]
+script = ExtResource("6_wqc6m")
+duration = 0.5
+iterations = 2
