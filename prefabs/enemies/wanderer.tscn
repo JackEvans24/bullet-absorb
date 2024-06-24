@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scripts/mechanics/shared/knockback.gd" id="4_mqcuu"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="5_auu40"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="5_b2h5o"]
-[ext_resource type="Script" path="res://scripts/mechanics/enemies/basic_movement.gd" id="6_603ul"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/basic_movement.gd" id="6_fwebo"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer_config.gd" id="6_wqc6m"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_64qd1"]
@@ -63,8 +63,10 @@ mesh = SubResource("BoxMesh_eqfrf")
 shape = SubResource("SphereShape3D_vhdor")
 
 [node name="Movement" type="Node3D" parent="."]
-script = ExtResource("6_603ul")
+script = ExtResource("6_fwebo")
 speed = 3.0
+drift_max = 2.0
+drift_change = 0.3
 
 [node name="WalkTimer" type="Timer" parent="Movement"]
 script = ExtResource("5_b2h5o")
@@ -75,7 +77,7 @@ duration = 2.2
 
 [node name="Walk" type="Node" parent="Movement/WalkTimer"]
 script = ExtResource("6_wqc6m")
-duration = 0.8
+duration = 1.6
 
 [node name="WallCheck" type="RayCast3D" parent="Movement"]
 target_position = Vector3(0, 0, 0)
