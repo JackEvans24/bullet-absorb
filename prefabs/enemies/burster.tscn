@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://dcmefiejwfjyq"]
+
+[ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="1_no1yi"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/basic_movement.gd" id="2_1evv8"]
+[ext_resource type="Script" path="res://scripts/mechanics/enemies/burster.gd" id="2_4a7pp"]
+[ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="2_i8v7u"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="3_a2sv1"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer_config.gd" id="4_ijtvr"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/fire_from_ring.gd" id="7_q2sbb"]
+[ext_resource type="PackedScene" uid="uid://bwb55ll2hiucv" path="res://prefabs/bullets/perfect_enemy_bullet.tscn" id="8_mra72"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hvq68"]
+material = ExtResource("2_i8v7u")
+
+[node name="Burster" instance=ExtResource("1_no1yi")]
+script = ExtResource("2_4a7pp")
+hurt_particles_scene = null
+
+[node name="Body" parent="Pivot" index="0"]
+mesh = SubResource("BoxMesh_hvq68")
+
+[node name="Movement" type="Node3D" parent="." index="5"]
+script = ExtResource("2_1evv8")
+drift_max = 0.0
+drift_change = 0.0
+
+[node name="WalkTimer" type="Timer" parent="Movement" index="0"]
+script = ExtResource("3_a2sv1")
+
+[node name="Wait" type="Node" parent="Movement/WalkTimer" index="0"]
+script = ExtResource("4_ijtvr")
+duration = 3.0
+
+[node name="Walk" type="Node" parent="Movement/WalkTimer" index="1"]
+script = ExtResource("4_ijtvr")
+duration = 2.1
+
+[node name="WallCheck" type="RayCast3D" parent="Movement" index="1"]
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="Fire" type="Node" parent="." index="6"]
+script = ExtResource("7_q2sbb")
+pivot_ref = NodePath("../Pivot")
+bullet_scene = ExtResource("8_mra72")
+
+[node name="BehaviourTimer" type="Timer" parent="." index="7"]
+script = ExtResource("3_a2sv1")
+
+[node name="Pause" type="Node" parent="BehaviourTimer" index="0"]
+script = ExtResource("4_ijtvr")
+duration = 0.5
+
+[node name="Walk" type="Node" parent="BehaviourTimer" index="1"]
+script = ExtResource("4_ijtvr")
+duration = 1.6
+
+[node name="Windup" type="Node" parent="BehaviourTimer" index="2"]
+script = ExtResource("4_ijtvr")
+duration = 0.5
+
+[node name="Fire" type="Node" parent="BehaviourTimer" index="3"]
+script = ExtResource("4_ijtvr")
+duration = 0.2
+iterations = 3
