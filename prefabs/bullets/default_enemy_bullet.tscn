@@ -13,10 +13,11 @@ material = ExtResource("4_ikl7v")
 radius = 0.05
 height = 0.1
 
-[node name="PlayerBullet" instance=ExtResource("1_yy0xb")]
+[node name="EnemyBullet" instance=ExtResource("1_yy0xb")]
 collision_layer = 4
 collision_mask = 19
 speed = 10
+accuracy = 0.03
 power_scene = ExtResource("2_0sm5q")
 
 [node name="Mesh" parent="." index="0"]
