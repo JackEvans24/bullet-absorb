@@ -5,10 +5,12 @@ extends Node
 @onready var cameras: CameraController = $Cameras
 @onready var hit_stop: HitStop = $HitStop
 @onready var turret: Turret = $Turret
+@onready var wanderer: Wanderer = $Wanderer
 
 func _ready():
 	cameras.target = player.camera_follow_point
 	turret.target = player
+	wanderer.target = player
 
 	player.damage_taken.connect(_on_damage_taken)
 	player.power_count_changed.connect(hud._on_absorb_count_changed)
