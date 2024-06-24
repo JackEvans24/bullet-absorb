@@ -26,8 +26,6 @@ mesh = SubResource("BoxMesh_8stgr")
 [node name="Movement" type="Node3D" parent="." index="5"]
 script = ExtResource("6_fwebo")
 speed = 3.0
-drift_max = 2.0
-drift_change = 0.3
 
 [node name="WalkTimer" type="Timer" parent="Movement" index="0"]
 script = ExtResource("5_b2h5o")

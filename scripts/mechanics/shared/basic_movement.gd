@@ -2,8 +2,8 @@ class_name BasicMovement
 extends Node3D
 
 @export var speed := 5.0
-@export var drift_max := 0.1
-@export var drift_change := 0.1
+@export var drift_max := 2.0
+@export var drift_change := 0.3
 @export var wall_check_distance := 2.0
 
 @onready var walk_timer: VariableTimer = $WalkTimer
@@ -43,7 +43,8 @@ func stop():
 
 func _physics_process(_delta):
     if wall_check.is_colliding():
-        set_new_movement()
+        movement = movement.bounce(wall_check.get_collision_normal().normalized())
+        update_wall_check_position()
     if is_walking:
         handle_drift(_delta)
 
