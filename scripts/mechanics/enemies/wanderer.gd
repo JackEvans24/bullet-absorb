@@ -13,7 +13,10 @@ func _ready():
 	look_at_target.pivot = pivot
 	fire.pivot = pivot
 
-func _physics_process(_delta):
+func _physics_process(delta):
+	super(delta)
+	if knockback.knockback_direction.length():
+		return
 	velocity = move.movement
 	move_and_slide()
 
