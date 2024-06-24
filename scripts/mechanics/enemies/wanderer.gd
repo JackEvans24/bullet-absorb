@@ -2,6 +2,7 @@ class_name Wanderer
 extends Enemy
 
 @onready var move: BasicMovement = $Movement
+@onready var walk_timer: VariableTimer = $WalkTimer
 @onready var look_at_target: LookAtTarget = $LookAtTarget
 @onready var fire: FireFromPoint = $Fire
 
@@ -10,8 +11,10 @@ var target: Node3D:
 
 func _ready():
 	super()
+
 	look_at_target.pivot = pivot
 	fire.pivot = pivot
+	walk_timer.timeout.connect(move.toggle_movement)
 
 func _physics_process(delta):
 	super(delta)

@@ -6,7 +6,6 @@ extends Node3D
 @export var drift_change := 0.3
 @export var wall_check_distance := 2.0
 
-@onready var walk_timer: VariableTimer = $WalkTimer
 @onready var wall_check: RayCast3D = $WallCheck
 @onready var noise = FastNoiseLite.new()
 
@@ -14,10 +13,7 @@ var is_walking := false
 var movement := Vector3.ZERO
 var noise_y := 0.0
 
-func _ready():
-    walk_timer.timeout.connect(change_movement)
-
-func change_movement():
+func toggle_movement():
     if is_walking:
         stop()
     else:

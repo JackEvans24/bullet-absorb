@@ -27,27 +27,27 @@ mesh = SubResource("BoxMesh_8stgr")
 script = ExtResource("6_fwebo")
 speed = 3.0
 
-[node name="WalkTimer" type="Timer" parent="Movement" index="0"]
+[node name="WallCheck" type="RayCast3D" parent="Movement" index="0"]
+target_position = Vector3(0, 0, 3)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="WalkTimer" type="Timer" parent="." index="6"]
 script = ExtResource("5_b2h5o")
 
-[node name="Wait" type="Node" parent="Movement/WalkTimer" index="0"]
+[node name="Wait" type="Node" parent="WalkTimer" index="0"]
 script = ExtResource("6_wqc6m")
 duration = 2.2
 
-[node name="Walk" type="Node" parent="Movement/WalkTimer" index="1"]
+[node name="Walk" type="Node" parent="WalkTimer" index="1"]
 script = ExtResource("6_wqc6m")
 duration = 1.6
 
-[node name="WallCheck" type="RayCast3D" parent="Movement" index="1"]
-target_position = Vector3(0, 0, 0)
-debug_shape_custom_color = Color(1, 0, 0, 1)
+[node name="LookAtTarget" parent="." index="7" instance=ExtResource("2_4ualn")]
 
-[node name="LookAtTarget" parent="." index="6" instance=ExtResource("2_4ualn")]
-
-[node name="Fire" parent="." index="7" instance=ExtResource("3_vvdtc")]
+[node name="Fire" parent="." index="8" instance=ExtResource("3_vvdtc")]
 timer_ref = NodePath("../FireTimer")
 
-[node name="FireTimer" type="Timer" parent="." index="8"]
+[node name="FireTimer" type="Timer" parent="." index="9"]
 wait_time = 0.25
 one_shot = true
 script = ExtResource("5_b2h5o")
