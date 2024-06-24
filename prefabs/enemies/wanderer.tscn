@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://btfsstt1biti7"]
+[gd_scene load_steps=15 format=3 uid="uid://btfsstt1biti7"]
 
 [ext_resource type="PackedScene" uid="uid://bxkdcki5vdm0x" path="res://prefabs/behaviours/look_at_target.tscn" id="2_4ualn"]
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/wanderer.gd" id="2_ga1uy"]
@@ -8,12 +8,17 @@
 [ext_resource type="Script" path="res://scripts/mechanics/shared/knockback.gd" id="4_mqcuu"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="5_auu40"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="5_b2h5o"]
+[ext_resource type="Script" path="res://scripts/mechanics/enemies/basic_movement.gd" id="6_603ul"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer_config.gd" id="6_wqc6m"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_64qd1"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_jkita"]
 material = ExtResource("5_auu40")
+
+[sub_resource type="BoxMesh" id="BoxMesh_eqfrf"]
+material = ExtResource("5_auu40")
+size = Vector3(0.25, 0.25, 0.25)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vhdor"]
 radius = 0.45
@@ -50,8 +55,27 @@ mesh = SubResource("SphereMesh_jkita")
 [node name="FirePoint" type="Node3D" parent="Pivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+mesh = SubResource("BoxMesh_eqfrf")
+
 [node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_vhdor")
+
+[node name="Movement" type="Node" parent="."]
+script = ExtResource("6_603ul")
+speed = 3.0
+
+[node name="WalkTimer" type="Timer" parent="Movement"]
+script = ExtResource("5_b2h5o")
+
+[node name="Wait" type="Node" parent="Movement/WalkTimer"]
+script = ExtResource("6_wqc6m")
+duration = 2.2
+
+[node name="Walk" type="Node" parent="Movement/WalkTimer"]
+script = ExtResource("6_wqc6m")
+duration = 0.8
 
 [node name="LookAtTarget" parent="." instance=ExtResource("2_4ualn")]
 

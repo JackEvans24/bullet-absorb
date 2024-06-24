@@ -1,6 +1,7 @@
 class_name Wanderer
 extends Enemy
 
+@onready var move: BasicMovement = $Movement
 @onready var look_at_target: LookAtTarget = $LookAtTarget
 @onready var fire: FireFromPoint = $Fire
 
@@ -11,6 +12,10 @@ func _ready():
 	super()
 	look_at_target.pivot = pivot
 	fire.pivot = pivot
+
+func _physics_process(_delta):
+	velocity = move.movement
+	move_and_slide()
 
 func die():
 	super()
