@@ -62,7 +62,7 @@ mesh = SubResource("BoxMesh_eqfrf")
 [node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_vhdor")
 
-[node name="Movement" type="Node" parent="."]
+[node name="Movement" type="Node3D" parent="."]
 script = ExtResource("6_603ul")
 speed = 3.0
 
@@ -76,6 +76,10 @@ duration = 2.2
 [node name="Walk" type="Node" parent="Movement/WalkTimer"]
 script = ExtResource("6_wqc6m")
 duration = 0.8
+
+[node name="WallCheck" type="RayCast3D" parent="Movement"]
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="LookAtTarget" parent="." instance=ExtResource("2_4ualn")]
 
