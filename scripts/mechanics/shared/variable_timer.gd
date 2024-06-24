@@ -1,6 +1,8 @@
 class_name VariableTimer
 extends Timer
 
+signal named_timeout(name: String)
+
 var time_bounds: Array[VariableTimerConfig] = []
 
 var config_index := 0
@@ -20,7 +22,7 @@ func _on_timeout():
     iteration_index += 1
 
     if iteration_index < time_bounds[config_index].iterations:
-        start()
+        restart()
         return
 
     config_index += 1
@@ -30,4 +32,8 @@ func _on_timeout():
     iteration_index = 0
     wait_time = time_bounds[config_index].duration
 
+    restart()
+
+func restart():
+    named_timeout.emit(time_bounds[config_index].name)
     start()
