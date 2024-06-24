@@ -60,7 +60,7 @@ timer_ref = NodePath("../FireTimer")
 
 [node name="FireTimer" type="Timer" parent="."]
 wait_time = 0.25
-autostart = true
+one_shot = true
 script = ExtResource("5_b2h5o")
 
 [node name="Wait" type="Node" parent="FireTimer"]

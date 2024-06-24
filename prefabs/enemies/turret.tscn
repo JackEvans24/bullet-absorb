@@ -54,7 +54,7 @@ bullet_scene = ExtResource("6_fmidc")
 
 [node name="FireTimer" type="Timer" parent="." index="7"]
 wait_time = 0.25
-autostart = true
+one_shot = true
 script = ExtResource("5_128lh")
 
 [node name="Wait" type="Node" parent="FireTimer" index="0"]

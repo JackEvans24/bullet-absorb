@@ -14,11 +14,13 @@ func _ready():
     wait_time = time_bounds[config_index].duration
 
     timeout.connect(_on_timeout)
+    start()
 
 func _on_timeout():
     iteration_index += 1
 
     if iteration_index < time_bounds[config_index].iterations:
+        start()
         return
 
     config_index += 1
@@ -27,3 +29,5 @@ func _on_timeout():
 
     iteration_index = 0
     wait_time = time_bounds[config_index].duration
+
+    start()
