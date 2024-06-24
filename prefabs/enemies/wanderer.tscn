@@ -1,103 +1,64 @@
-[gd_scene load_steps=15 format=3 uid="uid://btfsstt1biti7"]
+[gd_scene load_steps=10 format=3 uid="uid://btfsstt1biti7"]
 
+[ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="1_5w8lx"]
 [ext_resource type="PackedScene" uid="uid://bxkdcki5vdm0x" path="res://prefabs/behaviours/look_at_target.tscn" id="2_4ualn"]
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/wanderer.gd" id="2_ga1uy"]
-[ext_resource type="PackedScene" uid="uid://cjvpl2fcwu246" path="res://prefabs/hurt_particles.tscn" id="2_mpnm2"]
 [ext_resource type="PackedScene" uid="uid://uqduo71b13ee" path="res://prefabs/behaviours/fire_bullet.tscn" id="3_vvdtc"]
-[ext_resource type="Script" path="res://scripts/mechanics/shared/health.gd" id="3_wq884"]
-[ext_resource type="Script" path="res://scripts/mechanics/shared/knockback.gd" id="4_mqcuu"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="5_auu40"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="5_b2h5o"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/basic_movement.gd" id="6_fwebo"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer_config.gd" id="6_wqc6m"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_64qd1"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_jkita"]
-material = ExtResource("5_auu40")
-
-[sub_resource type="BoxMesh" id="BoxMesh_eqfrf"]
+[sub_resource type="BoxMesh" id="BoxMesh_8stgr"]
 material = ExtResource("5_auu40")
 size = Vector3(0.25, 0.25, 0.25)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_vhdor"]
-radius = 0.45
-
-[node name="Wanderer" type="CharacterBody3D"]
-collision_layer = 32
-collision_mask = 17
+[node name="Wanderer" instance=ExtResource("1_5w8lx")]
 script = ExtResource("2_ga1uy")
-hurt_particles_scene = ExtResource("2_mpnm2")
 
-[node name="Health" type="Node" parent="."]
-script = ExtResource("3_wq884")
-starting_health = 3.0
-recovery_time = 0.01
-
-[node name="Knockback" type="Node" parent="."]
-script = ExtResource("4_mqcuu")
-knockback_time = 0.05
-knockback_power = 15.0
-
-[node name="HitDetection" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 16
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetection"]
-shape = SubResource("SphereShape3D_64qd1")
-
-[node name="Pivot" type="Node3D" parent="."]
-
-[node name="Body" type="MeshInstance3D" parent="Pivot"]
-mesh = SubResource("SphereMesh_jkita")
-
-[node name="FirePoint" type="Node3D" parent="Pivot"]
+[node name="FirePoint" type="Node3D" parent="Pivot" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-mesh = SubResource("BoxMesh_eqfrf")
+mesh = SubResource("BoxMesh_8stgr")
 
-[node name="Collider" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_vhdor")
-
-[node name="Movement" type="Node3D" parent="."]
+[node name="Movement" type="Node3D" parent="." index="5"]
 script = ExtResource("6_fwebo")
 speed = 3.0
 drift_max = 2.0
 drift_change = 0.3
 
-[node name="WalkTimer" type="Timer" parent="Movement"]
+[node name="WalkTimer" type="Timer" parent="Movement" index="0"]
 script = ExtResource("5_b2h5o")
 
-[node name="Wait" type="Node" parent="Movement/WalkTimer"]
+[node name="Wait" type="Node" parent="Movement/WalkTimer" index="0"]
 script = ExtResource("6_wqc6m")
 duration = 2.2
 
-[node name="Walk" type="Node" parent="Movement/WalkTimer"]
+[node name="Walk" type="Node" parent="Movement/WalkTimer" index="1"]
 script = ExtResource("6_wqc6m")
 duration = 1.6
 
-[node name="WallCheck" type="RayCast3D" parent="Movement"]
+[node name="WallCheck" type="RayCast3D" parent="Movement" index="1"]
 target_position = Vector3(0, 0, 0)
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="LookAtTarget" parent="." instance=ExtResource("2_4ualn")]
+[node name="LookAtTarget" parent="." index="6" instance=ExtResource("2_4ualn")]
 
-[node name="Fire" parent="." instance=ExtResource("3_vvdtc")]
+[node name="Fire" parent="." index="7" instance=ExtResource("3_vvdtc")]
 timer_ref = NodePath("../FireTimer")
 
-[node name="FireTimer" type="Timer" parent="."]
+[node name="FireTimer" type="Timer" parent="." index="8"]
 wait_time = 0.25
 one_shot = true
 script = ExtResource("5_b2h5o")
 
-[node name="Wait" type="Node" parent="FireTimer"]
+[node name="Wait" type="Node" parent="FireTimer" index="0"]
 script = ExtResource("6_wqc6m")
 duration = 3.0
 
-[node name="Fire" type="Node" parent="FireTimer"]
+[node name="Fire" type="Node" parent="FireTimer" index="1"]
 script = ExtResource("6_wqc6m")
 duration = 0.5
 iterations = 2
