@@ -7,6 +7,10 @@ extends Node
 var pivot: Node3D
 
 @onready var fire_point: Node3D = get_node(fire_point_ref)
+@onready var timer: Timer = $FireTimer
+
+func _ready():
+    timer.timeout.connect(fire)
 
 func fire():
     if pivot == null:
@@ -19,3 +23,6 @@ func fire():
     bullet.initialise(pivot.basis)
 
     add_child(bullet)
+
+func stop():
+    timer.stop()
