@@ -14,7 +14,6 @@ material = ExtResource("2_i8v7u")
 
 [node name="Burster" instance=ExtResource("1_no1yi")]
 script = ExtResource("2_4a7pp")
-hurt_particles_scene = null
 
 [node name="Body" parent="Pivot" index="0"]
 mesh = SubResource("BoxMesh_hvq68")
