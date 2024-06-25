@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bcjb1jnr0y5mb"]
+[gd_scene load_steps=14 format=3 uid="uid://bcjb1jnr0y5mb"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/power_generator.gd" id="1_btbyj"]
 [ext_resource type="PackedScene" uid="uid://evlhef456yfc" path="res://prefabs/power/generated_power_ball.tscn" id="2_uxx3a"]
 [ext_resource type="Material" uid="uid://f41eu4cbvian" path="res://materials/player/player_absorb.tres" id="3_88q7i"]
+[ext_resource type="PackedScene" uid="uid://b0g4qn342fbge" path="res://prefabs/behaviours/drop_power.tscn" id="4_b084a"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1bsd3"]
 
@@ -70,7 +71,6 @@ _data = {
 [node name="PowerGenerator" type="Node3D"]
 script = ExtResource("1_btbyj")
 power_scene = ExtResource("2_uxx3a")
-cooldown = 0.5
 
 [node name="PowerCheckArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -113,3 +113,9 @@ libraries = {
 "": SubResource("AnimationLibrary_o3sd2")
 }
 autoplay = "power_generator_idle"
+
+[node name="DropPower" parent="." instance=ExtResource("4_b084a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+power_scene = ExtResource("2_uxx3a")
+power_drop_count = 1
+power_drop_offset = 0.0

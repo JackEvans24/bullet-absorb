@@ -1,13 +1,13 @@
 class_name PowerGenerator
 extends Node3D
 
-@export var power_scene: PackedScene
 @export var cooldown: float = 0.3
 @export var power_check_time: float = 0.1
 
 @onready var power_check_area: Area3D = $PowerCheckArea
 @onready var spawn_point: Node3D = $SpawnPoint
 @onready var particles: GPUParticles3D = $SpawnParticles
+@onready var drop_power: DropPower = $DropPower
 
 var can_spawn := true
 
@@ -26,9 +26,7 @@ func spawn_power():
 
     await get_tree().create_timer(cooldown).timeout
 
-    var power = power_scene.instantiate()
-    get_tree().root.add_child(power)
-    power.global_position = spawn_point.global_position
+    drop_power.drop_all_power()
 
     await get_tree().create_timer(power_check_time).timeout
 
