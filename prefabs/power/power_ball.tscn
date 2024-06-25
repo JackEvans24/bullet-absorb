@@ -80,3 +80,5 @@ monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerCollisionArea"]
 shape = SubResource("SphereShape3D_crqyd")
+
+[node name="WallCheck" type="RayCast3D" parent="."]

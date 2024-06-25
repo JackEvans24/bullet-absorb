@@ -21,4 +21,4 @@ func drop_single_power(offset_angle: float):
 	var deviation = randf_range( - offset_deviation, offset_deviation)
 	var angle = PI * 2 * (offset_angle + deviation)
 	var offset = Vector3.FORWARD.rotated(Vector3.UP, angle) * power_drop_offset
-	power.target_position = global_position + offset
+	power.set_target_position(global_position + offset)
