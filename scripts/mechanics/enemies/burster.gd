@@ -26,3 +26,4 @@ func _on_behaviour_timer_timeout(timer_name: String):
 func die():
 	super()
 	behaviour_timer.stop()
+	move.stop()

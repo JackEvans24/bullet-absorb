@@ -28,3 +28,4 @@ func die():
 	target = null
 	fire.stop()
 	walk_timer.stop()
+	move.stop()
