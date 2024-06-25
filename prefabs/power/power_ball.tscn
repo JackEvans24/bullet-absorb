@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cm1wj0vbe4wn8"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/power.gd" id="1_n4h2h"]
-[ext_resource type="Script" path="res://scripts/mechanics/follow_body.gd" id="1_yfpo3"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/movement/follow_body.gd" id="2_7cgiv"]
 [ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/power.tres" id="2_netkk"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_6vkiy"]
@@ -39,7 +39,7 @@ radius = 0.1
 script = ExtResource("1_n4h2h")
 
 [node name="FollowBody" type="Node3D" parent="."]
-script = ExtResource("1_yfpo3")
+script = ExtResource("2_7cgiv")
 max_speed = 3.0
 acceleration = 0.5
 

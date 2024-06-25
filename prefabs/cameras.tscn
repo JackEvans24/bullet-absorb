@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cl1dul38xrvt2"]
 
-[ext_resource type="Script" path="res://scripts/mechanics/smooth_follow_target.gd" id="1_cm6mc"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/movement/smooth_follow_target.gd" id="1_cm6mc"]
 [ext_resource type="Script" path="res://scripts/camera/camera_controller.gd" id="1_e4k7u"]
 [ext_resource type="Script" path="res://scripts/camera/screen_shake.gd" id="3_x5t8o"]
 
