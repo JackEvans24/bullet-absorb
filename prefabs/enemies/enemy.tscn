@@ -17,7 +17,6 @@ radius = 0.45
 
 [node name="Enemy" type="CharacterBody3D"]
 collision_layer = 32
-collision_mask = 17
 script = ExtResource("1_wjmkf")
 hurt_particles_scene = ExtResource("2_e8cc4")
 
