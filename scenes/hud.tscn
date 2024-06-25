@@ -28,6 +28,7 @@ offset_right = -530.0
 offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
+bar_speed = 6.0
 bar_colour = Color(0.1672, 0.76, 0.24624, 1)
 color_decay = 2.0
 flash_colour = Color(0.1166, 0.53, 0.17172, 1)
@@ -42,6 +43,7 @@ offset_right = -500.0
 offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
+bar_speed = 15.0
 bar_colour = Color(0.37, 0.958, 1, 1)
 color_decay = 2.0
 

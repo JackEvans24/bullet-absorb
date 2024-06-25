@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cl1dul38xrvt2"]
 
-[ext_resource type="Script" path="res://scripts/mechanics/shared/movement/smooth_follow_target.gd" id="1_cm6mc"]
 [ext_resource type="Script" path="res://scripts/camera/camera_controller.gd" id="1_e4k7u"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/movement/smooth_follow_target.gd" id="2_8gcvs"]
 [ext_resource type="Script" path="res://scripts/camera/screen_shake.gd" id="3_x5t8o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85wj3"]
@@ -15,7 +15,7 @@ script = ExtResource("1_e4k7u")
 
 [node name="FollowPlayer" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-script = ExtResource("1_cm6mc")
+script = ExtResource("2_8gcvs")
 max_speed = 30.0
 min_speed = 10.0
 
