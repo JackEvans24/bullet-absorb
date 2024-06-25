@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://cm1wj0vbe4wn8"]
+[gd_scene load_steps=9 format=3 uid="uid://cm1wj0vbe4wn8"]
 
+[ext_resource type="Script" path="res://scripts/mechanics/power.gd" id="1_n4h2h"]
 [ext_resource type="Script" path="res://scripts/mechanics/follow_body.gd" id="1_yfpo3"]
 [ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/power.tres" id="2_netkk"]
 
@@ -13,7 +14,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/path = NodePath("Mesh:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -35,11 +36,14 @@ radius = 5.0
 radius = 0.1
 
 [node name="Power" type="Node3D" groups=["bullet"]]
+script = ExtResource("1_n4h2h")
+
+[node name="FollowBody" type="Node3D" parent="."]
 script = ExtResource("1_yfpo3")
 max_speed = 3.0
 acceleration = 0.5
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 mesh = SubResource("SphereMesh_6vkiy")
 
