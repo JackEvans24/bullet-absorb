@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4f4su1e66ujd"]
+[gd_scene load_steps=14 format=3 uid="uid://b4f4su1e66ujd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room.gd" id="1_6vv4c"]
 [ext_resource type="Material" uid="uid://gclpf2kqyelh" path="res://materials/wall.tres" id="1_tpwuc"]
+[ext_resource type="Script" path="res://scripts/mechanics/rooms/room_doors.gd" id="2_srwra"]
+[ext_resource type="Script" path="res://scripts/mechanics/rooms/door.gd" id="4_r5rlm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lg0uu"]
 size = Vector3(8, 2, 1)
@@ -10,6 +12,13 @@ size = Vector3(8, 2, 1)
 material = ExtResource("1_tpwuc")
 size = Vector3(8, 2, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_5jioj"]
+size = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7k0b8"]
+material = ExtResource("1_tpwuc")
+size = Vector3(3, 2, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_n0m7c"]
 size = Vector3(1, 2, 8)
 
@@ -17,97 +26,149 @@ size = Vector3(1, 2, 8)
 material = ExtResource("1_tpwuc")
 size = Vector3(1, 2, 8)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_puwbh"]
+size = Vector3(1, 2, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0j41g"]
+material = ExtResource("1_tpwuc")
+size = Vector3(1, 2, 4)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_x6347"]
 size = Vector3(16, 2, 14)
 
 [node name="Room" type="Node3D"]
 script = ExtResource("1_6vv4c")
 
-[node name="Walls" type="Node3D" parent="."]
+[node name="Boundary" type="Node3D" parent="."]
+script = ExtResource("2_srwra")
 
-[node name="Front" type="Node3D" parent="Walls"]
+[node name="Front" type="Node3D" parent="Boundary"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.5)
 
-[node name="Left" type="StaticBody3D" parent="Walls/Front"]
+[node name="Left" type="StaticBody3D" parent="Boundary/Front"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 1, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Front/Left"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boundary/Front/Left"]
 shape = SubResource("BoxShape3D_lg0uu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Front/Left"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boundary/Front/Left"]
 mesh = SubResource("BoxMesh_u7btn")
 
-[node name="Right" type="StaticBody3D" parent="Walls/Front"]
+[node name="Right" type="StaticBody3D" parent="Boundary/Front"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Front/Right"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boundary/Front/Right"]
 shape = SubResource("BoxShape3D_lg0uu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Front/Right"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boundary/Front/Right"]
 mesh = SubResource("BoxMesh_u7btn")
 
-[node name="Back" type="Node3D" parent="Walls"]
+[node name="Door" type="StaticBody3D" parent="Boundary/Front"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("4_r5rlm")
+
+[node name="Collider" type="CollisionShape3D" parent="Boundary/Front/Door"]
+shape = SubResource("BoxShape3D_5jioj")
+disabled = true
+
+[node name="Mesh" type="MeshInstance3D" parent="Boundary/Front/Door"]
+mesh = SubResource("BoxMesh_7k0b8")
+
+[node name="Back" type="Node3D" parent="Boundary"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.5)
 
-[node name="Left" type="StaticBody3D" parent="Walls/Back"]
+[node name="Left" type="StaticBody3D" parent="Boundary/Back"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 1, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Back/Left"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boundary/Back/Left"]
 shape = SubResource("BoxShape3D_lg0uu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Back/Left"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boundary/Back/Left"]
 mesh = SubResource("BoxMesh_u7btn")
 
-[node name="Right" type="StaticBody3D" parent="Walls/Back"]
+[node name="Right" type="StaticBody3D" parent="Boundary/Back"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Back/Right"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boundary/Back/Right"]
 shape = SubResource("BoxShape3D_lg0uu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Back/Right"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boundary/Back/Right"]
 mesh = SubResource("BoxMesh_u7btn")
 
-[node name="Left" type="Node3D" parent="Walls"]
+[node name="Door" type="StaticBody3D" parent="Boundary/Back"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("4_r5rlm")
+
+[node name="Collider" type="CollisionShape3D" parent="Boundary/Back/Door"]
+shape = SubResource("BoxShape3D_5jioj")
+disabled = true
+
+[node name="Mesh" type="MeshInstance3D" parent="Boundary/Back/Door"]
+mesh = SubResource("BoxMesh_7k0b8")
+
+[node name="Left" type="Node3D" parent="Boundary"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
 
-[node name="Forward" type="StaticBody3D" parent="Walls/Left"]
+[node name="Forward" type="StaticBody3D" parent="Boundary/Left"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Left/Forward"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boundary/Left/Forward"]
 shape = SubResource("BoxShape3D_n0m7c")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Left/Forward"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boundary/Left/Forward"]
 mesh = SubResource("BoxMesh_4s2ht")
 
-[node name="Back" type="StaticBody3D" parent="Walls/Left"]
+[node name="Back" type="StaticBody3D" parent="Boundary/Left"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Left/Back"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boundary/Left/Back"]
 shape = SubResource("BoxShape3D_n0m7c")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Left/Back"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boundary/Left/Back"]
 mesh = SubResource("BoxMesh_4s2ht")
 
-[node name="Right" type="Node3D" parent="Walls"]
+[node name="Door" type="StaticBody3D" parent="Boundary/Left"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("4_r5rlm")
+
+[node name="Collider" type="CollisionShape3D" parent="Boundary/Left/Door"]
+shape = SubResource("BoxShape3D_puwbh")
+disabled = true
+
+[node name="Mesh" type="MeshInstance3D" parent="Boundary/Left/Door"]
+mesh = SubResource("BoxMesh_0j41g")
+
+[node name="Right" type="Node3D" parent="Boundary"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 
-[node name="Forward" type="StaticBody3D" parent="Walls/Right"]
+[node name="Forward" type="StaticBody3D" parent="Boundary/Right"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Right/Forward"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boundary/Right/Forward"]
 shape = SubResource("BoxShape3D_n0m7c")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Right/Forward"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boundary/Right/Forward"]
 mesh = SubResource("BoxMesh_4s2ht")
 
-[node name="Back" type="StaticBody3D" parent="Walls/Right"]
+[node name="Back" type="StaticBody3D" parent="Boundary/Right"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Right/Back"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boundary/Right/Back"]
 shape = SubResource("BoxShape3D_n0m7c")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Right/Back"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boundary/Right/Back"]
 mesh = SubResource("BoxMesh_4s2ht")
+
+[node name="Door" type="StaticBody3D" parent="Boundary/Right"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("4_r5rlm")
+
+[node name="Collider" type="CollisionShape3D" parent="Boundary/Right/Door"]
+shape = SubResource("BoxShape3D_puwbh")
+disabled = true
+
+[node name="Mesh" type="MeshInstance3D" parent="Boundary/Right/Door"]
+mesh = SubResource("BoxMesh_0j41g")
 
 [node name="PlayerDetection" type="Area3D" parent="."]
 collision_layer = 0
