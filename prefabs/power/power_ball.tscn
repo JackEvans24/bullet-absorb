@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cm1wj0vbe4wn8"]
+[gd_scene load_steps=10 format=3 uid="uid://cm1wj0vbe4wn8"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/power.gd" id="1_n4h2h"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/follow_body.gd" id="2_7cgiv"]
 [ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/power.tres" id="2_netkk"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/movement/smooth_movement.gd" id="3_gix6h"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_6vkiy"]
 material = ExtResource("2_netkk")
@@ -42,6 +43,9 @@ script = ExtResource("1_n4h2h")
 script = ExtResource("2_7cgiv")
 max_speed = 3.0
 acceleration = 0.5
+
+[node name="SmoothMovement" type="Node3D" parent="."]
+script = ExtResource("3_gix6h")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
