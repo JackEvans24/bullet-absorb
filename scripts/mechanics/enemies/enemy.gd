@@ -2,6 +2,7 @@ class_name Enemy
 extends CharacterBody3D
 
 @export var hurt_particles_scene: PackedScene
+@export var power_scene: PackedScene
 
 @onready var health: Health = $Health
 @onready var knockback: Knockback = $Knockback
@@ -29,7 +30,7 @@ func _on_damage_taken(damage_taken: float, taken_from: Node3D):
 	do_knockback(taken_from)
 
 	if health.current_health <= 0:
-		die()
+		call_deferred("die")
 
 func add_hurt_particles():
 	var hurt_particles = hurt_particles_scene.instantiate()
@@ -43,3 +44,9 @@ func do_knockback(taken_from: Node3D):
 func die():
 	pivot.visible = false
 	collider.call_deferred("queue_free")
+
+	if power_scene == null:
+		return
+	var power = power_scene.instantiate()
+	get_tree().root.add_child(power)
+	power.global_position = global_position
