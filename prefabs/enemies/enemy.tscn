@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c3ytmjd7pe4pg"]
+[gd_scene load_steps=11 format=3 uid="uid://c3ytmjd7pe4pg"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/enemy.gd" id="1_wjmkf"]
 [ext_resource type="PackedScene" uid="uid://cjvpl2fcwu246" path="res://prefabs/hurt_particles.tscn" id="2_e8cc4"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cm1wj0vbe4wn8" path="res://prefabs/power/power_ball.tscn" id="3_vtb0l"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/knockback.gd" id="4_0se3r"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="5_d48ya"]
+[ext_resource type="PackedScene" uid="uid://b0g4qn342fbge" path="res://prefabs/behaviours/drop_power.tscn" id="7_ou8mj"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_64qd1"]
 
@@ -47,3 +48,5 @@ mesh = SubResource("SphereMesh_jkita")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_vhdor")
+
+[node name="DropPower" parent="." instance=ExtResource("7_ou8mj")]
