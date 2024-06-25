@@ -27,3 +27,4 @@ func die():
 	super()
 	target = null
 	fire.stop()
+	walk_timer.stop()
