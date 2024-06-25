@@ -2,9 +2,6 @@ class_name Enemy
 extends CharacterBody3D
 
 @export var hurt_particles_scene: PackedScene
-@export var power_scene: PackedScene
-@export_range(0, 20) var power_drop_count := 3
-@export var power_drop_offset = 0.5
 
 @onready var health: Health = $Health
 @onready var knockback: Knockback = $Knockback

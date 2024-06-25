@@ -23,7 +23,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 mesh = SubResource("BoxMesh_8stgr")
 
-[node name="Movement" type="Node3D" parent="." index="5"]
+[node name="Movement" type="Node3D" parent="." index="6"]
 script = ExtResource("6_fwebo")
 speed = 3.0
 
@@ -31,7 +31,7 @@ speed = 3.0
 target_position = Vector3(0, 0, 3)
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="WalkTimer" type="Timer" parent="." index="6"]
+[node name="WalkTimer" type="Timer" parent="." index="7"]
 script = ExtResource("5_b2h5o")
 
 [node name="Wait" type="Node" parent="WalkTimer" index="0"]
@@ -42,12 +42,12 @@ duration = 2.2
 script = ExtResource("6_wqc6m")
 duration = 1.6
 
-[node name="LookAtTarget" parent="." index="7" instance=ExtResource("2_4ualn")]
+[node name="LookAtTarget" parent="." index="8" instance=ExtResource("2_4ualn")]
 
-[node name="Fire" parent="." index="8" instance=ExtResource("3_vvdtc")]
+[node name="Fire" parent="." index="9" instance=ExtResource("3_vvdtc")]
 timer_ref = NodePath("../FireTimer")
 
-[node name="FireTimer" type="Timer" parent="." index="9"]
+[node name="FireTimer" type="Timer" parent="." index="10"]
 wait_time = 0.25
 one_shot = true
 script = ExtResource("5_b2h5o")

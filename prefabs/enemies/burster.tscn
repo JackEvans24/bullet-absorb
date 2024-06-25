@@ -18,7 +18,7 @@ script = ExtResource("2_4a7pp")
 [node name="Body" parent="Pivot" index="0"]
 mesh = SubResource("BoxMesh_hvq68")
 
-[node name="Movement" type="Node3D" parent="." index="5"]
+[node name="Movement" type="Node3D" parent="." index="6"]
 script = ExtResource("2_1evv8")
 drift_max = 0.0
 drift_change = 0.0
@@ -38,12 +38,12 @@ duration = 2.1
 target_position = Vector3(0, 0, 0)
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="Fire" type="Node" parent="." index="6"]
+[node name="Fire" type="Node" parent="." index="7"]
 script = ExtResource("7_q2sbb")
 pivot_ref = NodePath("../Pivot")
 bullet_scene = ExtResource("8_mra72")
 
-[node name="BehaviourTimer" type="Timer" parent="." index="7"]
+[node name="BehaviourTimer" type="Timer" parent="." index="8"]
 script = ExtResource("3_a2sv1")
 
 [node name="Pause" type="Node" parent="BehaviourTimer" index="0"]

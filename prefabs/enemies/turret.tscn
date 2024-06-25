@@ -46,13 +46,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -1)
 [node name="Collider" parent="." index="4"]
 shape = SubResource("CylinderShape3D_0wps2")
 
-[node name="LookAtTarget" parent="." index="5" instance=ExtResource("4_1qdhy")]
+[node name="LookAtTarget" parent="." index="6" instance=ExtResource("4_1qdhy")]
 
-[node name="Fire" parent="." index="6" instance=ExtResource("5_ok7x6")]
+[node name="Fire" parent="." index="7" instance=ExtResource("5_ok7x6")]
 timer_ref = NodePath("../FireTimer")
 bullet_scene = ExtResource("6_fmidc")
 
-[node name="FireTimer" type="Timer" parent="." index="7"]
+[node name="FireTimer" type="Timer" parent="." index="8"]
 wait_time = 0.25
 one_shot = true
 script = ExtResource("5_128lh")
