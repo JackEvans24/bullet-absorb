@@ -10,6 +10,6 @@ func _ready():
 	boundary.set_doors(door_config)
 	player_detection.body_entered.connect(_on_player_entered)
 
-func _on_player_entered(body: Node3D):
-	print("PLAYER ENTERED: %s" % body.name)
+func _on_player_entered(_body: Node3D):
 	player_detection.body_entered.disconnect(_on_player_entered)
+	boundary.call_deferred("close_all_doors")
