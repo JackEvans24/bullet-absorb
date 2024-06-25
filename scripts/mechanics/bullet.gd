@@ -4,12 +4,11 @@ extends Area3D
 @export var speed = 5
 @export var accuracy = 1.0 / 6.0
 
-@export var power_scene: PackedScene
-
 @onready var mesh: MeshInstance3D = $Mesh
 @onready var collider: CollisionShape3D = $Collider
 @onready var splash_particles: GPUParticles3D = $SplashParticles
 @onready var on_screen_notifier: VisibleOnScreenNotifier3D = $OnScreenNotifier
+@onready var drop_power: DropPower = $DropPower
 
 var dead = false
 
@@ -48,13 +47,5 @@ func handle_destruction():
 	call_deferred("queue_free")
 
 func handle_destruction_with_power():
-	drop_power()
+	drop_power.drop_all_power()
 	handle_destruction()
-
-func drop_power():
-	if power_scene == null:
-		return
-
-	var power = power_scene.instantiate()
-	get_tree().root.add_child(power)
-	power.global_position = global_position
