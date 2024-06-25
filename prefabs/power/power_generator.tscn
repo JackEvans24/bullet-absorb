@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b0g4qn342fbge" path="res://prefabs/behaviours/drop_power.tscn" id="4_b084a"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1bsd3"]
+radius = 2.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_lgj11"]
 size = Vector3(0.8, 0.1, 0.8)
@@ -70,6 +71,7 @@ _data = {
 
 [node name="PowerGenerator" type="Node3D"]
 script = ExtResource("1_btbyj")
+cooldown = 0.5
 
 [node name="PowerCheckArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -116,5 +118,5 @@ autoplay = "power_generator_idle"
 [node name="DropPower" parent="." instance=ExtResource("4_b084a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 power_scene = ExtResource("2_uxx3a")
-power_drop_count = 1
-power_drop_offset = 0.0
+power_drop_count = 4
+power_drop_offset = 1.5
