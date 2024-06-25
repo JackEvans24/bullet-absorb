@@ -46,6 +46,8 @@ acceleration = 0.5
 
 [node name="SmoothMovement" type="Node3D" parent="."]
 script = ExtResource("3_gix6h")
+max_speed = 50.0
+dampening = 0.0
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
