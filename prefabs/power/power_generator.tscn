@@ -70,7 +70,6 @@ _data = {
 
 [node name="PowerGenerator" type="Node3D"]
 script = ExtResource("1_btbyj")
-power_scene = ExtResource("2_uxx3a")
 
 [node name="PowerCheckArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
