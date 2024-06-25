@@ -118,5 +118,5 @@ autoplay = "power_generator_idle"
 [node name="DropPower" parent="." instance=ExtResource("4_b084a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 power_scene = ExtResource("2_uxx3a")
-power_drop_count = 4
+power_drop_count = 5
 power_drop_offset = 1.5

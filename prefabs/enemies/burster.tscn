@@ -18,6 +18,9 @@ script = ExtResource("2_4a7pp")
 [node name="Body" parent="Pivot" index="0"]
 mesh = SubResource("BoxMesh_hvq68")
 
+[node name="DropPower" parent="." index="5"]
+power_drop_count = 6
+
 [node name="Movement" type="Node3D" parent="." index="6"]
 script = ExtResource("2_1evv8")
 drift_max = 0.0
