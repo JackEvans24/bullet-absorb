@@ -17,7 +17,6 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_behaviour_timer_timeout(timer_name: String):
-	print("RECEIVED TIMEOUT: %s" % timer_name)
 	match timer_name.to_lower():
 		"walk": move.set_new_movement()
 		"fire": fire.fire()
