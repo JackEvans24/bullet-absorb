@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dcmefiejwfjyq"]
 
 [ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="1_no1yi"]
-[ext_resource type="Script" path="res://scripts/mechanics/shared/basic_movement.gd" id="2_1evv8"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/movement/basic_movement.gd" id="2_1evv8"]
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/burster.gd" id="2_4a7pp"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="2_i8v7u"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="3_a2sv1"]
@@ -17,6 +17,9 @@ script = ExtResource("2_4a7pp")
 
 [node name="Body" parent="Pivot" index="0"]
 mesh = SubResource("BoxMesh_hvq68")
+
+[node name="DropPower" parent="." index="5"]
+power_drop_count = 6
 
 [node name="Movement" type="Node3D" parent="." index="6"]
 script = ExtResource("2_1evv8")

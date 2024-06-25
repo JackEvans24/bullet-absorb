@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://uqduo71b13ee" path="res://prefabs/behaviours/fire_bullet.tscn" id="3_vvdtc"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="5_auu40"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="5_b2h5o"]
-[ext_resource type="Script" path="res://scripts/mechanics/shared/basic_movement.gd" id="6_fwebo"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/movement/basic_movement.gd" id="6_fwebo"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer_config.gd" id="6_wqc6m"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8stgr"]
@@ -22,6 +22,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 mesh = SubResource("BoxMesh_8stgr")
+
+[node name="DropPower" parent="." index="5"]
+power_drop_count = 4
 
 [node name="Movement" type="Node3D" parent="." index="6"]
 script = ExtResource("6_fwebo")

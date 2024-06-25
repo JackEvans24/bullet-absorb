@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/enemy.gd" id="1_wjmkf"]
 [ext_resource type="PackedScene" uid="uid://cjvpl2fcwu246" path="res://prefabs/hurt_particles.tscn" id="2_e8cc4"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/health.gd" id="2_pjhvc"]
-[ext_resource type="Script" path="res://scripts/mechanics/shared/knockback.gd" id="4_0se3r"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/movement/knockback.gd" id="4_t2vkt"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="5_d48ya"]
 [ext_resource type="PackedScene" uid="uid://b0g4qn342fbge" path="res://prefabs/behaviours/drop_power.tscn" id="7_ou8mj"]
 
@@ -27,7 +27,7 @@ starting_health = 3.0
 recovery_time = 0.01
 
 [node name="Knockback" type="Node" parent="."]
-script = ExtResource("4_0se3r")
+script = ExtResource("4_t2vkt")
 knockback_time = 0.05
 knockback_power = 15.0
 
@@ -48,3 +48,4 @@ mesh = SubResource("SphereMesh_jkita")
 shape = SubResource("SphereShape3D_vhdor")
 
 [node name="DropPower" parent="." instance=ExtResource("7_ou8mj")]
+power_drop_offset = 2.0
