@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0g4qn342fbge"]
+
+[ext_resource type="Script" path="res://scripts/mechanics/shared/drop_power.gd" id="1_r1c08"]
+[ext_resource type="PackedScene" uid="uid://cm1wj0vbe4wn8" path="res://prefabs/power/power_ball.tscn" id="2_jbdyi"]
+
+[node name="DropPower" type="Node3D"]
+script = ExtResource("1_r1c08")
+power_scene = ExtResource("2_jbdyi")

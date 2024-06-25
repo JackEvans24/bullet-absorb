@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ccgpc6v5lruew"]
+[gd_scene load_steps=18 format=3 uid="uid://ccgpc6v5lruew"]
 
 [ext_resource type="PackedScene" uid="uid://c3tj0pdcum4wd" path="res://prefabs/player.tscn" id="1_e5x1h"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_rtjol"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://wfijrpbc1nxm" path="res://prefabs/enemies/turret.tscn" id="6_nrrgo"]
 [ext_resource type="Script" path="res://scripts/effects/hit_stop.gd" id="8_dyhou"]
 [ext_resource type="PackedScene" uid="uid://bcjb1jnr0y5mb" path="res://prefabs/power/power_generator.tscn" id="9_cyv5f"]
+[ext_resource type="PackedScene" uid="uid://btfsstt1biti7" path="res://prefabs/enemies/wanderer.tscn" id="10_y1ys0"]
+[ext_resource type="PackedScene" uid="uid://dcmefiejwfjyq" path="res://prefabs/enemies/burster.tscn" id="11_7qml6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1hrq"]
 metallic = 1.0
@@ -87,20 +89,14 @@ mesh = SubResource("BoxMesh_ughhm")
 [node name="Player" parent="." instance=ExtResource("1_e5x1h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
 
-[node name="Enemy2" parent="." instance=ExtResource("5_4wclf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -11)
+[node name="Enemy1" parent="." instance=ExtResource("5_4wclf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -11)
 
 [node name="Enemy3" parent="." instance=ExtResource("5_4wclf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -11)
+
+[node name="Enemy2" parent="." instance=ExtResource("5_4wclf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -9)
-
-[node name="Enemy4" parent="." instance=ExtResource("5_4wclf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, -9)
-
-[node name="Enemy5" parent="." instance=ExtResource("5_4wclf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, -11)
-
-[node name="Enemy6" parent="." instance=ExtResource("5_4wclf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -11)
 
 [node name="Turret" parent="." instance=ExtResource("6_nrrgo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -13)
@@ -111,3 +107,9 @@ freeze_duration = 0.04
 
 [node name="PowerGenerator" parent="." instance=ExtResource("9_cyv5f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 8)
+
+[node name="Wanderer" parent="." instance=ExtResource("10_y1ys0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, -3)
+
+[node name="Burster" parent="." instance=ExtResource("11_7qml6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -5)

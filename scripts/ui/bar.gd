@@ -32,8 +32,6 @@ func update_bar_height(delta):
 
 	var direction = sign(new_value - current_value)
 
-	print([current_value, new_value, direction])
-
 	current_value = clamp(
 		current_value + bar_speed * direction * delta,
 		current_value if direction > 0 else new_value,

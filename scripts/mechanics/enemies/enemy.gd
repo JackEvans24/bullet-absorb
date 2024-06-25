@@ -9,6 +9,7 @@ extends CharacterBody3D
 @onready var pivot: Node3D = $Pivot
 @onready var body: MeshInstance3D = $Pivot/Body
 @onready var collider: CollisionShape3D = $Collider
+@onready var drop_power: DropPower = $DropPower
 
 func _ready():
 	hit_detection.area_entered.connect(_on_area_entered)
@@ -29,7 +30,7 @@ func _on_damage_taken(damage_taken: float, taken_from: Node3D):
 	do_knockback(taken_from)
 
 	if health.current_health <= 0:
-		die()
+		call_deferred("die")
 
 func add_hurt_particles():
 	var hurt_particles = hurt_particles_scene.instantiate()
@@ -41,5 +42,6 @@ func do_knockback(taken_from: Node3D):
 	knockback.set_knockback_direction(direction)
 
 func die():
-	body.visible = false
+	pivot.visible = false
 	collider.call_deferred("queue_free")
+	drop_power.drop_all_power()

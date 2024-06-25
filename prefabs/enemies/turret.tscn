@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://wfijrpbc1nxm"]
+[gd_scene load_steps=12 format=3 uid="uid://wfijrpbc1nxm"]
 
 [ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="1_rkpaq"]
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/turret.gd" id="2_2ldd0"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="2_bqylj"]
-[ext_resource type="PackedScene" uid="uid://coogevjwgwbft" path="res://prefabs/bullets/default_enemy_bullet.tscn" id="3_cdiyw"]
+[ext_resource type="PackedScene" uid="uid://bxkdcki5vdm0x" path="res://prefabs/behaviours/look_at_target.tscn" id="4_1qdhy"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="5_128lh"]
+[ext_resource type="PackedScene" uid="uid://uqduo71b13ee" path="res://prefabs/behaviours/fire_bullet.tscn" id="5_ok7x6"]
+[ext_resource type="PackedScene" uid="uid://bwb55ll2hiucv" path="res://prefabs/bullets/perfect_enemy_bullet.tscn" id="6_fmidc"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer_config.gd" id="6_kudmq"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wys4c"]
 material = ExtResource("2_bqylj")
@@ -21,7 +25,6 @@ radius = 0.6
 
 [node name="Turret" instance=ExtResource("1_rkpaq")]
 script = ExtResource("2_2ldd0")
-bullet_scene = ExtResource("3_cdiyw")
 
 [node name="Health" parent="." index="0"]
 starting_health = 10.0
@@ -43,6 +46,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -1)
 [node name="Collider" parent="." index="4"]
 shape = SubResource("CylinderShape3D_0wps2")
 
-[node name="FireTimer" type="Timer" parent="." index="5"]
+[node name="LookAtTarget" parent="." index="6" instance=ExtResource("4_1qdhy")]
+
+[node name="Fire" parent="." index="7" instance=ExtResource("5_ok7x6")]
+timer_ref = NodePath("../FireTimer")
+bullet_scene = ExtResource("6_fmidc")
+
+[node name="FireTimer" type="Timer" parent="." index="8"]
 wait_time = 0.25
-autostart = true
+one_shot = true
+script = ExtResource("5_128lh")
+
+[node name="Wait" type="Node" parent="FireTimer" index="0"]
+script = ExtResource("6_kudmq")
+duration = 1.4
+
+[node name="Fire" type="Node" parent="FireTimer" index="1"]
+script = ExtResource("6_kudmq")
+duration = 0.25
+iterations = 8

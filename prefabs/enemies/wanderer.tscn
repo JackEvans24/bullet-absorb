@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://btfsstt1biti7"]
+
+[ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="1_5w8lx"]
+[ext_resource type="PackedScene" uid="uid://bxkdcki5vdm0x" path="res://prefabs/behaviours/look_at_target.tscn" id="2_4ualn"]
+[ext_resource type="Script" path="res://scripts/mechanics/enemies/wanderer.gd" id="2_ga1uy"]
+[ext_resource type="PackedScene" uid="uid://uqduo71b13ee" path="res://prefabs/behaviours/fire_bullet.tscn" id="3_vvdtc"]
+[ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="5_auu40"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="5_b2h5o"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/basic_movement.gd" id="6_fwebo"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer_config.gd" id="6_wqc6m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8stgr"]
+material = ExtResource("5_auu40")
+size = Vector3(0.25, 0.25, 0.25)
+
+[node name="Wanderer" instance=ExtResource("1_5w8lx")]
+script = ExtResource("2_ga1uy")
+
+[node name="FirePoint" type="Node3D" parent="Pivot" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+mesh = SubResource("BoxMesh_8stgr")
+
+[node name="Movement" type="Node3D" parent="." index="6"]
+script = ExtResource("6_fwebo")
+speed = 3.0
+
+[node name="WallCheck" type="RayCast3D" parent="Movement" index="0"]
+target_position = Vector3(0, 0, 3)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="WalkTimer" type="Timer" parent="." index="7"]
+script = ExtResource("5_b2h5o")
+
+[node name="Wait" type="Node" parent="WalkTimer" index="0"]
+script = ExtResource("6_wqc6m")
+duration = 2.2
+
+[node name="Walk" type="Node" parent="WalkTimer" index="1"]
+script = ExtResource("6_wqc6m")
+duration = 1.6
+
+[node name="LookAtTarget" parent="." index="8" instance=ExtResource("2_4ualn")]
+
+[node name="Fire" parent="." index="9" instance=ExtResource("3_vvdtc")]
+timer_ref = NodePath("../FireTimer")
+
+[node name="FireTimer" type="Timer" parent="." index="10"]
+wait_time = 0.25
+one_shot = true
+script = ExtResource("5_b2h5o")
+
+[node name="Wait" type="Node" parent="FireTimer" index="0"]
+script = ExtResource("6_wqc6m")
+duration = 3.0
+
+[node name="Fire" type="Node" parent="FireTimer" index="1"]
+script = ExtResource("6_wqc6m")
+duration = 0.5
+iterations = 2

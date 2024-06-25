@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://uqduo71b13ee"]
+
+[ext_resource type="Script" path="res://scripts/mechanics/shared/fire_from_point.gd" id="1_6e1u0"]
+[ext_resource type="PackedScene" uid="uid://coogevjwgwbft" path="res://prefabs/bullets/default_enemy_bullet.tscn" id="2_nuwa2"]
+
+[node name="Fire" type="Node"]
+script = ExtResource("1_6e1u0")
+fire_point_ref = NodePath("../Pivot/FirePoint")
+bullet_scene = ExtResource("2_nuwa2")
