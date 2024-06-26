@@ -61,7 +61,6 @@ power_drop_count = 12
 [node name="LookAtTarget" parent="." index="6" instance=ExtResource("4_1qdhy")]
 
 [node name="Fire" parent="." index="7" instance=ExtResource("5_ok7x6")]
-timer_ref = NodePath("../FireTimer")
 bullet_scene = ExtResource("6_fmidc")
 
 [node name="FireTimer" type="Timer" parent="." index="8"]
