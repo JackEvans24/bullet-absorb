@@ -1,8 +1,8 @@
 class_name Room
 extends Node3D
 
-@export var inactive_config: RoomData
 @export var active_config: RoomData
+@export var inactive_config: RoomData
 @export var completed_config: RoomData
 
 @onready var boundary: RoomBoundary = $Boundary
