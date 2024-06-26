@@ -9,16 +9,8 @@ extends Node3D
 @onready var wall_check: RayCast3D = $WallCheck
 @onready var noise = FastNoiseLite.new()
 
-var is_walking := false
 var movement := Vector3.ZERO
 var noise_y := 0.0
-
-func toggle_movement():
-    if is_walking:
-        stop()
-    else:
-        set_new_movement()
-    is_walking = !is_walking
 
 func set_new_movement():
     var direction = Vector3.FORWARD.rotated(Vector3.UP, randf_range(0.0, 360.0))
@@ -41,7 +33,7 @@ func _physics_process(_delta):
     if wall_check.is_colliding():
         movement = movement.bounce(wall_check.get_collision_normal().normalized())
         update_wall_check_position()
-    if is_walking:
+    if movement.length() > 0.0:
         handle_drift(_delta)
 
 func handle_drift(delta: float):

@@ -13,10 +13,8 @@ func _ready():
     for child in children:
         time_bounds.push_back(child as VariableTimerConfig)
 
-    wait_time = time_bounds[config_index].duration
-
     timeout.connect(_on_timeout)
-    start()
+    restart()
 
 func _on_timeout():
     iteration_index += 1
@@ -30,10 +28,10 @@ func _on_timeout():
         config_index = 0
 
     iteration_index = 0
-    wait_time = time_bounds[config_index].duration
 
     restart()
 
 func restart():
     named_timeout.emit(time_bounds[config_index].name)
+    wait_time = time_bounds[config_index].get_duration()
     start()

@@ -15,20 +15,13 @@ material = ExtResource("2_i8v7u")
 [node name="Burster" instance=ExtResource("1_no1yi")]
 script = ExtResource("2_4a7pp")
 
-[node name="HitDetection" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
 [node name="Pivot" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Body" parent="Pivot" index="0"]
 mesh = SubResource("BoxMesh_hvq68")
 
-[node name="Collider" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
 [node name="DropPower" parent="." index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 power_drop_count = 6
 
 [node name="Movement" type="Node3D" parent="." index="6"]
@@ -36,18 +29,7 @@ script = ExtResource("2_1evv8")
 drift_max = 0.0
 drift_change = 0.0
 
-[node name="WalkTimer" type="Timer" parent="Movement" index="0"]
-script = ExtResource("3_a2sv1")
-
-[node name="Wait" type="Node" parent="Movement/WalkTimer" index="0"]
-script = ExtResource("4_ijtvr")
-duration = 3.0
-
-[node name="Walk" type="Node" parent="Movement/WalkTimer" index="1"]
-script = ExtResource("4_ijtvr")
-duration = 2.1
-
-[node name="WallCheck" type="RayCast3D" parent="Movement" index="1"]
+[node name="WallCheck" type="RayCast3D" parent="Movement" index="0"]
 target_position = Vector3(0, 0, 0)
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
@@ -70,8 +52,10 @@ duration = 1.6
 [node name="Windup" type="Node" parent="BehaviourTimer" index="2"]
 script = ExtResource("4_ijtvr")
 duration = 0.5
+duration_randomness = 0.0
 
 [node name="Fire" type="Node" parent="BehaviourTimer" index="3"]
 script = ExtResource("4_ijtvr")
 duration = 0.2
+duration_randomness = 0.0
 iterations = 3

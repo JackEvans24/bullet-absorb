@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RoomData" load_steps=3 format=3 uid="uid://cyhd6riuxyc1o"]
+
+[ext_resource type="Resource" uid="uid://dc32ymbotpd8b" path="res://data/items/turret.tres" id="1_7if8p"]
+[ext_resource type="Script" path="res://scripts/data/room_data.gd" id="2_i7bxo"]
+
+[resource]
+script = ExtResource("2_i7bxo")
+doors = 0
+enemies = Array[Resource("res://scripts/data/room_item.gd")]([ExtResource("1_7if8p")])
+items = Array[Resource("res://scripts/data/room_item.gd")]([])
