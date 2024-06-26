@@ -2,6 +2,7 @@ class_name Room
 extends Node3D
 
 @export var config: RoomData
+@export var enemy_scene: PackedScene
 
 @onready var boundary: RoomBoundary = $Boundary
 @onready var player_detection: Area3D = $PlayerDetection
@@ -21,3 +22,7 @@ func _on_player_entered(_body: Node3D):
 
 func on_first_entry():
 	boundary.close_all_doors()
+
+	var enemy = enemy_scene.instantiate()
+	add_child(enemy)
+	enemy.position = config.enemy_position
