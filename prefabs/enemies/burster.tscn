@@ -15,20 +15,13 @@ material = ExtResource("2_i8v7u")
 [node name="Burster" instance=ExtResource("1_no1yi")]
 script = ExtResource("2_4a7pp")
 
-[node name="HitDetection" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
 [node name="Pivot" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Body" parent="Pivot" index="0"]
 mesh = SubResource("BoxMesh_hvq68")
 
-[node name="Collider" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
 [node name="DropPower" parent="." index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 power_drop_count = 6
 
 [node name="Movement" type="Node3D" parent="." index="6"]

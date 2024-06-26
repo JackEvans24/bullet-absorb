@@ -35,9 +35,6 @@ starting_health = 10.0
 [node name="Knockback" parent="." index="1"]
 knockback_power = 0.0
 
-[node name="HitDetection" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
 [node name="CollisionShape3D" parent="HitDetection" index="0"]
 shape = SubResource("CylinderShape3D_fa3mc")
 
@@ -56,11 +53,9 @@ mesh = SubResource("CylinderMesh_uh4qt")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -1)
 
 [node name="Collider" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_0wps2")
 
 [node name="DropPower" parent="." index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 power_drop_count = 12
 
 [node name="LookAtTarget" parent="." index="6" instance=ExtResource("4_1qdhy")]
@@ -76,9 +71,7 @@ script = ExtResource("5_128lh")
 
 [node name="Wait" type="Node" parent="FireTimer" index="0"]
 script = ExtResource("6_kudmq")
-duration = 1.4
 
 [node name="Fire" type="Node" parent="FireTimer" index="1"]
 script = ExtResource("6_kudmq")
-duration = 0.25
 iterations = 8

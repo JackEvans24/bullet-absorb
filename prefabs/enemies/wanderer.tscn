@@ -16,9 +16,6 @@ size = Vector3(0.25, 0.25, 0.25)
 [node name="Wanderer" instance=ExtResource("1_5w8lx")]
 script = ExtResource("2_ga1uy")
 
-[node name="HitDetection" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
 [node name="Pivot" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
@@ -29,11 +26,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 mesh = SubResource("BoxMesh_8stgr")
 
-[node name="Collider" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
 [node name="DropPower" parent="." index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 power_drop_count = 4
 
 [node name="Movement" type="Node3D" parent="." index="6"]
@@ -50,11 +43,9 @@ script = ExtResource("5_b2h5o")
 
 [node name="Wait" type="Node" parent="WalkTimer" index="0"]
 script = ExtResource("6_wqc6m")
-duration = 2.2
 
 [node name="Walk" type="Node" parent="WalkTimer" index="1"]
 script = ExtResource("6_wqc6m")
-duration = 1.6
 
 [node name="LookAtTarget" parent="." index="8" instance=ExtResource("2_4ualn")]
 
@@ -68,9 +59,7 @@ script = ExtResource("5_b2h5o")
 
 [node name="Wait" type="Node" parent="FireTimer" index="0"]
 script = ExtResource("6_wqc6m")
-duration = 3.0
 
 [node name="Fire" type="Node" parent="FireTimer" index="1"]
 script = ExtResource("6_wqc6m")
-duration = 0.5
 iterations = 2
