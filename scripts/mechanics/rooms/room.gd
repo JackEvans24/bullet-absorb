@@ -1,7 +1,8 @@
 class_name Room
 extends Node3D
 
-@export var config: RoomData
+@export var active_config: RoomData
+@export var completed_config: RoomData
 
 @onready var boundary: RoomBoundary = $Boundary
 @onready var player_detection: Area3D = $PlayerDetection
@@ -10,8 +11,7 @@ var player: Node3D
 var enemy_count = 0
 
 func _ready():
-	print(config)
-	reset_room_state()
+	set_doors(completed_config)
 	player_detection.body_entered.connect(_on_player_entered)
 
 func _on_player_entered(body: Node3D):
@@ -22,21 +22,27 @@ func _on_player_entered(body: Node3D):
 	call_deferred("on_first_entry")
 
 func on_first_entry():
-	if config.enemies.size() == 0:
-		return
+	set_room_configuration(active_config)
 
-	boundary.close_all_doors()
-	for enemy in config.enemies:
-		add_enemy(enemy)
+func set_room_configuration(config: RoomData):
+	set_doors(config)
+
+	for enemy_config in config.enemies:
+		add_enemy(enemy_config)
 		enemy_count += 1
+	for item_config in config.items:
+		add_item(item_config)
 
 func add_enemy(enemy_config: RoomItem):
-	var enemy = enemy_config.scene.instantiate() as Enemy
-	add_child(enemy)
-	enemy.position = enemy_config.position
-
+	var enemy = add_item(enemy_config) as Enemy
 	enemy.set_target(player)
 	enemy.died.connect(_on_enemy_died)
+
+func add_item(item_config: RoomItem) -> Node3D:
+	var item = item_config.scene.instantiate() as Node3D
+	add_child(item)
+	item.position = item_config.position
+	return item
 
 func _on_enemy_died():
 	if enemy_count <= 0:
@@ -44,7 +50,10 @@ func _on_enemy_died():
 
 	enemy_count -= 1
 	if enemy_count == 0:
-		call_deferred("reset_room_state")
+		call_deferred("on_room_complete")
 
-func reset_room_state():
+func on_room_complete():
+	set_room_configuration(completed_config)
+
+func set_doors(config: RoomData):
 	boundary.set_doors(config.doors)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://b4f4su1e66ujd"]
+[gd_scene load_steps=16 format=3 uid="uid://b4f4su1e66ujd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room.gd" id="1_6vv4c"]
 [ext_resource type="Material" uid="uid://gclpf2kqyelh" path="res://materials/wall.tres" id="1_tpwuc"]
-[ext_resource type="Resource" uid="uid://cwk1nv84gmg48" path="res://data/default_room_data.tres" id="2_dqq6h"]
+[ext_resource type="Resource" uid="uid://cwk1nv84gmg48" path="res://data/active_room.tres" id="2_qc361"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room_doors.gd" id="2_srwra"]
+[ext_resource type="Resource" uid="uid://b0qkp5nrpn54u" path="res://data/complete_room.tres" id="3_ufgtk"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/door.gd" id="4_r5rlm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lg0uu"]
@@ -39,7 +40,8 @@ size = Vector3(16, 2, 14)
 
 [node name="Room" type="Node3D"]
 script = ExtResource("1_6vv4c")
-config = ExtResource("2_dqq6h")
+active_config = ExtResource("2_qc361")
+completed_config = ExtResource("3_ufgtk")
 
 [node name="Boundary" type="Node3D" parent="."]
 script = ExtResource("2_srwra")

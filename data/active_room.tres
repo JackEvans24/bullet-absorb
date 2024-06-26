@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RoomData" load_steps=5 format=3 uid="uid://cwk1nv84gmg48"]
+
+[ext_resource type="PackedScene" uid="uid://btfsstt1biti7" path="res://prefabs/enemies/wanderer.tscn" id="1_u5ws8"]
+[ext_resource type="Script" path="res://scripts/data/room_item.gd" id="2_nldll"]
+[ext_resource type="Script" path="res://scripts/data/room_data.gd" id="3_44spe"]
+
+[sub_resource type="Resource" id="Resource_ecev2"]
+script = ExtResource("2_nldll")
+scene = ExtResource("1_u5ws8")
+position = Vector3(4, 0, 0)
+
+[resource]
+script = ExtResource("3_44spe")
+doors = 0
+enemies = Array[ExtResource("2_nldll")]([SubResource("Resource_ecev2")])
+items = Array[ExtResource("2_nldll")]([])
