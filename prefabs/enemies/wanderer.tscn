@@ -32,38 +32,34 @@ power_drop_count = 4
 [node name="Movement" type="Node3D" parent="." index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("6_fwebo")
-speed = 3.0
+speed = 4.0
 
 [node name="WallCheck" type="RayCast3D" parent="Movement" index="0"]
 target_position = Vector3(0, 0, 3)
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="WalkTimer" type="Timer" parent="." index="7"]
+[node name="Fire" parent="." index="7" instance=ExtResource("3_vvdtc")]
+
+[node name="BehaviourTimer" type="Timer" parent="." index="8"]
 script = ExtResource("5_b2h5o")
 
-[node name="Wait" type="Node" parent="WalkTimer" index="0"]
+[node name="Wait" type="Node" parent="BehaviourTimer" index="0"]
 script = ExtResource("6_wqc6m")
 
-[node name="Walk" type="Node" parent="WalkTimer" index="1"]
+[node name="Walk" type="Node" parent="BehaviourTimer" index="1"]
 script = ExtResource("6_wqc6m")
+duration = 1.5
+duration_randomness = 0.5
 
-[node name="LookAtTarget" parent="." index="8" instance=ExtResource("2_4ualn")]
-
-[node name="Fire" parent="." index="9" instance=ExtResource("3_vvdtc")]
-timer_ref = NodePath("../FireTimer")
-
-[node name="FireTimer" type="Timer" parent="." index="10"]
-wait_time = 0.25
-one_shot = true
-script = ExtResource("5_b2h5o")
-
-[node name="Wait" type="Node" parent="FireTimer" index="0"]
+[node name="Windup" type="Node" parent="BehaviourTimer" index="2"]
 script = ExtResource("6_wqc6m")
-duration = 2.0
-duration_randomness = 1.0
+duration = 0.2
+duration_randomness = 0.0
 
-[node name="Fire" type="Node" parent="FireTimer" index="1"]
+[node name="Fire" type="Node" parent="BehaviourTimer" index="3"]
 script = ExtResource("6_wqc6m")
-duration = 0.4
-duration_randomness = 0.1
-iterations = 2
+duration = 0.35
+duration_randomness = 0.05
+iterations = 3
+
+[node name="LookAtTarget" parent="." index="9" instance=ExtResource("2_4ualn")]
