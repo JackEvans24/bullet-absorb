@@ -10,7 +10,7 @@ extends Node3D
 var player: Node3D
 
 func _ready():
-	boundary.set_doors(config.doors)
+	reset_room_state()
 	player_detection.body_entered.connect(_on_player_entered)
 
 func _on_player_entered(body: Node3D):
@@ -23,8 +23,15 @@ func _on_player_entered(body: Node3D):
 func on_first_entry():
 	boundary.close_all_doors()
 
-	var enemy = enemy_scene.instantiate()
+	var enemy = enemy_scene.instantiate() as Enemy
 	add_child(enemy)
 	enemy.position = config.enemy_position
 
 	enemy.set_target(player)
+	enemy.died.connect(_on_enemy_died)
+
+func _on_enemy_died():
+	call_deferred("reset_room_state")
+
+func reset_room_state():
+	boundary.set_doors(config.doors)
