@@ -1,17 +1,10 @@
-[gd_resource type="Resource" script_class="RoomData" load_steps=5 format=3 uid="uid://b0qkp5nrpn54u"]
+[gd_resource type="Resource" script_class="RoomData" load_steps=3 format=3 uid="uid://b0qkp5nrpn54u"]
 
-[ext_resource type="PackedScene" uid="uid://bcjb1jnr0y5mb" path="res://prefabs/power/power_generator.tscn" id="1_r562h"]
-[ext_resource type="Script" path="res://scripts/data/room_item.gd" id="2_wc1o4"]
-[ext_resource type="Script" path="res://scripts/data/room_data.gd" id="3_6l84s"]
-
-[sub_resource type="Resource" id="Resource_86twh"]
-script = ExtResource("2_wc1o4")
-scene = ExtResource("1_r562h")
-position = Vector3(0, 0, 0)
-spawn_delay = 0.0
+[ext_resource type="Resource" uid="uid://bibninnmc26uh" path="res://data/items/generator.tres" id="1_8ismm"]
+[ext_resource type="Script" path="res://scripts/data/room_data.gd" id="2_81uqv"]
 
 [resource]
-script = ExtResource("3_6l84s")
+script = ExtResource("2_81uqv")
 doors = 3
-enemies = Array[ExtResource("2_wc1o4")]([])
-items = Array[ExtResource("2_wc1o4")]([SubResource("Resource_86twh")])
+enemies = Array[Resource("res://scripts/data/room_item.gd")]([])
+items = Array[Resource("res://scripts/data/room_item.gd")]([ExtResource("1_8ismm")])
