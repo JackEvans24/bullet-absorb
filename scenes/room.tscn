@@ -1,10 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://b4f4su1e66ujd"]
+[gd_scene load_steps=15 format=3 uid="uid://b4f4su1e66ujd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room.gd" id="1_6vv4c"]
 [ext_resource type="Material" uid="uid://gclpf2kqyelh" path="res://materials/wall.tres" id="1_tpwuc"]
+[ext_resource type="Resource" uid="uid://cwk1nv84gmg48" path="res://data/default_room_data.tres" id="2_dqq6h"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room_doors.gd" id="2_srwra"]
-[ext_resource type="Resource" uid="uid://cwk1nv84gmg48" path="res://data/default_room_data.tres" id="2_vd2dv"]
-[ext_resource type="PackedScene" uid="uid://btfsstt1biti7" path="res://prefabs/enemies/wanderer.tscn" id="3_8vv6v"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/door.gd" id="4_r5rlm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lg0uu"]
@@ -40,8 +39,7 @@ size = Vector3(16, 2, 14)
 
 [node name="Room" type="Node3D"]
 script = ExtResource("1_6vv4c")
-config = ExtResource("2_vd2dv")
-enemy_scene = ExtResource("3_8vv6v")
+config = ExtResource("2_dqq6h")
 
 [node name="Boundary" type="Node3D" parent="."]
 script = ExtResource("2_srwra")
