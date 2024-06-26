@@ -57,7 +57,6 @@ shadow_enabled = true
 
 [node name="Room" parent="World" instance=ExtResource("2_2rk65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
-door_config = 2
 
 [node name="HUD" parent="." instance=ExtResource("2_bqahq")]
 
