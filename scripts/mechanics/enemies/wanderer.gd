@@ -6,9 +6,6 @@ extends Enemy
 @onready var look_at_target: LookAtTarget = $LookAtTarget
 @onready var fire: FireFromPoint = $Fire
 
-var target: Node3D:
-	set(value): look_at_target.target = value;
-
 func _ready():
 	super()
 
@@ -23,9 +20,12 @@ func _physics_process(delta):
 	velocity = move.movement
 	move_and_slide()
 
+func set_target(target: Node3D):
+	look_at_target.target = target
+
 func die():
 	super()
-	target = null
+	look_at_target.target = null
 	fire.stop()
 	walk_timer.stop()
 	move.stop()

@@ -1,6 +1,8 @@
 class_name Enemy
 extends CharacterBody3D
 
+signal died
+
 @export var hurt_particles_scene: PackedScene
 
 @onready var health: Health = $Health
@@ -32,6 +34,9 @@ func _on_damage_taken(damage_taken: float, taken_from: Node3D):
 	if health.current_health <= 0:
 		call_deferred("die")
 
+func set_target(_target: Node3D):
+	pass
+
 func add_hurt_particles():
 	var hurt_particles = hurt_particles_scene.instantiate()
 	add_child(hurt_particles)
@@ -45,3 +50,4 @@ func die():
 	pivot.visible = false
 	collider.call_deferred("queue_free")
 	drop_power.drop_all_power()
+	died.emit()

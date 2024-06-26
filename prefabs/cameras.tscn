@@ -18,9 +18,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("2_8gcvs")
 max_speed = 30.0
 min_speed = 10.0
+dampening = 0.01
 
 [node name="PlayerCamera" type="Node3D" parent="FollowPlayer"]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 20, 8)
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 10, 8)
 
 [node name="Camera" type="Camera3D" parent="FollowPlayer/PlayerCamera"]
 projection = 1

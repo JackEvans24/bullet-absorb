@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RoomData" load_steps=3 format=3 uid="uid://b0qkp5nrpn54u"]
+
+[ext_resource type="Resource" uid="uid://bibninnmc26uh" path="res://data/items/generator.tres" id="1_8ismm"]
+[ext_resource type="Script" path="res://scripts/data/room_data.gd" id="2_81uqv"]
+
+[resource]
+script = ExtResource("2_81uqv")
+doors = 3
+enemies = Array[Resource("res://scripts/data/room_item.gd")]([])
+items = Array[Resource("res://scripts/data/room_item.gd")]([ExtResource("1_8ismm")])
