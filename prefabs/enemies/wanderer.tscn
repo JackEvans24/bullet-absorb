@@ -59,7 +59,11 @@ script = ExtResource("5_b2h5o")
 
 [node name="Wait" type="Node" parent="FireTimer" index="0"]
 script = ExtResource("6_wqc6m")
+duration = 2.0
+duration_randomness = 1.0
 
 [node name="Fire" type="Node" parent="FireTimer" index="1"]
 script = ExtResource("6_wqc6m")
+duration = 0.4
+duration_randomness = 0.1
 iterations = 2
