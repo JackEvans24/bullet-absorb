@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_4vtkj")
 doors = 3
+enemy_positions = Array[Vector3]([Vector3(2, 0, 0), Vector3(-2, 0, 0)])
