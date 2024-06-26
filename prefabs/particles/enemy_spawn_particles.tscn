@@ -3,18 +3,15 @@
 [ext_resource type="Material" uid="uid://bl5t2wj8dbl83" path="res://materials/enemy/enemy_spawn.tres" id="1_md1vo"]
 
 [sub_resource type="Curve" id="Curve_cdf5s"]
-_data = [Vector2(0, 0), 0.0, 8.55633, 0, 0, Vector2(0.302949, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.02402, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 8.55633, 0, 0, Vector2(0.252011, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.02402, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_260n8"]
 curve = SubResource("Curve_cdf5s")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5tx7h"]
-emission_shape = 6
-emission_ring_axis = Vector3(0, 1, 0)
-emission_ring_height = 0.0
-emission_ring_radius = 0.5
-emission_ring_inner_radius = 0.0
+emission_shape = 1
+emission_sphere_radius = 1.0
 direction = Vector3(0, 1, 0)
 spread = 90.0
 initial_velocity_min = 1.0
@@ -34,5 +31,6 @@ cast_shadow = 0
 emitting = false
 amount = 60
 one_shot = true
+explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_5tx7h")
 draw_pass_1 = SubResource("SphereMesh_ouikr")

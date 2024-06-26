@@ -10,7 +10,7 @@ script = ExtResource("2_nldll")
 scene = ExtResource("1_u5ws8")
 position = Vector3(4, 0, 0)
 particles = ExtResource("1_m124q")
-spawn_delay = 1.0
+spawn_delay = 0.25
 
 [resource]
 script = ExtResource("3_44spe")
