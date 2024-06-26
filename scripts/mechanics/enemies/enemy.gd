@@ -32,6 +32,9 @@ func _on_damage_taken(damage_taken: float, taken_from: Node3D):
 	if health.current_health <= 0:
 		call_deferred("die")
 
+func set_target(_target: Node3D):
+	pass
+
 func add_hurt_particles():
 	var hurt_particles = hurt_particles_scene.instantiate()
 	add_child(hurt_particles)
