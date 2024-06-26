@@ -1,6 +1,7 @@
 class_name Room
 extends Node3D
 
+@export var inactive_config: RoomData
 @export var active_config: RoomData
 @export var completed_config: RoomData
 
@@ -11,7 +12,7 @@ var player: Node3D
 var enemy_count = 0
 
 func _ready():
-	set_doors(completed_config)
+	set_room_configuration(inactive_config)
 	player_detection.body_entered.connect(_on_player_entered)
 
 func _on_player_entered(body: Node3D):
