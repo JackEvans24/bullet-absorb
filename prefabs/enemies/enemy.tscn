@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://c3ytmjd7pe4pg"]
+[gd_scene load_steps=12 format=3 uid="uid://c3ytmjd7pe4pg"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/enemy.gd" id="1_wjmkf"]
-[ext_resource type="PackedScene" uid="uid://cjvpl2fcwu246" path="res://prefabs/particles/hurt_particles.tscn" id="2_e8cc4"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/health.gd" id="2_pjhvc"]
+[ext_resource type="PackedScene" uid="uid://cjvpl2fcwu246" path="res://prefabs/particles/hurt_particles.tscn" id="2_smu6b"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/knockback.gd" id="4_t2vkt"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="5_d48ya"]
 [ext_resource type="PackedScene" uid="uid://b0g4qn342fbge" path="res://prefabs/behaviours/drop_power.tscn" id="7_ou8mj"]
@@ -15,10 +15,43 @@ material = ExtResource("5_d48ya")
 [sub_resource type="SphereShape3D" id="SphereShape3D_vhdor"]
 radius = 0.45
 
+[sub_resource type="Animation" id="Animation_jcw0f"]
+resource_name = "start"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.3, 0.3),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.3, 0.3),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ksm5t"]
+_data = {
+"start": SubResource("Animation_jcw0f")
+}
+
 [node name="Enemy" type="CharacterBody3D"]
 collision_layer = 32
 script = ExtResource("1_wjmkf")
-hurt_particles_scene = ExtResource("2_e8cc4")
+hurt_particles_scene = ExtResource("2_smu6b")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_pjhvc")
@@ -40,7 +73,7 @@ monitorable = false
 shape = SubResource("SphereShape3D_64qd1")
 
 [node name="Pivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(0.995368, 0, 0, 0, 0.995368, 0, 0, 0, 0.995368, 0, 0.995322, 0)
 
 [node name="Body" type="MeshInstance3D" parent="Pivot"]
 mesh = SubResource("SphereMesh_jkita")
@@ -52,3 +85,9 @@ shape = SubResource("SphereShape3D_vhdor")
 [node name="DropPower" parent="." instance=ExtResource("7_ou8mj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 power_drop_offset = 2.0
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ksm5t")
+}
+autoplay = "start"
