@@ -31,6 +31,7 @@ knockback_time = 0.05
 knockback_power = 15.0
 
 [node name="HitDetection" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 0
 collision_mask = 16
 monitorable = false
@@ -39,12 +40,15 @@ monitorable = false
 shape = SubResource("SphereShape3D_64qd1")
 
 [node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Body" type="MeshInstance3D" parent="Pivot"]
 mesh = SubResource("SphereMesh_jkita")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("SphereShape3D_vhdor")
 
 [node name="DropPower" parent="." instance=ExtResource("7_ou8mj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 power_drop_offset = 2.0
