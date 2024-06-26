@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="RoomData" load_steps=7 format=3 uid="uid://cwk1nv84gmg48"]
+
+[ext_resource type="Resource" uid="uid://bgn642fe8axyd" path="res://data/items/wanderer.tres" id="1_k7k6w"]
+[ext_resource type="PackedScene" uid="uid://cxlq2p6ujeij8" path="res://prefabs/particles/enemy_spawn_particles.tscn" id="2_40d3u"]
+[ext_resource type="PackedScene" uid="uid://btfsstt1biti7" path="res://prefabs/enemies/wanderer.tscn" id="3_yhn5s"]
+[ext_resource type="Script" path="res://scripts/data/room_item.gd" id="4_4tkwl"]
+[ext_resource type="Script" path="res://scripts/data/room_data.gd" id="5_jb0c2"]
+
+[sub_resource type="Resource" id="Resource_vgjps"]
+script = ExtResource("4_4tkwl")
+scene = ExtResource("3_yhn5s")
+position = Vector3(-4, 0, 0)
+particles = ExtResource("2_40d3u")
+spawn_delay = 0.25
+
+[resource]
+script = ExtResource("5_jb0c2")
+doors = 0
+enemies = Array[ExtResource("4_4tkwl")]([ExtResource("1_k7k6w"), SubResource("Resource_vgjps")])
+items = Array[ExtResource("4_4tkwl")]([])

@@ -1,10 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://b4f4su1e66ujd"]
+[gd_scene load_steps=16 format=3 uid="uid://b4f4su1e66ujd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room.gd" id="1_6vv4c"]
 [ext_resource type="Material" uid="uid://gclpf2kqyelh" path="res://materials/wall.tres" id="1_tpwuc"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room_doors.gd" id="2_srwra"]
 [ext_resource type="Resource" uid="uid://c6g6msddj6g6j" path="res://data/rooms/inactive_room.tres" id="2_tytr3"]
-[ext_resource type="Resource" uid="uid://cwk1nv84gmg48" path="res://data/rooms/active_rooms/default_active_room.tres" id="3_bb8r4"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/door.gd" id="4_r5rlm"]
 [ext_resource type="Resource" uid="uid://b0qkp5nrpn54u" path="res://data/rooms/complete_room.tres" id="4_ti4xg"]
 
@@ -42,7 +41,6 @@ size = Vector3(16, 2, 14)
 [node name="Room" type="Node3D"]
 script = ExtResource("1_6vv4c")
 inactive_config = ExtResource("2_tytr3")
-active_config = ExtResource("3_bb8r4")
 completed_config = ExtResource("4_ti4xg")
 
 [node name="Boundary" type="Node3D" parent="."]
