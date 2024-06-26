@@ -7,16 +7,16 @@ extends Node3D
 @onready var boundary: RoomBoundary = $Boundary
 @onready var player_detection: Area3D = $PlayerDetection
 
-var has_previously_entered := false
+var player: Node3D
 
 func _ready():
 	boundary.set_doors(config.doors)
 	player_detection.body_entered.connect(_on_player_entered)
 
-func _on_player_entered(_body: Node3D):
-	if has_previously_entered:
+func _on_player_entered(body: Node3D):
+	if player != null:
 		return
-	has_previously_entered = true
+	player = body
 
 	call_deferred("on_first_entry")
 
@@ -26,3 +26,5 @@ func on_first_entry():
 	var enemy = enemy_scene.instantiate()
 	add_child(enemy)
 	enemy.position = config.enemy_position
+
+	enemy.set_target(player)
