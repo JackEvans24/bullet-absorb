@@ -1,5 +1,7 @@
 extends Node
 
+@export var doors_changed_screen_shake_profile: ScreenShakeProfile
+
 @onready var hud: Hud = $HUD
 @onready var player: Player = $Player
 @onready var rooms: RoomController = $World/Rooms
@@ -33,4 +35,4 @@ func _on_damage_taken():
 	hud._on_health_changed(player.current_health)
 
 func _on_room_doors_changed():
-	cameras.add_impulse(0.8)
+	cameras.add_impulse(0.8, doors_changed_screen_shake_profile)
