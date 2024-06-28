@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://bxkdcki5vdm0x" path="res://prefabs/behaviours/look_at_target.tscn" id="2_4ualn"]
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/wanderer.gd" id="2_ga1uy"]
 [ext_resource type="PackedScene" uid="uid://uqduo71b13ee" path="res://prefabs/behaviours/fire_bullet.tscn" id="3_vvdtc"]
-[ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="5_auu40"]
+[ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy/enemy_body.tres" id="3_yjmhk"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="5_b2h5o"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/basic_movement.gd" id="6_fwebo"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer_config.gd" id="6_wqc6m"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8stgr"]
-material = ExtResource("5_auu40")
+material = ExtResource("3_yjmhk")
 size = Vector3(0.25, 0.25, 0.25)
 
 [node name="Wanderer" instance=ExtResource("1_5w8lx")]

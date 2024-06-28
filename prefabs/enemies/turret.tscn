@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="1_rkpaq"]
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/turret.gd" id="2_2ldd0"]
-[ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="2_bqylj"]
+[ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy/enemy_body.tres" id="2_bqylj"]
 [ext_resource type="PackedScene" uid="uid://bxkdcki5vdm0x" path="res://prefabs/behaviours/look_at_target.tscn" id="4_1qdhy"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="5_128lh"]
 [ext_resource type="PackedScene" uid="uid://uqduo71b13ee" path="res://prefabs/behaviours/fire_bullet.tscn" id="5_ok7x6"]
