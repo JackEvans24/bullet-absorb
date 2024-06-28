@@ -17,7 +17,11 @@ var roll: float = 0.0
 func register(camera: Node3D):
 	cameras.push_back(camera)
 
-func add_impulse(impulse_amount: float):
+func add_impulse(impulse_amount: float, requested_profile: ScreenShakeProfile):
+	if impulse > impulse_amount:
+		return
+
+	profile = requested_profile if requested_profile != null else default_profile
 	impulse = max(impulse, impulse_amount)
 	noise_y = 0
 	noise.seed = randi_range(0, 99999)
