@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bhxrs6pph350t" path="res://scenes/hud.tscn" id="2_bqahq"]
 [ext_resource type="Texture2D" uid="uid://b5lppbtmrhid0" path="res://textures/texture_07.png" id="2_jtr86"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room_controller.gd" id="3_yfuie"]
-[ext_resource type="Resource" uid="uid://cyhd6riuxyc1o" path="res://data/rooms/active_rooms/turret_room.tres" id="4_f7txv"]
 [ext_resource type="PackedScene" uid="uid://cl1dul38xrvt2" path="res://prefabs/cameras.tscn" id="4_nws0m"]
+[ext_resource type="Resource" uid="uid://cwk1nv84gmg48" path="res://data/rooms/active_rooms/wanderer_room.tres" id="5_svoh8"]
 [ext_resource type="Script" path="res://scripts/effects/hit_stop.gd" id="8_dyhou"]
 [ext_resource type="PackedScene" uid="uid://bcjb1jnr0y5mb" path="res://prefabs/power/power_generator.tscn" id="9_cyv5f"]
 
@@ -56,7 +56,7 @@ script = ExtResource("3_yfuie")
 
 [node name="Room" parent="World/Rooms" instance=ExtResource("2_2rk65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
-active_config = ExtResource("4_f7txv")
+active_config = ExtResource("5_svoh8")
 
 [node name="HUD" parent="." instance=ExtResource("2_bqahq")]
 
