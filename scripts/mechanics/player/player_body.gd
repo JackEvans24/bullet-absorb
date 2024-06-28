@@ -39,8 +39,7 @@ func _on_damage_taken(damage_taken: float, _taken_from: Node3D):
 	hurt_particles.restart()
 
 func _on_player_died():
-	body.visible = false
-	nose.visible = false
+	visible = false
 
 func _on_dash_triggered(_direction: Vector3):
 	dash_particles.restart()
