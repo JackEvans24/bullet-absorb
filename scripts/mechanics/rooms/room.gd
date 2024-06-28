@@ -1,7 +1,7 @@
 class_name Room
 extends Node3D
 
-signal room_doors_changed
+signal doors_changed
 
 @export var active_config: RoomData
 @export var inactive_config: RoomData
@@ -28,9 +28,12 @@ func on_first_entry():
 	set_room_configuration(active_config)
 
 func set_room_configuration(config: RoomData):
-	var doors_changed = set_doors(config)
-	if doors_changed:
-		room_doors_changed.emit()
+	var doors_set = set_doors(config)
+	if doors_set:
+		doors_changed.emit()
+
+	if config.spawn_delay > 0.0:
+		await get_tree().create_timer(config.spawn_delay).timeout
 
 	for enemy_config in config.enemies:
 		add_enemy(enemy_config)

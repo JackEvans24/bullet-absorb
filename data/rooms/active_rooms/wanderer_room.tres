@@ -16,5 +16,6 @@ spawn_delay = 0.25
 [resource]
 script = ExtResource("5_jb0c2")
 doors = 0
+spawn_delay = 0.5
 enemies = Array[ExtResource("4_4tkwl")]([ExtResource("1_k7k6w"), SubResource("Resource_vgjps")])
 items = Array[ExtResource("4_4tkwl")]([])
