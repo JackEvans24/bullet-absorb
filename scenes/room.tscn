@@ -69,6 +69,7 @@ mesh = SubResource("BoxMesh_u7btn")
 
 [node name="Door" type="StaticBody3D" parent="Boundary/Front"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 script = ExtResource("4_r5rlm")
 
 [node name="Collider" type="CollisionShape3D" parent="Boundary/Front/Door"]
@@ -101,6 +102,7 @@ mesh = SubResource("BoxMesh_u7btn")
 
 [node name="Door" type="StaticBody3D" parent="Boundary/Back"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 script = ExtResource("4_r5rlm")
 
 [node name="Collider" type="CollisionShape3D" parent="Boundary/Back/Door"]
@@ -133,6 +135,7 @@ mesh = SubResource("BoxMesh_4s2ht")
 
 [node name="Door" type="StaticBody3D" parent="Boundary/Left"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 script = ExtResource("4_r5rlm")
 
 [node name="Collider" type="CollisionShape3D" parent="Boundary/Left/Door"]
@@ -165,6 +168,7 @@ mesh = SubResource("BoxMesh_4s2ht")
 
 [node name="Door" type="StaticBody3D" parent="Boundary/Right"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 script = ExtResource("4_r5rlm")
 
 [node name="Collider" type="CollisionShape3D" parent="Boundary/Right/Door"]

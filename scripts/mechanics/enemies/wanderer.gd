@@ -32,6 +32,5 @@ func set_target(target: Node3D):
 func die():
 	super()
 	look_at_target.target = null
-	fire.stop()
 	behaviour_timer.stop()
 	move.stop()
