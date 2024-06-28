@@ -33,4 +33,4 @@ func _on_damage_taken():
 	hud._on_health_changed(player.current_health)
 
 func _on_room_doors_changed():
-	cameras.add_impulse(0.5)
+	cameras.add_impulse(0.8)
