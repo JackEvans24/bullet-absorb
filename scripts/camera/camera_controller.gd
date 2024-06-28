@@ -12,5 +12,5 @@ func _ready():
 	screen_shake.register(camera)
 	pass
 
-func add_impulse():
-	screen_shake.add_impulse()
+func add_impulse(impulse_amount: float=1.0):
+	screen_shake.add_impulse(impulse_amount)
