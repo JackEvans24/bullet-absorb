@@ -8,14 +8,19 @@ enum Walls {FORWARD = 1, BACK = 2, LEFT = 4, RIGHT = 8}
 @onready var left_door: Door = $Left/Door
 @onready var right_door: Door = $Right/Door
 
+func doors_need_changing(doors: int) -> bool:
+	if (doors&Walls.FORWARD != 0) == front_door.is_closed:
+		return true
+	if (doors&Walls.BACK != 0) == back_door.is_closed:
+		return true
+	if (doors&Walls.LEFT != 0) == left_door.is_closed:
+		return true
+	if (doors&Walls.RIGHT != 0) == right_door.is_closed:
+		return true
+	return false
+
 func set_doors(doors: int):
 	front_door.set_closed(doors&Walls.FORWARD == 0)
 	back_door.set_closed(doors&Walls.BACK == 0)
 	left_door.set_closed(doors&Walls.LEFT == 0)
 	right_door.set_closed(doors&Walls.RIGHT == 0)
-
-func close_all_doors():
-	front_door.set_closed(true)
-	back_door.set_closed(true)
-	left_door.set_closed(true)
-	right_door.set_closed(true)
