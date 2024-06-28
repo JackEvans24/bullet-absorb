@@ -8,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://da0sxh7vg3wxe" path="res://data/camera/doors_changed_screen_shake.tres" id="2_v7lto"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room_controller.gd" id="3_yfuie"]
 [ext_resource type="PackedScene" uid="uid://cl1dul38xrvt2" path="res://prefabs/cameras.tscn" id="4_nws0m"]
-[ext_resource type="Resource" uid="uid://cwk1nv84gmg48" path="res://data/rooms/active_rooms/wanderer_room.tres" id="5_svoh8"]
+[ext_resource type="Resource" uid="uid://g8t31vgbn4n2" path="res://data/rooms/active_rooms/burster_room.tres" id="6_o8dac"]
 [ext_resource type="Script" path="res://scripts/effects/hit_stop.gd" id="8_dyhou"]
 [ext_resource type="PackedScene" uid="uid://bcjb1jnr0y5mb" path="res://prefabs/power/power_generator.tscn" id="9_cyv5f"]
 
@@ -58,7 +58,7 @@ script = ExtResource("3_yfuie")
 
 [node name="Room" parent="World/Rooms" instance=ExtResource("2_2rk65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
-active_config = ExtResource("5_svoh8")
+active_config = ExtResource("6_o8dac")
 
 [node name="HUD" parent="." instance=ExtResource("2_bqahq")]
 

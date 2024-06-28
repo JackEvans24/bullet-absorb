@@ -1,25 +1,213 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcmefiejwfjyq"]
+[gd_scene load_steps=17 format=3 uid="uid://dcmefiejwfjyq"]
 
 [ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="1_no1yi"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/basic_movement.gd" id="2_1evv8"]
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/burster.gd" id="2_4a7pp"]
-[ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy_body.tres" id="2_i8v7u"]
+[ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy/enemy_body.tres" id="2_i8v7u"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="3_a2sv1"]
+[ext_resource type="PackedScene" uid="uid://b4qc1nyol7os" path="res://prefabs/enemies/burster_half.tscn" id="4_hrwks"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer_config.gd" id="4_ijtvr"]
+[ext_resource type="PackedScene" uid="uid://dsnxe8cqmmow8" path="res://prefabs/particles/smoke_burst.tscn" id="5_mbiiu"]
+[ext_resource type="PackedScene" uid="uid://d1a50aebuqe1d" path="res://prefabs/spawn_tube.tscn" id="6_dcvw3"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/fire_from_ring.gd" id="7_q2sbb"]
 [ext_resource type="PackedScene" uid="uid://bwb55ll2hiucv" path="res://prefabs/bullets/perfect_enemy_bullet.tscn" id="8_mra72"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5hfv7"]
+radius = 0.75
 
 [sub_resource type="BoxMesh" id="BoxMesh_hvq68"]
 material = ExtResource("2_i8v7u")
 
+[sub_resource type="Animation" id="Animation_xttcq"]
+resource_name = "start"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/BursterBottomHalf:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.2, 1.4, 2.2, 2.4),
+"transitions": PackedFloat32Array(1, 1, 0.25, 1),
+"update": 0,
+"values": [Vector3(0, -1, 0), Vector3(0, -0.5, 0), Vector3(0, -0.5, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/BursterBottomHalf:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(0.75, 0.75, 0.75)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/BursterTopHalf:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 1.3, 2.2, 2.4),
+"transitions": PackedFloat32Array(1, 1, 0.25, 1),
+"update": 0,
+"values": [Vector3(0, -1, 0), Vector3(0, 0.5, 0), Vector3(0, 0.5, 0), Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/BursterTopHalf:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(0.75, 0.75, 0.75)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pivot/BursterBottomHalf:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1, 1.6, 1.9),
+"transitions": PackedFloat32Array(1, 2, 1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0), Vector3(0, 1.5708, 0), Vector3(0, -1.5708, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Pivot/BursterTopHalf:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1, 1.6, 1.9),
+"transitions": PackedFloat32Array(1, 2, 1),
+"update": 0,
+"values": [Vector3(-3.14159, -3.14159, 0), Vector3(-3.14159, -3.14159, 0), Vector3(-3.14159, 0, 0)]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BehaviourTimer")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(2.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Pivot/SmokeBurst")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Pivot/SpawnTube/Animator")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["start", -1, 1.0, false],
+"method": &"play"
+}]
+}
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Pivot/SpawnTube")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_trd6s"]
+resource_name = "fire"
+length = 1.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/BursterTopHalf:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.55, 0.7, 0.75, 0.9, 0.95, 1.1, 1.3, 1.6),
+"transitions": PackedFloat32Array(2, 1, 0.1, 0.8, 0.1, 0.8, 0.1, 0.8, 1, 0.5, 3),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.5, 0), Vector3(0, 0.5, 0), Vector3(0, 0.6, 0), Vector3(0, 0.5, 0), Vector3(0, 0.6, 0), Vector3(0, 0.5, 0), Vector3(0, 0.6, 0), Vector3(0, 0.5, 0), Vector3(0, 0.5, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/BursterTopHalf:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.3, 1.6),
+"transitions": PackedFloat32Array(2, 1, 0.5, 1),
+"update": 0,
+"values": [Vector3(-3.14159, 0, 0), Vector3(-3.14159, 1.5708, 0), Vector3(-3.14159, 1.5708, 0), Vector3(-3.14159, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hlk6v"]
+_data = {
+"fire": SubResource("Animation_trd6s"),
+"start": SubResource("Animation_xttcq")
+}
+
 [node name="Burster" instance=ExtResource("1_no1yi")]
 script = ExtResource("2_4a7pp")
+
+[node name="CollisionShape3D" parent="HitDetection" index="0"]
+shape = SubResource("SphereShape3D_5hfv7")
 
 [node name="Pivot" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Body" parent="Pivot" index="0"]
+visible = false
 mesh = SubResource("BoxMesh_hvq68")
+
+[node name="BursterBottomHalf" parent="Pivot" index="1" instance=ExtResource("4_hrwks")]
+transform = Transform3D(-3.27835e-08, 0, -0.75, 0, 0.75, 0, 0.75, 0, -3.27835e-08, 0, -0.5, 0)
+
+[node name="BursterTopHalf" parent="Pivot" index="2" instance=ExtResource("4_hrwks")]
+transform = Transform3D(0.75, 0, 0, 0, -0.75, 1.13247e-07, 0, -1.13247e-07, -0.75, 0, 0.5, 0)
+
+[node name="SmokeBurst" parent="Pivot" index="3" instance=ExtResource("5_mbiiu")]
+
+[node name="SpawnTube" parent="Pivot" index="4" instance=ExtResource("6_dcvw3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="DropPower" parent="." index="5"]
 power_drop_count = 6
@@ -37,25 +225,32 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 script = ExtResource("7_q2sbb")
 pivot_ref = NodePath("../Pivot")
 bullet_scene = ExtResource("8_mra72")
+rotation_interval = 0.3
 
 [node name="BehaviourTimer" type="Timer" parent="." index="8"]
 script = ExtResource("3_a2sv1")
 
-[node name="Pause" type="Node" parent="BehaviourTimer" index="0"]
-script = ExtResource("4_ijtvr")
-duration = 0.5
-
-[node name="Walk" type="Node" parent="BehaviourTimer" index="1"]
+[node name="Walk" type="Node" parent="BehaviourTimer" index="0"]
 script = ExtResource("4_ijtvr")
 duration = 1.6
 
-[node name="Windup" type="Node" parent="BehaviourTimer" index="2"]
+[node name="Windup" type="Node" parent="BehaviourTimer" index="1"]
 script = ExtResource("4_ijtvr")
 duration = 0.5
 duration_randomness = 0.0
 
-[node name="Fire" type="Node" parent="BehaviourTimer" index="3"]
+[node name="Fire" type="Node" parent="BehaviourTimer" index="2"]
 script = ExtResource("4_ijtvr")
 duration = 0.2
 duration_randomness = 0.0
 iterations = 3
+
+[node name="Pause" type="Node" parent="BehaviourTimer" index="3"]
+script = ExtResource("4_ijtvr")
+duration = 0.7
+
+[node name="Animator" type="AnimationPlayer" parent="." index="9"]
+libraries = {
+"": SubResource("AnimationLibrary_hlk6v")
+}
+autoplay = "start"

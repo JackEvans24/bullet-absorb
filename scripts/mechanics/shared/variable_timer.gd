@@ -14,7 +14,9 @@ func _ready():
         time_bounds.push_back(child as VariableTimerConfig)
 
     timeout.connect(_on_timeout)
-    restart()
+
+    if autostart:
+        restart()
 
 func _on_timeout():
     iteration_index += 1

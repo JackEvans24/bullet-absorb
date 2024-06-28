@@ -6,5 +6,6 @@
 [resource]
 script = ExtResource("2_isx8v")
 doors = 0
+spawn_delay = 0.5
 enemies = Array[Resource("res://scripts/data/room_item.gd")]([ExtResource("1_7fl2y")])
 items = Array[Resource("res://scripts/data/room_item.gd")]([])
