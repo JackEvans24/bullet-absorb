@@ -1,6 +1,9 @@
 class_name Room
 extends Node3D
 
+signal room_activated
+signal room_completed
+
 @export var active_config: RoomData
 @export var inactive_config: RoomData
 @export var completed_config: RoomData
@@ -24,6 +27,7 @@ func _on_player_entered(body: Node3D):
 
 func on_first_entry():
 	set_room_configuration(active_config)
+	room_activated.emit()
 
 func set_room_configuration(config: RoomData):
 	set_doors(config)
@@ -70,6 +74,7 @@ func _on_enemy_died():
 
 func on_room_complete():
 	set_room_configuration(completed_config)
+	room_completed.emit()
 
 func set_doors(config: RoomData):
 	boundary.set_doors(config.doors)
