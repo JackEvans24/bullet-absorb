@@ -1,16 +1,12 @@
 class_name ScreenShake
 extends Node
 
-@export var punch: float = 2.0
-@export var tremolo = 5
-@export var decay = 1.5
-
-@export var impulse_max = Vector3(2.5, 2.0, 0)
-@export var roll_max = 0.1
+@export var default_profile: ScreenShakeProfile
 
 var cameras: Array[Node3D] = []
 
 @onready var noise = FastNoiseLite.new()
+@onready var profile = default_profile
 
 var impulse: float = 0.0
 var noise_y: int = 0
@@ -29,15 +25,15 @@ func add_impulse(impulse_amount: float):
 func _process(delta):
 	if impulse <= 0.0:
 		return
-	impulse = max(impulse - decay * delta, 0)
+	impulse = max(impulse - profile.decay * delta, 0)
 	shake()
 
 func shake():
-	noise_y += tremolo
+	noise_y += profile.tremolo
 
-	offset.x = get_offset(noise.seed, impulse_max.x)
-	offset.y = get_offset(noise.seed * 2, impulse_max.y)
-	roll = get_offset(noise.seed * 3, roll_max)
+	offset.x = get_offset(noise.seed, profile.impulse_max.x)
+	offset.y = get_offset(noise.seed * 2, profile.impulse_max.y)
+	roll = get_offset(noise.seed * 3, profile.roll_max)
 
 	for camera in cameras:
 		camera.position = offset
@@ -45,5 +41,5 @@ func shake():
 
 func get_offset(noise_seed: float, max_trauma: float) -> float:
 	var noise_output = noise.get_noise_2d(noise_seed, noise_y)
-	var active_impulse = pow(impulse, punch)
+	var active_impulse = pow(impulse, profile.punch)
 	return active_impulse * noise_output * max_trauma
