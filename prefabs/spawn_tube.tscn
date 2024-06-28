@@ -16,7 +16,7 @@ tracks/0/path = NodePath("Model:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 1.4, 1.6),
+"times": PackedFloat32Array(0, 0.4, 1.4, 1.6),
 "transitions": PackedFloat32Array(0.5, -2, -2, 0.5),
 "update": 0,
 "values": [Vector3(0, -0.4, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, -0.4, 0)]
@@ -28,7 +28,7 @@ tracks/1/path = NodePath("Model/Cap_001:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.3, 0.7),
+"times": PackedFloat32Array(0.4, 0.8),
 "transitions": PackedFloat32Array(2, 1),
 "update": 0,
 "values": [Vector3(0, 0.2, 0), Vector3(-0.8, 0.2, 0)]
@@ -40,7 +40,7 @@ tracks/2/path = NodePath("Model/Cap_001:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.3, 0.7),
+"times": PackedFloat32Array(0.4, 0.8),
 "transitions": PackedFloat32Array(2, 1),
 "update": 0,
 "values": [Vector3(1, 1, 1), Vector3(0, 1, 0.5)]
@@ -52,7 +52,7 @@ tracks/3/path = NodePath("Model/Cap_002:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.3, 0.7),
+"times": PackedFloat32Array(0.4, 0.8),
 "transitions": PackedFloat32Array(2, 1),
 "update": 0,
 "values": [Vector3(0, 0.2, 0), Vector3(0.8, 0.2, 0)]
@@ -64,7 +64,7 @@ tracks/4/path = NodePath("Model/Cap_002:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.3, 0.7),
+"times": PackedFloat32Array(0.4, 0.8),
 "transitions": PackedFloat32Array(2, 1),
 "update": 0,
 "values": [Vector3(1, 1, 1), Vector3(0, 1, 0.5)]
@@ -86,11 +86,10 @@ surface_material_override/1 = ExtResource("3_63ak4")
 surface_material_override/2 = ExtResource("4_lddkl")
 
 [node name="Cap_001" parent="Model" index="1"]
-transform = Transform3D(0, 0, 0, 0, 1, 0, 0, 0, 0.5, -0.8, 0.2, 0)
 surface_material_override/0 = ExtResource("5_xbv78")
 
 [node name="Cap_002" parent="Model" index="2"]
-transform = Transform3D(0, -1.50996e-07, 0, 0, -1, 0, 0, 0, 0.5, 0.8, 0.2, 0)
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0.2, 0)
 surface_material_override/0 = ExtResource("5_xbv78")
 
 [node name="Animator" type="AnimationPlayer" parent="."]
