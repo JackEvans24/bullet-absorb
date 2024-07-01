@@ -18,6 +18,10 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_behaviour_timer_timeout(timer_name: String):
+	if dead:
+		behaviour_timer.stop()
+		return
+
 	match timer_name.to_lower():
 		"walk": move.set_new_movement()
 		"windup": do_windup()
