@@ -13,9 +13,7 @@ signal died
 @onready var collider: CollisionShape3D = $Collider
 @onready var drop_power: DropPower = $DropPower
 
-var dead = false
-
-func _ready():
+func set_hit_detection():
 	hit_detection.area_entered.connect(_on_area_entered)
 	health.damage_taken.connect(_on_damage_taken)
 
@@ -52,6 +50,4 @@ func die():
 	pivot.visible = false
 	collider.call_deferred("queue_free")
 	drop_power.drop_all_power()
-
-	dead = true
 	died.emit()

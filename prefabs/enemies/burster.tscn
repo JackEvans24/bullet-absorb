@@ -125,11 +125,11 @@ tracks/5/keys = {
 tracks/6/type = "method"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("BehaviourTimer")
+tracks/6/path = NodePath("Pivot/SmokeBurst")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(2.4),
+"times": PackedFloat32Array(2.2),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -139,43 +139,18 @@ tracks/6/keys = {
 tracks/7/type = "method"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Pivot/SmokeBurst")
+tracks/7/path = NodePath(".")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(2.2),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2.4),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
-"method": &"restart"
-}]
-}
-tracks/8/type = "method"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Pivot/SpawnTube/Animator")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["start", -1, 1.0, false],
-"method": &"play"
-}]
-}
-tracks/9/type = "method"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Pivot/SpawnTube")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(2.2),
-"transitions": PackedFloat32Array(1),
-"values": [{
+"method": &"_on_intro_start"
+}, {
 "args": [],
-"method": &"queue_free"
+"method": &"_on_intro_complete"
 }]
 }
 
