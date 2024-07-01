@@ -163,7 +163,7 @@ script = ExtResource("11_s2u1f")
 
 [node name="Absorb" type="Node3D" parent="."]
 script = ExtResource("2_sawo1")
-absorb_cooldown = 0.9
+absorb_windup = 0.6
 mesh_display_time = 0.1
 
 [node name="DestroyArea" type="Area3D" parent="Absorb"]

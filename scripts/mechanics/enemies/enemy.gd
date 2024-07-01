@@ -13,7 +13,7 @@ signal died
 @onready var collider: CollisionShape3D = $Collider
 @onready var drop_power: DropPower = $DropPower
 
-func _ready():
+func set_hit_detection():
 	hit_detection.area_entered.connect(_on_area_entered)
 	health.damage_taken.connect(_on_damage_taken)
 

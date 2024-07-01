@@ -5,7 +5,7 @@ signal bullet_absorbed
 signal slowdown_started
 signal slowdown_ended
 
-@export var absorb_windup = 1
+@export var absorb_windup = 1.0
 @export var absorb_cooldown = 0.5
 @export var mesh_display_time = 0.2
 
@@ -29,7 +29,7 @@ func _process(delta):
 		process_absorb_state(delta)
 
 func process_absorb_start():
-	if not can_absorb:
+	if is_absorbing or not can_absorb:
 		return
 
 	slowdown_started.emit()

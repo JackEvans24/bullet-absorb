@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1a50aebuqe1d"]
+[gd_scene load_steps=9 format=3 uid="uid://d1a50aebuqe1d"]
 
 [ext_resource type="PackedScene" uid="uid://dj3emn7lxecbw" path="res://models/spawn_tube.glb" id="1_bs0kr"]
+[ext_resource type="Script" path="res://scripts/mechanics/enemies/spawn_tube.gd" id="1_ogrgo"]
 [ext_resource type="Material" uid="uid://cpjtvf4hywh4g" path="res://materials/enemy/enemy_metallic_body.tres" id="2_xuybf"]
 [ext_resource type="Material" uid="uid://27228lk7d3am" path="res://materials/enemy/enemy_shine.tres" id="3_63ak4"]
 [ext_resource type="Material" uid="uid://dga7w1qkxh0t3" path="res://materials/darkness.tres" id="4_lddkl"]
@@ -76,6 +77,7 @@ _data = {
 }
 
 [node name="SpawnTube" type="Node3D"]
+script = ExtResource("1_ogrgo")
 
 [node name="Model" parent="." instance=ExtResource("1_bs0kr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
@@ -86,10 +88,11 @@ surface_material_override/1 = ExtResource("3_63ak4")
 surface_material_override/2 = ExtResource("4_lddkl")
 
 [node name="Cap_001" parent="Model" index="1"]
+transform = Transform3D(0, 0, 0, 0, 1, 0, 0, 0, 0.5, -0.8, 0.2, 0)
 surface_material_override/0 = ExtResource("5_xbv78")
 
 [node name="Cap_002" parent="Model" index="2"]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0.2, 0)
+transform = Transform3D(0, 1.50996e-07, 0, 0, -1, 0, 0, 0, 0.5, 0.8, 0.2, 0)
 surface_material_override/0 = ExtResource("5_xbv78")
 
 [node name="Animator" type="AnimationPlayer" parent="."]
