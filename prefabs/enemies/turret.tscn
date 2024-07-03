@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://wfijrpbc1nxm"]
+[gd_scene load_steps=18 format=3 uid="uid://wfijrpbc1nxm"]
 
 [ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="1_rkpaq"]
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/turret.gd" id="2_2ldd0"]
@@ -18,6 +18,34 @@
 material = ExtResource("2_bqylj")
 top_radius = 0.4
 bottom_radius = 0.6
+
+[sub_resource type="Animation" id="Animation_2lcqy"]
+resource_name = "fire"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/TurretSwivel/Cannon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.4, 0.25), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/TurretSwivel/Cannon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.5, 2.5, 2.5), Vector3(2, 2, 2)]
+}
 
 [sub_resource type="Animation" id="Animation_0uju0"]
 resource_name = "start"
@@ -164,6 +192,7 @@ tracks/10/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ti4su"]
 _data = {
+"fire": SubResource("Animation_2lcqy"),
 "start": SubResource("Animation_0uju0")
 }
 
@@ -191,22 +220,18 @@ visible = false
 mesh = SubResource("CylinderMesh_wys4c")
 
 [node name="TurretBase" parent="Pivot" index="1" instance=ExtResource("5_32q5r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 
 [node name="TurretSwivel" parent="Pivot" index="2" instance=ExtResource("6_h1s5b")]
 transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, 0)
 
 [node name="Arm" parent="Pivot/TurretSwivel" index="0"]
-transform = Transform3D(-4.37114e-11, 0, -0.001, 0, 0.001, 0, 0.001, 0, -4.37114e-11, 0, -2, 0)
+transform = Transform3D(-8.74229e-08, 0, -2, 0, 2, 0, 2, 0, -8.74229e-08, 0, 0, 0)
 
 [node name="Cannon" parent="Pivot/TurretSwivel" index="1"]
-transform = Transform3D(-4.37114e-11, 0, -0.001, 0, 0.001, 0, 0.001, 0, -4.37114e-11, 0, -2, 0)
+transform = Transform3D(-1.09278e-07, 0, -2.5, 0, 2.5, 0, 2.5, 0, -1.09278e-07, 0, -0.4, 0.25)
 
 [node name="Head" parent="Pivot/TurretSwivel" index="2"]
-transform = Transform3D(-4.37114e-11, 0, -0.001, 0, 0.001, 0, 0.001, 0, -4.37114e-11, 0, -2, 0)
-
-[node name="Neck" parent="Pivot/TurretSwivel" index="3"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -2, 0)
+transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 0, 0, 0)
 
 [node name="FirePoint" type="Node3D" parent="Pivot/TurretSwivel" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.8)

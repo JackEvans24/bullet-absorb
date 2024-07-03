@@ -2,10 +2,11 @@ class_name Turret
 extends Enemy
 
 @onready var swivel: Node3D = $Pivot/TurretSwivel
-@onready var spawn_tube: SpawnTube = $Pivot/SpawnTube
 @onready var look_at_target: LookAtTarget = $LookAtTarget
 @onready var fire: FireFromPoint = $Fire
 @onready var fire_timer: VariableTimer = $FireTimer
+@onready var spawn_tube: SpawnTube = $Pivot/SpawnTube
+@onready var animation: AnimationPlayer = $Animator
 
 func _ready():
 	look_at_target.pivot = swivel
@@ -24,8 +25,12 @@ func set_target(target: Node3D):
 	look_at_target.target = target
 
 func _on_behaviour_timer_timeout(timer_name: String):
-	if timer_name.to_lower() == "fire":
-		fire.fire()
+	match timer_name.to_lower():
+		"fire": do_fire()
+
+func do_fire():
+	animation.play("fire")
+	fire.fire()
 
 func die():
 	super()
