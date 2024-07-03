@@ -7,6 +7,7 @@ extends Enemy
 @onready var fire_timer: VariableTimer = $FireTimer
 @onready var spawn_tube: SpawnTube = $Pivot/SpawnTube
 @onready var animation: AnimationPlayer = $Animator
+@onready var windup_particles: GPUParticles3D = $Pivot/TurretSwivel/WindupParticles
 
 func _ready():
 	look_at_target.pivot = swivel
@@ -27,6 +28,7 @@ func set_target(target: Node3D):
 func _on_behaviour_timer_timeout(timer_name: String):
 	match timer_name.to_lower():
 		"fire": do_fire()
+		"windup": windup_particles.restart()
 
 func do_fire():
 	animation.play("fire")
