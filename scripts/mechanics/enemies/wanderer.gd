@@ -7,8 +7,6 @@ extends Enemy
 @onready var fire: FireFromPoint = $Fire
 
 func _ready():
-	super()
-
 	look_at_target.pivot = pivot
 	fire.pivot = pivot
 	behaviour_timer.named_timeout.connect(_on_behaviour_timer_timeout)
