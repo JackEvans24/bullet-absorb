@@ -280,6 +280,7 @@ shape = ExtResource("3_ei43k")
 power_drop_count = 12
 
 [node name="LookAtTarget" parent="." index="6" instance=ExtResource("4_1qdhy")]
+max_rotation = 10.0
 
 [node name="Fire" parent="." index="7" instance=ExtResource("5_ok7x6")]
 fire_point_ref = NodePath("../Pivot/TurretSwivel/FirePoint")
