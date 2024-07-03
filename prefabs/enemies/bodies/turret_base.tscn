@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw8sjblk116h8"]
+
+[ext_resource type="PackedScene" uid="uid://dbor57bqujmdm" path="res://models/enemies/turret_base.glb" id="1_cd24g"]
+[ext_resource type="Material" uid="uid://cpjtvf4hywh4g" path="res://materials/enemy/enemy_metallic_body.tres" id="2_36gi7"]
+[ext_resource type="Material" uid="uid://27228lk7d3am" path="res://materials/enemy/enemy_shine.tres" id="3_jdfvi"]
+[ext_resource type="Material" uid="uid://dga7w1qkxh0t3" path="res://materials/darkness.tres" id="4_hcabc"]
+
+[node name="TurretBase" instance=ExtResource("1_cd24g")]
+
+[node name="Base" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_36gi7")
+surface_material_override/1 = ExtResource("3_jdfvi")
+surface_material_override/2 = ExtResource("4_hcabc")
