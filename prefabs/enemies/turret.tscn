@@ -3,28 +3,19 @@
 [ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="1_rkpaq"]
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/turret.gd" id="2_2ldd0"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy/enemy_body.tres" id="2_bqylj"]
+[ext_resource type="Shape3D" uid="uid://b68o8qingmajx" path="res://models/enemies/collision_shapes/turret.tres" id="3_ei43k"]
 [ext_resource type="PackedScene" uid="uid://bxkdcki5vdm0x" path="res://prefabs/behaviours/look_at_target.tscn" id="4_1qdhy"]
+[ext_resource type="PackedScene" uid="uid://bw8sjblk116h8" path="res://prefabs/enemies/bodies/turret_base.tscn" id="5_32q5r"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="5_128lh"]
 [ext_resource type="PackedScene" uid="uid://uqduo71b13ee" path="res://prefabs/behaviours/fire_bullet.tscn" id="5_ok7x6"]
 [ext_resource type="PackedScene" uid="uid://bwb55ll2hiucv" path="res://prefabs/bullets/perfect_enemy_bullet.tscn" id="6_fmidc"]
+[ext_resource type="PackedScene" uid="uid://cglktlghuy7dm" path="res://prefabs/enemies/bodies/turret_swivel.tscn" id="6_h1s5b"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer_config.gd" id="6_kudmq"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_fa3mc"]
-radius = 0.6
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wys4c"]
 material = ExtResource("2_bqylj")
 top_radius = 0.4
 bottom_radius = 0.6
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_uh4qt"]
-material = ExtResource("2_bqylj")
-top_radius = 0.2
-bottom_radius = 0.2
-height = 0.4
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_0wps2"]
-radius = 0.6
 
 [node name="Turret" instance=ExtResource("1_rkpaq")]
 script = ExtResource("2_2ldd0")
@@ -35,25 +26,30 @@ starting_health = 10.0
 [node name="Knockback" parent="." index="1"]
 knockback_power = 0.0
 
+[node name="HitDetection" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+
 [node name="CollisionShape3D" parent="HitDetection" index="0"]
-shape = SubResource("CylinderShape3D_fa3mc")
+shape = ExtResource("3_ei43k")
 
 [node name="Pivot" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Body" parent="Pivot" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 mesh = SubResource("CylinderMesh_wys4c")
 
-[node name="Gun" type="MeshInstance3D" parent="Pivot" index="1"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, -0.5)
-layers = 4
-mesh = SubResource("CylinderMesh_uh4qt")
+[node name="TurretBase" parent="Pivot" index="1" instance=ExtResource("5_32q5r")]
 
-[node name="FirePoint" type="Node3D" parent="Pivot" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -1)
+[node name="TurretSwivel" parent="Pivot" index="2" instance=ExtResource("6_h1s5b")]
+
+[node name="FirePoint" type="Node3D" parent="Pivot/TurretSwivel" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.8)
 
 [node name="Collider" parent="." index="4"]
-shape = SubResource("CylinderShape3D_0wps2")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = ExtResource("3_ei43k")
 
 [node name="DropPower" parent="." index="5"]
 power_drop_count = 12
@@ -61,6 +57,7 @@ power_drop_count = 12
 [node name="LookAtTarget" parent="." index="6" instance=ExtResource("4_1qdhy")]
 
 [node name="Fire" parent="." index="7" instance=ExtResource("5_ok7x6")]
+fire_point_ref = NodePath("../Pivot/TurretSwivel/FirePoint")
 bullet_scene = ExtResource("6_fmidc")
 
 [node name="FireTimer" type="Timer" parent="." index="8"]
@@ -76,4 +73,4 @@ duration = 1.4
 script = ExtResource("6_kudmq")
 duration = 0.25
 duration_randomness = 0.0
-iterations = 8
+iterations = 5
