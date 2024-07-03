@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://cglktlghuy7dm"]
+
+[ext_resource type="PackedScene" uid="uid://cg006xaylar5w" path="res://models/enemies/turret_swivel.glb" id="1_r0of4"]
+[ext_resource type="Material" uid="uid://cpjtvf4hywh4g" path="res://materials/enemy/enemy_metallic_body.tres" id="2_bgerd"]
+[ext_resource type="Material" uid="uid://27228lk7d3am" path="res://materials/enemy/enemy_shine.tres" id="3_ssa2o"]
+[ext_resource type="Material" uid="uid://bsc2sj6crs1hr" path="res://materials/enemy/enemy_metallic_detail.tres" id="4_kj8n1"]
+[ext_resource type="Material" uid="uid://dga7w1qkxh0t3" path="res://materials/darkness.tres" id="5_8g6v4"]
+
+[node name="TurretSwivel" instance=ExtResource("1_r0of4")]
+
+[node name="Arm" parent="." index="0"]
+transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 0, 0, 0)
+surface_material_override/0 = ExtResource("2_bgerd")
+surface_material_override/1 = ExtResource("3_ssa2o")
+
+[node name="Cannon" parent="." index="1"]
+transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 0, 0, 0)
+surface_material_override/0 = ExtResource("2_bgerd")
+surface_material_override/1 = ExtResource("4_kj8n1")
+surface_material_override/2 = ExtResource("5_8g6v4")
+surface_material_override/3 = ExtResource("3_ssa2o")
+
+[node name="Head" parent="." index="2"]
+transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 0, 0, 0)
+surface_material_override/0 = ExtResource("2_bgerd")
+surface_material_override/1 = ExtResource("4_kj8n1")
+surface_material_override/2 = ExtResource("3_ssa2o")
+surface_material_override/3 = ExtResource("5_8g6v4")
+
+[node name="Neck" parent="." index="3"]
+surface_material_override/0 = ExtResource("4_kj8n1")

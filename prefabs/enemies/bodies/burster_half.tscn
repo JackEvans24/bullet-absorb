@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4qc1nyol7os"]
+
+[ext_resource type="PackedScene" uid="uid://8s8qm5aneecb" path="res://models/enemies/burster.glb" id="1_wevhw"]
+[ext_resource type="Material" uid="uid://cpjtvf4hywh4g" path="res://materials/enemy/enemy_metallic_body.tres" id="2_bb74d"]
+[ext_resource type="Material" uid="uid://27228lk7d3am" path="res://materials/enemy/enemy_shine.tres" id="3_rh2ax"]
+[ext_resource type="Material" uid="uid://bsc2sj6crs1hr" path="res://materials/enemy/enemy_metallic_detail.tres" id="4_2bccq"]
+
+[node name="BursterHalf" instance=ExtResource("1_wevhw")]
+
+[node name="Body" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_bb74d")
+surface_material_override/1 = ExtResource("3_rh2ax")
+
+[node name="Spike_001" parent="." index="1"]
+surface_material_override/0 = ExtResource("4_2bccq")
+
+[node name="Spike_002" parent="." index="2"]
+surface_material_override/0 = ExtResource("4_2bccq")

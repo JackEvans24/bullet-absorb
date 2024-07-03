@@ -1,30 +1,225 @@
-[gd_scene load_steps=13 format=3 uid="uid://wfijrpbc1nxm"]
+[gd_scene load_steps=22 format=3 uid="uid://wfijrpbc1nxm"]
 
 [ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="1_rkpaq"]
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/turret.gd" id="2_2ldd0"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy/enemy_body.tres" id="2_bqylj"]
+[ext_resource type="Shape3D" uid="uid://b68o8qingmajx" path="res://models/enemies/collision_shapes/turret.tres" id="3_ei43k"]
 [ext_resource type="PackedScene" uid="uid://bxkdcki5vdm0x" path="res://prefabs/behaviours/look_at_target.tscn" id="4_1qdhy"]
+[ext_resource type="PackedScene" uid="uid://bw8sjblk116h8" path="res://prefabs/enemies/bodies/turret_base.tscn" id="5_32q5r"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="5_128lh"]
 [ext_resource type="PackedScene" uid="uid://uqduo71b13ee" path="res://prefabs/behaviours/fire_bullet.tscn" id="5_ok7x6"]
 [ext_resource type="PackedScene" uid="uid://bwb55ll2hiucv" path="res://prefabs/bullets/perfect_enemy_bullet.tscn" id="6_fmidc"]
+[ext_resource type="PackedScene" uid="uid://cglktlghuy7dm" path="res://prefabs/enemies/bodies/turret_swivel.tscn" id="6_h1s5b"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer_config.gd" id="6_kudmq"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_fa3mc"]
-radius = 0.6
+[ext_resource type="PackedScene" uid="uid://cxlq2p6ujeij8" path="res://prefabs/particles/enemy_spawn_particles.tscn" id="7_e1cfp"]
+[ext_resource type="PackedScene" uid="uid://d1a50aebuqe1d" path="res://prefabs/spawn_tube.tscn" id="7_fcakt"]
+[ext_resource type="PackedScene" uid="uid://dsnxe8cqmmow8" path="res://prefabs/particles/smoke_burst.tscn" id="7_sc58i"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wys4c"]
 material = ExtResource("2_bqylj")
 top_radius = 0.4
 bottom_radius = 0.6
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_uh4qt"]
-material = ExtResource("2_bqylj")
-top_radius = 0.2
-bottom_radius = 0.2
-height = 0.4
+[sub_resource type="Curve" id="Curve_thp3e"]
+_data = [Vector2(0, 0), 0.0, 8.55633, 0, 0, Vector2(0.252011, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.02402, 0.0, 0, 0]
+point_count = 3
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_0wps2"]
-radius = 0.6
+[sub_resource type="CurveTexture" id="CurveTexture_gglui"]
+curve = SubResource("Curve_thp3e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4s63c"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 0.0
+emission_ring_inner_radius = 2.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+flatness = 1.0
+radial_velocity_min = -5.0
+radial_velocity_max = -5.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.4
+scale_curve = SubResource("CurveTexture_gglui")
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.01
+
+[sub_resource type="Animation" id="Animation_2lcqy"]
+resource_name = "fire"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/TurretSwivel/Cannon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.4, 0.25), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/TurretSwivel/Cannon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.5, 2.5, 2.5), Vector3(2, 2, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_0uju0"]
+resource_name = "start"
+length = 3.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_on_intro_animation_start"
+}, {
+"args": [],
+"method": &"_on_intro_animation_complete"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/TurretBase:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.3),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [Vector3(0, -2, 0), Vector3(0, -2, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/TurretSwivel/Neck:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.4),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [Vector3(0, -2, 0), Vector3(0, -2, 0), Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/TurretSwivel/Head:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.3, 1.5, 1.6),
+"transitions": PackedFloat32Array(1, 0.5, 1, 2, 1),
+"update": 0,
+"values": [Vector3(0, -2, 0), Vector3(0, -2, 0), Vector3(0, 0.5, 0), Vector3(0, 0.5, 0), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pivot/TurretSwivel/Head:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.3),
+"transitions": PackedFloat32Array(1, 0.5, 1),
+"update": 0,
+"values": [Vector3(0.001, 0.001, 0.001), Vector3(0.001, 0.001, 0.001), Vector3(2, 2, 2)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Pivot/TurretSwivel/Arm:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.3, 1.5, 1.6),
+"transitions": PackedFloat32Array(1, 0.5, 1, 2, 1),
+"update": 0,
+"values": [Vector3(0, -2, 0), Vector3(0, -2, 0), Vector3(0, 0.5, 0), Vector3(0, 0.5, 0), Vector3(0, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Pivot/TurretSwivel/Arm:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.3),
+"transitions": PackedFloat32Array(1, 0.5, 1),
+"update": 0,
+"values": [Vector3(0.001, 0.001, 0.001), Vector3(0.001, 0.001, 0.001), Vector3(2, 2, 2)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Pivot/TurretSwivel/Cannon:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.3, 1.5, 1.6),
+"transitions": PackedFloat32Array(1, 0.5, 1, 2, 1),
+"update": 0,
+"values": [Vector3(0, -2, 0), Vector3(0, -2, 0), Vector3(0, 0.5, 0), Vector3(0, 0.5, 0), Vector3(0, 0, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Pivot/TurretSwivel/Cannon:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.3),
+"transitions": PackedFloat32Array(1, 0.5, 1),
+"update": 0,
+"values": [Vector3(0.001, 0.001, 0.001), Vector3(0.001, 0.001, 0.001), Vector3(2, 2, 2)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Pivot/TurretSwivel:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(1.8, 2, 2.2, 2.5, 2.7, 2.9),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2, 0.5),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(0, 2.44346, 0), Vector3(0, 2.44346, 0), Vector3(0, 3.83972, 0), Vector3(0, 3.83972, 0), Vector3(0, 3.14159, 0)]
+}
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Pivot/SmokeBurst")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(1.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ti4su"]
+_data = {
+"fire": SubResource("Animation_2lcqy"),
+"start": SubResource("Animation_0uju0")
+}
 
 [node name="Turret" instance=ExtResource("1_rkpaq")]
 script = ExtResource("2_2ldd0")
@@ -35,32 +230,60 @@ starting_health = 10.0
 [node name="Knockback" parent="." index="1"]
 knockback_power = 0.0
 
+[node name="HitDetection" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+
 [node name="CollisionShape3D" parent="HitDetection" index="0"]
-shape = SubResource("CylinderShape3D_fa3mc")
+shape = ExtResource("3_ei43k")
 
 [node name="Pivot" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Body" parent="Pivot" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 mesh = SubResource("CylinderMesh_wys4c")
 
-[node name="Gun" type="MeshInstance3D" parent="Pivot" index="1"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, -0.5)
-layers = 4
-mesh = SubResource("CylinderMesh_uh4qt")
+[node name="TurretBase" parent="Pivot" index="1" instance=ExtResource("5_32q5r")]
 
-[node name="FirePoint" type="Node3D" parent="Pivot" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -1)
+[node name="TurretSwivel" parent="Pivot" index="2" instance=ExtResource("6_h1s5b")]
+transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, 0)
+
+[node name="Arm" parent="Pivot/TurretSwivel" index="0"]
+transform = Transform3D(-8.74229e-08, 0, -2, 0, 2, 0, 2, 0, -8.74229e-08, 0, 0, 0)
+
+[node name="Cannon" parent="Pivot/TurretSwivel" index="1"]
+transform = Transform3D(-1.09278e-07, 0, -2.5, 0, 2.5, 0, 2.5, 0, -1.09278e-07, 0, -0.4, 0.25)
+
+[node name="Head" parent="Pivot/TurretSwivel" index="2"]
+transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 0, 0, 0)
+
+[node name="FirePoint" type="Node3D" parent="Pivot/TurretSwivel" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, -0.8)
+
+[node name="WindupParticles" parent="Pivot/TurretSwivel" index="5" instance=ExtResource("7_e1cfp")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.6, -0.6)
+lifetime = 0.5
+explosiveness = 0.0
+process_material = SubResource("ParticleProcessMaterial_4s63c")
+
+[node name="SmokeBurst" parent="Pivot" index="3" instance=ExtResource("7_sc58i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+
+[node name="SpawnTube" parent="Pivot" index="4" instance=ExtResource("7_fcakt")]
 
 [node name="Collider" parent="." index="4"]
-shape = SubResource("CylinderShape3D_0wps2")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = ExtResource("3_ei43k")
 
 [node name="DropPower" parent="." index="5"]
 power_drop_count = 12
 
 [node name="LookAtTarget" parent="." index="6" instance=ExtResource("4_1qdhy")]
+max_rotation = 8.0
 
 [node name="Fire" parent="." index="7" instance=ExtResource("5_ok7x6")]
+fire_point_ref = NodePath("../Pivot/TurretSwivel/FirePoint")
 bullet_scene = ExtResource("6_fmidc")
 
 [node name="FireTimer" type="Timer" parent="." index="8"]
@@ -72,8 +295,21 @@ script = ExtResource("5_128lh")
 script = ExtResource("6_kudmq")
 duration = 1.4
 
-[node name="Fire" type="Node" parent="FireTimer" index="1"]
+[node name="Windup" type="Node" parent="FireTimer" index="1"]
+script = ExtResource("6_kudmq")
+duration = 0.6
+duration_randomness = 0.0
+
+[node name="Fire" type="Node" parent="FireTimer" index="2"]
 script = ExtResource("6_kudmq")
 duration = 0.25
 duration_randomness = 0.0
-iterations = 8
+iterations = 5
+
+[node name="Animator" type="AnimationPlayer" parent="." index="9"]
+libraries = {
+"": SubResource("AnimationLibrary_ti4su")
+}
+autoplay = "start"
+
+[editable path="Pivot/TurretSwivel"]

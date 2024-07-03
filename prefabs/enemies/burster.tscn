@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/burster.gd" id="2_4a7pp"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy/enemy_body.tres" id="2_i8v7u"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="3_a2sv1"]
-[ext_resource type="PackedScene" uid="uid://b4qc1nyol7os" path="res://prefabs/enemies/burster_half.tscn" id="4_hrwks"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer_config.gd" id="4_ijtvr"]
+[ext_resource type="PackedScene" uid="uid://b4qc1nyol7os" path="res://prefabs/enemies/bodies/burster_half.tscn" id="4_pyb35"]
 [ext_resource type="PackedScene" uid="uid://dsnxe8cqmmow8" path="res://prefabs/particles/smoke_burst.tscn" id="5_mbiiu"]
 [ext_resource type="PackedScene" uid="uid://d1a50aebuqe1d" path="res://prefabs/spawn_tube.tscn" id="6_dcvw3"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/fire_from_ring.gd" id="7_q2sbb"]
@@ -173,10 +173,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 visible = false
 mesh = SubResource("BoxMesh_hvq68")
 
-[node name="BursterBottomHalf" parent="Pivot" index="1" instance=ExtResource("4_hrwks")]
+[node name="BursterBottomHalf" parent="Pivot" index="1" instance=ExtResource("4_pyb35")]
 transform = Transform3D(-3.61999e-08, 0, 0.01, 0, 0.01, 0, -0.01, 0, -3.61999e-08, 0, -1, 0)
 
-[node name="BursterTopHalf" parent="Pivot" index="2" instance=ExtResource("4_hrwks")]
+[node name="BursterTopHalf" parent="Pivot" index="2" instance=ExtResource("4_pyb35")]
 transform = Transform3D(-0.01, 6.42715e-14, 2.53518e-08, 0, -0.01, 2.53518e-08, 2.53518e-08, 2.53518e-08, 0.01, 0, -1, 0)
 
 [node name="SmokeBurst" parent="Pivot" index="3" instance=ExtResource("5_mbiiu")]
