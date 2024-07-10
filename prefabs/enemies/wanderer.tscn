@@ -22,7 +22,6 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -1)
 
 [node name="wanderer" parent="Pivot" index="2" instance=ExtResource("3_6g5qc")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 
 [node name="DropPower" parent="." index="5"]
 power_drop_count = 4
