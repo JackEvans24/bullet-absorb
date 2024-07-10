@@ -85,10 +85,10 @@ tracks/5/path = NodePath("Pivot/wanderer:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(2, 2.2, 2.4, 2.7, 2.9, 3.1),
+"times": PackedFloat32Array(1.99, 2.21, 2.41, 2.7, 2.9, 3.19),
 "transitions": PackedFloat32Array(-2, -2, -2, -2, -2, -2),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -0.698132, 0), Vector3(0, -0.698132, 0), Vector3(0, 0.698132, 0), Vector3(0, 0.698132, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 2.0944, 0), Vector3(0, 2.0944, 0), Vector3(0, 4.18879, 0), Vector3(0, 4.18879, 0), Vector3(0, 6.28319, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8w2wq"]
@@ -100,7 +100,7 @@ _data = {
 script = ExtResource("2_ga1uy")
 
 [node name="Pivot" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0)
 
 [node name="Body" parent="Pivot" index="0"]
 visible = false
@@ -109,9 +109,10 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -1)
 
 [node name="wanderer" parent="Pivot" index="2" instance=ExtResource("3_6g5qc")]
+transform = Transform3D(0.4, 0, 6.99382e-08, 0, 0.4, 0, -6.99382e-08, 0, 0.4, 0, 0, 0)
 
 [node name="Gun" parent="Pivot/wanderer" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.5, -1.8)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, -1.8)
 
 [node name="Muzzle" parent="Pivot/wanderer" index="3"]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.5, -1.5)
@@ -156,6 +157,7 @@ iterations = 3
 script = ExtResource("6_wqc6m")
 
 [node name="LookAtTarget" parent="." index="9" instance=ExtResource("2_4ualn")]
+max_rotation = 10.0
 
 [node name="Animator" type="AnimationPlayer" parent="." index="10"]
 libraries = {
