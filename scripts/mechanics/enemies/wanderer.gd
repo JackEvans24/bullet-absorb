@@ -5,11 +5,22 @@ extends Enemy
 @onready var behaviour_timer: VariableTimer = $BehaviourTimer
 @onready var look_at_target: LookAtTarget = $LookAtTarget
 @onready var fire: FireFromPoint = $Fire
+@onready var spawn_tube: SpawnTube = $Pivot/SpawnTube
+@onready var windup_particles: GPUParticles3D = $Pivot/WindupParticles
+@onready var animation: AnimationPlayer = $Animator
 
 func _ready():
-	look_at_target.pivot = pivot
 	fire.pivot = pivot
 	behaviour_timer.named_timeout.connect(_on_behaviour_timer_timeout)
+
+func _on_intro_animation_start():
+	spawn_tube.play_animation()
+
+func _on_intro_animation_complete():
+	look_at_target.pivot = pivot
+	call_deferred("set_hit_detection")
+	spawn_tube.call_deferred("queue_free")
+	behaviour_timer.restart()
 
 func _physics_process(delta):
 	super(delta)
@@ -21,11 +32,20 @@ func _physics_process(delta):
 func _on_behaviour_timer_timeout(timer_name: String):
 	match timer_name.to_lower():
 		"walk": move.set_new_movement()
-		"fire": fire.fire()
+		"windup": do_windup()
+		"fire": do_fire()
 		_: move.stop()
 
 func set_target(target: Node3D):
 	look_at_target.target = target
+
+func do_windup():
+	move.stop()
+	windup_particles.restart()
+
+func do_fire():
+	animation.play("fire")
+	fire.fire()
 
 func die():
 	super()

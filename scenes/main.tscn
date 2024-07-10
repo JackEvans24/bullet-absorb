@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ccgpc6v5lruew"]
+[gd_scene load_steps=17 format=3 uid="uid://ccgpc6v5lruew"]
 
 [ext_resource type="PackedScene" uid="uid://c3tj0pdcum4wd" path="res://prefabs/player.tscn" id="1_e5x1h"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_rtjol"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cl1dul38xrvt2" path="res://prefabs/cameras.tscn" id="4_nws0m"]
 [ext_resource type="Resource" uid="uid://g8t31vgbn4n2" path="res://data/rooms/active_rooms/burster_room.tres" id="6_o8dac"]
 [ext_resource type="Resource" uid="uid://cyhd6riuxyc1o" path="res://data/rooms/active_rooms/turret_room.tres" id="7_4aog2"]
+[ext_resource type="Resource" uid="uid://cwk1nv84gmg48" path="res://data/rooms/active_rooms/wanderer_room.tres" id="7_wpyvy"]
 [ext_resource type="Script" path="res://scripts/effects/hit_stop.gd" id="8_dyhou"]
 [ext_resource type="PackedScene" uid="uid://bcjb1jnr0y5mb" path="res://prefabs/power/power_generator.tscn" id="9_cyv5f"]
 
@@ -58,8 +59,12 @@ shadow_enabled = true
 script = ExtResource("3_yfuie")
 
 [node name="BursterRoom" parent="World/Rooms" instance=ExtResource("2_2rk65")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -9)
 active_config = ExtResource("6_o8dac")
+
+[node name="WandererRoom" parent="World/Rooms" instance=ExtResource("2_2rk65")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+active_config = ExtResource("7_wpyvy")
 
 [node name="TurretRoom" parent="World/Rooms" instance=ExtResource("2_2rk65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -9)

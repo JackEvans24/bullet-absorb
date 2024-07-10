@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://xbjgfdd800te"]
+
+[ext_resource type="PackedScene" uid="uid://trevfnkc8n2a" path="res://models/enemies/wanderer.glb" id="1_ja7ee"]
+[ext_resource type="Material" uid="uid://cpjtvf4hywh4g" path="res://materials/enemy/enemy_metallic_body.tres" id="2_i5f4f"]
+[ext_resource type="Material" uid="uid://bsc2sj6crs1hr" path="res://materials/enemy/enemy_metallic_detail.tres" id="3_qpc1d"]
+[ext_resource type="Material" uid="uid://27228lk7d3am" path="res://materials/enemy/enemy_shine.tres" id="4_oacqq"]
+[ext_resource type="Material" uid="uid://dga7w1qkxh0t3" path="res://materials/darkness.tres" id="5_5tmwt"]
+
+[node name="wanderer" instance=ExtResource("1_ja7ee")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+
+[node name="Body_Bottom" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_i5f4f")
+surface_material_override/1 = ExtResource("3_qpc1d")
+surface_material_override/2 = ExtResource("4_oacqq")
+surface_material_override/3 = ExtResource("5_5tmwt")
+
+[node name="Gun" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.726236, -1.99493)
+surface_material_override/0 = ExtResource("2_i5f4f")
+surface_material_override/1 = ExtResource("3_qpc1d")
+surface_material_override/2 = ExtResource("4_oacqq")
+surface_material_override/3 = ExtResource("5_5tmwt")
+
+[node name="Body_Top" parent="." index="2"]
+surface_material_override/0 = ExtResource("2_i5f4f")
+surface_material_override/1 = ExtResource("3_qpc1d")
+surface_material_override/2 = ExtResource("4_oacqq")
+
+[node name="Muzzle" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.726353, -1.56628)
+surface_material_override/0 = ExtResource("3_qpc1d")
+surface_material_override/1 = ExtResource("5_5tmwt")
