@@ -1,17 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://btfsstt1biti7"]
+[gd_scene load_steps=9 format=3 uid="uid://btfsstt1biti7"]
 
 [ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="1_5w8lx"]
 [ext_resource type="PackedScene" uid="uid://bxkdcki5vdm0x" path="res://prefabs/behaviours/look_at_target.tscn" id="2_4ualn"]
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/wanderer.gd" id="2_ga1uy"]
+[ext_resource type="PackedScene" uid="uid://xbjgfdd800te" path="res://prefabs/enemies/bodies/wanderer.tscn" id="3_6g5qc"]
 [ext_resource type="PackedScene" uid="uid://uqduo71b13ee" path="res://prefabs/behaviours/fire_bullet.tscn" id="3_vvdtc"]
-[ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy/enemy_body.tres" id="3_yjmhk"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="5_b2h5o"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/basic_movement.gd" id="6_fwebo"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer_config.gd" id="6_wqc6m"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_8stgr"]
-material = ExtResource("3_yjmhk")
-size = Vector3(0.25, 0.25, 0.25)
 
 [node name="Wanderer" instance=ExtResource("1_5w8lx")]
 script = ExtResource("2_ga1uy")
@@ -19,12 +15,14 @@ script = ExtResource("2_ga1uy")
 [node name="Pivot" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="FirePoint" type="Node3D" parent="Pivot" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+[node name="Body" parent="Pivot" index="0"]
+visible = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-mesh = SubResource("BoxMesh_8stgr")
+[node name="FirePoint" type="Node3D" parent="Pivot" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -1)
+
+[node name="wanderer" parent="Pivot" index="2" instance=ExtResource("3_6g5qc")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 
 [node name="DropPower" parent="." index="5"]
 power_drop_count = 4

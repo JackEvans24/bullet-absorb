@@ -10,6 +10,17 @@ func _ready():
 	look_at_target.pivot = pivot
 	fire.pivot = pivot
 	behaviour_timer.named_timeout.connect(_on_behaviour_timer_timeout)
+	# TODO: REMOVE
+	_on_intro_animation_complete()
+
+func _on_intro_animation_start():
+	# spawn_tube.play_animation()
+	pass
+
+func _on_intro_animation_complete():
+	call_deferred("set_hit_detection")
+	# spawn_tube.call_deferred("queue_free")
+	behaviour_timer.restart()
 
 func _physics_process(delta):
 	super(delta)
