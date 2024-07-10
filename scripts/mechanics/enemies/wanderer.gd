@@ -5,21 +5,19 @@ extends Enemy
 @onready var behaviour_timer: VariableTimer = $BehaviourTimer
 @onready var look_at_target: LookAtTarget = $LookAtTarget
 @onready var fire: FireFromPoint = $Fire
+@onready var spawn_tube: SpawnTube = $Pivot/SpawnTube
 
 func _ready():
 	look_at_target.pivot = pivot
 	fire.pivot = pivot
 	behaviour_timer.named_timeout.connect(_on_behaviour_timer_timeout)
-	# TODO: REMOVE
-	_on_intro_animation_complete()
 
 func _on_intro_animation_start():
-	# spawn_tube.play_animation()
-	pass
+	spawn_tube.play_animation()
 
 func _on_intro_animation_complete():
 	call_deferred("set_hit_detection")
-	# spawn_tube.call_deferred("queue_free")
+	spawn_tube.call_deferred("queue_free")
 	behaviour_timer.restart()
 
 func _physics_process(delta):

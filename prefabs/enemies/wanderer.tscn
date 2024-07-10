@@ -1,13 +1,100 @@
-[gd_scene load_steps=9 format=3 uid="uid://btfsstt1biti7"]
+[gd_scene load_steps=12 format=3 uid="uid://btfsstt1biti7"]
 
 [ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="1_5w8lx"]
 [ext_resource type="PackedScene" uid="uid://bxkdcki5vdm0x" path="res://prefabs/behaviours/look_at_target.tscn" id="2_4ualn"]
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/wanderer.gd" id="2_ga1uy"]
 [ext_resource type="PackedScene" uid="uid://xbjgfdd800te" path="res://prefabs/enemies/bodies/wanderer.tscn" id="3_6g5qc"]
 [ext_resource type="PackedScene" uid="uid://uqduo71b13ee" path="res://prefabs/behaviours/fire_bullet.tscn" id="3_vvdtc"]
+[ext_resource type="PackedScene" uid="uid://d1a50aebuqe1d" path="res://prefabs/spawn_tube.tscn" id="4_oxhtf"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="5_b2h5o"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/basic_movement.gd" id="6_fwebo"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer_config.gd" id="6_wqc6m"]
+
+[sub_resource type="Animation" id="Animation_u6v88"]
+resource_name = "start"
+length = 3.2
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_on_intro_animation_start"
+}, {
+"args": [],
+"method": &"_on_intro_animation_complete"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/wanderer/Body_Bottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.1, 1.4),
+"transitions": PackedFloat32Array(1, 0.5, 0.5),
+"update": 0,
+"values": [Vector3(0, -3, 0), Vector3(0, -3, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/wanderer/Body_Top:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.1),
+"transitions": PackedFloat32Array(1, 0.5, 0.5),
+"update": 0,
+"values": [Vector3(0, -6, 0), Vector3(0, -6, 0), Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/wanderer/Gun:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.1, 1.7, 2),
+"transitions": PackedFloat32Array(1, 0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector3(0, -5.5, 0), Vector3(0, -5.5, 0), Vector3(0, 0.5, 0), Vector3(0, 0.5, 0), Vector3(0, 0.5, -1.8)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pivot/wanderer/Muzzle:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.1, 1.4, 1.7),
+"transitions": PackedFloat32Array(1, 0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector3(0, -5.5, 0), Vector3(0, -5.5, 0), Vector3(0, 0.5, 0), Vector3(0, 0.5, 0), Vector3(0, 0.5, -1.5)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Pivot/wanderer:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2, 2.2, 2.4, 2.7, 2.9, 3.1),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2, -2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.698132, 0), Vector3(0, -0.698132, 0), Vector3(0, 0.698132, 0), Vector3(0, 0.698132, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8w2wq"]
+_data = {
+"start": SubResource("Animation_u6v88")
+}
 
 [node name="Wanderer" instance=ExtResource("1_5w8lx")]
 script = ExtResource("2_ga1uy")
@@ -22,6 +109,15 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -1)
 
 [node name="wanderer" parent="Pivot" index="2" instance=ExtResource("3_6g5qc")]
+
+[node name="Gun" parent="Pivot/wanderer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.5, -1.8)
+
+[node name="Muzzle" parent="Pivot/wanderer" index="3"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.5, -1.5)
+
+[node name="SpawnTube" parent="Pivot" index="3" instance=ExtResource("4_oxhtf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="DropPower" parent="." index="5"]
 power_drop_count = 4
@@ -40,23 +136,31 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 [node name="BehaviourTimer" type="Timer" parent="." index="8"]
 script = ExtResource("5_b2h5o")
 
-[node name="Wait" type="Node" parent="BehaviourTimer" index="0"]
-script = ExtResource("6_wqc6m")
-
-[node name="Walk" type="Node" parent="BehaviourTimer" index="1"]
+[node name="Walk" type="Node" parent="BehaviourTimer" index="0"]
 script = ExtResource("6_wqc6m")
 duration = 1.5
 duration_randomness = 0.5
 
-[node name="Windup" type="Node" parent="BehaviourTimer" index="2"]
+[node name="Windup" type="Node" parent="BehaviourTimer" index="1"]
 script = ExtResource("6_wqc6m")
 duration = 0.2
 duration_randomness = 0.0
 
-[node name="Fire" type="Node" parent="BehaviourTimer" index="3"]
+[node name="Fire" type="Node" parent="BehaviourTimer" index="2"]
 script = ExtResource("6_wqc6m")
 duration = 0.35
 duration_randomness = 0.05
 iterations = 3
 
+[node name="Wait" type="Node" parent="BehaviourTimer" index="3"]
+script = ExtResource("6_wqc6m")
+
 [node name="LookAtTarget" parent="." index="9" instance=ExtResource("2_4ualn")]
+
+[node name="Animator" type="AnimationPlayer" parent="." index="10"]
+libraries = {
+"": SubResource("AnimationLibrary_8w2wq")
+}
+autoplay = "start"
+
+[editable path="Pivot/wanderer"]
