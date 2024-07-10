@@ -7,6 +7,6 @@
 [resource]
 script = ExtResource("3_7elqv")
 scene = ExtResource("2_bp6g1")
-position = Vector3(4, 0, 0)
+position = Vector3(0, 0, -4)
 particles = ExtResource("1_i0fpl")
 spawn_delay = 0.25
