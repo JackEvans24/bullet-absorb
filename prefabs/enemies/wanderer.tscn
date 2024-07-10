@@ -180,7 +180,7 @@ iterations = 3
 
 [node name="Wait" type="Node" parent="BehaviourTimer" index="3"]
 script = ExtResource("6_wqc6m")
-duration = 0.6
+duration = 0.4
 
 [node name="LookAtTarget" parent="." index="9" instance=ExtResource("2_4ualn")]
 max_rotation = 10.0
