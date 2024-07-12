@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="RoomData" load_steps=7 format=3 uid="uid://cwk1nv84gmg48"]
+
+[ext_resource type="Resource" uid="uid://gyohowq2vqc3" path="res://data/room_items/orb.tres" id="1_iiop3"]
+[ext_resource type="Script" path="res://scripts/data/room_configuration.gd" id="2_xr0wc"]
+[ext_resource type="Script" path="res://scripts/data/room_data.gd" id="3_qat8g"]
+[ext_resource type="Resource" uid="uid://bgn642fe8axyd" path="res://data/room_enemies/wanderer.tres" id="4_16coy"]
+
+[sub_resource type="Resource" id="Resource_y1gx2"]
+script = ExtResource("2_xr0wc")
+enemies = Array[Resource("res://scripts/data/room_item.gd")]([])
+items = Array[Resource("res://scripts/data/room_item.gd")]([ExtResource("1_iiop3")])
+
+[sub_resource type="Resource" id="Resource_oqeci"]
+script = ExtResource("2_xr0wc")
+enemies = Array[Resource("res://scripts/data/room_item.gd")]([ExtResource("4_16coy"), ExtResource("4_16coy")])
+items = Array[Resource("res://scripts/data/room_item.gd")]([])
+
+[resource]
+script = ExtResource("3_qat8g")
+untouched_doors = 2
+completed_doors = 15
+waves = SubResource("Resource_oqeci")
+completed_room = SubResource("Resource_y1gx2")
