@@ -6,6 +6,10 @@ extends Node3D
 @onready var absorb_handler: AbsorbHandler = $AbsorbHandler
 @onready var drop_power: DropPower = $DropPower
 
+@onready var mesh: MeshInstance3D = $Mesh
+@onready var idle_particles: GPUParticles3D = $IdleParticles
+@onready var death_particles: GPUParticles3D = $DeathParticles
+
 func _ready():
 	drop_power.power_drop_count = power_count
 	absorb_handler.absorb_triggered.connect(_on_absorb_triggered)
@@ -17,5 +21,11 @@ func _on_absorb_triggered():
 func destroy():
 	drop_power.drop_all_power()
 
-	await get_tree().create_timer(0.1).timeout
+	mesh.visible = false
+
+	idle_particles.emitting = false
+
+	death_particles.emitting = true
+	await get_tree().create_timer(death_particles.lifetime).timeout
+
 	queue_free()

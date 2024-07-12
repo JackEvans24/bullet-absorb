@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dd7vuam6cs4fp"]
+[gd_scene load_steps=21 format=3 uid="uid://dd7vuam6cs4fp"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/power/power_orb.gd" id="1_dmnnh"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/absorb_handler.gd" id="2_kwn5a"]
@@ -11,15 +11,92 @@ material = ExtResource("3_pwhd1")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_34gph"]
 
+[sub_resource type="Curve" id="Curve_7drqb"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_i58t0"]
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0.483516), -4.1834, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_crewt"]
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_pnvtw"]
+curve_x = SubResource("Curve_7drqb")
+curve_y = SubResource("Curve_i58t0")
+curve_z = SubResource("Curve_crewt")
+
+[sub_resource type="Curve" id="Curve_n4sxy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.595652, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -7.19356, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cp6je"]
+curve = SubResource("Curve_n4sxy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y8b55"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 0.5
+emission_ring_inner_radius = 0.2
+direction = Vector3(0, 1, 0)
+spread = 0.0
+flatness = 1.0
+directional_velocity_min = 1.0
+directional_velocity_max = 1.0
+directional_velocity_curve = SubResource("CurveXYZTexture_pnvtw")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_cp6je")
+
+[sub_resource type="SphereMesh" id="SphereMesh_ryj1u"]
+material = ExtResource("3_pwhd1")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="Curve" id="Curve_wnpi8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.434783, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.197802), -3.12925, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ya36r"]
+curve = SubResource("Curve_wnpi8")
+
+[sub_resource type="Curve" id="Curve_wwfbi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.595652, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -7.19356, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4rxgf"]
+curve = SubResource("Curve_wwfbi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yroj6"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 0.5
+emission_ring_inner_radius = 0.2
+direction = Vector3(0, 1, 0)
+spread = 0.0
+flatness = 1.0
+radial_velocity_min = 5.0
+radial_velocity_max = 5.0
+radial_velocity_curve = SubResource("CurveTexture_ya36r")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_4rxgf")
+
 [node name="PowerOrb" type="Area3D"]
 collision_layer = 64
 collision_mask = 0
 script = ExtResource("1_dmnnh")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("SphereMesh_x6y6o")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("SphereShape3D_34gph")
 
 [node name="AbsorbHandler" type="Node" parent="."]
@@ -29,3 +106,21 @@ script = ExtResource("2_kwn5a")
 script = ExtResource("4_b2vt6")
 power_scene = ExtResource("5_ga1ti")
 power_drop_offset = 2.0
+
+[node name="IdleParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cast_shadow = 0
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_y8b55")
+draw_pass_1 = SubResource("SphereMesh_ryj1u")
+
+[node name="DeathParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cast_shadow = 0
+emitting = false
+amount = 20
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_yroj6")
+draw_pass_1 = SubResource("SphereMesh_ryj1u")
