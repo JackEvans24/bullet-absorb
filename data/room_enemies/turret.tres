@@ -6,5 +6,4 @@
 [resource]
 script = ExtResource("3_cmbcb")
 scene = ExtResource("2_iu6ls")
-position = Vector3(-4, 0, 0)
-spawn_delay = 0.0
+position = Vector3(0, 0, 0)
