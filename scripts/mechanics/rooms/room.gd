@@ -10,6 +10,7 @@ signal doors_changed
 
 var player: Node3D
 var enemy_count = 0
+var wave_index = 0
 
 func _ready():
 	set_doors(data.untouched_doors)
@@ -24,7 +25,7 @@ func _on_player_entered(body: Node3D):
 
 func on_first_entry():
 	close_all_doors()
-	set_room_configuration(data.waves)
+	set_room_configuration(data.waves[wave_index])
 
 func set_room_configuration(config: RoomConfiguration):
 	for enemy_config in config.enemies:
@@ -53,9 +54,14 @@ func _on_enemy_died():
 
 	enemy_count -= 1
 	if enemy_count == 0:
-		call_deferred("on_room_complete")
+		call_deferred("on_wave_complete")
 
-func on_room_complete():
+func on_wave_complete():
+	wave_index += 1
+	if wave_index < len(data.waves):
+		set_room_configuration(data.waves[wave_index])
+		return
+
 	set_doors(data.completed_doors)
 	set_room_configuration(data.completed_room)
 
