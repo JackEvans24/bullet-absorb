@@ -3,8 +3,10 @@ extends Node3D
 
 @export var wall_check_distance := 0.3
 @export var attraction_delay := 0.3
+@export_flags_3d_physics var collision_layer
 
 @onready var attraction_area = $PlayerAttractionArea
+@onready var collision_area: Area3D = $PlayerCollisionArea
 @onready var follow_body: FollowBody3D = $FollowBody
 @onready var smooth_movement: SmoothMovement = $SmoothMovement
 @onready var wall_check: RayCast3D = $WallCheck
@@ -17,6 +19,8 @@ func _ready():
 
 	await get_tree().create_timer(attraction_delay).timeout
 	can_attract = true
+
+	collision_area.collision_layer = collision_layer
 
 func _process(_delta):
 	if target == null or not can_attract:
