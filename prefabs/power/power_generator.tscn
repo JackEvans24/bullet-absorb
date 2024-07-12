@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://bcjb1jnr0y5mb"]
 
-[ext_resource type="Script" path="res://scripts/mechanics/power/power_generator.gd" id="1_btbyj"]
+[ext_resource type="Script" path="res://scripts/mechanics/power/power_generator.gd" id="1_vjpe8"]
 [ext_resource type="PackedScene" uid="uid://evlhef456yfc" path="res://prefabs/power/generated_power_ball.tscn" id="2_uxx3a"]
 [ext_resource type="Material" uid="uid://f41eu4cbvian" path="res://materials/player/player_absorb.tres" id="3_88q7i"]
 [ext_resource type="PackedScene" uid="uid://b0g4qn342fbge" path="res://prefabs/behaviours/drop_power.tscn" id="4_b084a"]
@@ -125,8 +125,9 @@ _data = {
 }
 
 [node name="PowerGenerator" type="Node3D"]
-script = ExtResource("1_btbyj")
-cooldown = 0.5
+script = ExtResource("1_vjpe8")
+cooldown = 1.0
+power_check_timer = 1.0
 
 [node name="PowerCheckArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
