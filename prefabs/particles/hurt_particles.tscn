@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cjvpl2fcwu246"]
 
-[ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy/enemy_body.tres" id="1_yf8ed"]
+[ext_resource type="Material" uid="uid://27228lk7d3am" path="res://materials/enemy/enemy_shine.tres" id="1_gvl6i"]
 [ext_resource type="Script" path="res://scripts/effects/one_shot_particles.gd" id="2_kqr2q"]
 
 [sub_resource type="Curve" id="Curve_jenfi"]
@@ -19,7 +19,7 @@ gravity = Vector3(0, -15, 0)
 scale_curve = SubResource("CurveTexture_dceoy")
 
 [sub_resource type="SphereMesh" id="SphereMesh_fhla8"]
-material = ExtResource("1_yf8ed")
+material = ExtResource("1_gvl6i")
 radius = 0.1
 height = 0.2
 
