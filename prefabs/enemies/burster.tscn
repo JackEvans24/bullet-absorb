@@ -162,6 +162,10 @@ _data = {
 
 [node name="Burster" instance=ExtResource("1_no1yi")]
 script = ExtResource("2_4a7pp")
+orb_power_count = 5
+
+[node name="Health" parent="." index="0"]
+starting_health = 5.0
 
 [node name="CollisionShape3D" parent="HitDetection" index="0"]
 shape = SubResource("SphereShape3D_5hfv7")

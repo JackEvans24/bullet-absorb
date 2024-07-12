@@ -199,6 +199,7 @@ _data = {
 
 [node name="Turret" instance=ExtResource("1_rkpaq")]
 script = ExtResource("2_2ldd0")
+orb_power_count = 12
 
 [node name="Health" parent="." index="0"]
 starting_health = 10.0

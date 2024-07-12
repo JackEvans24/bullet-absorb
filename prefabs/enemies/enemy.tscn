@@ -1,12 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3ytmjd7pe4pg"]
+[gd_scene load_steps=10 format=3 uid="uid://c3ytmjd7pe4pg"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/enemy.gd" id="1_wjmkf"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/health.gd" id="2_pjhvc"]
 [ext_resource type="PackedScene" uid="uid://cjvpl2fcwu246" path="res://prefabs/particles/hurt_particles.tscn" id="2_smu6b"]
+[ext_resource type="PackedScene" uid="uid://dd7vuam6cs4fp" path="res://prefabs/power/power_orb.tscn" id="3_yn8ly"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/knockback.gd" id="4_t2vkt"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy/enemy_body.tres" id="5_ra3i6"]
-[ext_resource type="PackedScene" uid="uid://bkirx1sxnwhq" path="res://prefabs/power/dropped_power_ball.tscn" id="7_m6p33"]
-[ext_resource type="PackedScene" uid="uid://b0g4qn342fbge" path="res://prefabs/behaviours/drop_power.tscn" id="7_ou8mj"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_64qd1"]
 
@@ -20,6 +19,7 @@ radius = 0.45
 collision_layer = 32
 script = ExtResource("1_wjmkf")
 hurt_particles_scene = ExtResource("2_smu6b")
+orb_scene = ExtResource("3_yn8ly")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_pjhvc")
@@ -49,8 +49,3 @@ mesh = SubResource("SphereMesh_jkita")
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("SphereShape3D_vhdor")
-
-[node name="DropPower" parent="." instance=ExtResource("7_ou8mj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-power_scene = ExtResource("7_m6p33")
-power_drop_offset = 2.0

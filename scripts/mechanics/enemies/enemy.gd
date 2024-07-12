@@ -4,6 +4,8 @@ extends CharacterBody3D
 signal died
 
 @export var hurt_particles_scene: PackedScene
+@export var orb_scene: PackedScene
+@export var orb_power_count := 3
 
 @onready var health: Health = $Health
 @onready var knockback: Knockback = $Knockback
@@ -11,7 +13,6 @@ signal died
 @onready var pivot: Node3D = $Pivot
 @onready var body: MeshInstance3D = $Pivot/Body
 @onready var collider: CollisionShape3D = $Collider
-@onready var drop_power: DropPower = $DropPower
 
 func set_hit_detection():
 	hit_detection.area_entered.connect(_on_area_entered)
@@ -49,5 +50,11 @@ func do_knockback(taken_from: Node3D):
 func die():
 	pivot.visible = false
 	collider.call_deferred("queue_free")
-	drop_power.drop_all_power()
+	drop_orb()
 	died.emit()
+
+func drop_orb():
+	var orb = orb_scene.instantiate()
+	orb.power_count = orb_power_count
+	get_tree().root.add_child(orb)
+	orb.global_position = global_position
