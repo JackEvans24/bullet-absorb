@@ -83,3 +83,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
 
 [node name="PowerGenerator" parent="." instance=ExtResource("9_cyv5f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 6)
+cooldown = 2.0
+power_count = 10
