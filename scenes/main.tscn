@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ccgpc6v5lruew"]
+[gd_scene load_steps=18 format=3 uid="uid://ccgpc6v5lruew"]
 
 [ext_resource type="PackedScene" uid="uid://c3tj0pdcum4wd" path="res://prefabs/player.tscn" id="1_e5x1h"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_rtjol"]
@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://cwk1nv84gmg48" path="res://data/rooms/active_rooms/wanderer_room.tres" id="7_wpyvy"]
 [ext_resource type="Script" path="res://scripts/effects/hit_stop.gd" id="8_dyhou"]
 [ext_resource type="PackedScene" uid="uid://bcjb1jnr0y5mb" path="res://prefabs/power/power_generator.tscn" id="9_cyv5f"]
+[ext_resource type="PackedScene" uid="uid://dd7vuam6cs4fp" path="res://prefabs/power/power_orb.tscn" id="14_c7b1x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1hrq"]
 albedo_texture = ExtResource("2_jtr86")
@@ -83,3 +84,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
 
 [node name="PowerGenerator" parent="." instance=ExtResource("9_cyv5f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 6)
+cooldown = 2.0
+power_count = 10
+
+[node name="PowerOrb" parent="." instance=ExtResource("14_c7b1x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 6)

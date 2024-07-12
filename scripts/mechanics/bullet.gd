@@ -9,12 +9,14 @@ extends Area3D
 @onready var splash_particles: GPUParticles3D = $SplashParticles
 @onready var on_screen_notifier: VisibleOnScreenNotifier3D = $OnScreenNotifier
 @onready var drop_power: DropPower = $DropPower
+@onready var absorb_handler: AbsorbHandler = $AbsorbHandler
 
 var dead = false
 
 func _ready():
 	body_entered.connect(_on_body_entered)
 	on_screen_notifier.screen_exited.connect(_on_screen_exited)
+	absorb_handler.absorb_triggered.connect(handle_destruction_with_power)
 
 func initialise(turret_basis: Basis):
 	basis = turret_basis.orthonormalized()
@@ -32,9 +34,6 @@ func _on_body_entered(_body: Node3D):
 
 func _on_screen_exited():
 	queue_free()
-
-func destroy():
-	call_deferred("handle_destruction_with_power")
 
 func handle_destruction():
 	dead = true

@@ -6,7 +6,7 @@
 radius = 3.0
 
 [node name="Power" instance=ExtResource("1_cu14m")]
-attraction_delay = 0.5
+attraction_delay = 0.8
 
 [node name="CollisionShape3D" parent="PlayerAttractionArea" index="0"]
 shape = SubResource("SphereShape3D_cysau")

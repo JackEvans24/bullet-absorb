@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cm1wj0vbe4wn8"]
 
-[ext_resource type="Script" path="res://scripts/mechanics/power.gd" id="1_n4h2h"]
+[ext_resource type="Script" path="res://scripts/mechanics/power/power.gd" id="1_n4h2h"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/follow_body.gd" id="2_7cgiv"]
 [ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/power.tres" id="2_netkk"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/smooth_movement.gd" id="3_gix6h"]
@@ -39,6 +39,7 @@ radius = 0.1
 [node name="Power" type="Node3D" groups=["bullet"]]
 script = ExtResource("1_n4h2h")
 attraction_delay = 0.0
+collision_layer = 8
 
 [node name="FollowBody" type="Node3D" parent="."]
 script = ExtResource("2_7cgiv")
@@ -75,7 +76,7 @@ monitorable = false
 shape = SubResource("SphereShape3D_8p8c6")
 
 [node name="PlayerCollisionArea" type="Area3D" parent="."]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 0
 monitoring = false
 

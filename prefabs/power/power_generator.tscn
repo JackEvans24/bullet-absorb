@@ -1,6 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://bcjb1jnr0y5mb"]
+[gd_scene load_steps=15 format=3 uid="uid://bcjb1jnr0y5mb"]
 
-[ext_resource type="Script" path="res://scripts/mechanics/power_generator.gd" id="1_btbyj"]
+[ext_resource type="Script" path="res://scripts/mechanics/power/power_generator.gd" id="1_vjpe8"]
 [ext_resource type="PackedScene" uid="uid://evlhef456yfc" path="res://prefabs/power/generated_power_ball.tscn" id="2_uxx3a"]
 [ext_resource type="Material" uid="uid://f41eu4cbvian" path="res://materials/player/player_absorb.tres" id="3_88q7i"]
 [ext_resource type="PackedScene" uid="uid://b0g4qn342fbge" path="res://prefabs/behaviours/drop_power.tscn" id="4_b084a"]
@@ -35,8 +35,62 @@ material = ExtResource("3_88q7i")
 radius = 0.1
 height = 0.2
 
+[sub_resource type="Animation" id="Animation_fo15n"]
+resource_name = "start"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Base:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(0, -0.2, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Head:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 2),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [Vector3(0, -0.2, 0), Vector3(0, -0.2, 0), Vector3(0, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/Head:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.785398, 0), Vector3(0, 1.5708, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_start_animation_complete"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_0en0q"]
-resource_name = "power_generator_idle"
+resource_name = "idle"
 length = 4.0
 loop_mode = 1
 tracks/0/type = "value"
@@ -66,12 +120,14 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o3sd2"]
 _data = {
-"power_generator_idle": SubResource("Animation_0en0q")
+"idle": SubResource("Animation_0en0q"),
+"start": SubResource("Animation_fo15n")
 }
 
 [node name="PowerGenerator" type="Node3D"]
-script = ExtResource("1_btbyj")
-cooldown = 0.5
+script = ExtResource("1_vjpe8")
+cooldown = 1.0
+power_check_timer = 1.0
 
 [node name="PowerCheckArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -92,7 +148,7 @@ mesh = SubResource("BoxMesh_lgj11")
 skeleton = NodePath("../..")
 
 [node name="Head" type="MeshInstance3D" parent="Pivot"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0)
+transform = Transform3D(0.707106, 0, 0.707108, 0, 1, 0, -0.707108, 0, 0.707106, 0, 0.9, 0)
 mesh = SubResource("BoxMesh_wd12u")
 skeleton = NodePath("../..")
 
@@ -109,11 +165,11 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_6vtgr")
 draw_pass_1 = SubResource("SphereMesh_fhuju")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Animator" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_o3sd2")
 }
-autoplay = "power_generator_idle"
+autoplay = "start"
 
 [node name="DropPower" parent="." instance=ExtResource("4_b084a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
