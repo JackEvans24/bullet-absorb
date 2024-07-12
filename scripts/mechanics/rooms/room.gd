@@ -34,11 +34,14 @@ func set_room_configuration(config: RoomConfiguration):
 		add_item(item_config)
 
 func add_enemy(enemy_config: RoomItem):
-	var enemy = add_item(enemy_config) as Enemy
+	var enemy = await add_item(enemy_config) as Enemy
 	enemy.set_target(player)
 	enemy.died.connect(_on_enemy_died)
 
 func add_item(item_config: RoomItem) -> Node3D:
+	if item_config.delay > 0.0:
+		await get_tree().create_timer(item_config.delay).timeout
+
 	var item = item_config.scene.instantiate() as Node3D
 	add_child(item)
 	item.position = item_config.position

@@ -15,11 +15,13 @@ items = Array[ExtResource("5_u7xr5")]([ExtResource("1_iiop3")])
 script = ExtResource("5_u7xr5")
 scene = ExtResource("4_3xh7l")
 position = Vector3(4, 0, -2)
+delay = 0.0
 
 [sub_resource type="Resource" id="Resource_itt31"]
 script = ExtResource("5_u7xr5")
 scene = ExtResource("4_3xh7l")
 position = Vector3(-4, 0, -2)
+delay = 0.2
 
 [sub_resource type="Resource" id="Resource_oqeci"]
 script = ExtResource("2_xr0wc")
