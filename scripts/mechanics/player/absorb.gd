@@ -56,8 +56,7 @@ func trigger_absorb():
 
 	var overlapping_areas: Array[Area3D] = destoy_area.get_overlapping_areas()
 	for overlapping_area in overlapping_areas:
-		if overlapping_area.is_in_group('bullet'):
-			destroy_bullet(overlapping_area)
+		absorb_entity(overlapping_area)
 
 	await display_mesh()
 	await handle_cooldown()
@@ -77,9 +76,12 @@ func enable_particles(enabled: bool):
 	particles.emitting = enabled
 	particles.visible = enabled
 
-func destroy_bullet(bullet_area: Area3D):
-	var bullet = type_convert(bullet_area, typeof(Bullet))
-	bullet.destroy()
+func absorb_entity(area: Area3D):
+	var absorb_handler = area.find_child("AbsorbHandler")
+	if absorb_handler == null:
+		printerr("Area has no absorb handler: %s" % area.name)
+
+	absorb_handler.trigger_absorb()
 
 func absorb_power(area: Area3D):
 	area.get_parent().call_deferred("queue_free")
