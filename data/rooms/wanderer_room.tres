@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="RoomData" load_steps=12 format=3 uid="uid://cwk1nv84gmg48"]
+
+[ext_resource type="Resource" uid="uid://gyohowq2vqc3" path="res://data/room_items/orb.tres" id="1_iiop3"]
+[ext_resource type="Script" path="res://scripts/data/room_configuration.gd" id="2_xr0wc"]
+[ext_resource type="Script" path="res://scripts/data/room_data.gd" id="3_qat8g"]
+[ext_resource type="PackedScene" uid="uid://btfsstt1biti7" path="res://prefabs/enemies/wanderer.tscn" id="4_3xh7l"]
+[ext_resource type="Script" path="res://scripts/data/room_item.gd" id="5_u7xr5"]
+
+[sub_resource type="Resource" id="Resource_y1gx2"]
+script = ExtResource("2_xr0wc")
+enemies = Array[ExtResource("5_u7xr5")]([])
+items = Array[ExtResource("5_u7xr5")]([ExtResource("1_iiop3")])
+
+[sub_resource type="Resource" id="Resource_h7fxi"]
+script = ExtResource("5_u7xr5")
+scene = ExtResource("4_3xh7l")
+position = Vector3(0, 0, -4)
+delay = 1.0
+
+[sub_resource type="Resource" id="Resource_vq1kl"]
+script = ExtResource("2_xr0wc")
+enemies = Array[ExtResource("5_u7xr5")]([SubResource("Resource_h7fxi")])
+items = Array[ExtResource("5_u7xr5")]([])
+
+[sub_resource type="Resource" id="Resource_pvli3"]
+script = ExtResource("5_u7xr5")
+scene = ExtResource("4_3xh7l")
+position = Vector3(-4, 0, 0)
+delay = 1.0
+
+[sub_resource type="Resource" id="Resource_oxuu7"]
+script = ExtResource("5_u7xr5")
+scene = ExtResource("4_3xh7l")
+position = Vector3(4, 0, 0)
+delay = 1.5
+
+[sub_resource type="Resource" id="Resource_wvdje"]
+script = ExtResource("2_xr0wc")
+enemies = Array[ExtResource("5_u7xr5")]([SubResource("Resource_pvli3"), SubResource("Resource_oxuu7")])
+items = Array[ExtResource("5_u7xr5")]([])
+
+[resource]
+script = ExtResource("3_qat8g")
+untouched_doors = 2
+completed_doors = 15
+waves = Array[ExtResource("2_xr0wc")]([SubResource("Resource_vq1kl"), SubResource("Resource_wvdje")])
+completed_room = SubResource("Resource_y1gx2")
