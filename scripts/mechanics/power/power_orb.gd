@@ -12,12 +12,15 @@ extends Node3D
 
 func _ready():
 	drop_power.power_drop_count = power_count
+
+func _on_start_animation_complete():
 	absorb_handler.absorb_triggered.connect(_on_absorb_triggered)
 
 # TODO: REPLACE INSTANT DEATH WITH HEALTH
 func _on_absorb_triggered():
 	call_deferred("destroy")
 
+# TODO: HOOK UP SCREEN SHAKE?
 func destroy():
 	drop_power.drop_all_power()
 

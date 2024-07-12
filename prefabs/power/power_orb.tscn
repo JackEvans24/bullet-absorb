@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dd7vuam6cs4fp"]
+[gd_scene load_steps=27 format=3 uid="uid://dd7vuam6cs4fp"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/power/power_orb.gd" id="1_dmnnh"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/absorb_handler.gd" id="2_kwn5a"]
@@ -10,6 +10,35 @@
 material = ExtResource("3_pwhd1")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_34gph"]
+
+[sub_resource type="Curve" id="Curve_thp3e"]
+_data = [Vector2(0, 0), 0.0, 8.55633, 0, 0, Vector2(0.252011, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.02402, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_gglui"]
+curve = SubResource("Curve_thp3e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4s63c"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 0.0
+emission_ring_inner_radius = 2.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+flatness = 1.0
+radial_velocity_min = -5.0
+radial_velocity_max = -5.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.4
+scale_curve = SubResource("CurveTexture_gglui")
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.01
+
+[sub_resource type="SphereMesh" id="SphereMesh_pvaaq"]
+material = ExtResource("3_pwhd1")
+radius = 0.2
+height = 0.4
 
 [sub_resource type="Curve" id="Curve_7drqb"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0]
@@ -86,6 +115,65 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.5
 scale_curve = SubResource("CurveTexture_4rxgf")
 
+[sub_resource type="Animation" id="Animation_gnlb8"]
+resource_name = "start"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 1.1, 1.3, 1.8, 2),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2, -2, -2),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(0.3, 0.3, 0.3), Vector3(0.2, 0.2, 0.2), Vector3(0.65, 0.65, 0.65), Vector3(0.5, 0.5, 0.5), Vector3(1.2, 1.2, 1.2), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("IdleParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_start_animation_complete"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CreateParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0gtoc"]
+_data = {
+"start": SubResource("Animation_gnlb8")
+}
+
 [node name="PowerOrb" type="Area3D"]
 collision_layer = 64
 collision_mask = 0
@@ -107,6 +195,16 @@ script = ExtResource("4_b2vt6")
 power_scene = ExtResource("5_ga1ti")
 power_drop_offset = 2.0
 
+[node name="CreateParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cast_shadow = 0
+emitting = false
+amount = 60
+lifetime = 1.8
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_4s63c")
+draw_pass_1 = SubResource("SphereMesh_pvaaq")
+
 [node name="IdleParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 cast_shadow = 0
@@ -124,3 +222,9 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_yroj6")
 draw_pass_1 = SubResource("SphereMesh_ryj1u")
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0gtoc")
+}
+autoplay = "start"
