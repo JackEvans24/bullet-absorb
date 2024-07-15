@@ -12,6 +12,10 @@ const FLOOR_ITEM := 1
 @export var depth := 10
 @export var width := 10
 
+@export_group("Detection")
+@export var detection_offset := 2.0
+@export var detection_height := 2.0
+
 func start_generation(_value: bool):
 	if not Engine.is_editor_hint():
 		return
@@ -22,13 +26,17 @@ func start_generation(_value: bool):
 	# Calculate wall positions
 	# Set gridmap cells
 	var pos := Vector3(0, 0, 0)
-	for z in range( - depth / 2.0, depth / 2.0):
-		for x in range( - width / 2.0, width / 2.0):
+	for z in range( - depth, depth):
+		for x in range( - width, width):
 			pos.x = x
 			pos.z = z
-			if x == - width / 2.0 or x == width / 2.0 - 1:
+			if x == - width or x == width - 1:
 				grid.set_cell_item(pos, WALL_ITEM)
-			elif z == - depth / 2.0 or z == depth / 2.0 - 1:
+			elif z == - depth or z == depth - 1:
 				grid.set_cell_item(pos, WALL_ITEM)
 			else:
 				grid.set_cell_item(pos, FLOOR_ITEM)
+
+	var detection_shape: CollisionShape3D = $Room/PlayerDetection/Shape
+	var box: BoxShape3D = detection_shape.shape
+	box.size = Vector3(width - detection_offset, detection_height, depth - detection_offset)
