@@ -43,6 +43,10 @@ data = ExtResource("2_ei3i1")
 
 [node name="Boundary" type="Node3D" parent="."]
 script = ExtResource("2_srwra")
+north_door_ref = NodePath("North/Door")
+south_door_ref = NodePath("South/Door")
+east_door_ref = NodePath("East/Door")
+west_door_ref = NodePath("West/Door")
 
 [node name="North" type="Node3D" parent="Boundary"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.5)
