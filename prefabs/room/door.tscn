@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ok4gfjcs3kol"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/door.gd" id="1_ob5x7"]
-[ext_resource type="Material" uid="uid://xbps45ualr02" path="res://materials/door.tres" id="2_5eda2"]
+[ext_resource type="Material" uid="uid://xbps45ualr02" path="res://materials/environment/door.tres" id="2_5eda2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5jioj"]
 size = Vector3(4, 2, 1)

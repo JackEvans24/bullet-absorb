@@ -5,6 +5,7 @@ extends Node3D
 
 const WALL_ITEM := 0
 const FLOOR_ITEM := 1
+const DOOR_SUPPORT_ITEM := 2
 
 @export var generate: bool = false: set = start_generation
 
@@ -67,10 +68,13 @@ func start_generation(_value: bool):
 	box.size = Vector3((width * 2) - detection_offset, detection_height, (depth * 2) - detection_offset)
 
 func add_door(door_position: Vector3, grid_direction: Vector3, door_name: String, door_rotation: float=0.0) -> Node3D:
-	for x in range( - 2, 2):
+	for x in range( - 3, 3):
 		var cell = door_position + (grid_direction * x)
 		print(cell)
-		grid.set_cell_item(cell, GridMap.INVALID_CELL_ITEM)
+		if x == - 3 or x == 2:
+			grid.set_cell_item(cell, DOOR_SUPPORT_ITEM)
+		else:
+			grid.set_cell_item(cell, GridMap.INVALID_CELL_ITEM)
 
 	var door: Node3D = door_scene.instantiate()
 	grid.add_child(door)
