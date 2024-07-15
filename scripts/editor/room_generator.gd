@@ -48,9 +48,8 @@ func start_generation(_value: bool):
 
 	# Clear existing grid
 	for child in grid.get_children():
-		print(child.name)
 		grid.remove_child(child)
-		child.queue_free()
+		child.free()
 	grid.clear()
 
 	# Build walls
