@@ -3,10 +3,10 @@ extends Node3D
 
 enum Walls {NORTH = 1, SOUTH = 2, EAST = 4, WEST = 8}
 
-@export var north_door: Door
-@export var south_door: Door
-@export var east_door: Door
-@export var west_door: Door
+@onready var north_door: Door = $DoorNorth
+@onready var south_door: Door = $DoorSouth
+@onready var east_door: Door = $DoorEast
+@onready var west_door: Door = $DoorWest
 
 func clear_doors():
 	if not Engine.is_editor_hint():
