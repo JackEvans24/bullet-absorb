@@ -1,13 +1,13 @@
 @tool
 
 class_name RoomGenerator
-extends Node3D
+extends EditorScript
 
 const WALL_ITEM := 0
 const FLOOR_ITEM := 1
 const DOOR_SUPPORT_ITEM := 2
 
-enum DoorDirection {NORTH = 0, EAST = 1, SOUTH = 2, WEST = 3}
+enum DoorDirection {North = 0, East = 1, South = 2, West = 3}
 
 const ROT_SOUTH := 0
 const ROT_NORTH := 10
@@ -19,37 +19,42 @@ const VERTICAL_DOOR_OFFSET := Vector3(0.5, 0, 0)
 
 var doorway_rotations: Array[int] = [ROT_SOUTH, ROT_EAST, ROT_NORTH, ROT_WEST]
 
-@export var generate: bool = false: set = start_generation
-@export var clear: bool = false: set = clear_grid
-
 @export_group("Size")
-@export var depth := 10
-@export var width := 10
+@export var depth := 6
+@export var width := 14
 
 @export_group("Detection")
-@export var detection_offset := 2.0
+@export var detection_offset := 4.0
 @export var detection_height := 2.0
 
 @export_group("Doors")
-@export var door_scene: PackedScene
-@export_flags("NORTH", "SOUTH", "EAST", "WEST") var start_doors := 0
-@export_flags("NORTH", "SOUTH", "EAST", "WEST") var end_doors := 0
+@export var door_scene: PackedScene = preload("res://prefabs/room/door.tscn")
+@export_flags("NORTH", "SOUTH", "EAST", "WEST") var start_doors := 2
+@export_flags("NORTH", "SOUTH", "EAST", "WEST") var end_doors := 12
 
+var scene: Node
+var room: Node3D
 var grid: GridMap
 var boundary: RoomBoundary
 
-func start_generation(_value: bool):
+func _run():
 	if not Engine.is_editor_hint():
 		return
+	generate_room()
 
+func generate_room():
 	# Set references
-	grid = $Room/Grid
-	boundary = $Room/Boundary
+	scene = get_scene()
+	if not scene.name == "RoomGenerator":
+		printerr("NOT IN ROOM GENERATOR SCENE")
+		return
+	room = scene.get_node("Room")
+	grid = scene.get_node("Room/Grid")
+	boundary = scene.get_node("Room/Boundary")
 
 	# Clear existing grid
-	for child in grid.get_children():
-		grid.remove_child(child)
-		child.free()
+	remove_children_from(grid)
+	remove_children_from(boundary)
 	grid.clear()
 
 	# Build walls
@@ -71,24 +76,28 @@ func start_generation(_value: bool):
 
 	# Set start_doors
 	if (start_doors&1 != 0) or (end_doors&1 != 0):
-		boundary.north_door = add_door(Vector3(0, 0, -depth), DoorDirection.NORTH)
+		add_door(Vector3(0, 0, -depth), DoorDirection.North)
 	if (start_doors&2 != 0) or (end_doors&2 != 0):
-		boundary.south_door = add_door(Vector3(0, 0, depth - 1), DoorDirection.SOUTH)
+		add_door(Vector3(0, 0, depth - 1), DoorDirection.South)
 	if (start_doors&4 != 0) or (end_doors&4 != 0):
-		boundary.east_door = add_door(Vector3(width - 1, 0, 0), DoorDirection.EAST)
+		add_door(Vector3(width - 1, 0, 0), DoorDirection.East)
 	if (start_doors&8 != 0) or (end_doors&8 != 0):
-		boundary.west_door = add_door(Vector3( - width, 0, 0), DoorDirection.WEST)
+		add_door(Vector3( - width, 0, 0), DoorDirection.West)
 
 	# Set player detection space
-	var detection_shape: CollisionShape3D = $Room/PlayerDetection/Shape
+	var detection_shape: CollisionShape3D = scene.get_node("Room/PlayerDetection/Shape")
 	var box: BoxShape3D = detection_shape.shape
 	box.size = Vector3((width * 2) - detection_offset, detection_height, (depth * 2) - detection_offset)
 
 	# Set data
-	var room: Room = $Room
 	room.data = RoomData.new()
 	room.data.untouched_doors = start_doors
 	room.data.completed_doors = end_doors
+
+func remove_children_from(removal_node: Node):
+	for child in removal_node.get_children():
+		removal_node.remove_child(child)
+		child.queue_free()
 
 func clear_grid(_value: bool):
 	grid.clear()
@@ -107,9 +116,10 @@ func add_door(door_position: Vector3, door_rotation_index: DoorDirection) -> Nod
 			grid.set_cell_item(cell, FLOOR_ITEM)
 
 	var door: Node3D = door_scene.instantiate()
-	grid.add_child(door)
-	var door_name = "Door%s" % str(door_rotation_index)
+	boundary.add_child(door)
+	var door_name = "Door%s" % DoorDirection.keys()[door_rotation_index]
 	door.name = door_name
+	door.owner = scene
 
 	var door_offset := HORIZONTAL_DOOR_OFFSET if is_horizontal_door else VERTICAL_DOOR_OFFSET
 	door.position = door_position + door_offset
