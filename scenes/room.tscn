@@ -1,24 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://b4f4su1e66ujd"]
+[gd_scene load_steps=7 format=3 uid="uid://b4f4su1e66ujd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room.gd" id="1_6vv4c"]
 [ext_resource type="Resource" uid="uid://cwk1nv84gmg48" path="res://data/rooms/wanderer_room.tres" id="2_ei3i1"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room_doors.gd" id="2_srwra"]
 [ext_resource type="MeshLibrary" uid="uid://bydmgvg8cpigh" path="res://models/rooms/room_mesh_library.tres" id="3_mbrwb"]
-[ext_resource type="Script" path="res://scripts/mechanics/rooms/door.gd" id="4_r5rlm"]
-[ext_resource type="PackedScene" uid="uid://ok4gfjcs3kol" path="res://prefabs/room/door.tscn" id="5_io7xn"]
-[ext_resource type="Material" uid="uid://xbps45ualr02" path="res://materials/door.tres" id="6_yx05i"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xq1m6"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_puwbh"]
-size = Vector3(1, 2, 4)
-
-[sub_resource type="BoxMesh" id="BoxMesh_0j41g"]
-material = ExtResource("6_yx05i")
-size = Vector3(1, 2, 4)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_x6347"]
-size = Vector3(16, 2, 14)
+size = Vector3(6, 2, 6)
 
 [node name="Room" type="Node3D"]
 script = ExtResource("1_6vv4c")
@@ -35,38 +25,6 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Boundary" type="Node3D" parent="."]
 script = ExtResource("2_srwra")
-north_door_ref = NodePath("NorthDoor")
-south_door_ref = NodePath("SouthDoor")
-east_door_ref = NodePath("EastDoor")
-west_door_ref = NodePath("WestDoor")
-
-[node name="NorthDoor" parent="Boundary" instance=ExtResource("5_io7xn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -9.5)
-
-[node name="SouthDoor" parent="Boundary" instance=ExtResource("5_io7xn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 9.5)
-
-[node name="EastDoor" type="StaticBody3D" parent="Boundary"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 1, 0)
-script = ExtResource("4_r5rlm")
-
-[node name="Collider" type="CollisionShape3D" parent="Boundary/EastDoor"]
-shape = SubResource("BoxShape3D_puwbh")
-disabled = true
-
-[node name="Mesh" type="MeshInstance3D" parent="Boundary/EastDoor"]
-mesh = SubResource("BoxMesh_0j41g")
-
-[node name="WestDoor" type="StaticBody3D" parent="Boundary"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 1, 0)
-script = ExtResource("4_r5rlm")
-
-[node name="Collider" type="CollisionShape3D" parent="Boundary/WestDoor"]
-shape = SubResource("BoxShape3D_puwbh")
-disabled = true
-
-[node name="Mesh" type="MeshInstance3D" parent="Boundary/WestDoor"]
-mesh = SubResource("BoxMesh_0j41g")
 
 [node name="PlayerDetection" type="Area3D" parent="."]
 collision_layer = 0

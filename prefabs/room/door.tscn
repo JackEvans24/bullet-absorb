@@ -11,12 +11,13 @@ material = ExtResource("2_5eda2")
 size = Vector3(4, 2, 1)
 
 [node name="Door" type="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_ob5x7")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.5)
 shape = SubResource("BoxShape3D_5jioj")
 disabled = true
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.5)
 mesh = SubResource("BoxMesh_7k0b8")
