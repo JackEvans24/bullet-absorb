@@ -7,6 +7,8 @@ extends Node3D
 @onready var drop_power: DropPower = $DropPower
 
 @onready var mesh: MeshInstance3D = $Mesh
+@onready var animation: AnimationPlayer = $Animator
+@onready var create_particles: GPUParticles3D = $CreateParticles
 @onready var idle_particles: GPUParticles3D = $IdleParticles
 @onready var death_particles: GPUParticles3D = $DeathParticles
 
@@ -24,8 +26,10 @@ func _on_absorb_triggered():
 func destroy():
 	drop_power.drop_all_power()
 
+	animation.stop()
 	mesh.visible = false
 
+	create_particles.emitting = false
 	idle_particles.emitting = false
 
 	death_particles.emitting = true

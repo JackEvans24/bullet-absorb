@@ -12,8 +12,8 @@ material = ExtResource("3_pwhd1")
 [sub_resource type="SphereShape3D" id="SphereShape3D_34gph"]
 
 [sub_resource type="Curve" id="Curve_thp3e"]
-_data = [Vector2(0, 0), 0.0, 8.55633, 0, 0, Vector2(0.252011, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.02402, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0), 0.0, 8.55633, 0, 0, Vector2(0.0247934, 0.895722), 8.58, 8.58, 0, 0, Vector2(0.0909091, 0.958289), 0.0, 0.0, 0, 0, Vector2(0.28125, 0), -3.02402, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_gglui"]
 curve = SubResource("Curve_thp3e")
@@ -149,7 +149,7 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(2),
+"times": PackedFloat32Array(0.4),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -180,7 +180,7 @@ collision_mask = 0
 script = ExtResource("1_dmnnh")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 1, 0)
 mesh = SubResource("SphereMesh_x6y6o")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
@@ -208,6 +208,7 @@ draw_pass_1 = SubResource("SphereMesh_pvaaq")
 [node name="IdleParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 cast_shadow = 0
+emitting = false
 amount = 5
 process_material = SubResource("ParticleProcessMaterial_y8b55")
 draw_pass_1 = SubResource("SphereMesh_ryj1u")
