@@ -24,18 +24,18 @@ material = SubResource("StandardMaterial3D_r1hrq")
 size = Vector2(100, 100)
 
 [sub_resource type="Environment" id="Environment_v60oa"]
-background_color = Color(0.513598, 0.816935, 0.627634, 1)
-ambient_light_source = 2
-ambient_light_color = Color(0.637843, 0.637843, 0.637843, 1)
-ambient_light_energy = 3.0
+background_mode = 1
+background_color = Color(0.0584801, 0.00636879, 0.0584338, 1)
 glow_enabled = true
 glow_intensity = 1.0
 glow_bloom = 1.0
 glow_hdr_threshold = 0.5
-glow_hdr_luminance_cap = 10.0
-fog_light_color = Color(0.380445, 0.623552, 0.298777, 1)
+fog_light_color = Color(0.610853, 0.0696632, 0.461406, 1)
 fog_light_energy = 0.1
 fog_density = 0.001
+volumetric_fog_density = 0.01
+volumetric_fog_albedo = Color(0.956667, 0.48, 1, 1)
+volumetric_fog_gi_inject = 0.12
 
 [node name="Main" type="Node"]
 script = ExtResource("1_rtjol")
