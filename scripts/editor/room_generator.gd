@@ -32,7 +32,8 @@ var doorway_rotations: Array[int] = [ROT_SOUTH, ROT_EAST, ROT_NORTH, ROT_WEST]
 
 @export_group("Doors")
 @export var door_scene: PackedScene
-@export_flags("NORTH", "SOUTH", "EAST", "WEST") var doors := 0
+@export_flags("NORTH", "SOUTH", "EAST", "WEST") var start_doors := 0
+@export_flags("NORTH", "SOUTH", "EAST", "WEST") var end_doors := 0
 
 var grid: GridMap
 var boundary: RoomBoundary
@@ -69,20 +70,26 @@ func start_generation(_value: bool):
 			else:
 				grid.set_cell_item(pos, FLOOR_ITEM)
 
-	# Set doors
-	if (doors&1 != 0):
+	# Set start_doors
+	if (start_doors&1 != 0) or (end_doors&1 != 0):
 		boundary.north_door = add_door(Vector3(0, 0, -depth), DoorDirection.NORTH)
-	if (doors&2 != 0):
+	if (start_doors&2 != 0) or (end_doors&2 != 0):
 		boundary.south_door = add_door(Vector3(0, 0, depth - 1), DoorDirection.SOUTH)
-	if (doors&4 != 0):
+	if (start_doors&4 != 0) or (end_doors&4 != 0):
 		boundary.east_door = add_door(Vector3(width - 1, 0, 0), DoorDirection.EAST)
-	if (doors&8 != 0):
+	if (start_doors&8 != 0) or (end_doors&8 != 0):
 		boundary.west_door = add_door(Vector3( - width, 0, 0), DoorDirection.WEST)
 
 	# Set player detection space
 	var detection_shape: CollisionShape3D = $Room/PlayerDetection/Shape
 	var box: BoxShape3D = detection_shape.shape
 	box.size = Vector3((width * 2) - detection_offset, detection_height, (depth * 2) - detection_offset)
+
+	# Set data
+	var room: Room = $Room
+	room.data = RoomData.new()
+	room.data.untouched_doors = start_doors
+	room.data.completed_doors = end_doors
 
 func clear_grid(_value: bool):
 	grid.clear()
