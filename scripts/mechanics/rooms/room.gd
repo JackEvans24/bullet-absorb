@@ -24,10 +24,15 @@ func _on_player_entered(body: Node3D):
 	call_deferred("on_first_entry")
 
 func on_first_entry():
+	if len(data.waves) <= 0:
+		return
+
 	close_all_doors()
 	set_room_configuration(data.waves[wave_index])
 
 func set_room_configuration(config: RoomConfiguration):
+	if config == null:
+		return
 	for enemy_config in config.enemies:
 		add_enemy(enemy_config)
 		enemy_count += 1
