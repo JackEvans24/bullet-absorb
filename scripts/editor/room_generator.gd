@@ -7,6 +7,11 @@ const WALL_ITEM := 0
 const FLOOR_ITEM := 1
 const DOOR_SUPPORT_ITEM := 2
 
+const ROT_SOUTH := 0
+const ROT_NORTH := 10
+const ROT_EAST := 22
+const ROT_WEST := 16
+
 @export var generate: bool = false: set = start_generation
 
 @export_group("Size")
@@ -45,10 +50,14 @@ func start_generation(_value: bool):
 		for x in range( - width, width):
 			pos.x = x
 			pos.z = z
-			if x == - width or x == width - 1:
-				grid.set_cell_item(pos, WALL_ITEM)
-			elif z == - depth or z == depth - 1:
-				grid.set_cell_item(pos, WALL_ITEM)
+			if x == - width:
+				grid.set_cell_item(pos, WALL_ITEM, ROT_EAST)
+			elif x == width - 1:
+				grid.set_cell_item(pos, WALL_ITEM, ROT_WEST)
+			elif z == - depth:
+				grid.set_cell_item(pos, WALL_ITEM, ROT_NORTH)
+			elif z == depth - 1:
+				grid.set_cell_item(pos, WALL_ITEM, ROT_SOUTH)
 			else:
 				grid.set_cell_item(pos, FLOOR_ITEM)
 
