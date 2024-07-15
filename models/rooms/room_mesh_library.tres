@@ -1,4 +1,4 @@
-[gd_resource type="MeshLibrary" load_steps=4 format=3 uid="uid://bydmgvg8cpigh"]
+[gd_resource type="MeshLibrary" load_steps=6 format=3 uid="uid://bydmgvg8cpigh"]
 
 [ext_resource type="Material" uid="uid://gclpf2kqyelh" path="res://materials/wall.tres" id="1_yhltl"]
 
@@ -9,6 +9,13 @@ size = Vector3(1, 2, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_tbwxh"]
 size = Vector3(1, 2, 1)
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_8nywi"]
+size = Vector2(1, 1)
+center_offset = Vector3(0, -0.5, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j8i8m"]
+size = Vector3(1, 0.01, 1)
+
 [resource]
 item/0/name = "wall"
 item/0/mesh = SubResource("BoxMesh_htyll")
@@ -16,3 +23,9 @@ item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/0/shapes = [SubResource("BoxShape3D_tbwxh"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/0/navigation_layers = 1
+item/1/name = "floor"
+item/1/mesh = SubResource("PlaneMesh_8nywi")
+item/1/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/1/shapes = [SubResource("BoxShape3D_j8i8m"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/1/navigation_layers = 1

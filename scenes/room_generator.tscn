@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://jek84lpakkqb"]
+
+[ext_resource type="Script" path="res://scripts/editor/room_generator.gd" id="1_0javb"]
+[ext_resource type="Script" path="res://scripts/mechanics/rooms/room.gd" id="2_nfrqp"]
+[ext_resource type="Resource" uid="uid://cwk1nv84gmg48" path="res://data/rooms/wanderer_room.tres" id="3_8yl8w"]
+[ext_resource type="MeshLibrary" uid="uid://bydmgvg8cpigh" path="res://models/rooms/room_mesh_library.tres" id="4_t3spq"]
+[ext_resource type="Script" path="res://scripts/mechanics/rooms/room_doors.gd" id="5_tqirr"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xq1m6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x6347"]
+size = Vector3(16, 2, 14)
+
+[node name="RoomGenerator" type="Node3D"]
+script = ExtResource("1_0javb")
+generate = null
+width = 20
+
+[node name="Room" type="Node3D" parent="."]
+script = ExtResource("2_nfrqp")
+data = ExtResource("3_8yl8w")
+
+[node name="Grid" type="GridMap" parent="Room"]
+mesh_library = ExtResource("4_t3spq")
+physics_material = SubResource("PhysicsMaterial_xq1m6")
+cell_size = Vector3(1, 2, 1)
+data = {
+"cells": PackedInt32Array(65526, 0, 0, 65527, 0, 0, 65528, 0, 0, 65529, 0, 0, 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 65526, 1, 0, 65527, 1, 1, 65528, 1, 1, 65529, 1, 1, 65530, 1, 1, 65531, 1, 1, 65532, 1, 1, 65533, 1, 1, 65534, 1, 1, 65535, 1, 1, 0, 1, 1, 1, 1, 1, 2, 1, 1, 3, 1, 1, 4, 1, 1, 5, 1, 1, 6, 1, 1, 7, 1, 1, 8, 1, 1, 9, 1, 0, 65526, 2, 0, 65527, 2, 1, 65528, 2, 1, 65529, 2, 1, 65530, 2, 1, 65531, 2, 1, 65532, 2, 1, 65533, 2, 1, 65534, 2, 1, 65535, 2, 1, 0, 2, 1, 1, 2, 1, 2, 2, 1, 3, 2, 1, 4, 2, 1, 5, 2, 1, 6, 2, 1, 7, 2, 1, 8, 2, 1, 9, 2, 0, 65526, 3, 0, 65527, 3, 1, 65528, 3, 1, 65529, 3, 1, 65530, 3, 1, 65531, 3, 1, 65532, 3, 1, 65533, 3, 1, 65534, 3, 1, 65535, 3, 1, 0, 3, 1, 1, 3, 1, 2, 3, 1, 3, 3, 1, 4, 3, 1, 5, 3, 1, 6, 3, 1, 7, 3, 1, 8, 3, 1, 9, 3, 0, 65526, 4, 0, 65527, 4, 1, 65528, 4, 1, 65529, 4, 1, 65530, 4, 1, 65531, 4, 1, 65532, 4, 1, 65533, 4, 1, 65534, 4, 1, 65535, 4, 1, 0, 4, 1, 1, 4, 1, 2, 4, 1, 3, 4, 1, 4, 4, 1, 5, 4, 1, 6, 4, 1, 7, 4, 1, 8, 4, 1, 9, 4, 0, 65526, 5, 0, 65527, 5, 1, 65528, 5, 1, 65529, 5, 1, 65530, 5, 1, 65531, 5, 1, 65532, 5, 1, 65533, 5, 1, 65534, 5, 1, 65535, 5, 1, 0, 5, 1, 1, 5, 1, 2, 5, 1, 3, 5, 1, 4, 5, 1, 5, 5, 1, 6, 5, 1, 7, 5, 1, 8, 5, 1, 9, 5, 0, 65526, 6, 0, 65527, 6, 1, 65528, 6, 1, 65529, 6, 1, 65530, 6, 1, 65531, 6, 1, 65532, 6, 1, 65533, 6, 1, 65534, 6, 1, 65535, 6, 1, 0, 6, 1, 1, 6, 1, 2, 6, 1, 3, 6, 1, 4, 6, 1, 5, 6, 1, 6, 6, 1, 7, 6, 1, 8, 6, 1, 9, 6, 0, 65526, 7, 0, 65527, 7, 1, 65528, 7, 1, 65529, 7, 1, 65530, 7, 1, 65531, 7, 1, 65532, 7, 1, 65533, 7, 1, 65534, 7, 1, 65535, 7, 1, 0, 7, 1, 1, 7, 1, 2, 7, 1, 3, 7, 1, 4, 7, 1, 5, 7, 1, 6, 7, 1, 7, 7, 1, 8, 7, 1, 9, 7, 0, 65526, 8, 0, 65527, 8, 1, 65528, 8, 1, 65529, 8, 1, 65530, 8, 1, 65531, 8, 1, 65532, 8, 1, 65533, 8, 1, 65534, 8, 1, 65535, 8, 1, 0, 8, 1, 1, 8, 1, 2, 8, 1, 3, 8, 1, 4, 8, 1, 5, 8, 1, 6, 8, 1, 7, 8, 1, 8, 8, 1, 9, 8, 0, 65526, 9, 0, 65527, 9, 0, 65528, 9, 0, 65529, 9, 0, 65530, 9, 0, 65531, 9, 0, 65532, 9, 0, 65533, 9, 0, 65534, 9, 0, 65535, 9, 0, 0, 9, 0, 1, 9, 0, 2, 9, 0, 3, 9, 0, 4, 9, 0, 5, 9, 0, 6, 9, 0, 7, 9, 0, 8, 9, 0, 9, 9, 0)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Boundary" type="Node3D" parent="Room"]
+script = ExtResource("5_tqirr")
+
+[node name="PlayerDetection" type="Area3D" parent="Room"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="Shape" type="CollisionShape3D" parent="Room/PlayerDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_x6347")
