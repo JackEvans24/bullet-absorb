@@ -1,0 +1,91 @@
+[gd_scene load_steps=19 format=3 uid="uid://dsdee78pu7oxc"]
+
+[ext_resource type="Script" path="res://scripts/mechanics/rooms/room.gd" id="1_2vutr"]
+[ext_resource type="PackedScene" uid="uid://dd7vuam6cs4fp" path="res://prefabs/power/power_orb.tscn" id="2_gr347"]
+[ext_resource type="Script" path="res://scripts/data/room_item.gd" id="3_wt5x1"]
+[ext_resource type="Script" path="res://scripts/data/room_configuration.gd" id="4_21hex"]
+[ext_resource type="Script" path="res://scripts/data/room_data.gd" id="5_h3kwi"]
+[ext_resource type="PackedScene" uid="uid://btfsstt1biti7" path="res://prefabs/enemies/wanderer.tscn" id="6_8lck7"]
+[ext_resource type="MeshLibrary" uid="uid://bydmgvg8cpigh" path="res://models/rooms/room_mesh_library.tres" id="7_sikjw"]
+[ext_resource type="Script" path="res://scripts/mechanics/rooms/room_doors.gd" id="8_jqi3d"]
+[ext_resource type="PackedScene" uid="uid://ok4gfjcs3kol" path="res://prefabs/room/door.tscn" id="9_qwxk7"]
+
+[sub_resource type="Resource" id="Resource_jsori"]
+script = ExtResource("3_wt5x1")
+scene = ExtResource("2_gr347")
+position = Vector3(8, 0, 0)
+delay = 0.0
+
+[sub_resource type="Resource" id="Resource_r6313"]
+script = ExtResource("3_wt5x1")
+scene = ExtResource("2_gr347")
+position = Vector3(-8, 0, 0)
+delay = 0.0
+
+[sub_resource type="Resource" id="Resource_qr7gj"]
+script = ExtResource("4_21hex")
+enemies = Array[ExtResource("3_wt5x1")]([])
+items = Array[ExtResource("3_wt5x1")]([SubResource("Resource_jsori"), SubResource("Resource_r6313")])
+
+[sub_resource type="Resource" id="Resource_fknuw"]
+script = ExtResource("3_wt5x1")
+scene = ExtResource("6_8lck7")
+position = Vector3(-4, 0, -3)
+delay = 1.0
+
+[sub_resource type="Resource" id="Resource_32che"]
+script = ExtResource("3_wt5x1")
+scene = ExtResource("6_8lck7")
+position = Vector3(4, 0, -3)
+delay = 1.5
+
+[sub_resource type="Resource" id="Resource_qkp7t"]
+script = ExtResource("4_21hex")
+enemies = Array[ExtResource("3_wt5x1")]([SubResource("Resource_fknuw"), SubResource("Resource_32che")])
+items = Array[ExtResource("3_wt5x1")]([])
+
+[sub_resource type="Resource" id="Resource_ggmul"]
+script = ExtResource("5_h3kwi")
+untouched_doors = 2
+completed_doors = 12
+waves = Array[ExtResource("4_21hex")]([SubResource("Resource_qkp7t")])
+completed_room = SubResource("Resource_qr7gj")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xq1m6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x6347"]
+size = Vector3(24, 2, 8)
+
+[node name="Room3" type="Node3D"]
+script = ExtResource("1_2vutr")
+data = SubResource("Resource_ggmul")
+
+[node name="Grid" type="GridMap" parent="."]
+mesh_library = ExtResource("7_sikjw")
+physics_material = SubResource("PhysicsMaterial_xq1m6")
+cell_size = Vector3(1, 2, 1)
+data = {
+"cells": PackedInt32Array(65522, 65530, 1441792, 65523, 65530, 655360, 65524, 65530, 655360, 65525, 65530, 655360, 65526, 65530, 655360, 65527, 65530, 655360, 65528, 65530, 655360, 65529, 65530, 655360, 65530, 65530, 655360, 65531, 65530, 655360, 65532, 65530, 655360, 65533, 65530, 655360, 65534, 65530, 655360, 65535, 65530, 655360, 0, 65530, 655360, 1, 65530, 655360, 2, 65530, 655360, 3, 65530, 655360, 4, 65530, 655360, 5, 65530, 655360, 6, 65530, 655360, 7, 65530, 655360, 8, 65530, 655360, 9, 65530, 655360, 10, 65530, 655360, 11, 65530, 655360, 12, 65530, 655360, 13, 65530, 1048576, 65522, 65531, 1441792, 65523, 65531, 1, 65524, 65531, 1, 65525, 65531, 1, 65526, 65531, 1, 65527, 65531, 1, 65528, 65531, 1, 65529, 65531, 1, 65530, 65531, 1, 65531, 65531, 1, 65532, 65531, 1, 65533, 65531, 1, 65534, 65531, 1, 65535, 65531, 1, 0, 65531, 1, 1, 65531, 1, 2, 65531, 1, 3, 65531, 1, 4, 65531, 1, 5, 65531, 1, 6, 65531, 1, 7, 65531, 1, 8, 65531, 1, 9, 65531, 1, 10, 65531, 1, 11, 65531, 1, 12, 65531, 1, 13, 65531, 1048576, 65522, 65532, 1441792, 65523, 65532, 1, 65524, 65532, 1, 65525, 65532, 1, 65526, 65532, 1, 65527, 65532, 1, 65528, 65532, 1, 65529, 65532, 1, 65530, 65532, 1, 65531, 65532, 1, 65532, 65532, 1, 65533, 65532, 1, 65534, 65532, 1, 65535, 65532, 1, 0, 65532, 1, 1, 65532, 1, 2, 65532, 1, 3, 65532, 1, 4, 65532, 1, 5, 65532, 1, 6, 65532, 1, 7, 65532, 1, 8, 65532, 1, 9, 65532, 1, 10, 65532, 1, 11, 65532, 1, 12, 65532, 1, 13, 65532, 1048576, 65522, 65533, 1048578, 65523, 65533, 1, 65524, 65533, 1, 65525, 65533, 1, 65526, 65533, 1, 65527, 65533, 1, 65528, 65533, 1, 65529, 65533, 1, 65530, 65533, 1, 65531, 65533, 1, 65532, 65533, 1, 65533, 65533, 1, 65534, 65533, 1, 65535, 65533, 1, 0, 65533, 1, 1, 65533, 1, 2, 65533, 1, 3, 65533, 1, 4, 65533, 1, 5, 65533, 1, 6, 65533, 1, 7, 65533, 1, 8, 65533, 1, 9, 65533, 1, 10, 65533, 1, 11, 65533, 1, 12, 65533, 1, 13, 65533, 1048578, 65522, 65534, 1, 65523, 65534, 1, 65524, 65534, 1, 65525, 65534, 1, 65526, 65534, 1, 65527, 65534, 1, 65528, 65534, 1, 65529, 65534, 1, 65530, 65534, 1, 65531, 65534, 1, 65532, 65534, 1, 65533, 65534, 1, 65534, 65534, 1, 65535, 65534, 1, 0, 65534, 1, 1, 65534, 1, 2, 65534, 1, 3, 65534, 1, 4, 65534, 1, 5, 65534, 1, 6, 65534, 1, 7, 65534, 1, 8, 65534, 1, 9, 65534, 1, 10, 65534, 1, 11, 65534, 1, 12, 65534, 1, 13, 65534, 1, 65522, 65535, 1, 65523, 65535, 1, 65524, 65535, 1, 65525, 65535, 1, 65526, 65535, 1, 65527, 65535, 1, 65528, 65535, 1, 65529, 65535, 1, 65530, 65535, 1, 65531, 65535, 1, 65532, 65535, 1, 65533, 65535, 1, 65534, 65535, 1, 65535, 65535, 1, 0, 65535, 1, 1, 65535, 1, 2, 65535, 1, 3, 65535, 1, 4, 65535, 1, 5, 65535, 1, 6, 65535, 1, 7, 65535, 1, 8, 65535, 1, 9, 65535, 1, 10, 65535, 1, 11, 65535, 1, 12, 65535, 1, 13, 65535, 1, 65522, 0, 1, 65523, 0, 1, 65524, 0, 1, 65525, 0, 1, 65526, 0, 1, 65527, 0, 1, 65528, 0, 1, 65529, 0, 1, 65530, 0, 1, 65531, 0, 1, 65532, 0, 1, 65533, 0, 1, 65534, 0, 1, 65535, 0, 1, 0, 0, 1, 1, 0, 1, 2, 0, 1, 3, 0, 1, 4, 0, 1, 5, 0, 1, 6, 0, 1, 7, 0, 1, 8, 0, 1, 9, 0, 1, 10, 0, 1, 11, 0, 1, 12, 0, 1, 13, 0, 1, 65522, 1, 1, 65523, 1, 1, 65524, 1, 1, 65525, 1, 1, 65526, 1, 1, 65527, 1, 1, 65528, 1, 1, 65529, 1, 1, 65530, 1, 1, 65531, 1, 1, 65532, 1, 1, 65533, 1, 1, 65534, 1, 1, 65535, 1, 1, 0, 1, 1, 1, 1, 1, 2, 1, 1, 3, 1, 1, 4, 1, 1, 5, 1, 1, 6, 1, 1, 7, 1, 1, 8, 1, 1, 9, 1, 1, 10, 1, 1, 11, 1, 1, 12, 1, 1, 13, 1, 1, 65522, 2, 1441794, 65523, 2, 1, 65524, 2, 1, 65525, 2, 1, 65526, 2, 1, 65527, 2, 1, 65528, 2, 1, 65529, 2, 1, 65530, 2, 1, 65531, 2, 1, 65532, 2, 1, 65533, 2, 1, 65534, 2, 1, 65535, 2, 1, 0, 2, 1, 1, 2, 1, 2, 2, 1, 3, 2, 1, 4, 2, 1, 5, 2, 1, 6, 2, 1, 7, 2, 1, 8, 2, 1, 9, 2, 1, 10, 2, 1, 11, 2, 1, 12, 2, 1, 13, 2, 1441794, 65522, 3, 1441792, 65523, 3, 1, 65524, 3, 1, 65525, 3, 1, 65526, 3, 1, 65527, 3, 1, 65528, 3, 1, 65529, 3, 1, 65530, 3, 1, 65531, 3, 1, 65532, 3, 1, 65533, 3, 1, 65534, 3, 1, 65535, 3, 1, 0, 3, 1, 1, 3, 1, 2, 3, 1, 3, 3, 1, 4, 3, 1, 5, 3, 1, 6, 3, 1, 7, 3, 1, 8, 3, 1, 9, 3, 1, 10, 3, 1, 11, 3, 1, 12, 3, 1, 13, 3, 1048576, 65522, 4, 1441792, 65523, 4, 1, 65524, 4, 1, 65525, 4, 1, 65526, 4, 1, 65527, 4, 1, 65528, 4, 1, 65529, 4, 1, 65530, 4, 1, 65531, 4, 1, 65532, 4, 1, 65533, 4, 1, 65534, 4, 1, 65535, 4, 1, 0, 4, 1, 1, 4, 1, 2, 4, 1, 3, 4, 1, 4, 4, 1, 5, 4, 1, 6, 4, 1, 7, 4, 1, 8, 4, 1, 9, 4, 1, 10, 4, 1, 11, 4, 1, 12, 4, 1, 13, 4, 1048576, 65522, 5, 1441792, 65523, 5, 0, 65524, 5, 0, 65525, 5, 0, 65526, 5, 0, 65527, 5, 0, 65528, 5, 0, 65529, 5, 0, 65530, 5, 0, 65531, 5, 0, 65532, 5, 0, 65533, 5, 655362, 65534, 5, 1, 65535, 5, 1, 0, 5, 1, 1, 5, 1, 2, 5, 2, 3, 5, 0, 4, 5, 0, 5, 5, 0, 6, 5, 0, 7, 5, 0, 8, 5, 0, 9, 5, 0, 10, 5, 0, 11, 5, 0, 12, 5, 0, 13, 5, 1048576)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Boundary" type="Node3D" parent="."]
+script = ExtResource("8_jqi3d")
+
+[node name="DoorSouth" parent="Boundary" instance=ExtResource("9_qwxk7")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 5.5)
+
+[node name="DoorEast" parent="Boundary" instance=ExtResource("9_qwxk7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.5, 0, 0)
+
+[node name="DoorWest" parent="Boundary" instance=ExtResource("9_qwxk7")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -13.5, 0, 0)
+
+[node name="PlayerDetection" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="Shape" type="CollisionShape3D" parent="PlayerDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_x6347")
