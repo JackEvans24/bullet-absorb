@@ -1,23 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://ok4gfjcs3kol"]
+[gd_scene load_steps=6 format=3 uid="uid://ok4gfjcs3kol"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/door.gd" id="1_ob5x7"]
-[ext_resource type="Material" uid="uid://xbps45ualr02" path="res://materials/environment/door.tres" id="2_5eda2"]
+[ext_resource type="Material" uid="uid://xbps45ualr02" path="res://materials/environment/door.tres" id="2_nwkqp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5jioj"]
 size = Vector3(4, 2, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7k0b8"]
-material = ExtResource("2_5eda2")
+material = ExtResource("2_nwkqp")
 size = Vector3(4, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wtf5l"]
 
 [node name="Door" type="StaticBody3D"]
 script = ExtResource("1_ob5x7")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_5jioj")
 disabled = true
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("BoxMesh_7k0b8")
+
+[node name="Inner" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+visible = false
+mesh = SubResource("BoxMesh_wtf5l")
