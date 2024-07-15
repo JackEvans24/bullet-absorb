@@ -20,6 +20,7 @@ const VERTICAL_DOOR_OFFSET := Vector3(0.5, 0, 0)
 var doorway_rotations: Array[int] = [ROT_SOUTH, ROT_EAST, ROT_NORTH, ROT_WEST]
 
 @export var generate: bool = false: set = start_generation
+@export var clear: bool = false: set = clear_grid
 
 @export_group("Size")
 @export var depth := 10
@@ -82,6 +83,9 @@ func start_generation(_value: bool):
 	var detection_shape: CollisionShape3D = $Room/PlayerDetection/Shape
 	var box: BoxShape3D = detection_shape.shape
 	box.size = Vector3((width * 2) - detection_offset, detection_height, (depth * 2) - detection_offset)
+
+func clear_grid(_value: bool):
+	grid.clear()
 
 func add_door(door_position: Vector3, door_rotation_index: DoorDirection) -> Node3D:
 	var is_horizontal_door = door_rotation_index % 2 == 0
