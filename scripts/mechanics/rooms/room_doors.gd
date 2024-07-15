@@ -1,5 +1,5 @@
 class_name RoomBoundary
-extends Node3D
+extends Node
 
 enum Walls {NORTH = 1, SOUTH = 2, EAST = 4, WEST = 8}
 
