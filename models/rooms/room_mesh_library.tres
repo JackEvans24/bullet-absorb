@@ -1,0 +1,30 @@
+[gd_resource type="MeshLibrary" load_steps=6 format=3 uid="uid://bydmgvg8cpigh"]
+
+[ext_resource type="ArrayMesh" uid="uid://bjihkpofvtk1o" path="res://models/environment/wall.res" id="1_xruxc"]
+[ext_resource type="ArrayMesh" uid="uid://b2b6irtbfrfee" path="res://models/environment/floor.res" id="2_2l5tp"]
+[ext_resource type="ArrayMesh" uid="uid://bg35h462mqaqm" path="res://models/environment/door_frame.res" id="2_tfbct"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tbwxh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uxc7s"]
+size = Vector3(1, 2, 1)
+
+[resource]
+item/0/name = "wall"
+item/0/mesh = ExtResource("1_xruxc")
+item/0/mesh_transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0)
+item/0/shapes = [SubResource("BoxShape3D_tbwxh"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/navigation_layers = 1
+item/1/name = "floor"
+item/1/mesh = ExtResource("2_2l5tp")
+item/1/mesh_transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, -1, 0)
+item/1/shapes = []
+item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/1/navigation_layers = 1
+item/2/name = "door_support"
+item/2/mesh = ExtResource("2_tfbct")
+item/2/mesh_transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0)
+item/2/shapes = [SubResource("BoxShape3D_uxc7s"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/2/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/2/navigation_layers = 1
