@@ -7,3 +7,4 @@
 script = ExtResource("2_crmpi")
 scene = ExtResource("1_umjru")
 position = Vector3(0, 0, 0)
+delay = 0.0
