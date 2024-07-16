@@ -17,7 +17,7 @@ signal died
 var meshes: Array[MeshInstance3D] = []
 
 func _ready():
-	get_meshes_recursive(self)
+	get_meshes_recursive(pivot)
 
 func get_meshes_recursive(node: Node):
 	for child in node.get_children():
