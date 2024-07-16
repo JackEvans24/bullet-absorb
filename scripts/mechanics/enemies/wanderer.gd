@@ -10,6 +10,7 @@ extends Enemy
 @onready var animation: AnimationPlayer = $Animator
 
 func _ready():
+	super()
 	fire.pivot = pivot
 	behaviour_timer.named_timeout.connect(_on_behaviour_timer_timeout)
 

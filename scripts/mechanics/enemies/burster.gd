@@ -8,6 +8,7 @@ extends Enemy
 @onready var spawn_tube: SpawnTube = $Pivot/SpawnTube
 
 func _ready():
+	super()
 	behaviour_timer.named_timeout.connect(_on_behaviour_timer_timeout)
 
 func _on_intro_start():

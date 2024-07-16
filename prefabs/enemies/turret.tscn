@@ -246,17 +246,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = ExtResource("3_ei43k")
 
-[node name="DropPower" parent="." index="5"]
-power_drop_count = 12
-
-[node name="LookAtTarget" parent="." index="6" instance=ExtResource("4_1qdhy")]
+[node name="LookAtTarget" parent="." index="5" instance=ExtResource("4_1qdhy")]
 max_rotation = 8.0
 
-[node name="Fire" parent="." index="7" instance=ExtResource("5_ok7x6")]
+[node name="Fire" parent="." index="6" instance=ExtResource("5_ok7x6")]
 fire_point_ref = NodePath("../Pivot/TurretSwivel/FirePoint")
 bullet_scene = ExtResource("6_fmidc")
 
-[node name="FireTimer" type="Timer" parent="." index="8"]
+[node name="FireTimer" type="Timer" parent="." index="7"]
 wait_time = 0.25
 one_shot = true
 script = ExtResource("5_128lh")
@@ -276,7 +273,7 @@ duration = 0.25
 duration_randomness = 0.0
 iterations = 5
 
-[node name="Animator" type="AnimationPlayer" parent="." index="9"]
+[node name="Animator" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 "": SubResource("AnimationLibrary_ti4su")
 }
