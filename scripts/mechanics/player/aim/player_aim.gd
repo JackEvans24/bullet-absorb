@@ -6,6 +6,10 @@ signal bullet_fired
 @export var cooldown = 0.05
 @export var bullet_scene: PackedScene
 
+@onready var controller_aim: ControllerAimDirection = $ControllerAim
+@onready var mouse_aim: MouseAimDirection = $MouseAim
+var aim_service: AimDirection
+
 var pivot: Node3D
 var aim_direction: Vector3 = Vector3.FORWARD
 
@@ -14,23 +18,35 @@ var can_fire = true
 var is_firing = false
 var has_ammo = false
 
+func _ready():
+	aim_service = mouse_aim
+
 func initialise(body_pivot: Node3D):
 	pivot = body_pivot
+	mouse_aim.player = pivot
 
 func _process(_delta: float):
 	if not can_aim:
 		return
 
-	var input_dir = Input.get_vector("aim_left", "aim_right", "aim_forward", "aim_back")
-	var direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
+	var direction = aim_service.get_aim_direction()
 
 	if direction:
 		aim_direction = direction
 
 func _input(event: InputEvent):
-	if not can_fire or not event.is_action_pressed("fire"):
+	check_input_method(event)
+
+	if can_fire and event.is_action_pressed("fire"):
+		fire()
+
+func check_input_method(event: InputEvent):
+	if event is InputEventMouseMotion:
+		aim_service = mouse_aim
+	elif aim_service == controller_aim:
 		return
-	fire()
+	elif controller_aim.get_aim_direction().length() > 0.1:
+		aim_service = controller_aim
 
 func fire():
 	if is_firing or not has_ammo:
