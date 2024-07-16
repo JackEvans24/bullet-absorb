@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RoomItemLookup" load_steps=5 format=3 uid="uid://dfp6bwqqsvt21"]
+
+[ext_resource type="PackedScene" uid="uid://btfsstt1biti7" path="res://prefabs/enemies/wanderer.tscn" id="1_12avm"]
+[ext_resource type="Script" path="res://scripts/data/room_item_lookup.gd" id="1_50kb5"]
+[ext_resource type="Script" path="res://scripts/data/room_item_mapping.gd" id="2_vuhso"]
+
+[sub_resource type="Resource" id="Resource_3wqml"]
+script = ExtResource("2_vuhso")
+item_type = 0
+scene = ExtResource("1_12avm")
+
+[resource]
+script = ExtResource("1_50kb5")
+lookup = Array[ExtResource("2_vuhso")]([SubResource("Resource_3wqml")])

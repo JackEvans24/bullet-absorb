@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="RoomItem" load_steps=3 format=3 uid="uid://brkp0tbs3von"]
-
-[ext_resource type="PackedScene" uid="uid://dcmefiejwfjyq" path="res://prefabs/enemies/burster.tscn" id="2_dx208"]
-[ext_resource type="Script" path="res://scripts/data/room_item.gd" id="3_wht0t"]
-
-[resource]
-script = ExtResource("3_wht0t")
-scene = ExtResource("2_dx208")
-position = Vector3(0, 0, 0)
