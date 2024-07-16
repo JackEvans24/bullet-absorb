@@ -189,6 +189,7 @@ transform = Transform3D(-0.01, 6.42715e-14, 2.53518e-08, 0, -0.01, 2.53518e-08, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="Movement" type="Node3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("2_1evv8")
 drift_max = 0.0
 drift_change = 0.0
