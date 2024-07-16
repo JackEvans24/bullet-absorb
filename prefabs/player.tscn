@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=41 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Material" uid="uid://beaa2b7evhbjh" path="res://materials/player/player.tres" id="2_di4ke"]
@@ -10,6 +10,7 @@
 [ext_resource type="Material" uid="uid://f41eu4cbvian" path="res://materials/player/player_absorb.tres" id="4_ep8r4"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/dead.gd" id="4_koxfs"]
 [ext_resource type="Material" uid="uid://dq2ufo1kpypca" path="res://materials/player/player_absorb_halo.tres" id="4_poddg"]
+[ext_resource type="PackedScene" uid="uid://dl5unqhv0x3ox" path="res://prefabs/bullets/player_bullet.tscn" id="5_twt6l"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/knockback.gd" id="5_unin6"]
 [ext_resource type="Material" uid="uid://cjk1dquq1tt1j" path="res://materials/player/player_dash.tres" id="6_gxbhd"]
 [ext_resource type="Shape3D" uid="uid://c4tuvev8wasc3" path="res://models/player/player_internal.tres" id="7_iumbl"]
@@ -20,6 +21,7 @@
 [ext_resource type="Script" path="res://scripts/mechanics/player/dash.gd" id="11_s2u1f"]
 [ext_resource type="Material" uid="uid://dlj8u7o0rqldc" path="res://materials/player/player_recovery.tres" id="12_cbt3u"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/aim/controller_aim_direction.gd" id="12_j1ytq"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/aim/mouse_aim_direction.gd" id="12_j7rkf"]
 [ext_resource type="Material" uid="uid://bl15jqbmjfvys" path="res://materials/player/player_dash_particle.tres" id="20_n80do"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/reticule.gd" id="21_tbx8f"]
 
@@ -156,9 +158,14 @@ recovery_time = 1.6
 
 [node name="Aim" type="Node" parent="."]
 script = ExtResource("10_gaav5")
+cooldown = 0.01
+bullet_scene = ExtResource("5_twt6l")
 
 [node name="ControllerAim" type="Node" parent="Aim"]
 script = ExtResource("12_j1ytq")
+
+[node name="MouseAim" type="Node" parent="Aim"]
+script = ExtResource("12_j7rkf")
 
 [node name="Dash" type="Node" parent="."]
 script = ExtResource("11_s2u1f")
