@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ccgpc6v5lruew"]
+[gd_scene load_steps=16 format=3 uid="uid://ccgpc6v5lruew"]
 
 [ext_resource type="PackedScene" uid="uid://c3tj0pdcum4wd" path="res://prefabs/player.tscn" id="1_e5x1h"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_rtjol"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room_controller.gd" id="3_yfuie"]
 [ext_resource type="PackedScene" uid="uid://cl1dul38xrvt2" path="res://prefabs/cameras.tscn" id="4_nws0m"]
 [ext_resource type="PackedScene" uid="uid://dsdee78pu7oxc" path="res://prefabs/room/room_3.tscn" id="5_grw4s"]
+[ext_resource type="Resource" uid="uid://dfp6bwqqsvt21" path="res://data/room_items/room_item_lookup.tres" id="5_n6ls3"]
 [ext_resource type="Script" path="res://scripts/effects/hit_stop.gd" id="8_dyhou"]
 [ext_resource type="PackedScene" uid="uid://bcjb1jnr0y5mb" path="res://prefabs/power/power_generator.tscn" id="9_cyv5f"]
 [ext_resource type="PackedScene" uid="uid://dd7vuam6cs4fp" path="res://prefabs/power/power_orb.tscn" id="14_c7b1x"]
@@ -60,6 +61,7 @@ shadow_enabled = true
 
 [node name="Rooms" type="Node" parent="World"]
 script = ExtResource("3_yfuie")
+room_item_lookup = ExtResource("5_n6ls3")
 
 [node name="Room3" parent="World/Rooms" instance=ExtResource("5_grw4s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)

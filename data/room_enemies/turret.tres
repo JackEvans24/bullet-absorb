@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="RoomItem" load_steps=3 format=3 uid="uid://dc32ymbotpd8b"]
-
-[ext_resource type="PackedScene" uid="uid://wfijrpbc1nxm" path="res://prefabs/enemies/turret.tscn" id="2_iu6ls"]
-[ext_resource type="Script" path="res://scripts/data/room_item.gd" id="3_cmbcb"]
-
-[resource]
-script = ExtResource("3_cmbcb")
-scene = ExtResource("2_iu6ls")
-position = Vector3(0, 0, 0)

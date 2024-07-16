@@ -5,8 +5,8 @@ extends Node3D
 
 @export var room_reference: NodePath
 
-@export_group("Enemies")
-@export var room_item: RoomItem
+@export_group("Items")
+@export var room_item: RoomItem.RoomItemType
 @export var delay: float
 @export var add_enemy: bool = false: set = add_enemy_to_current_wave
 @export var add_item: bool = false: set = add_item_to_current_wave
@@ -39,7 +39,8 @@ func get_room_item_copy():
 	if config == null:
 		config = RoomConfiguration.new()
 
-	var new_room_item: RoomItem = room_item.duplicate()
+	var new_room_item: RoomItem = RoomItem.new()
+	new_room_item.item_type = room_item
 	new_room_item.position = position
 	new_room_item.delay = delay
 	return new_room_item

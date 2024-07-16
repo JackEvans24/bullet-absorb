@@ -8,6 +8,8 @@ signal doors_changed
 @onready var boundary: RoomBoundary = $Boundary
 @onready var player_detection: Area3D = $PlayerDetection
 
+var room_item_lookup: RoomItemLookup
+
 var player: Node3D
 var enemy_count = 0
 var wave_index = 0
@@ -41,6 +43,8 @@ func set_room_configuration(config: RoomConfiguration):
 
 func add_enemy(enemy_config: RoomItem):
 	var enemy = await add_item(enemy_config) as Enemy
+	if enemy == null:
+		return
 	enemy.set_target(player)
 	enemy.died.connect(_on_enemy_died)
 
@@ -48,7 +52,12 @@ func add_item(item_config: RoomItem) -> Node3D:
 	if item_config.delay > 0.0:
 		await get_tree().create_timer(item_config.delay).timeout
 
-	var item = item_config.scene.instantiate() as Node3D
+	var item_scene = room_item_lookup.get_matching(item_config.item_type)
+	if item_scene == null:
+		printerr("ITEM NOT FOUND: %s" % RoomItem.RoomItemType.keys()[item_config.item_type])
+		return null
+
+	var item = item_scene.instantiate() as Node3D
 	add_child(item)
 	item.position = item_config.position
 	return item

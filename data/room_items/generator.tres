@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="RoomItem" load_steps=3 format=3 uid="uid://bibninnmc26uh"]
-
-[ext_resource type="PackedScene" uid="uid://bcjb1jnr0y5mb" path="res://prefabs/power/power_generator.tscn" id="1_l8o1i"]
-[ext_resource type="Script" path="res://scripts/data/room_item.gd" id="2_lemw2"]
-
-[resource]
-script = ExtResource("2_lemw2")
-scene = ExtResource("1_l8o1i")
-position = Vector3(0, 0, 0)

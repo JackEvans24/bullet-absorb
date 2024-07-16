@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="RoomItem" load_steps=3 format=3 uid="uid://gyohowq2vqc3"]
-
-[ext_resource type="Script" path="res://scripts/data/room_item.gd" id="1_fx1ao"]
-[ext_resource type="PackedScene" uid="uid://dd7vuam6cs4fp" path="res://prefabs/power/power_orb.tscn" id="1_jjxuc"]
-
-[resource]
-script = ExtResource("1_fx1ao")
-scene = ExtResource("1_jjxuc")
-position = Vector3(0, 0, 0)
