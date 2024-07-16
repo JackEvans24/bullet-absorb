@@ -9,17 +9,17 @@
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/dash.gd" id="4_5ub5d"]
 [ext_resource type="Material" uid="uid://f41eu4cbvian" path="res://materials/player/player_absorb.tres" id="4_ep8r4"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/dead.gd" id="4_koxfs"]
-[ext_resource type="Script" path="res://scripts/mechanics/player/player_aim.gd" id="4_owsoe"]
 [ext_resource type="Material" uid="uid://dq2ufo1kpypca" path="res://materials/player/player_absorb_halo.tres" id="4_poddg"]
-[ext_resource type="PackedScene" uid="uid://dl5unqhv0x3ox" path="res://prefabs/bullets/player_bullet.tscn" id="5_twt6l"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/knockback.gd" id="5_unin6"]
 [ext_resource type="Material" uid="uid://cjk1dquq1tt1j" path="res://materials/player/player_dash.tres" id="6_gxbhd"]
 [ext_resource type="Shape3D" uid="uid://c4tuvev8wasc3" path="res://models/player/player_internal.tres" id="7_iumbl"]
 [ext_resource type="Material" uid="uid://ckbmoxn51apxx" path="res://materials/player/player_knockback.tres" id="9_e4s4u"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/player_body.gd" id="10_18rdm"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/aim/player_aim.gd" id="10_gaav5"]
 [ext_resource type="Shape3D" uid="uid://b143a5k1xv5rx" path="res://models/player/player_external.tres" id="11_p7nyd"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/dash.gd" id="11_s2u1f"]
 [ext_resource type="Material" uid="uid://dlj8u7o0rqldc" path="res://materials/player/player_recovery.tres" id="12_cbt3u"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/aim/controller_aim_direction.gd" id="12_j1ytq"]
 [ext_resource type="Material" uid="uid://bl15jqbmjfvys" path="res://materials/player/player_dash_particle.tres" id="20_n80do"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/reticule.gd" id="21_tbx8f"]
 
@@ -155,8 +155,10 @@ starting_health = 3.0
 recovery_time = 1.6
 
 [node name="Aim" type="Node" parent="."]
-script = ExtResource("4_owsoe")
-bullet_scene = ExtResource("5_twt6l")
+script = ExtResource("10_gaav5")
+
+[node name="ControllerAim" type="Node" parent="Aim"]
+script = ExtResource("12_j1ytq")
 
 [node name="Dash" type="Node" parent="."]
 script = ExtResource("11_s2u1f")
