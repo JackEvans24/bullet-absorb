@@ -8,14 +8,6 @@ enum Walls {NORTH = 1, SOUTH = 2, EAST = 4, WEST = 8}
 @onready var east_door: Door = $DoorEast
 @onready var west_door: Door = $DoorWest
 
-func clear_doors():
-	if not Engine.is_editor_hint():
-		return
-	north_door = null
-	south_door = null
-	east_door = null
-	west_door = null
-
 func doors_need_changing(doors: int) -> bool:
 	if north_door != null&&(doors&Walls.NORTH != 0) == north_door.is_closed:
 		return true
