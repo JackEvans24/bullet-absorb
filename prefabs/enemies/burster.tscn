@@ -188,10 +188,7 @@ transform = Transform3D(-0.01, 6.42715e-14, 2.53518e-08, 0, -0.01, 2.53518e-08, 
 [node name="SpawnTube" parent="Pivot" index="4" instance=ExtResource("6_dcvw3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
-[node name="DropPower" parent="." index="5"]
-power_drop_count = 6
-
-[node name="Movement" type="Node3D" parent="." index="6"]
+[node name="Movement" type="Node3D" parent="." index="5"]
 script = ExtResource("2_1evv8")
 drift_max = 0.0
 drift_change = 0.0
@@ -200,13 +197,13 @@ drift_change = 0.0
 target_position = Vector3(0, 0, 0)
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="Fire" type="Node" parent="." index="7"]
+[node name="Fire" type="Node" parent="." index="6"]
 script = ExtResource("7_q2sbb")
 pivot_ref = NodePath("../Pivot")
 bullet_scene = ExtResource("8_mra72")
 rotation_interval = 0.3
 
-[node name="BehaviourTimer" type="Timer" parent="." index="8"]
+[node name="BehaviourTimer" type="Timer" parent="." index="7"]
 script = ExtResource("3_a2sv1")
 
 [node name="Walk" type="Node" parent="BehaviourTimer" index="0"]
@@ -228,7 +225,7 @@ iterations = 3
 script = ExtResource("4_ijtvr")
 duration = 0.7
 
-[node name="Animator" type="AnimationPlayer" parent="." index="9"]
+[node name="Animator" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 "": SubResource("AnimationLibrary_hlk6v")
 }

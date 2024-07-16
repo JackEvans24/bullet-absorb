@@ -10,6 +10,7 @@ extends Enemy
 @onready var windup_particles: GPUParticles3D = $Pivot/TurretSwivel/WindupParticles
 
 func _ready():
+	super()
 	look_at_target.pivot = swivel
 	fire.pivot = swivel
 	fire_timer.named_timeout.connect(_on_behaviour_timer_timeout)

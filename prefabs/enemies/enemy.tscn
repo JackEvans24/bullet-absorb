@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c3ytmjd7pe4pg"]
+[gd_scene load_steps=11 format=3 uid="uid://c3ytmjd7pe4pg"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/enemy.gd" id="1_wjmkf"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/health.gd" id="2_pjhvc"]
 [ext_resource type="PackedScene" uid="uid://cjvpl2fcwu246" path="res://prefabs/particles/hurt_particles.tscn" id="2_smu6b"]
 [ext_resource type="PackedScene" uid="uid://dd7vuam6cs4fp" path="res://prefabs/power/power_orb.tscn" id="3_yn8ly"]
+[ext_resource type="Material" uid="uid://bh15v0ftuakdk" path="res://materials/enemy/enemy_hurt.tres" id="4_3pfns"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/knockback.gd" id="4_t2vkt"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy/enemy_body.tres" id="5_ra3i6"]
 
@@ -20,6 +21,7 @@ collision_layer = 32
 script = ExtResource("1_wjmkf")
 hurt_particles_scene = ExtResource("2_smu6b")
 orb_scene = ExtResource("3_yn8ly")
+knockback_material = ExtResource("4_3pfns")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_pjhvc")
