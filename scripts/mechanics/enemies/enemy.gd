@@ -60,8 +60,8 @@ func set_target(_target: Node3D):
 
 func add_hurt_particles():
 	var hurt_particles = hurt_particles_scene.instantiate()
-	add_child(hurt_particles)
-	hurt_particles.position = pivot.position
+	get_tree().root.add_child(hurt_particles)
+	hurt_particles.global_position = pivot.global_position
 
 func do_knockback(taken_from: Node3D):
 	var direction = -taken_from.basis.z

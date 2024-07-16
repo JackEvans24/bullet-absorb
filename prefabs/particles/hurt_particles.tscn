@@ -4,30 +4,38 @@
 [ext_resource type="Script" path="res://scripts/effects/one_shot_particles.gd" id="2_kqr2q"]
 
 [sub_resource type="Curve" id="Curve_jenfi"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.85693, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 22.2844, 0, 0, Vector2(0.0973783, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.85693, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_dceoy"]
 curve = SubResource("Curve_jenfi")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v1lvv"]
+particle_flag_align_y = true
 direction = Vector3(0, 1, 0)
-spread = 75.0
-initial_velocity_min = 5.0
-initial_velocity_max = 5.0
-gravity = Vector3(0, -15, 0)
+spread = 90.0
+initial_velocity_min = 0.1
+initial_velocity_max = 0.1
+radial_velocity_min = 15.0
+radial_velocity_max = 15.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.4
 scale_curve = SubResource("CurveTexture_dceoy")
 
-[sub_resource type="SphereMesh" id="SphereMesh_fhla8"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_uyx0q"]
 material = ExtResource("1_gvl6i")
-radius = 0.1
-height = 0.2
+top_radius = 0.01
+bottom_radius = 0.1
+radial_segments = 12
 
 [node name="HurtParticles" type="GPUParticles3D"]
 cast_shadow = 0
 emitting = false
+amount = 30
+lifetime = 0.4
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_v1lvv")
-draw_pass_1 = SubResource("SphereMesh_fhla8")
+draw_pass_1 = SubResource("CylinderMesh_uyx0q")
 script = ExtResource("2_kqr2q")
