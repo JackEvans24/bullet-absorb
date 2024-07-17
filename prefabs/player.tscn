@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=42 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Material" uid="uid://beaa2b7evhbjh" path="res://materials/player/player.tres" id="2_di4ke"]
@@ -20,6 +20,7 @@
 [ext_resource type="Shape3D" uid="uid://b143a5k1xv5rx" path="res://models/player/player_external.tres" id="11_p7nyd"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/dash.gd" id="11_s2u1f"]
 [ext_resource type="Material" uid="uid://dlj8u7o0rqldc" path="res://materials/player/player_recovery.tres" id="12_cbt3u"]
+[ext_resource type="PackedScene" uid="uid://cw3xyogbakvqj" path="res://prefabs/particles/fire_fail_particles.tscn" id="12_d68f3"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/aim/controller_aim_direction.gd" id="12_j1ytq"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/aim/mouse_aim_direction.gd" id="12_j7rkf"]
 [ext_resource type="Material" uid="uid://bl15jqbmjfvys" path="res://materials/player/player_dash_particle.tres" id="20_n80do"]
@@ -160,6 +161,7 @@ script = ExtResource("10_gaav5")
 fire_point_ref = NodePath("../Pivot/FirePoint")
 cooldown = 0.01
 bullet_scene = ExtResource("5_twt6l")
+fire_fail_particles_scene = ExtResource("12_d68f3")
 
 [node name="ControllerAim" type="Node" parent="Aim"]
 script = ExtResource("12_j1ytq")
