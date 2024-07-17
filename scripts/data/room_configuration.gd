@@ -4,5 +4,5 @@ class_name RoomConfiguration extends Resource
 @export var items: Array[RoomItem]
 
 func _init():
-    enemies = []
-    items = []
+	enemies = []
+	items = []

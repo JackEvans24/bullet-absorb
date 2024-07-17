@@ -5,7 +5,6 @@ signal died
 
 @export var hurt_particles_scene: PackedScene
 @export var orb_scene: PackedScene
-@export var orb_power_count := 3
 @export var knockback_material: Material
 
 @onready var health: Health = $Health
@@ -16,8 +15,16 @@ signal died
 
 var meshes: Array[MeshInstance3D] = []
 
+var orb_power_count := 3
+var starting_health := 3
+
+var is_dead := false
+var knockback_active := false
+
 func _ready():
 	get_meshes_recursive(pivot)
+	set_hit_detection()
+	health.current_health = starting_health
 
 func get_meshes_recursive(node: Node):
 	for child in node.get_children():
@@ -31,6 +38,13 @@ func set_hit_detection():
 	hit_detection.area_entered.connect(_on_area_entered)
 	health.damage_taken.connect(_on_damage_taken)
 	knockback.knockback_changed.connect(_on_knockback_changed)
+
+func activate_knockback():
+	knockback_active = true
+
+func initialise(max_health: int, power_count: int):
+	orb_power_count = power_count
+	starting_health = max_health
 
 func _physics_process(_delta):
 	velocity = knockback.knockback_direction
@@ -49,31 +63,42 @@ func _on_damage_taken(damage_taken: float, taken_from: Node3D):
 	if health.current_health <= 0:
 		call_deferred("die")
 
-func _on_knockback_changed(active: bool):
-	for mesh in meshes:
-		if not is_instance_valid(mesh):
-			continue
-		mesh.material_override = knockback_material if active else null
-
-func set_target(_target: Node3D):
-	pass
-
 func add_hurt_particles():
 	var hurt_particles = hurt_particles_scene.instantiate()
 	get_tree().root.add_child(hurt_particles)
 	hurt_particles.global_position = pivot.global_position
 
 func do_knockback(taken_from: Node3D):
-	var direction = -taken_from.basis.z
+	var direction = -taken_from.basis.z if knockback_active else Vector3.ZERO
 	knockback.set_knockback_direction(direction)
 
+func _on_knockback_changed(active: bool):
+	for mesh in meshes:
+		if not is_instance_valid(mesh):
+			continue
+		mesh.material_override = knockback_material if active else null
+
+func _on_intro_animation_complete():
+	if is_dead:
+		return
+	activate_enemy()
+
+func activate_enemy():
+	pass
+
+func set_target(_target: Node3D):
+	pass
+
 func die():
+	is_dead = true
 	pivot.visible = false
 	collider.call_deferred("queue_free")
 	drop_orb()
 	died.emit()
 
 func drop_orb():
+	if orb_power_count <= 0:
+		return
 	var orb = orb_scene.instantiate()
 	orb.power_count = orb_power_count
 	get_tree().root.add_child(orb)

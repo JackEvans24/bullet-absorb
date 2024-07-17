@@ -27,6 +27,7 @@ func _on_player_entered(body: Node3D):
 
 func on_first_entry():
 	if len(data.waves) <= 0:
+		set_room_complete()
 		return
 
 	close_all_doors()
@@ -52,14 +53,12 @@ func add_item(item_config: RoomItem) -> Node3D:
 	if item_config.delay > 0.0:
 		await get_tree().create_timer(item_config.delay).timeout
 
-	var item_scene = room_item_lookup.get_matching(item_config.item_type)
-	if item_scene == null:
+	var item = room_item_lookup.build_from_config(item_config)
+	if item == null:
 		printerr("ITEM NOT FOUND: %s" % RoomItem.RoomItemType.keys()[item_config.item_type])
 		return null
 
-	var item = item_scene.instantiate() as Node3D
 	add_child(item)
-	item.position = item_config.position
 	return item
 
 func _on_enemy_died():
@@ -75,7 +74,9 @@ func on_wave_complete():
 	if wave_index < len(data.waves):
 		set_room_configuration(data.waves[wave_index])
 		return
+	set_room_complete()
 
+func set_room_complete():
 	set_doors(data.completed_doors)
 	set_room_configuration(data.completed_room)
 

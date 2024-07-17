@@ -10,7 +10,8 @@ var knockback_direction = Vector3.ZERO
 var knockback_id = 0
 
 func set_knockback_direction(direction: Vector3):
-	knockback_direction = direction.normalized() * knockback_power
+	if direction.length() > 0.01:
+		knockback_direction = direction.normalized() * knockback_power
 	knockback_changed.emit(true)
 
 	knockback_id += 1

@@ -22,6 +22,7 @@ radial_velocity_min = -5.0
 radial_velocity_max = -5.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.4
+scale_max = 0.6
 scale_curve = SubResource("CurveTexture_gglui")
 turbulence_influence_min = 0.01
 turbulence_influence_max = 0.01

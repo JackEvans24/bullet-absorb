@@ -4,10 +4,11 @@ class_name RoomConfigEditor
 extends Node3D
 
 @export var room_reference: NodePath
+@export var new_room: bool = false: set = set_new_room
 
 @export_group("Items")
 @export var room_item: RoomItem.RoomItemType
-@export var delay: float
+@export var delay: float = 1
 @export var add_enemy: bool = false: set = add_enemy_to_current_wave
 @export var add_item: bool = false: set = add_item_to_current_wave
 
@@ -21,20 +22,22 @@ func add_enemy_to_current_wave(_value: bool):
 	if not Engine.is_editor_hint():
 		return
 
-	var new_enemy: RoomItem = get_room_item_copy()
-	config.enemies.push_back(new_enemy)
+	var new_enemy: RoomItem = get_item()
+	if new_enemy:
+		config.enemies.push_back(new_enemy)
 
 func add_item_to_current_wave(_value: bool):
 	if not Engine.is_editor_hint():
 		return
 
-	var new_item: RoomItem = get_room_item_copy()
-	config.items.push_back(new_item)
+	var new_room_item: RoomItem = get_item()
+	if new_room_item:
+		config.items.push_back(new_room_item)
 
-func get_room_item_copy():
+func get_item():
 	if room_item == null:
 		printerr("ROOM ITEM NOT SELECTED")
-		return
+		return null
 
 	if config == null:
 		config = RoomConfiguration.new()
@@ -82,3 +85,14 @@ func add_as_completed_config(_value: bool):
 
 func clear_current_config(_value: bool):
 	config = null
+
+func set_new_room(_value: bool):
+	if room_reference == null:
+		printerr("NO ROOM REFERENCE SET")
+		return
+	var room: Room = get_node(room_reference)
+	if room == null or not room is Room:
+		printerr("ROOM IS NOT OF TYPE ROOM")
+		return
+	room.data.waves = []
+	room.data.completed_room = null

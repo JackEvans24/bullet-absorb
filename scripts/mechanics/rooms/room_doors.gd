@@ -3,10 +3,20 @@ extends Node3D
 
 enum Walls {NORTH = 1, SOUTH = 2, EAST = 4, WEST = 8}
 
-@onready var north_door: Door = $DoorNorth
-@onready var south_door: Door = $DoorSouth
-@onready var east_door: Door = $DoorEast
-@onready var west_door: Door = $DoorWest
+var north_door: Door
+var south_door: Door
+var east_door: Door
+var west_door: Door
+
+func _ready():
+	if has_node("DoorNorth"):
+		north_door = $DoorNorth
+	if has_node("DoorSouth"):
+		south_door = $DoorSouth
+	if has_node("DoorEast"):
+		east_door = $DoorEast
+	if has_node("DoorWest"):
+		west_door = $DoorWest
 
 func doors_need_changing(doors: int) -> bool:
 	if north_door != null&&(doors&Walls.NORTH != 0) == north_door.is_closed:

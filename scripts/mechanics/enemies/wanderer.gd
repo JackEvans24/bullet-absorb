@@ -17,9 +17,9 @@ func _ready():
 func _on_intro_animation_start():
 	spawn_tube.play_animation()
 
-func _on_intro_animation_complete():
+func activate_enemy():
 	look_at_target.pivot = pivot
-	call_deferred("set_hit_detection")
+	call_deferred("activate_knockback")
 	spawn_tube.call_deferred("queue_free")
 	behaviour_timer.restart()
 

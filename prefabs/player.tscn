@@ -153,7 +153,6 @@ script = ExtResource("3_60agh")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_pcwtq")
-starting_health = 3.0
 recovery_time = 1.6
 
 [node name="Aim" type="Node" parent="."]

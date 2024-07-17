@@ -14,8 +14,8 @@ func _ready():
 func _on_intro_start():
 	spawn_tube.play_animation()
 
-func _on_intro_complete():
-	call_deferred("set_hit_detection")
+func activate_enemy():
+	call_deferred("activate_knockback")
 	spawn_tube.call_deferred("queue_free")
 	behaviour_timer.restart()
 

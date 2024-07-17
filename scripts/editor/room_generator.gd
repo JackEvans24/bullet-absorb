@@ -20,7 +20,7 @@ const VERTICAL_DOOR_OFFSET := Vector3(0.5, 0, 0)
 var doorway_rotations: Array[int] = [ROT_SOUTH, ROT_EAST, ROT_NORTH, ROT_WEST]
 
 @export_group("Size")
-@export var depth := 6
+@export var depth := 10
 @export var width := 14
 
 @export_group("Detection")
@@ -30,7 +30,8 @@ var doorway_rotations: Array[int] = [ROT_SOUTH, ROT_EAST, ROT_NORTH, ROT_WEST]
 @export_group("Doors")
 @export var door_scene: PackedScene = preload("res://prefabs/room/door.tscn")
 @export_flags("NORTH", "SOUTH", "EAST", "WEST") var start_doors := 2
-@export_flags("NORTH", "SOUTH", "EAST", "WEST") var end_doors := 12
+@export_flags("NORTH", "SOUTH", "EAST", "WEST") var end_doors := 14
+@export var door_offsets: Vector4 = Vector4(0, 0, 4, -4)
 
 var scene: Node
 var room: Node3D
@@ -76,13 +77,13 @@ func generate_room():
 
 	# Set start_doors
 	if (start_doors&1 != 0) or (end_doors&1 != 0):
-		add_door(Vector3(0, 0, -depth), DoorDirection.North)
+		add_door(Vector3(0, 0, -depth), DoorDirection.North, door_offsets.x)
 	if (start_doors&2 != 0) or (end_doors&2 != 0):
-		add_door(Vector3(0, 0, depth - 1), DoorDirection.South)
+		add_door(Vector3(0, 0, depth - 1), DoorDirection.South, door_offsets.y)
 	if (start_doors&4 != 0) or (end_doors&4 != 0):
-		add_door(Vector3(width - 1, 0, 0), DoorDirection.East)
+		add_door(Vector3(width - 1, 0, 0), DoorDirection.East, door_offsets.z)
 	if (start_doors&8 != 0) or (end_doors&8 != 0):
-		add_door(Vector3( - width, 0, 0), DoorDirection.West)
+		add_door(Vector3( - width, 0, 0), DoorDirection.West, door_offsets.w)
 
 	# Set player detection space
 	var detection_shape: CollisionShape3D = scene.get_node("Room/PlayerDetection/Shape")
@@ -102,15 +103,15 @@ func remove_children_from(removal_node: Node):
 func clear_grid(_value: bool):
 	grid.clear()
 
-func add_door(door_position: Vector3, door_rotation_index: DoorDirection) -> Node3D:
+func add_door(door_position: Vector3, door_rotation_index: DoorDirection, offset: int) -> Node3D:
 	var is_horizontal_door = door_rotation_index % 2 == 0
 	var grid_direction := Vector3.RIGHT if is_horizontal_door else Vector3.BACK
 
-	for x in range( - 3, 3):
+	for x in range(offset - 3, offset + 3):
 		var cell = door_position + (grid_direction * x)
-		if x == (-3):
+		if x == (offset - 3):
 			grid.set_cell_item(cell, DOOR_SUPPORT_ITEM, ROT_NORTH if is_horizontal_door else ROT_WEST)
-		elif x == 2:
+		elif x == offset + 2:
 			grid.set_cell_item(cell, DOOR_SUPPORT_ITEM, ROT_SOUTH if is_horizontal_door else ROT_EAST)
 		else:
 			grid.set_cell_item(cell, FLOOR_ITEM)
@@ -121,8 +122,9 @@ func add_door(door_position: Vector3, door_rotation_index: DoorDirection) -> Nod
 	door.name = door_name
 	door.owner = scene
 
-	var door_offset := HORIZONTAL_DOOR_OFFSET if is_horizontal_door else VERTICAL_DOOR_OFFSET
-	door.position = door_position + door_offset
+	var door_cell_offset := HORIZONTAL_DOOR_OFFSET if is_horizontal_door else VERTICAL_DOOR_OFFSET
+	var door_placement_offset := (VERTICAL_DOOR_OFFSET if is_horizontal_door else HORIZONTAL_DOOR_OFFSET) * 2 * offset
+	door.position = door_position + door_cell_offset + door_placement_offset
 	door.rotate_y(door_rotation_index * PI / 2.0)
 
 	return door

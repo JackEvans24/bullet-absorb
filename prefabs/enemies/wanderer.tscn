@@ -177,10 +177,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 [node name="WindupParticles" parent="Pivot" index="4" instance=ExtResource("5_m2mse")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.2, -1.2)
 
-[node name="DropPower" parent="." index="5"]
-power_drop_count = 4
-
-[node name="Movement" type="Node3D" parent="." index="6"]
+[node name="Movement" type="Node3D" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("6_fwebo")
 speed = 4.0
@@ -189,9 +186,9 @@ speed = 4.0
 target_position = Vector3(0, 0, 3)
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="Fire" parent="." index="7" instance=ExtResource("3_vvdtc")]
+[node name="Fire" parent="." index="6" instance=ExtResource("3_vvdtc")]
 
-[node name="BehaviourTimer" type="Timer" parent="." index="8"]
+[node name="BehaviourTimer" type="Timer" parent="." index="7"]
 script = ExtResource("5_b2h5o")
 
 [node name="Walk" type="Node" parent="BehaviourTimer" index="0"]
@@ -214,10 +211,10 @@ iterations = 3
 script = ExtResource("6_wqc6m")
 duration = 0.4
 
-[node name="LookAtTarget" parent="." index="9" instance=ExtResource("2_4ualn")]
+[node name="LookAtTarget" parent="." index="8" instance=ExtResource("2_4ualn")]
 max_rotation = 10.0
 
-[node name="Animator" type="AnimationPlayer" parent="." index="10"]
+[node name="Animator" type="AnimationPlayer" parent="." index="9"]
 libraries = {
 "": SubResource("AnimationLibrary_8w2wq")
 }
