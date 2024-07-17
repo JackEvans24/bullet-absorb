@@ -2,39 +2,45 @@
 
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room.gd" id="1_56yug"]
 [ext_resource type="Script" path="res://scripts/data/room_data.gd" id="2_05qob"]
-[ext_resource type="Script" path="res://scripts/data/room_item.gd" id="3_8ks7b"]
+[ext_resource type="Script" path="res://scripts/data/room_enemy.gd" id="3_fa1og"]
 [ext_resource type="Script" path="res://scripts/data/room_configuration.gd" id="4_q3kpk"]
 [ext_resource type="MeshLibrary" uid="uid://bydmgvg8cpigh" path="res://models/rooms/room_mesh_library.tres" id="5_6tto7"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room_doors.gd" id="6_ndfdv"]
 [ext_resource type="PackedScene" uid="uid://ok4gfjcs3kol" path="res://prefabs/room/door.tscn" id="7_jcry8"]
 
-[sub_resource type="Resource" id="Resource_cycvg"]
-script = ExtResource("3_8ks7b")
+[sub_resource type="Resource" id="Resource_0shh4"]
+script = ExtResource("3_fa1og")
+health = 3
+power_count = 5
 item_type = 0
-position = Vector3(-2, 0, -4)
+position = Vector3(-2, 0, 4)
 delay = 1.0
 
-[sub_resource type="Resource" id="Resource_2vnew"]
-script = ExtResource("3_8ks7b")
+[sub_resource type="Resource" id="Resource_e8f2w"]
+script = ExtResource("3_fa1og")
+health = 3
+power_count = 5
 item_type = 0
-position = Vector3(5, 0, 2)
-delay = 1.5
+position = Vector3(2, 0, -4)
+delay = 1.8
 
 [sub_resource type="Resource" id="Resource_j75ye"]
 script = ExtResource("4_q3kpk")
-enemies = Array[ExtResource("3_8ks7b")]([SubResource("Resource_cycvg"), SubResource("Resource_2vnew")])
-items = Array[ExtResource("3_8ks7b")]([])
+enemies = Array[Resource("res://scripts/data/room_item.gd")]([SubResource("Resource_0shh4"), SubResource("Resource_e8f2w")])
+items = Array[Resource("res://scripts/data/room_item.gd")]([])
 
-[sub_resource type="Resource" id="Resource_dq3bj"]
-script = ExtResource("3_8ks7b")
+[sub_resource type="Resource" id="Resource_ik524"]
+script = ExtResource("3_fa1og")
+health = 6
+power_count = 8
 item_type = 2
 position = Vector3(0, 0, -2)
-delay = 1.5
+delay = 1.2
 
 [sub_resource type="Resource" id="Resource_bagf6"]
 script = ExtResource("4_q3kpk")
-enemies = Array[ExtResource("3_8ks7b")]([SubResource("Resource_dq3bj")])
-items = Array[ExtResource("3_8ks7b")]([])
+enemies = Array[Resource("res://scripts/data/room_item.gd")]([SubResource("Resource_ik524")])
+items = Array[Resource("res://scripts/data/room_item.gd")]([])
 
 [sub_resource type="Resource" id="Resource_rh0dp"]
 script = ExtResource("2_05qob")
