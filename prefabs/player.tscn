@@ -157,6 +157,7 @@ recovery_time = 1.6
 
 [node name="Aim" type="Node" parent="."]
 script = ExtResource("10_gaav5")
+fire_point_ref = NodePath("../Pivot/FirePoint")
 cooldown = 0.01
 bullet_scene = ExtResource("5_twt6l")
 
@@ -216,6 +217,9 @@ skeleton = NodePath("../..")
 [node name="Nose" type="MeshInstance3D" parent="Pivot"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.5, -0.6)
 mesh = SubResource("CylinderMesh_ugy6r")
+
+[node name="FirePoint" type="Node3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2)
 
 [node name="HurtParticles" type="GPUParticles3D" parent="Pivot"]
 cast_shadow = 0

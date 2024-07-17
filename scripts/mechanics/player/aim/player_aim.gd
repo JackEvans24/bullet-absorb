@@ -3,14 +3,15 @@ extends Node
 
 signal bullet_fired
 
+@export var fire_point_ref: NodePath
 @export var cooldown = 0.05
 @export var bullet_scene: PackedScene
 
 @onready var controller_aim: ControllerAimDirection = $ControllerAim
 @onready var mouse_aim: MouseAimDirection = $MouseAim
+@onready var fire_point: Node3D = get_node(fire_point_ref)
 var aim_service: AimDirection
 
-var pivot: Node3D
 var aim_direction: Vector3 = Vector3.FORWARD
 
 var can_aim = true
@@ -20,10 +21,7 @@ var has_ammo = false
 
 func _ready():
 	aim_service = mouse_aim
-
-func initialise(body_pivot: Node3D):
-	pivot = body_pivot
-	mouse_aim.player = pivot
+	mouse_aim.player = fire_point
 
 func _process(_delta: float):
 	if not can_aim:
@@ -57,8 +55,8 @@ func fire():
 	var bullet = bullet_scene.instantiate()
 	tree.root.add_child(bullet)
 
-	bullet.global_position = pivot.global_position
-	bullet.initialise(pivot.basis)
+	bullet.global_position = fire_point.global_position
+	bullet.initialise(fire_point.global_basis)
 
 	bullet_fired.emit()
 

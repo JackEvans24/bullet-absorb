@@ -49,7 +49,6 @@ func _ready():
 
 	hit_detection.area_entered.connect(_on_hit)
 
-	aim.initialise(body)
 	dash.initialise(move_state, body)
 
 func _physics_process(_delta):
