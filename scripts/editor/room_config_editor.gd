@@ -4,6 +4,7 @@ class_name RoomConfigEditor
 extends Node3D
 
 @export var room_reference: NodePath
+@export var new_room: bool = false: set = set_new_room
 
 @export_group("Items")
 @export var room_item: RoomItem.RoomItemType
@@ -82,3 +83,14 @@ func add_as_completed_config(_value: bool):
 
 func clear_current_config(_value: bool):
 	config = null
+
+func set_new_room(_value: bool):
+	if room_reference == null:
+		printerr("NO ROOM REFERENCE SET")
+		return
+	var room: Room = get_node(room_reference)
+	if room == null or not room is Room:
+		printerr("ROOM IS NOT OF TYPE ROOM")
+		return
+	room.data.waves = []
+	room.data.completed_room = null
