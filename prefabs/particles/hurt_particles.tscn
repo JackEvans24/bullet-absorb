@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cjvpl2fcwu246"]
 
-[ext_resource type="Material" uid="uid://27228lk7d3am" path="res://materials/enemy/enemy_shine.tres" id="1_gvl6i"]
+[ext_resource type="Material" uid="uid://bh15v0ftuakdk" path="res://materials/enemy/enemy_hurt.tres" id="1_7bf7t"]
 [ext_resource type="Script" path="res://scripts/effects/one_shot_particles.gd" id="2_kqr2q"]
 
 [sub_resource type="Curve" id="Curve_jenfi"]
@@ -24,7 +24,7 @@ scale_max = 0.4
 scale_curve = SubResource("CurveTexture_dceoy")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_uyx0q"]
-material = ExtResource("1_gvl6i")
+material = ExtResource("1_7bf7t")
 top_radius = 0.01
 bottom_radius = 0.1
 radial_segments = 12
