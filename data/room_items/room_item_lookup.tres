@@ -12,26 +12,41 @@
 script = ExtResource("2_vuhso")
 item_type = 0
 scene = ExtResource("1_12avm")
+is_enemy = true
+health = 3
+power_count = 5
 
 [sub_resource type="Resource" id="Resource_nu8n2"]
 script = ExtResource("2_vuhso")
 item_type = 1
 scene = ExtResource("3_8eith")
+is_enemy = true
+health = 8
+power_count = 10
 
 [sub_resource type="Resource" id="Resource_w0cpm"]
 script = ExtResource("2_vuhso")
 item_type = 2
 scene = ExtResource("4_f5fad")
+is_enemy = true
+health = 6
+power_count = 8
 
 [sub_resource type="Resource" id="Resource_6nd6y"]
 script = ExtResource("2_vuhso")
 item_type = 3
 scene = ExtResource("5_s0mow")
+is_enemy = false
+health = 0
+power_count = 0
 
 [sub_resource type="Resource" id="Resource_j8xqv"]
 script = ExtResource("2_vuhso")
 item_type = 4
 scene = ExtResource("6_8wk7t")
+is_enemy = false
+health = 0
+power_count = 0
 
 [resource]
 script = ExtResource("1_50kb5")

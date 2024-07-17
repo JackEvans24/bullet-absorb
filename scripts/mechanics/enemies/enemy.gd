@@ -5,7 +5,6 @@ signal died
 
 @export var hurt_particles_scene: PackedScene
 @export var orb_scene: PackedScene
-@export var orb_power_count := 3
 @export var knockback_material: Material
 
 @onready var health: Health = $Health
@@ -16,12 +15,16 @@ signal died
 
 var meshes: Array[MeshInstance3D] = []
 
+var orb_power_count := 3
+var starting_health := 3
+
 var is_dead := false
 var knockback_active := false
 
 func _ready():
 	get_meshes_recursive(pivot)
 	set_hit_detection()
+	health.current_health = starting_health
 
 func get_meshes_recursive(node: Node):
 	for child in node.get_children():
@@ -39,9 +42,9 @@ func set_hit_detection():
 func activate_knockback():
 	knockback_active = true
 
-func initialise(config: RoomEnemy):
-	health.current_health = config.health
-	orb_power_count = config.power_count
+func initialise(max_health: int, power_count: int):
+	orb_power_count = power_count
+	starting_health = max_health
 
 func _physics_process(_delta):
 	velocity = knockback.knockback_direction

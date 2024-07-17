@@ -9,8 +9,6 @@ extends Node3D
 @export_group("Items")
 @export var room_item: RoomItem.RoomItemType
 @export var delay: float = 1
-@export var health: int = 3
-@export var power_count: int = 5
 @export var add_enemy: bool = false: set = add_enemy_to_current_wave
 @export var add_item: bool = false: set = add_item_to_current_wave
 
@@ -24,26 +22,19 @@ func add_enemy_to_current_wave(_value: bool):
 	if not Engine.is_editor_hint():
 		return
 
-	if room_item == null:
-		printerr("ROOM ITEM NOT SELECTED")
-		return null
-
-	if config == null:
-		config = RoomConfiguration.new()
-
-	var new_enemy: RoomEnemy = RoomEnemy.new()
-	new_enemy.item_type = room_item
-	new_enemy.position = position
-	new_enemy.delay = delay
-	new_enemy.health = health
-	new_enemy.power_count = power_count
-
-	config.enemies.push_back(new_enemy)
+	var new_enemy: RoomItem = get_item()
+	if new_enemy:
+		config.enemies.push_back(new_enemy)
 
 func add_item_to_current_wave(_value: bool):
 	if not Engine.is_editor_hint():
 		return
 
+	var new_room_item: RoomItem = get_item()
+	if new_room_item:
+		config.items.push_back(new_room_item)
+
+func get_item():
 	if room_item == null:
 		printerr("ROOM ITEM NOT SELECTED")
 		return null
@@ -55,8 +46,7 @@ func add_item_to_current_wave(_value: bool):
 	new_room_item.item_type = room_item
 	new_room_item.position = position
 	new_room_item.delay = delay
-
-	config.items.push_back(new_room_item)
+	return new_room_item
 
 func add_wave_to_config(_value: bool):
 	if room_reference == null:
