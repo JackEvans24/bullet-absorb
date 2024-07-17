@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody3D
 
+signal bullet_fired
 signal power_count_changed(count: int)
 signal damage_taken
 signal can_dash_changed(can_dash: bool)
@@ -106,6 +107,8 @@ func _on_absorb():
 func _on_bullet_fired():
 	power_count = max(0, power_count - 1)
 	update_power_count()
+	
+	bullet_fired.emit()
 
 func update_power_count():
 	power_count_changed.emit(power_count)

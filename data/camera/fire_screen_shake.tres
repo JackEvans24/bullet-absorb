@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ScreenShakeProfile" load_steps=2 format=3 uid="uid://cbvf42uftrfll"]
+
+[ext_resource type="Script" path="res://scripts/camera/screen_shake_profile.gd" id="1_346qg"]
+
+[resource]
+script = ExtResource("1_346qg")
+punch = 1.0
+tremolo = 2
+decay = 5.0
+impulse_max = Vector3(0.5, 0.5, 0)
+roll_max = 0.02
