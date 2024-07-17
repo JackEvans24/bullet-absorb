@@ -21,7 +21,7 @@ var doorway_rotations: Array[int] = [ROT_SOUTH, ROT_EAST, ROT_NORTH, ROT_WEST]
 
 @export_group("Size")
 @export var depth := 10
-@export var width := 10
+@export var width := 14
 
 @export_group("Detection")
 @export var detection_offset := 4.0
@@ -30,8 +30,8 @@ var doorway_rotations: Array[int] = [ROT_SOUTH, ROT_EAST, ROT_NORTH, ROT_WEST]
 @export_group("Doors")
 @export var door_scene: PackedScene = preload("res://prefabs/room/door.tscn")
 @export_flags("NORTH", "SOUTH", "EAST", "WEST") var start_doors := 2
-@export_flags("NORTH", "SOUTH", "EAST", "WEST") var end_doors := 12
-@export var door_offsets: Vector4 = Vector4(0, 0, 1, 0)
+@export_flags("NORTH", "SOUTH", "EAST", "WEST") var end_doors := 14
+@export var door_offsets: Vector4 = Vector4(0, 0, 4, -4)
 
 var scene: Node
 var room: Node3D
