@@ -103,7 +103,7 @@ power_count = 20
 
 [node name="HitStop" type="Node" parent="."]
 script = ExtResource("8_dyhou")
-freeze_duration = 0.04
+freeze_duration = 0.08
 
 [node name="Cameras" parent="." instance=ExtResource("4_nws0m")]
 

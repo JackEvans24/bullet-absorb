@@ -33,11 +33,11 @@ func restart_game():
 
 func _on_damage_taken():
 	hit_stop.freeze()
-	cameras.add_impulse()
+	cameras.add_impulse(2.0)
 	hud._on_health_changed(player.current_health)
 
 func _on_bullet_fired():
 	cameras.add_impulse(1.0, fire_screen_shake_profile)
 
 func _on_room_doors_changed():
-	cameras.add_impulse(0.8, doors_changed_screen_shake_profile)
+	cameras.add_impulse(1.0, doors_changed_screen_shake_profile)
