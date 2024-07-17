@@ -27,6 +27,7 @@ func _on_player_entered(body: Node3D):
 
 func on_first_entry():
 	if len(data.waves) <= 0:
+		set_room_complete()
 		return
 
 	close_all_doors()
@@ -75,7 +76,9 @@ func on_wave_complete():
 	if wave_index < len(data.waves):
 		set_room_configuration(data.waves[wave_index])
 		return
+	set_room_complete()
 
+func set_room_complete():
 	set_doors(data.completed_doors)
 	set_room_configuration(data.completed_room)
 
