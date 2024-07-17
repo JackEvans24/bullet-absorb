@@ -39,6 +39,10 @@ func set_hit_detection():
 func activate_knockback():
 	knockback_active = true
 
+func initialise(config: RoomEnemy):
+	health.current_health = config.health
+	orb_power_count = config.power_count
+
 func _physics_process(_delta):
 	velocity = knockback.knockback_direction
 	move_and_slide()
@@ -90,6 +94,8 @@ func die():
 	died.emit()
 
 func drop_orb():
+	if orb_power_count <= 0:
+		return
 	var orb = orb_scene.instantiate()
 	orb.power_count = orb_power_count
 	get_tree().root.add_child(orb)

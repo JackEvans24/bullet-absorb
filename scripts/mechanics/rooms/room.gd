@@ -42,10 +42,11 @@ func set_room_configuration(config: RoomConfiguration):
 	for item_config in config.items:
 		add_item(item_config)
 
-func add_enemy(enemy_config: RoomItem):
+func add_enemy(enemy_config: RoomEnemy):
 	var enemy = await add_item(enemy_config) as Enemy
 	if enemy == null:
 		return
+	enemy.initialise(enemy_config)
 	enemy.set_target(player)
 	enemy.died.connect(_on_enemy_died)
 
