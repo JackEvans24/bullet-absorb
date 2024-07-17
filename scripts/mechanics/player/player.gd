@@ -46,6 +46,7 @@ func _ready():
 	absorb.bullet_absorbed.connect(_on_absorb)
 	absorb.slowdown_started.connect(_on_slowdown_started)
 	absorb.slowdown_ended.connect(_on_slowdown_ended)
+	absorb.absorb_triggered.connect(_on_bullet_fired)
 
 	hit_detection.area_entered.connect(_on_hit)
 
@@ -106,7 +107,6 @@ func _on_absorb():
 func _on_bullet_fired():
 	power_count = max(0, power_count - 1)
 	update_power_count()
-	
 	bullet_fired.emit()
 
 func update_power_count():
@@ -122,3 +122,6 @@ func _on_slowdown_started():
 func _on_slowdown_ended():
 	move_state.transition_to(MoveStateConstants.STATE_RUN)
 	aim.can_fire = true
+
+func _on_absorb_triggered():
+	bullet_fired.emit()
