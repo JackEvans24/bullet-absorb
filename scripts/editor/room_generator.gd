@@ -77,13 +77,13 @@ func generate_room():
 
 	# Set start_doors
 	if (start_doors&1 != 0) or (end_doors&1 != 0):
-		add_door(Vector3(0, 0, -depth), DoorDirection.North, door_offsets.w)
+		add_door(Vector3(0, 0, -depth), DoorDirection.North, door_offsets.x)
 	if (start_doors&2 != 0) or (end_doors&2 != 0):
-		add_door(Vector3(0, 0, depth - 1), DoorDirection.South, door_offsets.x)
+		add_door(Vector3(0, 0, depth - 1), DoorDirection.South, door_offsets.y)
 	if (start_doors&4 != 0) or (end_doors&4 != 0):
-		add_door(Vector3(width - 1, 0, 0), DoorDirection.East, door_offsets.y)
+		add_door(Vector3(width - 1, 0, 0), DoorDirection.East, door_offsets.z)
 	if (start_doors&8 != 0) or (end_doors&8 != 0):
-		add_door(Vector3( - width, 0, 0), DoorDirection.West, door_offsets.z)
+		add_door(Vector3( - width, 0, 0), DoorDirection.West, door_offsets.w)
 
 	# Set player detection space
 	var detection_shape: CollisionShape3D = scene.get_node("Room/PlayerDetection/Shape")
