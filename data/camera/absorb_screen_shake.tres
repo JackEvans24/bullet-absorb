@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_6xe5b")
-initial_impulse = 1.0
+priority = 1
 punch = 1.0
 tremolo = 2
 decay = 3.0

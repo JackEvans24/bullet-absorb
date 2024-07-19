@@ -23,12 +23,12 @@ func add_impulse(id: ScreenShakeMapping.ScreenShakeId):
 	if found_profile == null:
 		printerr("No screen shake mapping profile found for ID: %s" % ScreenShakeMapping.ScreenShakeId.keys()[id])
 		return
+
+	if profile != null and profile.priority > found_profile.priority:
+		return
 	profile = found_profile
 
-	if impulse > profile.initial_impulse:
-		return
-
-	impulse = profile.initial_impulse
+	impulse = 1.0
 	noise_y = 0
 	noise.seed = randi_range(0, 99999)
 

@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_cdvbg")
-initial_impulse = 2.0
+priority = 10
 punch = 2.0
 tremolo = 5
-decay = 1.5
-impulse_max = Vector3(1.5, 1, 0)
-roll_max = 0.05
+decay = 1.0
+impulse_max = Vector3(3, 2, 0)
+roll_max = 0.1
