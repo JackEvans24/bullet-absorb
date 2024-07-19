@@ -9,8 +9,11 @@ extends Node
 @onready var rooms: RoomController = $World/Rooms
 @onready var cameras: CameraController = $Cameras
 @onready var hit_stop: HitStop = $HitStop
+@onready var save_game: SaveGame = $SaveGame
 
 func _ready():
+	save_game.load()
+
 	cameras.target = player.camera_follow_point
 
 	player.damage_taken.connect(_on_damage_taken)
