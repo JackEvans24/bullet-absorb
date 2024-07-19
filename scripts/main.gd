@@ -29,9 +29,10 @@ func initialise_rooms():
 	rooms.room_reentered.connect(_on_room_reentered)
 
 func initialise_player():
-	var current_room = rooms.get_room(save_game.data.current_room)
-	if current_room:
-		player.global_position = current_room.global_position
+	if save_game.data.current_room:
+		var current_room = rooms.get_room(save_game.data.current_room)
+		if current_room:
+			player.global_position = current_room.global_position
 
 	player.damage_taken.connect(_on_damage_taken)
 	player.bullet_fired.connect(_on_bullet_fired)
