@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_cdvbg")
-priority = 10
+priority = 100
 punch = 2.0
 tremolo = 5
 decay = 1.0

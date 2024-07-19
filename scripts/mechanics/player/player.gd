@@ -2,11 +2,13 @@ class_name Player
 extends CharacterBody3D
 
 signal bullet_fired
-signal absorb_triggered
+signal absorb_state_changed(absorb_state: AbsorbState)
 signal power_count_changed(count: int)
 signal damage_taken
 signal can_dash_changed(can_dash: bool)
 signal died
+
+enum AbsorbState {Started, Cancelled, Complete}
 
 @export var max_power = 20
 
@@ -118,11 +120,11 @@ func _on_hit(area: Area3D):
 
 func _on_slowdown_started():
 	move_state.transition_to(MoveStateConstants.STATE_ABSORB)
-	aim.can_fire = false
+	absorb_state_changed.emit(AbsorbState.Started)
 
 func _on_slowdown_ended():
 	move_state.transition_to(MoveStateConstants.STATE_RUN)
-	aim.can_fire = true
+	absorb_state_changed.emit(AbsorbState.Cancelled)
 
 func _on_absorb_triggered():
-	absorb_triggered.emit()
+	absorb_state_changed.emit(AbsorbState.Complete)
