@@ -1,6 +1,8 @@
 class_name SaveGame
 extends Node
 
+@export var start_room_override: String
+
 var SAVE_FILE_PATH := "user://bullet_absorb.save"
 var data := SaveGameData.new()
 
@@ -12,6 +14,7 @@ func save():
 func load():
 	if not FileAccess.file_exists(SAVE_FILE_PATH):
 		print("File not found")
+		overwrite_start_room()
 		return
 
 	var save_file = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)
@@ -20,9 +23,17 @@ func load():
 	var parse_result = json.parse(save_file.get_as_text())
 	if parse_result != OK:
 		print("JSON parse error: ", json.get_error_message())
+		overwrite_start_room()
 		return
 
 	data.read(json.data)
+	overwrite_start_room()
+
+func overwrite_start_room():
+	if not start_room_override:
+		return
+	if not data.completed_rooms.has(start_room_override):
+		data.completed_rooms.push_back(start_room_override)
 
 func add_completed_room(room_id: String):
 	if data.completed_rooms.has(room_id):
