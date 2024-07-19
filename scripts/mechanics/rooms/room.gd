@@ -25,6 +25,8 @@ func _on_player_entered(body: Node3D):
 	if completed:
 		room_reentered.emit(data.room_name)
 
+	if player != null:
+		return
 	player = body
 	call_deferred("on_first_entry")
 
