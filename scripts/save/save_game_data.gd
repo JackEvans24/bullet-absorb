@@ -1,6 +1,6 @@
 class_name SaveGameData
 
-var saved_int: int = 1
+var completed_rooms: Array = []
 
 func to_dictionary() -> Dictionary:
     var dict: Dictionary = {}

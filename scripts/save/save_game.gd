@@ -16,10 +16,18 @@ func load():
 
 	var save_file = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)
 
-    var json: JSON = JSON.new()
-    var parse_result = json.parse(save_file.get_as_text())
-    if parse_result != OK:
-        print("JSON parse error: ", json.get_error_message())
-        return
+	var json: JSON = JSON.new()
+	var parse_result = json.parse(save_file.get_as_text())
+	if parse_result != OK:
+		print("JSON parse error: ", json.get_error_message())
+		return
 
-    data.read(json.data)
+	data.read(json.data)
+
+func add_completed_room(room_id: String):
+	if data.completed_rooms.has(room_id):
+		printerr("Room %s already marked as completed" % room_id)
+		return
+
+	data.completed_rooms.push_back(room_id)
+	save()
