@@ -38,6 +38,7 @@ func overwrite_start_room():
 		return
 	if not data.completed_rooms.has(start_room_override):
 		data.completed_rooms.push_back(start_room_override)
+	data.current_room = start_room_override
 
 func add_completed_room(room_id: String):
 	if data.completed_rooms.has(room_id):
@@ -45,4 +46,6 @@ func add_completed_room(room_id: String):
 		return
 
 	data.completed_rooms.push_back(room_id)
+	data.current_room = room_id
+
 	save()

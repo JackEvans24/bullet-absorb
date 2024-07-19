@@ -13,9 +13,24 @@ extends Node
 
 func _ready():
 	save_game.load()
-	rooms.initialise(save_game.data)
+
+	initialise_rooms()
+	initialise_player()
 
 	cameras.target = player.camera_follow_point
+
+	hud.initialise_max_values(player.max_health, player.max_power)
+	hud._on_health_changed(player.current_health)
+
+func initialise_rooms():
+	rooms.initialise(save_game.data)
+	rooms.doors_changed.connect(_on_room_doors_changed)
+	rooms.room_completed.connect(_on_room_completed)
+
+func initialise_player():
+	var current_room = rooms.get_room(save_game.data.current_room)
+	if current_room:
+		player.global_position = current_room.global_position
 
 	player.damage_taken.connect(_on_damage_taken)
 	player.bullet_fired.connect(_on_bullet_fired)
@@ -23,12 +38,6 @@ func _ready():
 	player.power_count_changed.connect(hud._on_absorb_count_changed)
 	player.can_dash_changed.connect(hud._on_can_dash_changed)
 	player.died.connect(hud._on_player_died)
-
-	rooms.doors_changed.connect(_on_room_doors_changed)
-	rooms.room_completed.connect(_on_room_completed)
-
-	hud.initialise_max_values(player.max_health, player.max_power)
-	hud._on_health_changed(player.current_health)
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("restart"):

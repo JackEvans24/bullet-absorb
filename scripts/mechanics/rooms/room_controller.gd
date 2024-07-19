@@ -25,6 +25,12 @@ func initialise(data: SaveGameData):
 
 		rooms[room.data.room_name] = room
 
+func get_room(id: String) -> Room:
+	if not rooms.has(id):
+		printerr("Trying to retrieve room that doesn't exist: ", id)
+		return null
+	return rooms[id]
+
 func _on_room_doors_changed():
 	doors_changed.emit()
 
