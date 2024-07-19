@@ -30,6 +30,8 @@ func load():
 	overwrite_start_room()
 
 func overwrite_start_room():
+	if not OS.has_feature("debug"):
+		return
 	if not start_room_override:
 		return
 	if not data.completed_rooms.has(start_room_override):
