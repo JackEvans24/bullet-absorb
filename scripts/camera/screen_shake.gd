@@ -1,12 +1,13 @@
 class_name ScreenShake
 extends Node
 
-@export var default_profile: ScreenShakeProfile
+@export var lookup: ScreenShakeLookup
 
 var cameras: Array[Node3D] = []
 
 @onready var noise = FastNoiseLite.new()
-@onready var profile = default_profile
+
+var profile: ScreenShakeProfile
 
 var impulse: float = 0.0
 var noise_y: int = 0
@@ -17,12 +18,17 @@ var roll: float = 0.0
 func register(camera: Node3D):
 	cameras.push_back(camera)
 
-func add_impulse(impulse_amount: float, requested_profile: ScreenShakeProfile):
-	if impulse > impulse_amount:
+func add_impulse(id: ScreenShakeMapping.ScreenShakeId):
+	var found_profile = lookup.get_profile(id)
+	if found_profile == null:
+		printerr("No screen shake mapping profile found for ID: %s" % ScreenShakeMapping.ScreenShakeId.keys()[id])
+		return
+	profile = found_profile
+
+	if impulse > profile.initial_impulse:
 		return
 
-	profile = requested_profile if requested_profile != null else default_profile
-	impulse = max(impulse, impulse_amount)
+	impulse = profile.initial_impulse
 	noise_y = 0
 	noise.seed = randi_range(0, 99999)
 

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/camera/camera_controller.gd" id="1_e4k7u"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/smooth_follow_target.gd" id="2_8gcvs"]
 [ext_resource type="Script" path="res://scripts/camera/screen_shake.gd" id="3_x5t8o"]
-[ext_resource type="Resource" uid="uid://bi5i45vcgwjkh" path="res://data/camera/hurt_screen_shake.tres" id="4_nxl7j"]
+[ext_resource type="Resource" uid="uid://cv1vcpb5gw185" path="res://data/camera/screen_shake_lookup.tres" id="4_f0l43"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85wj3"]
 albedo_color = Color(1, 0.583333, 0, 1)
@@ -52,4 +52,4 @@ mesh = SubResource("CylinderMesh_ugq1f")
 
 [node name="ScreenShake" type="Node" parent="."]
 script = ExtResource("3_x5t8o")
-default_profile = ExtResource("4_nxl7j")
+lookup = ExtResource("4_f0l43")

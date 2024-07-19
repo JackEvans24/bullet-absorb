@@ -1,9 +1,10 @@
 [gd_resource type="Resource" script_class="ScreenShakeProfile" load_steps=2 format=3 uid="uid://b0gxm5k1cyt46"]
 
-[ext_resource type="Script" path="res://scripts/camera/screen_shake_profile.gd" id="1_ygkeo"]
+[ext_resource type="Script" path="res://scripts/data/camera/screen_shake_profile.gd" id="1_6xe5b"]
 
 [resource]
-script = ExtResource("1_ygkeo")
+script = ExtResource("1_6xe5b")
+initial_impulse = 1.0
 punch = 1.0
 tremolo = 2
 decay = 3.0

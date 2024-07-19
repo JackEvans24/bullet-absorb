@@ -1,5 +1,7 @@
 class_name ScreenShakeProfile extends Resource
 
+@export var initial_impulse: float = 1.0
+
 @export var punch: float = 2.0
 @export var tremolo = 5
 @export var decay = 1.5
