@@ -46,10 +46,8 @@ func _on_absorb_state_changed(absorb_state: Player.AbsorbState):
 		Player.AbsorbState.Complete:
 			cameras.add_impulse(ScreenShakeMapping.ScreenShakeId.Absorb)
 		Player.AbsorbState.Started:
-			print("Started")
 			cameras.add_impulse(ScreenShakeMapping.ScreenShakeId.AbsorbWindup)
 		Player.AbsorbState.Cancelled:
-			print("Cancelled")
 			cameras.cancel_impulse(ScreenShakeMapping.ScreenShakeId.AbsorbWindup)
 
 func _on_room_doors_changed():
