@@ -38,6 +38,7 @@ items = Array[ExtResource("2_ap718")]([])
 
 [sub_resource type="Resource" id="Resource_q04wk"]
 script = ExtResource("4_2iqfq")
+room_name = "TurretRoom01"
 untouched_doors = 4
 completed_doors = 5
 waves = Array[ExtResource("3_kcqo2")]([SubResource("Resource_xk735"), SubResource("Resource_7rk2q")])
