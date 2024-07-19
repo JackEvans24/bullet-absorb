@@ -23,7 +23,7 @@ items = Array[ExtResource("2_nymi3")]([])
 script = ExtResource("4_d0pga")
 room_name = "MainRoom"
 untouched_doors = 2
-completed_doors = 12
+completed_doors = 14
 waves = Array[ExtResource("3_2ywox")]([SubResource("Resource_njpib")])
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xq1m6"]

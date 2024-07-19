@@ -13,6 +13,7 @@ extends Node
 
 func _ready():
 	save_game.load()
+	rooms.initialise(save_game.data)
 
 	cameras.target = player.camera_follow_point
 

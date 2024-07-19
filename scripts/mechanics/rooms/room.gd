@@ -14,6 +14,7 @@ var room_item_lookup: RoomItemLookup
 var player: Node3D
 var enemy_count = 0
 var wave_index = 0
+var completed := false
 
 func _ready():
 	set_doors(data.untouched_doors)
@@ -27,6 +28,8 @@ func _on_player_entered(body: Node3D):
 	call_deferred("on_first_entry")
 
 func on_first_entry():
+	if completed:
+		return
 	if len(data.waves) <= 0:
 		set_room_complete()
 		return
@@ -81,6 +84,7 @@ func set_room_complete():
 	set_doors(data.completed_doors)
 	set_room_configuration(data.completed_room)
 
+	completed = true
 	room_completed.emit(data.room_name)
 
 func close_all_doors():

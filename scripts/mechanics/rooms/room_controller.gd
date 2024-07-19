@@ -7,7 +7,7 @@ signal room_completed(room_id: String)
 
 var rooms: Dictionary
 
-func _ready():
+func initialise(data: SaveGameData):
 	var children = get_children()
 	for child in children:
 		var room = child as Room
@@ -19,6 +19,9 @@ func _ready():
 		room.room_item_lookup = room_item_lookup
 		room.doors_changed.connect(_on_room_doors_changed)
 		room.room_completed.connect(_on_room_completed)
+
+		if data.completed_rooms.has(room.data.room_name):
+			room.set_room_complete()
 
 		rooms[room.data.room_name] = room
 
