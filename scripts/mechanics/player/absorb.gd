@@ -4,6 +4,7 @@ extends Node3D
 signal bullet_absorbed
 signal slowdown_started
 signal slowdown_ended
+signal absorb_triggered
 
 @export var absorb_windup = 1.0
 @export var absorb_cooldown = 0.5
@@ -53,6 +54,8 @@ func process_absorb_state(delta):
 
 func trigger_absorb():
 	is_absorbing = true
+	
+	absorb_triggered.emit()
 
 	var overlapping_areas: Array[Area3D] = destoy_area.get_overlapping_areas()
 	for overlapping_area in overlapping_areas:

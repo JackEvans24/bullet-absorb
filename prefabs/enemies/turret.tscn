@@ -261,20 +261,20 @@ wait_time = 0.25
 one_shot = true
 script = ExtResource("5_128lh")
 
-[node name="Wait" type="Node" parent="FireTimer" index="0"]
-script = ExtResource("6_kudmq")
-duration = 1.4
-
-[node name="Windup" type="Node" parent="FireTimer" index="1"]
+[node name="Windup" type="Node" parent="FireTimer" index="0"]
 script = ExtResource("6_kudmq")
 duration = 0.6
 duration_randomness = 0.0
 
-[node name="Fire" type="Node" parent="FireTimer" index="2"]
+[node name="Fire" type="Node" parent="FireTimer" index="1"]
 script = ExtResource("6_kudmq")
 duration = 0.25
 duration_randomness = 0.0
 iterations = 5
+
+[node name="Wait" type="Node" parent="FireTimer" index="2"]
+script = ExtResource("6_kudmq")
+duration = 1.4
 
 [node name="Animator" type="AnimationPlayer" parent="." index="8"]
 libraries = {

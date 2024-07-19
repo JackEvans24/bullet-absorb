@@ -1,12 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://ccgpc6v5lruew"]
+[gd_scene load_steps=22 format=3 uid="uid://ccgpc6v5lruew"]
 
 [ext_resource type="PackedScene" uid="uid://c3tj0pdcum4wd" path="res://prefabs/player.tscn" id="1_e5x1h"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_rtjol"]
 [ext_resource type="PackedScene" uid="uid://bhxrs6pph350t" path="res://scenes/hud.tscn" id="2_bqahq"]
 [ext_resource type="Texture2D" uid="uid://b5lppbtmrhid0" path="res://textures/texture_07.png" id="2_jtr86"]
 [ext_resource type="Resource" uid="uid://da0sxh7vg3wxe" path="res://data/camera/doors_changed_screen_shake.tres" id="2_v7lto"]
+[ext_resource type="Resource" uid="uid://cbvf42uftrfll" path="res://data/camera/fire_screen_shake.tres" id="3_ange6"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room_controller.gd" id="3_yfuie"]
 [ext_resource type="PackedScene" uid="uid://cl1dul38xrvt2" path="res://prefabs/cameras.tscn" id="4_nws0m"]
+[ext_resource type="Resource" uid="uid://b0gxm5k1cyt46" path="res://data/camera/absorb_screen_shake.tres" id="4_ta7c2"]
 [ext_resource type="Resource" uid="uid://dfp6bwqqsvt21" path="res://data/room_items/room_item_lookup.tres" id="5_n6ls3"]
 [ext_resource type="MeshLibrary" uid="uid://bydmgvg8cpigh" path="res://models/rooms/room_mesh_library.tres" id="6_bqt0l"]
 [ext_resource type="PackedScene" uid="uid://wcooa5c7ivpk" path="res://prefabs/room/main_room.tscn" id="7_7vht0"]
@@ -46,6 +48,8 @@ volumetric_fog_gi_inject = 0.12
 [node name="Main" type="Node"]
 script = ExtResource("1_rtjol")
 doors_changed_screen_shake_profile = ExtResource("2_v7lto")
+fire_screen_shake_profile = ExtResource("3_ange6")
+absorb_screen_shake_profile = ExtResource("4_ta7c2")
 
 [node name="World" type="Node" parent="."]
 
@@ -96,7 +100,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -70)
 
 [node name="HitStop" type="Node" parent="."]
 script = ExtResource("8_dyhou")
-freeze_duration = 0.04
+freeze_duration = 0.06
 
 [node name="Cameras" parent="." instance=ExtResource("4_nws0m")]
 

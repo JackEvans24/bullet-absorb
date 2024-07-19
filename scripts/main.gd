@@ -1,6 +1,8 @@
 extends Node
 
 @export var doors_changed_screen_shake_profile: ScreenShakeProfile
+@export var fire_screen_shake_profile: ScreenShakeProfile
+@export var absorb_screen_shake_profile: ScreenShakeProfile
 
 @onready var hud: Hud = $HUD
 @onready var player: Player = $Player
@@ -12,6 +14,8 @@ func _ready():
 	cameras.target = player.camera_follow_point
 
 	player.damage_taken.connect(_on_damage_taken)
+	player.bullet_fired.connect(_on_bullet_fired)
+	player.absorb_triggered.connect(_on_absorb_triggered)
 	player.power_count_changed.connect(hud._on_absorb_count_changed)
 	player.can_dash_changed.connect(hud._on_can_dash_changed)
 	player.died.connect(hud._on_player_died)
@@ -31,8 +35,14 @@ func restart_game():
 
 func _on_damage_taken():
 	hit_stop.freeze()
-	cameras.add_impulse()
+	cameras.add_impulse(2.0)
 	hud._on_health_changed(player.current_health)
 
+func _on_bullet_fired():
+	cameras.add_impulse(1.0, fire_screen_shake_profile)
+
+func _on_absorb_triggered():
+	cameras.add_impulse(1.0, absorb_screen_shake_profile)
+
 func _on_room_doors_changed():
-	cameras.add_impulse(0.8, doors_changed_screen_shake_profile)
+	cameras.add_impulse(1.0, doors_changed_screen_shake_profile)
