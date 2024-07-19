@@ -2,6 +2,7 @@ class_name Player
 extends CharacterBody3D
 
 signal bullet_fired
+signal absorb_triggered
 signal power_count_changed(count: int)
 signal damage_taken
 signal can_dash_changed(can_dash: bool)
@@ -46,7 +47,7 @@ func _ready():
 	absorb.bullet_absorbed.connect(_on_absorb)
 	absorb.slowdown_started.connect(_on_slowdown_started)
 	absorb.slowdown_ended.connect(_on_slowdown_ended)
-	absorb.absorb_triggered.connect(_on_bullet_fired)
+	absorb.absorb_triggered.connect(_on_absorb_triggered)
 
 	hit_detection.area_entered.connect(_on_hit)
 
@@ -124,4 +125,4 @@ func _on_slowdown_ended():
 	aim.can_fire = true
 
 func _on_absorb_triggered():
-	bullet_fired.emit()
+	absorb_triggered.emit()

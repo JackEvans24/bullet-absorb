@@ -8,13 +8,13 @@
 [ext_resource type="Resource" uid="uid://cbvf42uftrfll" path="res://data/camera/fire_screen_shake.tres" id="3_ange6"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room_controller.gd" id="3_yfuie"]
 [ext_resource type="PackedScene" uid="uid://cl1dul38xrvt2" path="res://prefabs/cameras.tscn" id="4_nws0m"]
+[ext_resource type="Resource" uid="uid://b0gxm5k1cyt46" path="res://data/camera/absorb_screen_shake.tres" id="4_ta7c2"]
 [ext_resource type="Resource" uid="uid://dfp6bwqqsvt21" path="res://data/room_items/room_item_lookup.tres" id="5_n6ls3"]
 [ext_resource type="MeshLibrary" uid="uid://bydmgvg8cpigh" path="res://models/rooms/room_mesh_library.tres" id="6_bqt0l"]
 [ext_resource type="PackedScene" uid="uid://wcooa5c7ivpk" path="res://prefabs/room/main_room.tscn" id="7_7vht0"]
 [ext_resource type="Script" path="res://scripts/effects/hit_stop.gd" id="8_dyhou"]
 [ext_resource type="PackedScene" uid="uid://5e701h6hvc7k" path="res://prefabs/room/turret_room_01.tscn" id="8_x7uyg"]
 [ext_resource type="PackedScene" uid="uid://b3otul1w7kovw" path="res://prefabs/room/turret_room_02.tscn" id="9_74kno"]
-[ext_resource type="PackedScene" uid="uid://bcjb1jnr0y5mb" path="res://prefabs/power/power_generator.tscn" id="9_cyv5f"]
 [ext_resource type="PackedScene" uid="uid://c1mqri24a2jrw" path="res://prefabs/room/burster_room_01.tscn" id="10_7eh75"]
 [ext_resource type="PackedScene" uid="uid://dgtr6vndvupwl" path="res://prefabs/room/burster_room_02.tscn" id="11_ob6mw"]
 
@@ -49,6 +49,7 @@ volumetric_fog_gi_inject = 0.12
 script = ExtResource("1_rtjol")
 doors_changed_screen_shake_profile = ExtResource("2_v7lto")
 fire_screen_shake_profile = ExtResource("3_ange6")
+absorb_screen_shake_profile = ExtResource("4_ta7c2")
 
 [node name="World" type="Node" parent="."]
 
@@ -94,10 +95,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -32)
 
 [node name="BursterRoom02" parent="World/Rooms" instance=ExtResource("11_ob6mw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -70)
-
-[node name="PowerGenerator" parent="World" instance=ExtResource("9_cyv5f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
-power_count = 20
 
 [node name="HUD" parent="." instance=ExtResource("2_bqahq")]
 
