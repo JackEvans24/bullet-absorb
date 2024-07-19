@@ -2,6 +2,8 @@ class_name Room
 extends Node3D
 
 signal doors_changed
+signal room_completed(room_id: String)
+signal room_reentered(room_id: String)
 
 @export var data: RoomData
 
@@ -13,19 +15,22 @@ var room_item_lookup: RoomItemLookup
 var player: Node3D
 var enemy_count = 0
 var wave_index = 0
+var completed := false
 
 func _ready():
 	set_doors(data.untouched_doors)
 	player_detection.body_entered.connect(_on_player_entered)
 
 func _on_player_entered(body: Node3D):
-	if player != null:
-		return
-	player = body
+	if completed:
+		room_reentered.emit(data.room_name)
 
+	player = body
 	call_deferred("on_first_entry")
 
 func on_first_entry():
+	if completed:
+		return
 	if len(data.waves) <= 0:
 		set_room_complete()
 		return
@@ -79,6 +84,9 @@ func on_wave_complete():
 func set_room_complete():
 	set_doors(data.completed_doors)
 	set_room_configuration(data.completed_room)
+
+	completed = true
+	room_completed.emit(data.room_name)
 
 func close_all_doors():
 	set_doors(0)

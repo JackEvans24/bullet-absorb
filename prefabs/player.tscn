@@ -112,7 +112,6 @@ material = SubResource("StandardMaterial3D_rafrx")
 size = Vector3(0.05, 1, 0.05)
 
 [node name="Player" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 script = ExtResource("1_u023k")
 
@@ -173,6 +172,7 @@ script = ExtResource("12_j7rkf")
 script = ExtResource("11_s2u1f")
 
 [node name="Absorb" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("2_sawo1")
 absorb_windup = 0.6
 mesh_display_time = 0.1
@@ -208,6 +208,7 @@ process_material = SubResource("ParticleProcessMaterial_jewto")
 draw_pass_1 = SubResource("SphereMesh_cp26l")
 
 [node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("10_18rdm")
 default_material = ExtResource("2_di4ke")
 recovery_material = ExtResource("12_cbt3u")
@@ -265,9 +266,11 @@ skeleton = NodePath("../..")
 [node name="DistanceCheck" type="RayCast3D" parent="Pivot/Reticule"]
 
 [node name="GroundDetection" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = ExtResource("11_p7nyd")
 
 [node name="HitDetection" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 0
 collision_mask = 4
 monitorable = false
