@@ -1,12 +1,15 @@
 class_name ScreenShake
 extends Node
 
-@export var default_profile: ScreenShakeProfile
+@export var lookup: ScreenShakeLookup
+@export var impulse_override: float = 0.25
 
 var cameras: Array[Node3D] = []
 
 @onready var noise = FastNoiseLite.new()
-@onready var profile = default_profile
+
+var profile: ScreenShakeProfile
+var current_profile_id: ScreenShakeMapping.ScreenShakeId
 
 var impulse: float = 0.0
 var noise_y: int = 0
@@ -17,14 +20,33 @@ var roll: float = 0.0
 func register(camera: Node3D):
 	cameras.push_back(camera)
 
-func add_impulse(impulse_amount: float, requested_profile: ScreenShakeProfile):
-	if impulse > impulse_amount:
+func add_impulse(id: ScreenShakeMapping.ScreenShakeId):
+	var new_profile = lookup.get_profile(id)
+	if new_profile == null:
+		printerr("No screen shake mapping profile found for ID: %s" % ScreenShakeMapping.ScreenShakeId.keys()[id])
 		return
 
-	profile = requested_profile if requested_profile != null else default_profile
-	impulse = max(impulse, impulse_amount)
+	if has_lower_priority(new_profile):
+		return
+
+	profile = new_profile
+	current_profile_id = id
+
+	impulse = 1.0
 	noise_y = 0
 	noise.seed = randi_range(0, 99999)
+
+func has_lower_priority(new_profile: ScreenShakeProfile) -> bool:
+	if impulse <= impulse_override:
+		return false
+	if profile == null:
+		return false
+	return profile.priority > new_profile.priority
+
+func cancel_impulse(id: ScreenShakeMapping.ScreenShakeId):
+	if current_profile_id != id:
+		return
+	impulse = 0.0
 
 func _process(delta):
 	if impulse <= 0.0:

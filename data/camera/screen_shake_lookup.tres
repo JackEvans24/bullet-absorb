@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="ScreenShakeLookup" load_steps=13 format=3 uid="uid://cv1vcpb5gw185"]
+
+[ext_resource type="Script" path="res://scripts/data/camera/screen_shake_lookup.gd" id="1_hurk4"]
+[ext_resource type="Resource" uid="uid://bi5i45vcgwjkh" path="res://data/camera/hurt_screen_shake.tres" id="1_ln5ab"]
+[ext_resource type="Script" path="res://scripts/data/camera/screen_shake_mapping.gd" id="2_ij0wq"]
+[ext_resource type="Resource" uid="uid://cbvf42uftrfll" path="res://data/camera/fire_screen_shake.tres" id="3_ed60f"]
+[ext_resource type="Resource" uid="uid://b0gxm5k1cyt46" path="res://data/camera/absorb_screen_shake.tres" id="4_2u1cq"]
+[ext_resource type="Resource" uid="uid://da0sxh7vg3wxe" path="res://data/camera/doors_changed_screen_shake.tres" id="5_ul8ml"]
+[ext_resource type="Resource" uid="uid://dsmsrk384hn3t" path="res://data/camera/absorb_windup_profile.tres" id="6_b76ol"]
+
+[sub_resource type="Resource" id="Resource_s3gxh"]
+script = ExtResource("2_ij0wq")
+id = 0
+profile = ExtResource("1_ln5ab")
+
+[sub_resource type="Resource" id="Resource_u7qsj"]
+script = ExtResource("2_ij0wq")
+id = 1
+profile = ExtResource("3_ed60f")
+
+[sub_resource type="Resource" id="Resource_lu5wv"]
+script = ExtResource("2_ij0wq")
+id = 2
+profile = ExtResource("4_2u1cq")
+
+[sub_resource type="Resource" id="Resource_epc82"]
+script = ExtResource("2_ij0wq")
+id = 4
+profile = ExtResource("5_ul8ml")
+
+[sub_resource type="Resource" id="Resource_8ng0f"]
+script = ExtResource("2_ij0wq")
+id = 3
+profile = ExtResource("6_b76ol")
+
+[resource]
+script = ExtResource("1_hurk4")
+lookup = Array[ExtResource("2_ij0wq")]([SubResource("Resource_s3gxh"), SubResource("Resource_u7qsj"), SubResource("Resource_lu5wv"), SubResource("Resource_epc82"), SubResource("Resource_8ng0f")])

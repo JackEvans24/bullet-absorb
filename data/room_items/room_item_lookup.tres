@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="RoomItemLookup" load_steps=13 format=3 uid="uid://dfp6bwqqsvt21"]
 
 [ext_resource type="PackedScene" uid="uid://btfsstt1biti7" path="res://prefabs/enemies/wanderer.tscn" id="1_12avm"]
-[ext_resource type="Script" path="res://scripts/data/room_item_lookup.gd" id="1_50kb5"]
-[ext_resource type="Script" path="res://scripts/data/room_item_mapping.gd" id="2_vuhso"]
+[ext_resource type="Script" path="res://scripts/data/rooms/room_item_mapping.gd" id="2_0xa5f"]
 [ext_resource type="PackedScene" uid="uid://wfijrpbc1nxm" path="res://prefabs/enemies/turret.tscn" id="3_8eith"]
 [ext_resource type="PackedScene" uid="uid://dcmefiejwfjyq" path="res://prefabs/enemies/burster.tscn" id="4_f5fad"]
 [ext_resource type="PackedScene" uid="uid://dd7vuam6cs4fp" path="res://prefabs/power/power_orb.tscn" id="5_s0mow"]
 [ext_resource type="PackedScene" uid="uid://bcjb1jnr0y5mb" path="res://prefabs/power/power_generator.tscn" id="6_8wk7t"]
+[ext_resource type="Script" path="res://scripts/data/rooms/room_item_lookup.gd" id="7_22vx4"]
 
 [sub_resource type="Resource" id="Resource_3wqml"]
-script = ExtResource("2_vuhso")
+script = ExtResource("2_0xa5f")
 item_type = 0
 scene = ExtResource("1_12avm")
 is_enemy = true
@@ -17,7 +17,7 @@ health = 3
 power_count = 5
 
 [sub_resource type="Resource" id="Resource_nu8n2"]
-script = ExtResource("2_vuhso")
+script = ExtResource("2_0xa5f")
 item_type = 1
 scene = ExtResource("3_8eith")
 is_enemy = true
@@ -25,7 +25,7 @@ health = 12
 power_count = 10
 
 [sub_resource type="Resource" id="Resource_w0cpm"]
-script = ExtResource("2_vuhso")
+script = ExtResource("2_0xa5f")
 item_type = 2
 scene = ExtResource("4_f5fad")
 is_enemy = true
@@ -33,7 +33,7 @@ health = 10
 power_count = 8
 
 [sub_resource type="Resource" id="Resource_6nd6y"]
-script = ExtResource("2_vuhso")
+script = ExtResource("2_0xa5f")
 item_type = 3
 scene = ExtResource("5_s0mow")
 is_enemy = false
@@ -41,7 +41,7 @@ health = 0
 power_count = 0
 
 [sub_resource type="Resource" id="Resource_j8xqv"]
-script = ExtResource("2_vuhso")
+script = ExtResource("2_0xa5f")
 item_type = 4
 scene = ExtResource("6_8wk7t")
 is_enemy = false
@@ -49,5 +49,5 @@ health = 0
 power_count = 0
 
 [resource]
-script = ExtResource("1_50kb5")
-lookup = Array[ExtResource("2_vuhso")]([SubResource("Resource_3wqml"), SubResource("Resource_nu8n2"), SubResource("Resource_w0cpm"), SubResource("Resource_6nd6y"), SubResource("Resource_j8xqv")])
+script = ExtResource("7_22vx4")
+lookup = Array[ExtResource("2_0xa5f")]([SubResource("Resource_3wqml"), SubResource("Resource_nu8n2"), SubResource("Resource_w0cpm"), SubResource("Resource_6nd6y"), SubResource("Resource_j8xqv")])
