@@ -2,6 +2,7 @@ class_name ScreenShake
 extends Node
 
 @export var lookup: ScreenShakeLookup
+@export var impulse_override: float = 0.25
 
 var cameras: Array[Node3D] = []
 
@@ -36,7 +37,7 @@ func add_impulse(id: ScreenShakeMapping.ScreenShakeId):
 	noise.seed = randi_range(0, 99999)
 
 func has_lower_priority(new_profile: ScreenShakeProfile) -> bool:
-	if impulse <= 0.0:
+	if impulse <= impulse_override:
 		return false
 	if profile == null:
 		return false
