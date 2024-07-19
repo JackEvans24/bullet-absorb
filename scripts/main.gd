@@ -24,6 +24,7 @@ func _ready():
 	player.died.connect(hud._on_player_died)
 
 	rooms.doors_changed.connect(_on_room_doors_changed)
+	rooms.room_completed.connect(_on_room_completed)
 
 	hud.initialise_max_values(player.max_health, player.max_power)
 	hud._on_health_changed(player.current_health)
@@ -55,3 +56,6 @@ func _on_absorb_state_changed(absorb_state: Player.AbsorbState):
 
 func _on_room_doors_changed():
 	cameras.add_impulse(ScreenShakeMapping.ScreenShakeId.Doors)
+
+func _on_room_completed(room_id: String):
+	save_game.add_completed_room(room_id)

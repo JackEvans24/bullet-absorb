@@ -2,6 +2,7 @@ class_name Room
 extends Node3D
 
 signal doors_changed
+signal room_completed(room_id: String)
 
 @export var data: RoomData
 
@@ -79,6 +80,8 @@ func on_wave_complete():
 func set_room_complete():
 	set_doors(data.completed_doors)
 	set_room_configuration(data.completed_room)
+
+	room_completed.emit(data.room_name)
 
 func close_all_doors():
 	set_doors(0)
