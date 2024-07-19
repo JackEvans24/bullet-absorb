@@ -13,5 +13,5 @@ func to_dictionary() -> Dictionary:
 
 func read(dict: Dictionary):
     for prop in get_property_list():
-        if prop.usage == PROPERTY_USAGE_SCRIPT_VARIABLE:
+        if prop.usage == PROPERTY_USAGE_SCRIPT_VARIABLE and dict.has(prop.name):
             set(prop.name, dict[prop.name])
