@@ -3,6 +3,7 @@ extends Node3D
 
 signal doors_changed
 signal room_completed(room_id: String)
+signal room_reentered(room_id: String)
 
 @export var data: RoomData
 
@@ -21,10 +22,10 @@ func _ready():
 	player_detection.body_entered.connect(_on_player_entered)
 
 func _on_player_entered(body: Node3D):
-	if player != null:
-		return
-	player = body
+	if completed:
+		room_reentered.emit(data.room_name)
 
+	player = body
 	call_deferred("on_first_entry")
 
 func on_first_entry():

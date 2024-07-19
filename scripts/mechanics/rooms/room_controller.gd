@@ -2,6 +2,7 @@ class_name RoomController extends Node
 
 signal doors_changed
 signal room_completed(room_id: String)
+signal room_reentered(room_id: String)
 
 @export var room_item_lookup: RoomItemLookup
 
@@ -19,6 +20,7 @@ func initialise(data: SaveGameData):
 		room.room_item_lookup = room_item_lookup
 		room.doors_changed.connect(_on_room_doors_changed)
 		room.room_completed.connect(_on_room_completed)
+		room.room_reentered.connect(_on_room_reentered)
 
 		if data.completed_rooms.has(room.data.room_name):
 			room.set_room_complete()
@@ -36,3 +38,6 @@ func _on_room_doors_changed():
 
 func _on_room_completed(room_id: String):
 	room_completed.emit(room_id)
+
+func _on_room_reentered(room_id: String):
+	room_reentered.emit(room_id)

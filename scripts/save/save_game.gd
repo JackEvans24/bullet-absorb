@@ -46,6 +46,6 @@ func add_completed_room(room_id: String):
 		return
 
 	data.completed_rooms.push_back(room_id)
-	data.current_room = room_id
 
-	save()
+func set_current_room(room_id: String):
+	data.current_room = room_id

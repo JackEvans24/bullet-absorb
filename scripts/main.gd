@@ -26,6 +26,7 @@ func initialise_rooms():
 	rooms.initialise(save_game.data)
 	rooms.doors_changed.connect(_on_room_doors_changed)
 	rooms.room_completed.connect(_on_room_completed)
+	rooms.room_reentered.connect(_on_room_reentered)
 
 func initialise_player():
 	var current_room = rooms.get_room(save_game.data.current_room)
@@ -69,3 +70,9 @@ func _on_room_doors_changed():
 
 func _on_room_completed(room_id: String):
 	save_game.add_completed_room(room_id)
+	save_game.set_current_room(room_id)
+	save_game.save()
+
+func _on_room_reentered(room_id: String):
+	save_game.set_current_room(room_id)
+	save_game.save()
