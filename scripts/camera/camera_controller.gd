@@ -14,3 +14,6 @@ func _ready():
 
 func add_impulse(id: ScreenShakeMapping.ScreenShakeId):
 	screen_shake.add_impulse(id)
+
+func cancel_impulse(id: ScreenShakeMapping.ScreenShakeId):
+	screen_shake.cancel_impulse(id)
