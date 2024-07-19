@@ -106,8 +106,6 @@ freeze_duration = 0.06
 [node name="Cameras" parent="." instance=ExtResource("4_nws0m")]
 
 [node name="Player" parent="." instance=ExtResource("1_e5x1h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2)
 
 [node name="SaveGame" type="Node" parent="."]
 script = ExtResource("18_k1gw7")
-start_room_override = "MainRoom"
