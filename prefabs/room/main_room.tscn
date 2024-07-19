@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://wcooa5c7ivpk"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room.gd" id="1_fhmn2"]
-[ext_resource type="Script" path="res://scripts/data/room_item.gd" id="2_nymi3"]
-[ext_resource type="Script" path="res://scripts/data/room_configuration.gd" id="3_2ywox"]
-[ext_resource type="Script" path="res://scripts/data/room_data.gd" id="4_d0pga"]
+[ext_resource type="Script" path="res://scripts/data/rooms/room_item.gd" id="2_nymi3"]
+[ext_resource type="Script" path="res://scripts/data/rooms/room_configuration.gd" id="3_2ywox"]
+[ext_resource type="Script" path="res://scripts/data/rooms/room_data.gd" id="4_d0pga"]
 [ext_resource type="MeshLibrary" uid="uid://bydmgvg8cpigh" path="res://models/rooms/room_mesh_library.tres" id="5_cg01b"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room_doors.gd" id="6_1t2ei"]
 [ext_resource type="PackedScene" uid="uid://ok4gfjcs3kol" path="res://prefabs/room/door.tscn" id="7_c1gl2"]

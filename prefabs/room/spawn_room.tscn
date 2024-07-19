@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dmgc0jvmx57pw"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room.gd" id="1_jko67"]
-[ext_resource type="Script" path="res://scripts/data/room_data.gd" id="2_04623"]
+[ext_resource type="Script" path="res://scripts/data/rooms/room_data.gd" id="2_04623"]
 [ext_resource type="MeshLibrary" uid="uid://bydmgvg8cpigh" path="res://models/rooms/room_mesh_library.tres" id="3_2l4yg"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room_doors.gd" id="4_4ilgn"]
 [ext_resource type="PackedScene" uid="uid://ok4gfjcs3kol" path="res://prefabs/room/door.tscn" id="5_dat1n"]
