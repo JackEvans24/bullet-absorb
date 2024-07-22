@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=40 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Script" path="res://scripts/state/move_state_machine.gd" id="2_pauji"]
@@ -91,6 +91,52 @@ material = SubResource("StandardMaterial3D_ujjva")
 text = "X"
 font_size = 64
 uppercase = true
+
+[sub_resource type="Animation" id="Animation_vvrfd"]
+resource_name = "idle"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/PlayerModel/Head:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.1, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/PlayerModel/Arm_Left:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-7.45058e-09, 0.6, 1.21),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.5, 0), Vector3(0, 0, 0), Vector3(0, -0.5, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/PlayerModel/Arm_Right:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(-7.45058e-09, 0.6, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.5, 0), Vector3(0, 0, 0), Vector3(0, -0.5, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7y837"]
+_data = {
+"idle": SubResource("Animation_vvrfd")
+}
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -198,6 +244,15 @@ recovery_material = ExtResource("21_yrqox")
 
 [node name="PlayerModel" parent="Pivot" instance=ExtResource("23_m7jo1")]
 
+[node name="Head" parent="Pivot/PlayerModel" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.034113, 0)
+
+[node name="Arm_Left" parent="Pivot/PlayerModel" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.329435, 0)
+
+[node name="Arm_Right" parent="Pivot/PlayerModel" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.329435, 0)
+
 [node name="HurtParticles" type="GPUParticles3D" parent="Pivot"]
 cast_shadow = 0
 emitting = false
@@ -246,5 +301,11 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetection"]
 shape = ExtResource("7_iumbl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7y837")
+}
+autoplay = "idle"
 
 [editable path="Pivot/PlayerModel"]
