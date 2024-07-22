@@ -6,7 +6,6 @@ extends Node3D
 @export_range(0.01, 1.0) var line_length_multiplier := 0.5
 
 @onready var reticule_mesh: MeshInstance3D = $Mesh
-@onready var line_mesh: MeshInstance3D = $Line
 @onready var distance_check: RayCast3D = $DistanceCheck
 
 func _ready():
@@ -21,5 +20,3 @@ func _physics_process(_delta):
 
 func set_mesh_positions(reticule_position: Vector3):
     reticule_mesh.position = reticule_position
-    line_mesh.position = reticule_position * 0.5 + line_offset
-    line_mesh.scale.y = reticule_position.z * line_length_multiplier
