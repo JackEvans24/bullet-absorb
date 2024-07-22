@@ -4,7 +4,7 @@ extends Node
 signal bullet_fired
 
 @export var pivot_ref: NodePath
-@export var arm_cannon_ref: NodePath
+@export var arm_cannon_refs: Array[NodePath]
 @export var aim_point_ref: NodePath
 @export var cooldown = 0.05
 @export var bullet_scene: PackedScene
@@ -13,8 +13,10 @@ signal bullet_fired
 @onready var controller_aim: ControllerAimDirection = $ControllerAim
 @onready var mouse_aim: MouseAimDirection = $MouseAim
 @onready var pivot: Node3D = get_node(pivot_ref)
-@onready var arm_cannon: ArmCannon = get_node(arm_cannon_ref)
 @onready var aim_point: Node3D = get_node(aim_point_ref)
+
+var arm_cannons: Array[ArmCannon]
+var arm_cannon_index := 0
 var aim_service: AimDirection
 
 var aim_direction: Vector3 = Vector3.FORWARD
@@ -28,11 +30,15 @@ func _ready():
 	aim_service = mouse_aim
 	mouse_aim.player = pivot
 
+	for arm_cannon_ref in arm_cannon_refs:
+		arm_cannons.push_back(get_node(arm_cannon_ref))
+
 func _process(_delta: float):
 	if not can_aim:
 		return
 
-	arm_cannon.aim_towards(aim_point.global_position)
+	for arm_cannon in arm_cannons:
+		arm_cannon.aim_towards(aim_point.global_position)
 
 	var direction = aim_service.get_aim_direction()
 	if direction:
@@ -55,9 +61,12 @@ func check_input_method(event: InputEvent):
 func fire():
 	if is_firing:
 		return
+
+	var arm_cannon = get_next_cannon()
 	if not has_ammo:
 		arm_cannon.trigger_fire_fail()
 		return
+
 	is_firing = true
 
 	var tree = get_tree()
@@ -70,6 +79,15 @@ func fire():
 
 	await tree.create_timer(cooldown).timeout
 	is_firing = false
+
+func get_next_cannon() -> ArmCannon:
+	var next_cannon = arm_cannons[arm_cannon_index]
+
+	arm_cannon_index += 1
+	if arm_cannon_index % len(arm_cannons) == 0:
+		arm_cannon_index = 0
+
+	return next_cannon
 
 func _on_power_count_changed(power_count: int):
 	has_ammo = power_count > 0

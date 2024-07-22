@@ -139,7 +139,7 @@ recovery_time = 1.6
 [node name="Aim" type="Node" parent="."]
 script = ExtResource("10_gaav5")
 pivot_ref = NodePath("../Pivot")
-arm_cannon_ref = NodePath("../Pivot/PlayerModel/Arm_Left")
+arm_cannon_refs = Array[NodePath]([NodePath("../Pivot/PlayerModel/Arm_Left"), NodePath("../Pivot/PlayerModel/Arm_Right")])
 aim_point_ref = NodePath("../Pivot/Reticule/Mesh")
 cooldown = 0.01
 bullet_scene = ExtResource("5_twt6l")
