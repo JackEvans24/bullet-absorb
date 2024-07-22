@@ -43,7 +43,10 @@ func _physics_process(_delta):
 	translate(smooth_movement.movement)
 
 func _on_body_entered(body: Node3D):
-	target = body
+	if body.has_node("Pivot"):
+		target = body.get_node("Pivot")
+	else:
+		target = body
 
 func set_target_position(target_position: Vector3):
 	var direction = target_position - global_position
