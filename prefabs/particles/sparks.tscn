@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dx62vkst3yru6"]
 
-[ext_resource type="Material" uid="uid://dley2mod0wc1b" path="res://materials/player/player_broken.tres" id="1_1odq8"]
+[ext_resource type="Material" uid="uid://dtc1fajdp7eto" path="res://materials/player/player_broken.tres" id="1_1odq8"]
 
 [sub_resource type="Curve" id="Curve_vova2"]
 _data = [Vector2(0, 0), 0.0, 14.2044, 0, 0, Vector2(0.0217391, 1), 0.0, 0.0, 0, 0, Vector2(0.0688406, 0), 0.0, 0.0, 0, 0]
