@@ -2,7 +2,6 @@ class_name StateMachine
 extends Node
 
 signal state_entered(state: State)
-signal state_exited(state: State)
 
 @export var initial_state := NodePath()
 
@@ -30,7 +29,6 @@ func transition_to(target_state_name: String, ctx: Dictionary={}):
 	print("Transitioned from state '%s' to state '%s'" % [state.name, target_state_name])
 
 	state.exit()
-	state_exited.emit(state)
 	state = get_node(target_state_name)
 	state.enter(ctx)
 	state_entered.emit(state)

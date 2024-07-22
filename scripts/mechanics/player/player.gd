@@ -21,7 +21,7 @@ enum AbsorbState {Started, Cancelled, Complete}
 @onready var camera_follow_point: Node3D = $Pivot/CameraFollowPoint
 @onready var hit_detection: Area3D = $HitDetection
 @onready var ground_detection: CollisionShape3D = $GroundDetection
-@onready var animator: AnimationTree = $Animator
+@onready var animator: AnimationPlayer = $Animator
 
 var power_count: int = 0
 
@@ -35,7 +35,6 @@ func _ready():
 	died.connect(body._on_player_died)
 
 	move_state.state_entered.connect(_on_move_state_entered)
-	move_state.state_exited.connect(_on_move_state_exited)
 
 	health.damage_taken.connect(_on_damage_taken)
 	health.damage_taken.connect(body._on_damage_taken)
@@ -75,13 +74,9 @@ func _on_move_state_entered(state: MoveState):
 	health.can_take_damage = state.can_take_damage
 
 	if state.animation_trigger:
-		animator.set("parameters/%s/request" % state.animation_trigger, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		animator.play(state.animation_trigger)
 
 	body._on_move_state_changed(state)
-
-func _on_move_state_exited(state: MoveState):
-	if state.animation_trigger:
-		animator.set("parameters/%s/request" % state.animation_trigger, AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 
 func _on_dash_triggered(dash_direction: Vector3):
 	var ctx: Dictionary = {}

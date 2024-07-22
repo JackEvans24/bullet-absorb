@@ -3,8 +3,8 @@ extends Node
 
 signal bullet_fired
 
-const SHOOT_LEFT = "ShootLeftTrigger"
-const SHOOT_RIGHT = "ShootRightTrigger"
+const SHOOT_LEFT = "shoot_left"
+const SHOOT_RIGHT = "shoot_right"
 
 @export var pivot_ref: NodePath
 @export var arm_cannon_refs: Array[NodePath]
@@ -18,7 +18,7 @@ const SHOOT_RIGHT = "ShootRightTrigger"
 @onready var mouse_aim: MouseAimDirection = $MouseAim
 @onready var pivot: Node3D = get_node(pivot_ref)
 @onready var aim_point: Node3D = get_node(aim_point_ref)
-@onready var animator: AnimationTree = get_node(animator_ref)
+@onready var animator: AnimationPlayer = get_node(animator_ref)
 
 var arm_cannons: Array[ArmCannon]
 var arm_cannon_index := 0
@@ -88,8 +88,7 @@ func fire():
 func get_next_cannon_for_fire() -> ArmCannon:
 	var next_cannon = arm_cannons[arm_cannon_index]
 
-	var animation_path = "parameters/%s/request" % (SHOOT_LEFT if arm_cannon_index % 2 == 0 else SHOOT_RIGHT)
-	animator.set(animation_path, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	animator.play(SHOOT_LEFT if arm_cannon_index % 2 == 0 else SHOOT_RIGHT)
 
 	arm_cannon_index += 1
 	if arm_cannon_index % len(arm_cannons) == 0:
