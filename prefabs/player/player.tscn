@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=52 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Script" path="res://scripts/state/move_state_machine.gd" id="2_pauji"]
@@ -229,13 +229,84 @@ tracks/1/keys = {
 "values": [Vector3(1.2, 1.2, 1.2), Vector3(1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_g3g4i"]
+resource_name = "absorb"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/PlayerModel/Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.523599, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/PlayerModel/Arm_Left:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.4, 0.4, -0.5), Vector3(-0.4, 0.5, -0.5), Vector3(-0.4, 0.5, -0.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/PlayerModel/Arm_Left:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(0.5, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.309, 0, 0), Vector3(1.309, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/PlayerModel/Arm_Right:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.4, 0.4, -0.5), Vector3(0.4, 0.5, -0.5), Vector3(0.4, 0.5, -0.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pivot/PlayerModel/Arm_Right:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(0.5, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.309, 0, 0), Vector3(1.309, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7y837"]
 _data = {
 "RESET": SubResource("Animation_kcjf8"),
+"absorb": SubResource("Animation_g3g4i"),
 "idle": SubResource("Animation_vvrfd"),
 "shoot_left": SubResource("Animation_pdepb"),
 "shoot_right": SubResource("Animation_f0kg1")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gdvso"]
+animation = &"absorb"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_pee6b"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dg2ao"]
 animation = &"idle"
@@ -253,7 +324,11 @@ animation = &"shoot_right"
 filters = ["Pivot/PlayerModel/Arm_Right:position", "Pivot/PlayerModel/Arm_Right:scale"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5olkx"]
-graph_offset = Vector2(-197.395, 17.5541)
+graph_offset = Vector2(-205.216, -12.3276)
+nodes/Absorb/node = SubResource("AnimationNodeAnimation_gdvso")
+nodes/Absorb/position = Vector2(340, 420)
+nodes/AbsorbTrigger/node = SubResource("AnimationNodeOneShot_pee6b")
+nodes/AbsorbTrigger/position = Vector2(580, 120)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_dg2ao")
 nodes/Idle/position = Vector2(-180, 180)
 nodes/ShootLeft/node = SubResource("AnimationNodeAnimation_n56fe")
@@ -265,7 +340,7 @@ nodes/ShootRight/position = Vector2(60, 420)
 nodes/ShootRightTrigger/node = SubResource("AnimationNodeOneShot_o1awh")
 nodes/ShootRightTrigger/position = Vector2(320, 140)
 nodes/output/position = Vector2(880, 140)
-node_connections = [&"ShootLeftTrigger", 0, &"Idle", &"ShootLeftTrigger", 1, &"ShootLeft", &"ShootRightTrigger", 0, &"ShootLeftTrigger", &"ShootRightTrigger", 1, &"ShootRight", &"output", 0, &"ShootRightTrigger"]
+node_connections = [&"AbsorbTrigger", 0, &"ShootRightTrigger", &"AbsorbTrigger", 1, &"Absorb", &"ShootLeftTrigger", 0, &"Idle", &"ShootLeftTrigger", 1, &"ShootLeft", &"ShootRightTrigger", 0, &"ShootLeftTrigger", &"ShootRightTrigger", 1, &"ShootRight", &"output", 0, &"AbsorbTrigger"]
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -333,6 +408,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("2_sawo1")
 absorb_windup = 0.6
 mesh_display_time = 0.1
+animator_ref = NodePath("../Animator")
 
 [node name="DestroyArea" type="Area3D" parent="Absorb"]
 collision_layer = 0
@@ -430,6 +506,9 @@ autoplay = "idle"
 [node name="Animator" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_5olkx")
 anim_player = NodePath("../AnimationPlayer")
+parameters/AbsorbTrigger/active = false
+parameters/AbsorbTrigger/internal_active = false
+parameters/AbsorbTrigger/request = 0
 parameters/ShootLeftTrigger/active = false
 parameters/ShootLeftTrigger/internal_active = false
 parameters/ShootLeftTrigger/request = 0
