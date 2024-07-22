@@ -3,9 +3,13 @@ extends Node
 
 signal bullet_fired
 
+const SHOOT_LEFT = "ShootLeftTrigger"
+const SHOOT_RIGHT = "ShootRightTrigger"
+
 @export var pivot_ref: NodePath
 @export var arm_cannon_refs: Array[NodePath]
 @export var aim_point_ref: NodePath
+@export var animator_ref: NodePath
 @export var cooldown = 0.05
 @export var bullet_scene: PackedScene
 @export var fire_fail_particles_scene: PackedScene
@@ -14,6 +18,7 @@ signal bullet_fired
 @onready var mouse_aim: MouseAimDirection = $MouseAim
 @onready var pivot: Node3D = get_node(pivot_ref)
 @onready var aim_point: Node3D = get_node(aim_point_ref)
+@onready var animator: AnimationTree = get_node(animator_ref)
 
 var arm_cannons: Array[ArmCannon]
 var arm_cannon_index := 0
@@ -62,7 +67,7 @@ func fire():
 	if is_firing:
 		return
 
-	var arm_cannon = get_next_cannon()
+	var arm_cannon = get_next_cannon_for_fire()
 	if not has_ammo:
 		arm_cannon.trigger_fire_fail()
 		return
@@ -80,8 +85,11 @@ func fire():
 	await tree.create_timer(cooldown).timeout
 	is_firing = false
 
-func get_next_cannon() -> ArmCannon:
+func get_next_cannon_for_fire() -> ArmCannon:
 	var next_cannon = arm_cannons[arm_cannon_index]
+
+	var animation_path = "parameters/%s/request" % (SHOOT_LEFT if arm_cannon_index % 2 == 0 else SHOOT_RIGHT)
+	animator.set(animation_path, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 	arm_cannon_index += 1
 	if arm_cannon_index % len(arm_cannons) == 0:
