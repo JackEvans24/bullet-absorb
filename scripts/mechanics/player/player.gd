@@ -21,6 +21,7 @@ enum AbsorbState {Started, Cancelled, Complete}
 @onready var camera_follow_point: Node3D = $Pivot/CameraFollowPoint
 @onready var hit_detection: Area3D = $HitDetection
 @onready var ground_detection: CollisionShape3D = $GroundDetection
+@onready var animator: AnimationPlayer = $Animator
 
 var power_count: int = 0
 
@@ -33,8 +34,7 @@ func _ready():
 	power_count_changed.connect(aim._on_power_count_changed)
 	died.connect(body._on_player_died)
 
-	move_state.state_changed.connect(_on_move_state_changed)
-	move_state.state_changed.connect(body._on_move_state_changed)
+	move_state.state_entered.connect(_on_move_state_entered)
 
 	health.damage_taken.connect(_on_damage_taken)
 	health.damage_taken.connect(body._on_damage_taken)
@@ -57,11 +57,13 @@ func _ready():
 
 func _physics_process(_delta):
 	velocity = move_state.movement
+	body.current_movement = velocity
+
 	body.look_at(body.global_position + aim.aim_direction)
 
 	move_and_slide()
 
-func _on_move_state_changed(state: MoveState):
+func _on_move_state_entered(state: MoveState):
 	aim.can_aim = state.can_aim
 	aim.can_fire = state.can_fire
 
@@ -70,6 +72,11 @@ func _on_move_state_changed(state: MoveState):
 		absorb.end_windup()
 
 	health.can_take_damage = state.can_take_damage
+
+	if state.animation_trigger:
+		animator.play(state.animation_trigger)
+
+	body._on_move_state_changed(state)
 
 func _on_dash_triggered(dash_direction: Vector3):
 	var ctx: Dictionary = {}

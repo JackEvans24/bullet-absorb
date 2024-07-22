@@ -54,7 +54,7 @@ func process_absorb_state(delta):
 
 func trigger_absorb():
 	is_absorbing = true
-	
+
 	absorb_triggered.emit()
 
 	var overlapping_areas: Array[Area3D] = destoy_area.get_overlapping_areas()

@@ -1,0 +1,49 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=10 format=3 uid="uid://bvwqms7ohmbjw"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gdvso"]
+animation = &"absorb"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_pee6b"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bx66p"]
+animation = &"hurt"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_b8pra"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dg2ao"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n56fe"]
+animation = &"shoot_left"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_04qxe"]
+filters = ["Pivot/PlayerModel/Arm_Left:position", "Pivot/PlayerModel/Arm_Left:scale"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1heiw"]
+animation = &"shoot_right"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_o1awh"]
+filters = ["Pivot/PlayerModel/Arm_Right:position", "Pivot/PlayerModel/Arm_Right:scale"]
+
+[resource]
+graph_offset = Vector2(-195.233, 14.4391)
+nodes/Absorb/node = SubResource("AnimationNodeAnimation_gdvso")
+nodes/Absorb/position = Vector2(280, 440)
+nodes/AbsorbTrigger/node = SubResource("AnimationNodeOneShot_pee6b")
+nodes/AbsorbTrigger/position = Vector2(640, 120)
+nodes/Hurt/node = SubResource("AnimationNodeAnimation_bx66p")
+nodes/Hurt/position = Vector2(642.577, 406.08)
+nodes/HurtTrigger/node = SubResource("AnimationNodeOneShot_b8pra")
+nodes/HurtTrigger/position = Vector2(840, 120)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_dg2ao")
+nodes/Idle/position = Vector2(-180, 180)
+nodes/ShootLeft/node = SubResource("AnimationNodeAnimation_n56fe")
+nodes/ShootLeft/position = Vector2(-180, 340)
+nodes/ShootLeftTrigger/node = SubResource("AnimationNodeOneShot_04qxe")
+nodes/ShootLeftTrigger/position = Vector2(40, 160)
+nodes/ShootRight/node = SubResource("AnimationNodeAnimation_1heiw")
+nodes/ShootRight/position = Vector2(60, 420)
+nodes/ShootRightTrigger/node = SubResource("AnimationNodeOneShot_o1awh")
+nodes/ShootRightTrigger/position = Vector2(320, 140)
+nodes/output/position = Vector2(1100, 120)
+node_connections = [&"AbsorbTrigger", 0, &"ShootRightTrigger", &"AbsorbTrigger", 1, &"Absorb", &"HurtTrigger", 0, &"AbsorbTrigger", &"HurtTrigger", 1, &"Hurt", &"ShootLeftTrigger", 0, &"Idle", &"ShootLeftTrigger", 1, &"ShootLeft", &"ShootRightTrigger", 0, &"ShootLeftTrigger", &"ShootRightTrigger", 1, &"ShootRight", &"output", 0, &"HurtTrigger"]

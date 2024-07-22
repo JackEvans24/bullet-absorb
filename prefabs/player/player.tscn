@@ -1,0 +1,530 @@
+[gd_scene load_steps=44 format=3 uid="uid://c3tj0pdcum4wd"]
+
+[ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
+[ext_resource type="Script" path="res://scripts/state/move_state_machine.gd" id="2_pauji"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/health.gd" id="2_pcwtq"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/absorb.gd" id="2_sawo1"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/movement/run.gd" id="3_60agh"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/movement/dash.gd" id="4_5ub5d"]
+[ext_resource type="Material" uid="uid://f41eu4cbvian" path="res://materials/player/player_absorb.tres" id="4_ep8r4"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/movement/dead.gd" id="4_koxfs"]
+[ext_resource type="Material" uid="uid://dq2ufo1kpypca" path="res://materials/player/player_absorb_halo.tres" id="4_poddg"]
+[ext_resource type="PackedScene" uid="uid://dl5unqhv0x3ox" path="res://prefabs/bullets/player_bullet.tscn" id="5_twt6l"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/movement/knockback.gd" id="5_unin6"]
+[ext_resource type="Material" uid="uid://ch75junnd3ws8" path="res://materials/player/player_body_dash.tres" id="5_x6ib0"]
+[ext_resource type="Shape3D" uid="uid://c4tuvev8wasc3" path="res://models/player/player_internal.tres" id="7_iumbl"]
+[ext_resource type="Material" uid="uid://c4sm0bxdm8qtm" path="res://materials/player/player_body_knockback.tres" id="8_bi3ql"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/player_body.gd" id="10_18rdm"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/aim/player_aim.gd" id="10_gaav5"]
+[ext_resource type="Shape3D" uid="uid://b143a5k1xv5rx" path="res://models/player/player_external.tres" id="11_p7nyd"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/dash.gd" id="11_s2u1f"]
+[ext_resource type="PackedScene" uid="uid://cw3xyogbakvqj" path="res://prefabs/particles/fire_fail_particles.tscn" id="12_d68f3"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/aim/controller_aim_direction.gd" id="12_j1ytq"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/aim/mouse_aim_direction.gd" id="12_j7rkf"]
+[ext_resource type="Material" uid="uid://bl15jqbmjfvys" path="res://materials/player/player_dash_particle.tres" id="20_n80do"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/reticule.gd" id="21_tbx8f"]
+[ext_resource type="Material" uid="uid://hh5rgca6j4cq" path="res://materials/player/player_body_default.tres" id="21_yrqox"]
+[ext_resource type="PackedScene" uid="uid://bkexk607fieqm" path="res://prefabs/player/player_body.tscn" id="23_m7jo1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4kfv7"]
+radius = 5.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_epkrr"]
+material = ExtResource("4_poddg")
+radius = 5.0
+height = 10.0
+
+[sub_resource type="Curve" id="Curve_syo44"]
+_data = [Vector2(0, 0), -2.37274, -2.37274, 0, 0, Vector2(0.104623, 1), -1.13942e-06, -1.13942e-06, 0, 0, Vector2(1, 0), -0.0990366, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_isa1t"]
+curve = SubResource("Curve_syo44")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jewto"]
+emission_shape = 2
+emission_sphere_radius = 5.0
+radial_velocity_min = -20.0
+radial_velocity_max = -10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_isa1t")
+
+[sub_resource type="SphereMesh" id="SphereMesh_cp26l"]
+material = ExtResource("4_ep8r4")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="Curve" id="Curve_d1fyx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.81353, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ifrih"]
+curve = SubResource("Curve_d1fyx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wwwn5"]
+emission_shape_scale = Vector3(1, 1, 0)
+emission_shape = 1
+emission_sphere_radius = 0.3
+direction = Vector3(0, 1, 1)
+spread = 30.0
+initial_velocity_min = 4.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, -5, 0)
+scale_curve = SubResource("CurveTexture_ifrih")
+turbulence_noise_speed_random = 0.27
+
+[sub_resource type="SphereMesh" id="SphereMesh_3tq4p"]
+material = ExtResource("20_n80do")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ujjva"]
+render_priority = 22
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(1, 0.964, 0.64, 1)
+disable_receive_shadows = true
+
+[sub_resource type="TextMesh" id="TextMesh_6c04p"]
+material = SubResource("StandardMaterial3D_ujjva")
+text = "X"
+font_size = 64
+uppercase = true
+
+[sub_resource type="Animation" id="Animation_vvrfd"]
+resource_name = "idle"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/PlayerModel/Head:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.3), Vector3(0, 0.2, 0.3), Vector3(0, 0, 0.3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/PlayerModel/Arm_Left:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/PlayerModel/Arm_Right:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/PlayerModel/Head:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pdepb"]
+resource_name = "shoot_left"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/PlayerModel/Arm_Left:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [Vector3(0.25, -0.2, 0.8), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/PlayerModel/Arm_Left:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [Vector3(1.2, 1.2, 1.2), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_f0kg1"]
+resource_name = "shoot_right"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/PlayerModel/Arm_Right:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [Vector3(-0.25, -0.2, 0.8), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/PlayerModel/Arm_Right:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [Vector3(1.2, 1.2, 1.2), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_g3g4i"]
+resource_name = "absorb"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/PlayerModel/Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.523599, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/PlayerModel/Arm_Left:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.4, 0.4, -0.5), Vector3(-0.4, 0.5, -0.5), Vector3(-0.4, 0.5, -0.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/PlayerModel/Arm_Left:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(0.5, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.309, 0, 0), Vector3(1.309, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/PlayerModel/Arm_Right:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.4, 0.4, -0.5), Vector3(0.4, 0.5, -0.5), Vector3(0.4, 0.5, -0.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pivot/PlayerModel/Arm_Right:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(0.5, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.309, 0, 0), Vector3(1.309, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cwn71"]
+resource_name = "hurt"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/PlayerModel/Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(-2, -2, 1),
+"update": 0,
+"values": [Vector3(0.523599, 0, 0), Vector3(0.523599, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/PlayerModel/Arm_Left:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(-2, -2, 1),
+"update": 0,
+"values": [Vector3(-0.4, 0.5, -0.5), Vector3(-0.4, 0.5, -0.5), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/PlayerModel/Arm_Left:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(-2, -2, 1),
+"update": 0,
+"values": [Vector3(1.309, 0, 0), Vector3(1.309, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/PlayerModel/Arm_Right:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(-2, -2, 1),
+"update": 0,
+"values": [Vector3(0.4, 0.5, -0.5), Vector3(0.4, 0.5, -0.5), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pivot/PlayerModel/Arm_Right:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(-2, -2, 1),
+"update": 0,
+"values": [Vector3(1.309, 0, 0), Vector3(1.309, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Pivot/PlayerModel/Head:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(-2, -2, 1),
+"update": 0,
+"values": [Vector3(0, 1.2, -0.4), Vector3(0, 1.2, -0.4), Vector3(0, 0, 0.3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7y837"]
+_data = {
+"absorb": SubResource("Animation_g3g4i"),
+"hurt": SubResource("Animation_cwn71"),
+"idle": SubResource("Animation_vvrfd"),
+"shoot_left": SubResource("Animation_pdepb"),
+"shoot_right": SubResource("Animation_f0kg1")
+}
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_u023k")
+
+[node name="MoveState" type="Node" parent="."]
+script = ExtResource("2_pauji")
+initial_state = NodePath("Run")
+
+[node name="Absorb" type="Node" parent="MoveState"]
+script = ExtResource("3_60agh")
+speed = 5.0
+can_fire = false
+animation_trigger = "absorb"
+
+[node name="Dash" type="Node" parent="MoveState"]
+script = ExtResource("4_5ub5d")
+dash_speed = 30.0
+can_fire = false
+can_absorb = false
+can_take_damage = false
+body_material = ExtResource("5_x6ib0")
+animation_trigger = "idle"
+
+[node name="Dead" type="Node" parent="MoveState"]
+script = ExtResource("4_koxfs")
+can_aim = false
+can_fire = false
+can_absorb = false
+can_take_damage = false
+
+[node name="Knockback" type="Node" parent="MoveState"]
+script = ExtResource("5_unin6")
+can_fire = false
+can_absorb = false
+can_take_damage = false
+body_material = ExtResource("8_bi3ql")
+animation_trigger = "hurt"
+
+[node name="Run" type="Node" parent="MoveState"]
+script = ExtResource("3_60agh")
+animation_trigger = "idle"
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_pcwtq")
+recovery_time = 1.6
+
+[node name="Aim" type="Node" parent="."]
+script = ExtResource("10_gaav5")
+pivot_ref = NodePath("../Pivot")
+arm_cannon_refs = Array[NodePath]([NodePath("../Pivot/PlayerModel/Arm_Left"), NodePath("../Pivot/PlayerModel/Arm_Right")])
+aim_point_ref = NodePath("../Pivot/Reticule/Mesh")
+animator_ref = NodePath("../Animator")
+cooldown = 0.01
+bullet_scene = ExtResource("5_twt6l")
+fire_fail_particles_scene = ExtResource("12_d68f3")
+
+[node name="ControllerAim" type="Node" parent="Aim"]
+script = ExtResource("12_j1ytq")
+
+[node name="MouseAim" type="Node" parent="Aim"]
+script = ExtResource("12_j7rkf")
+
+[node name="Dash" type="Node" parent="."]
+script = ExtResource("11_s2u1f")
+
+[node name="Absorb" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("2_sawo1")
+absorb_windup = 0.6
+mesh_display_time = 0.1
+
+[node name="DestroyArea" type="Area3D" parent="Absorb"]
+collision_layer = 0
+collision_mask = 68
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Absorb/DestroyArea"]
+shape = SubResource("SphereShape3D_4kfv7")
+
+[node name="AbsorbArea" type="Area3D" parent="Absorb"]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Absorb/AbsorbArea"]
+shape = ExtResource("7_iumbl")
+
+[node name="AbsorbMesh" type="MeshInstance3D" parent="Absorb"]
+visible = false
+mesh = SubResource("SphereMesh_epkrr")
+skeleton = NodePath("../DestroyArea")
+
+[node name="AbsorbParticles" type="GPUParticles3D" parent="Absorb"]
+emitting = false
+amount = 20
+interpolate = false
+fract_delta = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_jewto")
+draw_pass_1 = SubResource("SphereMesh_cp26l")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(0.999999, 0.00120908, 0.00080387, -0.00120983, 0.999999, 0.000936247, -0.000802739, -0.000937216, 0.999999, 0, 1, 0)
+script = ExtResource("10_18rdm")
+default_material = ExtResource("21_yrqox")
+recovery_material = ExtResource("21_yrqox")
+body_ref = NodePath("PlayerModel/Body")
+body_move_amount = -0.05
+body_angle_deg = 1.0
+body_smoothing = 0.4
+
+[node name="PlayerModel" parent="Pivot" instance=ExtResource("23_m7jo1")]
+
+[node name="Body" parent="Pivot/PlayerModel" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.999906, -0.0137353, 0, 0.0137353, 0.999906, 0, 0, 0)
+
+[node name="Head" parent="Pivot/PlayerModel" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3)
+
+[node name="HurtParticles" type="GPUParticles3D" parent="Pivot"]
+cast_shadow = 0
+emitting = false
+amount = 20
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_wwwn5")
+draw_pass_1 = SubResource("SphereMesh_3tq4p")
+
+[node name="DashParticles" type="GPUParticles3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
+cast_shadow = 0
+emitting = false
+amount = 20
+lifetime = 0.2
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_wwwn5")
+draw_pass_1 = SubResource("SphereMesh_3tq4p")
+
+[node name="CameraFollowPoint" type="Node3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+
+[node name="Reticule" type="Node3D" parent="Pivot"]
+script = ExtResource("21_tbx8f")
+min_reticule_distance = 1.5
+line_offset = Vector3(0, 0, -0.4)
+
+[node name="Mesh" type="MeshInstance3D" parent="Pivot/Reticule"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, -5)
+cast_shadow = 0
+mesh = SubResource("TextMesh_6c04p")
+skeleton = NodePath("../..")
+
+[node name="DistanceCheck" type="RayCast3D" parent="Pivot/Reticule"]
+
+[node name="RayCast3D" type="RayCast3D" parent="Pivot"]
+debug_shape_custom_color = Color(0, 1, 0, 1)
+
+[node name="GroundDetection" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = ExtResource("11_p7nyd")
+
+[node name="HitDetection" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetection"]
+shape = ExtResource("7_iumbl")
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7y837")
+}
+autoplay = "idle"
+
+[editable path="Pivot/PlayerModel"]
