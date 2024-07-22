@@ -6,18 +6,14 @@ signal slowdown_started
 signal slowdown_ended
 signal absorb_triggered
 
-const ANIMATION_PATH = "parameters/AbsorbTrigger/request"
-
 @export var absorb_windup = 1.0
 @export var absorb_cooldown = 0.5
 @export var mesh_display_time = 0.2
-@export var animator_ref: NodePath
 
 @onready var destoy_area: Area3D = $DestroyArea
 @onready var absorb_area: Area3D = $AbsorbArea
 @onready var mesh: MeshInstance3D = $AbsorbMesh
 @onready var particles: GPUParticles3D = $AbsorbParticles
-@onready var animator: AnimationTree = get_node(animator_ref)
 
 var can_absorb = true
 var is_absorb_started = false
@@ -40,8 +36,6 @@ func process_absorb_start():
 	slowdown_started.emit()
 	is_absorb_started = true
 	enable_particles(true)
-
-	animator.set(ANIMATION_PATH, AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func process_absorb_state(delta):
 	if is_absorbing or not can_absorb:
@@ -80,8 +74,6 @@ func end_windup():
 	is_absorb_started = false
 	current_windup_time = 0.0
 	enable_particles(false)
-
-	animator.set(ANIMATION_PATH, AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT)
 
 func enable_particles(enabled: bool):
 	particles.emitting = enabled

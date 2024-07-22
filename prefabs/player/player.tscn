@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=46 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Script" path="res://scripts/state/move_state_machine.gd" id="2_pauji"]
@@ -294,10 +294,87 @@ tracks/4/keys = {
 "values": [Vector3(0, 0, 0), Vector3(1.309, 0, 0), Vector3(1.309, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_cwn71"]
+resource_name = "hurt"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/PlayerModel/Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(-2, -2, 1),
+"update": 0,
+"values": [Vector3(0.523599, 0, 0), Vector3(0.523599, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/PlayerModel/Arm_Left:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(-2, -2, 1),
+"update": 0,
+"values": [Vector3(-0.4, 0.5, -0.5), Vector3(-0.4, 0.5, -0.5), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/PlayerModel/Arm_Left:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(-2, -2, 1),
+"update": 0,
+"values": [Vector3(1.309, 0, 0), Vector3(1.309, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/PlayerModel/Arm_Right:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(-2, -2, 1),
+"update": 0,
+"values": [Vector3(0.4, 0.5, -0.5), Vector3(0.4, 0.5, -0.5), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pivot/PlayerModel/Arm_Right:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(-2, -2, 1),
+"update": 0,
+"values": [Vector3(1.309, 0, 0), Vector3(1.309, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Pivot/PlayerModel/Head:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(-2, -2, 1),
+"update": 0,
+"values": [Vector3(0, 1.2, -0.4), Vector3(0, 1.2, -0.4), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7y837"]
 _data = {
 "RESET": SubResource("Animation_kcjf8"),
 "absorb": SubResource("Animation_g3g4i"),
+"hurt": SubResource("Animation_cwn71"),
 "idle": SubResource("Animation_vvrfd"),
 "shoot_left": SubResource("Animation_pdepb"),
 "shoot_right": SubResource("Animation_f0kg1")
@@ -315,6 +392,7 @@ initial_state = NodePath("Run")
 script = ExtResource("3_60agh")
 speed = 5.0
 can_fire = false
+animation_trigger = "AbsorbTrigger"
 
 [node name="Dash" type="Node" parent="MoveState"]
 script = ExtResource("4_5ub5d")
@@ -337,6 +415,7 @@ can_fire = false
 can_absorb = false
 can_take_damage = false
 body_material = ExtResource("8_bi3ql")
+animation_trigger = "HurtTrigger"
 
 [node name="Run" type="Node" parent="MoveState"]
 script = ExtResource("3_60agh")
@@ -369,7 +448,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("2_sawo1")
 absorb_windup = 0.6
 mesh_display_time = 0.1
-animator_ref = NodePath("../Animator")
 
 [node name="DestroyArea" type="Area3D" parent="Absorb"]
 collision_layer = 0
@@ -470,6 +548,9 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/AbsorbTrigger/active = false
 parameters/AbsorbTrigger/internal_active = false
 parameters/AbsorbTrigger/request = 0
+parameters/HurtTrigger/active = false
+parameters/HurtTrigger/internal_active = false
+parameters/HurtTrigger/request = 0
 parameters/ShootLeftTrigger/active = false
 parameters/ShootLeftTrigger/internal_active = false
 parameters/ShootLeftTrigger/request = 0
