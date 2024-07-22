@@ -1,9 +1,14 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=8 format=3 uid="uid://bvwqms7ohmbjw"]
+[gd_resource type="AnimationNodeBlendTree" load_steps=10 format=3 uid="uid://bvwqms7ohmbjw"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gdvso"]
 animation = &"absorb"
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_pee6b"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bx66p"]
+animation = &"hurt"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_b8pra"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dg2ao"]
 animation = &"idle"
@@ -26,6 +31,10 @@ nodes/Absorb/node = SubResource("AnimationNodeAnimation_gdvso")
 nodes/Absorb/position = Vector2(280, 440)
 nodes/AbsorbTrigger/node = SubResource("AnimationNodeOneShot_pee6b")
 nodes/AbsorbTrigger/position = Vector2(640, 120)
+nodes/Hurt/node = SubResource("AnimationNodeAnimation_bx66p")
+nodes/Hurt/position = Vector2(642.577, 406.08)
+nodes/HurtTrigger/node = SubResource("AnimationNodeOneShot_b8pra")
+nodes/HurtTrigger/position = Vector2(840, 120)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_dg2ao")
 nodes/Idle/position = Vector2(-180, 180)
 nodes/ShootLeft/node = SubResource("AnimationNodeAnimation_n56fe")
@@ -36,5 +45,5 @@ nodes/ShootRight/node = SubResource("AnimationNodeAnimation_1heiw")
 nodes/ShootRight/position = Vector2(60, 420)
 nodes/ShootRightTrigger/node = SubResource("AnimationNodeOneShot_o1awh")
 nodes/ShootRightTrigger/position = Vector2(320, 140)
-nodes/output/position = Vector2(880, 140)
-node_connections = [&"AbsorbTrigger", 0, &"ShootRightTrigger", &"AbsorbTrigger", 1, &"Absorb", &"ShootLeftTrigger", 0, &"Idle", &"ShootLeftTrigger", 1, &"ShootLeft", &"ShootRightTrigger", 0, &"ShootLeftTrigger", &"ShootRightTrigger", 1, &"ShootRight", &"output", 0, &"AbsorbTrigger"]
+nodes/output/position = Vector2(1100, 120)
+node_connections = [&"AbsorbTrigger", 0, &"ShootRightTrigger", &"AbsorbTrigger", 1, &"Absorb", &"HurtTrigger", 0, &"AbsorbTrigger", &"HurtTrigger", 1, &"Hurt", &"ShootLeftTrigger", 0, &"Idle", &"ShootLeftTrigger", 1, &"ShootLeft", &"ShootRightTrigger", 0, &"ShootLeftTrigger", &"ShootRightTrigger", 1, &"ShootRight", &"output", 0, &"HurtTrigger"]
