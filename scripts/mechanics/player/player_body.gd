@@ -4,14 +4,25 @@ extends Node3D
 @export var default_material: Material
 @export var recovery_material: Material
 
-@onready var body: MeshInstance3D = $Body
-@onready var nose: MeshInstance3D = $Nose
 @onready var hurt_particles: GPUParticles3D = $HurtParticles
 @onready var dash_particles: GPUParticles3D = $DashParticles
+
+var meshes: Array[MeshInstance3D]
 
 var current_move_state: MoveState
 var is_invincible: bool = false
 var current_material: Material
+
+func _ready():
+	get_meshes_recursive(self)
+
+func get_meshes_recursive(node: Node):
+	for child in node.get_children():
+		if child.name == "Reticule":
+			continue
+		if child is MeshInstance3D:
+			meshes.push_back(child as MeshInstance3D)
+		get_meshes_recursive(child)
 
 func _on_invincibility_changed(invincible: bool):
 	is_invincible = invincible
@@ -24,7 +35,9 @@ func _process(_delta):
 	if current_material == new_material:
 		return
 	current_material = new_material
-	body.set_surface_override_material(0, current_material)
+
+	for mesh in meshes:
+		mesh.set_surface_override_material(0, current_material)
 
 func calculate_current_material() -> Material:
 	if current_move_state != null and current_move_state.body_material != null:
