@@ -237,9 +237,6 @@ _data = {
 "shoot_right": SubResource("Animation_f0kg1")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1heiw"]
-animation = &"shoot_right"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dg2ao"]
 animation = &"idle"
 
@@ -249,22 +246,26 @@ animation = &"shoot_left"
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_04qxe"]
 filters = ["Pivot/PlayerModel/Arm_Left:position", "Pivot/PlayerModel/Arm_Left:scale"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1heiw"]
+animation = &"shoot_right"
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_o1awh"]
 filters = ["Pivot/PlayerModel/Arm_Right:position", "Pivot/PlayerModel/Arm_Right:scale"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5olkx"]
-nodes/Animation/node = SubResource("AnimationNodeAnimation_1heiw")
-nodes/Animation/position = Vector2(60, 420)
+graph_offset = Vector2(-197.395, 17.5541)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_dg2ao")
 nodes/Idle/position = Vector2(-180, 180)
 nodes/ShootLeft/node = SubResource("AnimationNodeAnimation_n56fe")
 nodes/ShootLeft/position = Vector2(-180, 340)
 nodes/ShootLeftTrigger/node = SubResource("AnimationNodeOneShot_04qxe")
 nodes/ShootLeftTrigger/position = Vector2(40, 160)
+nodes/ShootRight/node = SubResource("AnimationNodeAnimation_1heiw")
+nodes/ShootRight/position = Vector2(60, 420)
 nodes/ShootRightTrigger/node = SubResource("AnimationNodeOneShot_o1awh")
 nodes/ShootRightTrigger/position = Vector2(320, 140)
-nodes/output/position = Vector2(600, 140)
-node_connections = [&"ShootLeftTrigger", 0, &"Idle", &"ShootLeftTrigger", 1, &"ShootLeft", &"ShootRightTrigger", 0, &"ShootLeftTrigger", &"ShootRightTrigger", 1, &"Animation", &"output", 0, &"ShootRightTrigger"]
+nodes/output/position = Vector2(880, 140)
+node_connections = [&"ShootLeftTrigger", 0, &"Idle", &"ShootLeftTrigger", 1, &"ShootLeft", &"ShootRightTrigger", 0, &"ShootLeftTrigger", &"ShootRightTrigger", 1, &"ShootRight", &"output", 0, &"ShootRightTrigger"]
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -282,8 +283,6 @@ can_fire = false
 [node name="Dash" type="Node" parent="MoveState"]
 script = ExtResource("4_5ub5d")
 dash_speed = 30.0
-dash_duration = null
-can_aim = null
 can_fire = false
 can_absorb = false
 can_take_damage = false
