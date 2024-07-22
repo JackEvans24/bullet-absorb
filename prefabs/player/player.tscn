@@ -24,7 +24,7 @@
 [ext_resource type="Material" uid="uid://bl15jqbmjfvys" path="res://materials/player/player_dash_particle.tres" id="20_n80do"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/reticule.gd" id="21_tbx8f"]
 [ext_resource type="Material" uid="uid://hh5rgca6j4cq" path="res://materials/player/player_body_default.tres" id="21_yrqox"]
-[ext_resource type="PackedScene" uid="uid://cvcrnrlmmv7qr" path="res://prefabs/player/player_body.tscn" id="23_m7jo1"]
+[ext_resource type="PackedScene" uid="uid://bkexk607fieqm" path="res://prefabs/player/player_body.tscn" id="23_m7jo1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4kfv7"]
 radius = 5.0
@@ -138,7 +138,8 @@ recovery_time = 1.6
 
 [node name="Aim" type="Node" parent="."]
 script = ExtResource("10_gaav5")
-fire_point_ref = NodePath("../Pivot/FirePoint")
+pivot_ref = NodePath("../Pivot")
+arm_cannon_ref = NodePath("../Pivot/PlayerModel/Arm_Left")
 aim_point_ref = NodePath("../Pivot/Reticule/Mesh")
 cooldown = 0.01
 bullet_scene = ExtResource("5_twt6l")
@@ -195,11 +196,7 @@ script = ExtResource("10_18rdm")
 default_material = ExtResource("21_yrqox")
 recovery_material = ExtResource("21_yrqox")
 
-[node name="fusion_bot" parent="Pivot" instance=ExtResource("23_m7jo1")]
-transform = Transform3D(-1.74846e-08, 0, 0.4, 0, 0.4, 0, -0.4, 0, -1.74846e-08, 0, 0, 0)
-
-[node name="FirePoint" type="Node3D" parent="Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.64, 0, -1)
+[node name="PlayerModel" parent="Pivot" instance=ExtResource("23_m7jo1")]
 
 [node name="HurtParticles" type="GPUParticles3D" parent="Pivot"]
 cast_shadow = 0
@@ -248,3 +245,5 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetection"]
 shape = ExtResource("7_iumbl")
+
+[editable path="Pivot/PlayerModel"]

@@ -1,39 +1,46 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvcrnrlmmv7qr"]
+[gd_scene load_steps=8 format=3 uid="uid://bkexk607fieqm"]
 
 [ext_resource type="PackedScene" uid="uid://cya6vorsdg1em" path="res://models/player/fusion_bot.glb" id="1_uryam"]
 [ext_resource type="Material" uid="uid://hh5rgca6j4cq" path="res://materials/player/player_body_default.tres" id="2_b5lf6"]
-[ext_resource type="Material" uid="uid://cmco3s0yygsdu" path="res://materials/player/player_detail.tres" id="3_mbe5n"]
+[ext_resource type="Material" uid="uid://cmco3s0yygsdu" path="res://materials/player/player_body_detail.tres" id="3_wyqam"]
 [ext_resource type="Material" uid="uid://daj230qkurmwj" path="res://materials/player/player_shine.tres" id="4_4is0i"]
 [ext_resource type="Material" uid="uid://dga7w1qkxh0t3" path="res://materials/darkness.tres" id="5_pk8gx"]
-[ext_resource type="Material" uid="uid://dley2mod0wc1b" path="res://materials/player/player_broken.tres" id="6_dltoh"]
-[ext_resource type="PackedScene" uid="uid://dx62vkst3yru6" path="res://prefabs/particles/sparks.tscn" id="7_a24h5"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/aim/arm_cannon.gd" id="6_08jg3"]
+[ext_resource type="PackedScene" uid="uid://cw3xyogbakvqj" path="res://prefabs/particles/fire_fail_particles.tscn" id="7_dt0vy"]
 
-[node name="fusion_bot" instance=ExtResource("1_uryam")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+[node name="PlayerModel" instance=ExtResource("1_uryam")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 
 [node name="Body" parent="." index="0"]
 surface_material_override/0 = ExtResource("2_b5lf6")
-surface_material_override/1 = ExtResource("3_mbe5n")
+surface_material_override/1 = ExtResource("3_wyqam")
 surface_material_override/2 = ExtResource("4_4is0i")
 surface_material_override/3 = ExtResource("5_pk8gx")
 
-[node name="Arm_Right" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+[node name="Head" parent="." index="1"]
 surface_material_override/0 = ExtResource("2_b5lf6")
-surface_material_override/1 = ExtResource("3_mbe5n")
-surface_material_override/2 = ExtResource("6_dltoh")
-surface_material_override/3 = ExtResource("5_pk8gx")
-
-[node name="Sparks" parent="Arm_Right" index="0" instance=ExtResource("7_a24h5")]
-
-[node name="Head" parent="." index="2"]
-surface_material_override/0 = ExtResource("2_b5lf6")
-surface_material_override/1 = ExtResource("3_mbe5n")
+surface_material_override/1 = ExtResource("3_wyqam")
 surface_material_override/2 = ExtResource("4_4is0i")
 surface_material_override/3 = ExtResource("5_pk8gx")
 
-[node name="Arm_Left" parent="." index="3"]
+[node name="Arm_Left" parent="." index="2" node_paths=PackedStringArray("fire_point", "aim_reference_point")]
 surface_material_override/0 = ExtResource("2_b5lf6")
-surface_material_override/1 = ExtResource("3_mbe5n")
+surface_material_override/1 = ExtResource("3_wyqam")
+surface_material_override/2 = ExtResource("4_4is0i")
+surface_material_override/3 = ExtResource("5_pk8gx")
+script = ExtResource("6_08jg3")
+fire_point = NodePath("FirePoint")
+aim_reference_point = NodePath("ReferencePoint")
+fire_fail_particles_scene = ExtResource("7_dt0vy")
+
+[node name="FirePoint" type="Node3D" parent="Arm_Left" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0.5, -2)
+
+[node name="ReferencePoint" type="Node3D" parent="Arm_Left" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0.5, -0.8)
+
+[node name="Arm_Right" parent="." index="3"]
+surface_material_override/0 = ExtResource("2_b5lf6")
+surface_material_override/1 = ExtResource("3_wyqam")
 surface_material_override/2 = ExtResource("4_4is0i")
 surface_material_override/3 = ExtResource("5_pk8gx")
