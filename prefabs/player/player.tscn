@@ -223,6 +223,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 
 [node name="Reticule" type="Node3D" parent="Pivot"]
 script = ExtResource("21_tbx8f")
+min_reticule_distance = 1.5
 line_offset = Vector3(0, 0, -0.4)
 
 [node name="Mesh" type="MeshInstance3D" parent="Pivot/Reticule"]
