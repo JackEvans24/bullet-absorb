@@ -106,7 +106,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0.3)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -171,7 +171,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.6, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0.2, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0.3), Vector3(0, 0.2, 0.3), Vector3(0, 0, 0.3)]
 }
 
 [sub_resource type="Animation" id="Animation_pdepb"]
@@ -367,7 +367,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(-2, -2, 1),
 "update": 0,
-"values": [Vector3(0, 1.2, -0.4), Vector3(0, 1.2, -0.4), Vector3(0, 0, 0)]
+"values": [Vector3(0, 1.2, -0.4), Vector3(0, 1.2, -0.4), Vector3(0, 0, 0.3)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7y837"]
@@ -480,12 +480,22 @@ process_material = SubResource("ParticleProcessMaterial_jewto")
 draw_pass_1 = SubResource("SphereMesh_cp26l")
 
 [node name="Pivot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(0.999999, 0.00120908, 0.00080387, -0.00120983, 0.999999, 0.000936247, -0.000802739, -0.000937216, 0.999999, 0, 1, 0)
 script = ExtResource("10_18rdm")
 default_material = ExtResource("21_yrqox")
 recovery_material = ExtResource("21_yrqox")
+body_ref = NodePath("PlayerModel/Body")
+body_move_amount = -0.05
+body_angle_deg = 1.0
+body_smoothing = 0.4
 
 [node name="PlayerModel" parent="Pivot" instance=ExtResource("23_m7jo1")]
+
+[node name="Body" parent="Pivot/PlayerModel" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.999906, -0.0137353, 0, 0.0137353, 0.999906, 0, 0, 0)
+
+[node name="Head" parent="Pivot/PlayerModel" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3)
 
 [node name="HurtParticles" type="GPUParticles3D" parent="Pivot"]
 cast_shadow = 0
@@ -522,6 +532,9 @@ mesh = SubResource("TextMesh_6c04p")
 skeleton = NodePath("../..")
 
 [node name="DistanceCheck" type="RayCast3D" parent="Pivot/Reticule"]
+
+[node name="RayCast3D" type="RayCast3D" parent="Pivot"]
+debug_shape_custom_color = Color(0, 1, 0, 1)
 
 [node name="GroundDetection" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

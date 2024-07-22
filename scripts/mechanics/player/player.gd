@@ -58,6 +58,8 @@ func _ready():
 
 func _physics_process(_delta):
 	velocity = move_state.movement
+	body.current_movement = velocity
+
 	body.look_at(body.global_position + aim.aim_direction)
 
 	move_and_slide()
