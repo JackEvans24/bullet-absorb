@@ -139,6 +139,7 @@ recovery_time = 1.6
 [node name="Aim" type="Node" parent="."]
 script = ExtResource("10_gaav5")
 fire_point_ref = NodePath("../Pivot/FirePoint")
+aim_point_ref = NodePath("../Pivot/Reticule/Mesh")
 cooldown = 0.01
 bullet_scene = ExtResource("5_twt6l")
 fire_fail_particles_scene = ExtResource("12_d68f3")

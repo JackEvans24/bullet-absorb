@@ -4,6 +4,7 @@ extends Node
 signal bullet_fired
 
 @export var fire_point_ref: NodePath
+@export var aim_point_ref: NodePath
 @export var cooldown = 0.05
 @export var bullet_scene: PackedScene
 @export var fire_fail_particles_scene: PackedScene
@@ -11,6 +12,7 @@ signal bullet_fired
 @onready var controller_aim: ControllerAimDirection = $ControllerAim
 @onready var mouse_aim: MouseAimDirection = $MouseAim
 @onready var fire_point: Node3D = get_node(fire_point_ref)
+@onready var aim_point: Node3D = get_node(aim_point_ref)
 var aim_service: AimDirection
 
 var aim_direction: Vector3 = Vector3.FORWARD
@@ -62,10 +64,16 @@ func fire():
 	bullet.global_position = fire_point.global_position
 	bullet.initialise(fire_point.global_basis)
 
+	bullet.rotate_y(get_fire_angle())
+
 	bullet_fired.emit()
 
 	await tree.create_timer(cooldown).timeout
 	is_firing = false
+
+func get_fire_angle() -> float:
+	var reticule_direction = aim_point.global_position - fire_point.global_position
+	return aim_direction.signed_angle_to(reticule_direction.normalized(), Vector3.UP)
 
 func do_fire_failed():
 	var particles = fire_fail_particles_scene.instantiate()
