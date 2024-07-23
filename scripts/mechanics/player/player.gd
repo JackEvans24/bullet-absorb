@@ -56,9 +56,12 @@ func _ready():
 
 func update_stats(player_stats: PlayerStats):
 	stats = player_stats
+
 	health.initialise(stats.max_health)
 	aim.cooldown_modifier = stats.fire_cooldown_modifier
 	absorb.windup_modifier = stats.absorb_windup_modifier
+	absorb.destoy_area.scale = Vector3.ONE * stats.absorb_area
+	absorb.mesh.scale = Vector3.ONE * stats.absorb_area
 
 func _physics_process(_delta):
 	velocity = move_state.movement
