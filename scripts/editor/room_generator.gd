@@ -6,6 +6,7 @@ extends EditorScript
 const WALL_ITEM := 0
 const FLOOR_ITEM := 1
 const DOOR_SUPPORT_ITEM := 2
+const INVISIBLE_WALL_ITEM := 3
 
 enum DoorDirection {North = 0, East = 1, South = 2, West = 3}
 
@@ -21,14 +22,14 @@ var doorway_rotations: Array[int] = [ROT_SOUTH, ROT_EAST, ROT_NORTH, ROT_WEST]
 
 @export_group("Size")
 @export var depth := 10
-@export var width := 14
+@export var width := 10
 
 @export_group("Detection")
 @export var detection_offset := 4.0
 @export var detection_height := 2.0
 
 @export_group("Doors")
-@export var door_scene: PackedScene = preload("res://prefabs/room/door.tscn")
+@export var door_scene: PackedScene = preload ("res://prefabs/room/door.tscn")
 @export_flags("NORTH", "SOUTH", "EAST", "WEST") var start_doors := 2
 @export_flags("NORTH", "SOUTH", "EAST", "WEST") var end_doors := 14
 @export var door_offsets: Vector4 = Vector4(0, 0, 4, -4)
@@ -65,13 +66,13 @@ func generate_room():
 			pos.x = x
 			pos.z = z
 			if x == - width:
-				grid.set_cell_item(pos, WALL_ITEM, ROT_EAST)
+				grid.set_cell_item(pos, INVISIBLE_WALL_ITEM, ROT_EAST)
 			elif x == width - 1:
-				grid.set_cell_item(pos, WALL_ITEM, ROT_WEST)
+				grid.set_cell_item(pos, INVISIBLE_WALL_ITEM, ROT_WEST)
 			elif z == - depth:
 				grid.set_cell_item(pos, WALL_ITEM, ROT_NORTH)
 			elif z == depth - 1:
-				grid.set_cell_item(pos, WALL_ITEM, ROT_SOUTH)
+				grid.set_cell_item(pos, INVISIBLE_WALL_ITEM, ROT_SOUTH)
 			else:
 				grid.set_cell_item(pos, FLOOR_ITEM)
 
@@ -79,7 +80,7 @@ func generate_room():
 	if (start_doors&1 != 0) or (end_doors&1 != 0):
 		add_door(Vector3(0, 0, -depth), DoorDirection.North, door_offsets.x)
 	if (start_doors&2 != 0) or (end_doors&2 != 0):
-		add_door(Vector3(0, 0, depth - 1), DoorDirection.South, door_offsets.y)
+		add_door(Vector3(0.0, 0.0, depth - 1.0), DoorDirection.South, door_offsets.y)
 	if (start_doors&4 != 0) or (end_doors&4 != 0):
 		add_door(Vector3(width - 1, 0, 0), DoorDirection.East, door_offsets.z)
 	if (start_doors&8 != 0) or (end_doors&8 != 0):
@@ -103,7 +104,7 @@ func remove_children_from(removal_node: Node):
 func clear_grid(_value: bool):
 	grid.clear()
 
-func add_door(door_position: Vector3, door_rotation_index: DoorDirection, offset: int) -> Node3D:
+func add_door(door_position: Vector3, door_rotation_index: DoorDirection, offset: float) -> Node3D:
 	var is_horizontal_door = door_rotation_index % 2 == 0
 	var grid_direction := Vector3.RIGHT if is_horizontal_door else Vector3.BACK
 
