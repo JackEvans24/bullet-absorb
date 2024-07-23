@@ -113,7 +113,8 @@ func add_door(door_position: Vector3, door_rotation_index: DoorDirection, offset
 		if x == (offset - 3):
 			grid.set_cell_item(cell, DOOR_SUPPORT_ITEM, ROT_NORTH if is_horizontal_door else ROT_WEST)
 		elif x == offset + 2:
-			grid.set_cell_item(cell, DOOR_SUPPORT_ITEM, ROT_SOUTH if is_horizontal_door else ROT_EAST)
+			var item = DOOR_SUPPORT_ITEM if is_horizontal_door else INVISIBLE_WALL_ITEM
+			grid.set_cell_item(cell, item, ROT_SOUTH if is_horizontal_door else ROT_EAST)
 		else:
 			grid.set_cell_item(cell, FLOOR_ITEM)
 
