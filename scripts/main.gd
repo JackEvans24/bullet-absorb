@@ -29,6 +29,8 @@ func initialise_rooms():
 	rooms.room_reentered.connect(_on_room_reentered)
 
 func initialise_player():
+	player.update_stats(save_game.data.player_stats)
+
 	if save_game.data.current_room:
 		var current_room = rooms.get_room(save_game.data.current_room)
 		if current_room:

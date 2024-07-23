@@ -11,7 +11,6 @@ signal died
 enum AbsorbState {Started, Cancelled, Complete}
 
 @export var max_power = 20
-@export var stats: PlayerStats = PlayerStats.new()
 
 @onready var move_state: MoveStateMachine = $MoveState
 @onready var health: Health = $Health
@@ -24,6 +23,7 @@ enum AbsorbState {Started, Cancelled, Complete}
 @onready var ground_detection: CollisionShape3D = $GroundDetection
 @onready var animator: AnimationPlayer = $Animator
 
+var stats: PlayerStats
 var power_count: int = 0
 
 var current_health:
@@ -54,8 +54,11 @@ func _ready():
 
 	hit_detection.area_entered.connect(_on_hit)
 
-	health.initialise(stats.max_health)
 	dash.initialise(move_state, body)
+
+func update_stats(player_stats: PlayerStats):
+	stats = player_stats
+	health.initialise(stats.max_health)
 
 func _physics_process(_delta):
 	velocity = move_state.movement
