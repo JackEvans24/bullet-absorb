@@ -3,7 +3,7 @@ extends CharacterBody3D
 
 signal bullet_fired
 signal absorb_state_changed(absorb_state: AbsorbState)
-signal power_count_changed(count: int)
+signal power_count_changed(count: float)
 signal damage_taken
 signal can_dash_changed(can_dash: bool)
 signal died
@@ -22,7 +22,7 @@ enum AbsorbState {Started, Cancelled, Complete}
 @onready var animator: AnimationPlayer = $Animator
 
 var stats: PlayerStats
-var power_count: int = 0
+var power_count: float = 0.0
 
 var current_health:
 	get: return health.current_health
@@ -30,7 +30,6 @@ var max_health:
 	get: return health.starting_health
 
 func _ready():
-	power_count_changed.connect(aim._on_power_count_changed)
 	died.connect(body._on_player_died)
 
 	move_state.state_entered.connect(_on_move_state_entered)
@@ -119,16 +118,17 @@ func knockback(taken_from: Node3D):
 func _on_absorb():
 	if power_count == stats.max_power:
 		return
-	power_count += 1
+	power_count = min(stats.max_power, power_count + stats.power_conversion)
 	update_power_count()
 
 func _on_bullet_fired():
-	power_count = max(0, power_count - 1)
+	power_count = max(0, power_count - stats.fire_power_consumption)
 	update_power_count()
 	bullet_fired.emit()
 
 func update_power_count():
 	power_count_changed.emit(power_count)
+	aim.has_ammo = power_count >= stats.fire_power_consumption
 
 func _on_hit(area: Area3D):
 	health.take_damage(1.0, area)

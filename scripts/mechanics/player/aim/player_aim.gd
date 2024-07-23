@@ -96,6 +96,3 @@ func get_next_cannon_for_fire() -> ArmCannon:
 		arm_cannon_index = 0
 
 	return next_cannon
-
-func _on_power_count_changed(power_count: int):
-	has_ammo = power_count > 0

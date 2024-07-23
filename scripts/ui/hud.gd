@@ -20,7 +20,7 @@ func update_bar(bar: Bar, max_value: float, current_value: float):
 func _on_health_changed(current_health: float):
 	health_bar.update_value(current_health)
 
-func _on_absorb_count_changed(count: int):
+func _on_power_count_changed(count: float):
 	power_bar.update_value(count)
 
 func _on_can_dash_changed(can_dash: bool):
