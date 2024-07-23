@@ -19,7 +19,7 @@ func _ready():
 
 	cameras.target = player.camera_follow_point
 
-	hud.initialise_max_values(player.max_health, player.max_power)
+	hud.initialise_stats(save_game.data.player_stats)
 	hud._on_health_changed(player.current_health)
 
 func initialise_rooms():
