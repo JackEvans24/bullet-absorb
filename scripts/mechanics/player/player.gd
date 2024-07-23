@@ -10,8 +10,6 @@ signal died
 
 enum AbsorbState {Started, Cancelled, Complete}
 
-@export var max_power = 20
-
 @onready var move_state: MoveStateMachine = $MoveState
 @onready var health: Health = $Health
 @onready var aim: PlayerAim = $Aim
@@ -114,7 +112,7 @@ func knockback(taken_from: Node3D):
 	move_state.transition_to(MoveStateConstants.STATE_KNOCKBACK, ctx)
 
 func _on_absorb():
-	if power_count == max_power:
+	if power_count == stats.max_power:
 		return
 	power_count += 1
 	update_power_count()
