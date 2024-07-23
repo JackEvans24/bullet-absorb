@@ -10,7 +10,7 @@ const SHOOT_RIGHT = "shoot_right"
 @export var arm_cannon_refs: Array[NodePath]
 @export var aim_point_ref: NodePath
 @export var animator_ref: NodePath
-@export var cooldown = 0.05
+@export var cooldown = 0.4
 @export var bullet_scene: PackedScene
 @export var fire_fail_particles_scene: PackedScene
 
@@ -30,6 +30,7 @@ var can_aim = true
 var can_fire = true
 var is_firing = false
 var has_ammo = false
+var cooldown_modifier := 1.0
 
 func _ready():
 	aim_service = mouse_aim
@@ -67,22 +68,22 @@ func fire():
 	if is_firing:
 		return
 
-	var arm_cannon = get_next_cannon_for_fire()
-	if not has_ammo:
-		arm_cannon.trigger_fire_fail()
-		return
-
 	is_firing = true
 
 	var tree = get_tree()
-	var bullet = bullet_scene.instantiate()
-	tree.root.add_child(bullet)
+	var arm_cannon = get_next_cannon_for_fire()
 
-	arm_cannon.initialise_bullet(bullet)
+	if not has_ammo:
+		arm_cannon.trigger_fire_fail()
+	else:
+		var bullet = bullet_scene.instantiate()
+		tree.root.add_child(bullet)
 
-	bullet_fired.emit()
+		arm_cannon.initialise_bullet(bullet)
 
-	await tree.create_timer(cooldown).timeout
+		bullet_fired.emit()
+
+	await tree.create_timer(cooldown / cooldown_modifier).timeout
 	is_firing = false
 
 func get_next_cannon_for_fire() -> ArmCannon:
