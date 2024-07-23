@@ -12,6 +12,9 @@ signal invincibility_changed(is_invincible: bool)
 var is_invincible = false
 var can_take_damage = true
 
+func initialise(max_health: int):
+	current_health = max_health
+
 func take_damage(damage: float, taken_from: Node3D):
 	if not can_take_damage or is_invincible or current_health <= 0:
 		return

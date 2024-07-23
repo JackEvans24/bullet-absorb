@@ -11,6 +11,7 @@ signal died
 enum AbsorbState {Started, Cancelled, Complete}
 
 @export var max_power = 20
+@export var stats: PlayerStats = PlayerStats.new()
 
 @onready var move_state: MoveStateMachine = $MoveState
 @onready var health: Health = $Health
@@ -53,6 +54,7 @@ func _ready():
 
 	hit_detection.area_entered.connect(_on_hit)
 
+	health.initialise(stats.max_health)
 	dash.initialise(move_state, body)
 
 func _physics_process(_delta):
