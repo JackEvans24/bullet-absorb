@@ -19,6 +19,7 @@ var can_absorb = true
 var is_absorb_started = false
 var is_absorbing = false
 var current_windup_time = 0.0
+var windup_modifier = 1.0
 
 func _ready():
 	absorb_area.area_entered.connect(absorb_power)
@@ -46,7 +47,7 @@ func process_absorb_state(delta):
 		return
 
 	current_windup_time += delta
-	if not current_windup_time > absorb_windup:
+	if not current_windup_time > (absorb_windup / windup_modifier):
 		return
 
 	trigger_absorb()

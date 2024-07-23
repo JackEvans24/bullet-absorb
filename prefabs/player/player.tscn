@@ -94,7 +94,6 @@ uppercase = true
 
 [sub_resource type="Animation" id="Animation_g3g4i"]
 resource_name = "absorb"
-length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -102,7 +101,7 @@ tracks/0/path = NodePath("Pivot/PlayerModel/Head:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0.523599, 0, 0)]
@@ -114,7 +113,7 @@ tracks/1/path = NodePath("Pivot/PlayerModel/Arm_Left:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.6),
+"times": PackedFloat32Array(0, 0.3, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(-0.4, 0.4, -0.5), Vector3(-0.4, 0.5, -0.5), Vector3(-0.4, 0.5, -0.5)]
@@ -126,7 +125,7 @@ tracks/2/path = NodePath("Pivot/PlayerModel/Arm_Left:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6),
+"times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(0.5, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(1.309, 0, 0), Vector3(1.309, 0, 0)]
@@ -138,7 +137,7 @@ tracks/3/path = NodePath("Pivot/PlayerModel/Arm_Right:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.6),
+"times": PackedFloat32Array(0, 0.3, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0.4, 0.4, -0.5), Vector3(0.4, 0.5, -0.5), Vector3(0.4, 0.5, -0.5)]
@@ -150,7 +149,7 @@ tracks/4/path = NodePath("Pivot/PlayerModel/Arm_Right:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6),
+"times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(0.5, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(1.309, 0, 0), Vector3(1.309, 0, 0)]
@@ -426,7 +425,6 @@ pivot_ref = NodePath("../Pivot")
 arm_cannon_refs = Array[NodePath]([NodePath("../Pivot/PlayerModel/Arm_Left"), NodePath("../Pivot/PlayerModel/Arm_Right")])
 aim_point_ref = NodePath("../Pivot/Reticule/Mesh")
 animator_ref = NodePath("../Animator")
-cooldown = 0.4
 bullet_scene = ExtResource("5_twt6l")
 fire_fail_particles_scene = ExtResource("12_d68f3")
 
@@ -442,7 +440,6 @@ script = ExtResource("11_s2u1f")
 [node name="Absorb" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("2_sawo1")
-absorb_windup = 0.6
 mesh_display_time = 0.1
 
 [node name="DestroyArea" type="Area3D" parent="Absorb"]
@@ -491,7 +488,13 @@ body_smoothing = 0.4
 transform = Transform3D(1, 0, 0, 0, 0.999906, -0.0137353, 0, 0.0137353, 0.999906, 0, 0, 0)
 
 [node name="Head" parent="Pivot/PlayerModel" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3)
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0.3)
+
+[node name="Arm_Left" parent="Pivot/PlayerModel" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.258816, -0.965927, 0, 0.965927, 0.258816, -0.4, 0.5, -0.5)
+
+[node name="Arm_Right" parent="Pivot/PlayerModel" index="3"]
+transform = Transform3D(1, 0, 0, 0, 0.258816, -0.965927, 0, 0.965927, 0.258816, 0.4, 0.5, -0.5)
 
 [node name="HurtParticles" type="GPUParticles3D" parent="Pivot"]
 cast_shadow = 0
