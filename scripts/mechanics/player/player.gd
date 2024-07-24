@@ -59,6 +59,8 @@ func update_stats(player_stats: PlayerStats):
 	stats = player_stats
 	if aim:
 		aim.stats = stats
+	if absorb:
+		absorb.stats = stats
 
 	# health.initialise(stats.max_health)
 	# aim.cooldown_modifier = stats.fire_cooldown_modifier
@@ -140,7 +142,7 @@ func _on_hit(area: Area3D):
 func _on_slowdown_started():
 	move_state.transition_to(MoveStateConstants.STATE_ABSORB)
 	absorb_state_changed.emit(AbsorbState.Started)
-	animator.speed_scale = absorb.windup_modifier / absorb.absorb_windup
+	animator.speed_scale = stats.absorb_windup
 
 func _on_slowdown_ended():
 	move_state.transition_to(MoveStateConstants.STATE_RUN)

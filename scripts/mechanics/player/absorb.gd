@@ -6,7 +6,6 @@ signal slowdown_started
 signal slowdown_ended
 signal absorb_triggered
 
-@export var absorb_windup = 1.0
 @export var absorb_cooldown = 0.5
 @export var mesh_display_time = 0.2
 
@@ -15,11 +14,12 @@ signal absorb_triggered
 @onready var mesh: MeshInstance3D = $AbsorbMesh
 @onready var particles: GPUParticles3D = $AbsorbParticles
 
+var stats: PlayerStats
+
 var can_absorb = true
 var is_absorb_started = false
 var is_absorbing = false
 var current_windup_time = 0.0
-var windup_modifier = 1.0
 
 func _ready():
 	absorb_area.area_entered.connect(absorb_power)
@@ -47,7 +47,7 @@ func process_absorb_state(delta):
 		return
 
 	current_windup_time += delta
-	if not current_windup_time > (absorb_windup / windup_modifier):
+	if not current_windup_time > stats.absorb_windup:
 		return
 
 	trigger_absorb()
