@@ -1,6 +1,7 @@
 class_name AbsorbOrb
 extends Node3D
 
+signal orb_absorbed
 signal orb_destroyed
 
 @export var absorb_from_ready := false
@@ -35,9 +36,11 @@ func destroy():
 	create_particles.emitting = false
 	idle_particles.emitting = false
 
-	orb_destroyed.emit()
+	orb_absorbed.emit()
 
 	death_particles.emitting = true
 	await get_tree().create_timer(death_particles.lifetime).timeout
+
+	orb_destroyed.emit()
 
 	queue_free()
