@@ -8,4 +8,5 @@ class_name PlayerStats extends Resource
 @export var absorb_windup_modifier := 1.5
 @export var absorb_area := 1.0
 
-var fire_power_consumption := 1.0 / fire_power_consumption_modifier
+var fire_power_consumption: float:
+    get: return 1.0 / fire_power_consumption_modifier
