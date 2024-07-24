@@ -57,7 +57,8 @@ func _ready():
 # TODO: Replace with powerups
 func update_stats(player_stats: PlayerStats):
 	stats = player_stats
-	aim.stats = stats
+	if aim:
+		aim.stats = stats
 
 	# health.initialise(stats.max_health)
 	# aim.cooldown_modifier = stats.fire_cooldown_modifier
