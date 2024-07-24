@@ -10,4 +10,4 @@ power_conversion = 1.0
 fire_power_consumption_modifier = 1.0
 fire_cooldown_modifier = 1.0
 absorb_windup_modifier = 1.0
-absorb_area = 1.0
+absorb_area_scale = 1.0
