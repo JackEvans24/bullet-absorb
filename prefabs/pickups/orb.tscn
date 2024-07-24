@@ -1,11 +1,11 @@
 [gd_scene load_steps=25 format=3 uid="uid://inpjseyhox3m"]
 
-[ext_resource type="Script" path="res://scripts/mechanics/shared/absorb_orb.gd" id="1_tq5vu"]
-[ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/power.tres" id="2_oybc3"]
-[ext_resource type="Script" path="res://scripts/mechanics/shared/absorb_handler.gd" id="3_tpsnr"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/absorb_orb.gd" id="1_wxu3i"]
+[ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/pickups/power.tres" id="2_4bge2"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/absorb_handler.gd" id="3_acu7b"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_x6y6o"]
-material = ExtResource("2_oybc3")
+material = ExtResource("2_4bge2")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_34gph"]
 
@@ -34,7 +34,7 @@ turbulence_influence_min = 0.01
 turbulence_influence_max = 0.01
 
 [sub_resource type="SphereMesh" id="SphereMesh_pvaaq"]
-material = ExtResource("2_oybc3")
+material = ExtResource("2_4bge2")
 radius = 0.2
 height = 0.4
 
@@ -79,7 +79,7 @@ scale_max = 1.5
 scale_curve = SubResource("CurveTexture_cp6je")
 
 [sub_resource type="SphereMesh" id="SphereMesh_ryj1u"]
-material = ExtResource("2_oybc3")
+material = ExtResource("2_4bge2")
 radius = 0.1
 height = 0.2
 
@@ -173,7 +173,7 @@ _data = {
 }
 
 [node name="Orb" type="Node3D"]
-script = ExtResource("1_tq5vu")
+script = ExtResource("1_wxu3i")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 1, 0)
@@ -188,7 +188,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("SphereShape3D_34gph")
 
 [node name="AbsorbHandler" type="Node" parent="Collider"]
-script = ExtResource("3_tpsnr")
+script = ExtResource("3_acu7b")
 
 [node name="CreateParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
