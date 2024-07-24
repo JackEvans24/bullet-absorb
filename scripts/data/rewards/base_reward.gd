@@ -6,7 +6,7 @@ enum RewardType {
     MaxPower,
     PowerConversion,
     FireEfficiency,
-    # FireCooldown,
+    FireCooldown,
     # AbsorbWindup,
     # AbsorbArea
 }
