@@ -1,9 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://yrlkolmu7nna"]
+[gd_scene load_steps=4 format=3 uid="uid://yrlkolmu7nna"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/rewards/reward_pickup.gd" id="1_iwyks"]
 [ext_resource type="PackedScene" uid="uid://inpjseyhox3m" path="res://prefabs/pickups/orb.tscn" id="2_47pl6"]
+[ext_resource type="Material" uid="uid://dvaxsa8nej8rd" path="res://materials/pickups/reward_pickup.tres" id="3_1kqet"]
 
 [node name="RewardPickup" type="Node3D"]
 script = ExtResource("1_iwyks")
 
 [node name="Orb" parent="." instance=ExtResource("2_47pl6")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Mesh" parent="Orb" index="0"]
+surface_material_override/0 = ExtResource("3_1kqet")
+
+[node name="CreateParticles" parent="Orb" index="2"]
+material_override = ExtResource("3_1kqet")
+
+[node name="IdleParticles" parent="Orb" index="3"]
+material_override = ExtResource("3_1kqet")
+
+[node name="DeathParticles" parent="Orb" index="4"]
+material_override = ExtResource("3_1kqet")
+
+[editable path="Orb"]
