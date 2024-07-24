@@ -19,6 +19,7 @@ func _ready():
 func _on_start_animation_complete():
 	if not absorb_from_ready:
 		set_absorb_handler()
+	animation.play("idle")
 
 func set_absorb_handler():
 	absorb_handler.absorb_triggered.connect(_on_absorb_triggered)

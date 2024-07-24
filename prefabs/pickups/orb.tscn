@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://inpjseyhox3m"]
+[gd_scene load_steps=26 format=3 uid="uid://inpjseyhox3m"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/shared/absorb_orb.gd" id="1_wxu3i"]
 [ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/pickups/power.tres" id="2_4bge2"]
@@ -55,8 +55,8 @@ curve_y = SubResource("Curve_i58t0")
 curve_z = SubResource("Curve_crewt")
 
 [sub_resource type="Curve" id="Curve_n4sxy"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.595652, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -7.19356, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0), 0.0, 11.2904, 0, 0, Vector2(0.253623, 1), 0.0, 0.0, 0, 0, Vector2(0.595652, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -7.19356, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_cp6je"]
 curve = SubResource("Curve_n4sxy")
@@ -91,8 +91,8 @@ point_count = 3
 curve = SubResource("Curve_wnpi8")
 
 [sub_resource type="Curve" id="Curve_wwfbi"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.595652, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -7.19356, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.873188, 0), -4.24283, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_4rxgf"]
 curve = SubResource("Curve_wwfbi")
@@ -107,7 +107,7 @@ direction = Vector3(0, 1, 0)
 spread = 0.0
 flatness = 1.0
 radial_velocity_min = 5.0
-radial_velocity_max = 5.0
+radial_velocity_max = 10.0
 radial_velocity_curve = SubResource("CurveTexture_ya36r")
 gravity = Vector3(0, 0, 0)
 scale_min = 0.5
@@ -128,25 +128,13 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0.01, 0.01, 0.01), Vector3(0.3, 0.3, 0.3), Vector3(0.2, 0.2, 0.2), Vector3(0.65, 0.65, 0.65), Vector3(0.5, 0.5, 0.5), Vector3(1.2, 1.2, 1.2), Vector3(1, 1, 1)]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("IdleParticles:emitting")
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(2),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -154,13 +142,42 @@ tracks/2/keys = {
 "method": &"_on_start_animation_complete"
 }]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CreateParticles:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CreateParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_dit3k"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.2, 1.2, 1.2), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("IdleParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -169,6 +186,7 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0gtoc"]
 _data = {
+"idle": SubResource("Animation_dit3k"),
 "start": SubResource("Animation_gnlb8")
 }
 
@@ -176,7 +194,7 @@ _data = {
 script = ExtResource("1_wxu3i")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 1, 0)
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 1, 0)
 mesh = SubResource("SphereMesh_x6y6o")
 
 [node name="Collider" type="Area3D" parent="."]
