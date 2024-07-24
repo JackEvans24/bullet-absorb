@@ -1,5 +1,6 @@
 class_name RoomController extends Node
 
+signal reward_collected(reward: Reward)
 signal doors_changed
 signal room_completed(room_id: String)
 signal room_reentered(room_id: String)
@@ -19,6 +20,7 @@ func initialise(data: SaveGameData):
 
 		room.room_item_lookup = room_item_lookup
 		room.doors_changed.connect(_on_room_doors_changed)
+		room.reward_collected.connect(_on_reward_collected)
 		room.room_completed.connect(_on_room_completed)
 		room.room_reentered.connect(_on_room_reentered)
 
@@ -35,6 +37,9 @@ func get_room(id: String) -> Room:
 
 func _on_room_doors_changed():
 	doors_changed.emit()
+
+func _on_reward_collected(reward: Reward):
+	reward_collected.emit(reward)
 
 func _on_room_completed(room_id: String):
 	room_completed.emit(room_id)

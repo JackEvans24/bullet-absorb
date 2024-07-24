@@ -25,6 +25,7 @@ func _ready():
 func initialise_rooms():
 	rooms.initialise(save_game.data)
 	rooms.doors_changed.connect(_on_room_doors_changed)
+	rooms.reward_collected.connect(_on_reward_collected)
 	rooms.room_completed.connect(_on_room_completed)
 	rooms.room_reentered.connect(_on_room_reentered)
 
@@ -70,6 +71,10 @@ func _on_absorb_state_changed(absorb_state: Player.AbsorbState):
 
 func _on_room_doors_changed():
 	cameras.add_impulse(ScreenShakeMapping.ScreenShakeId.Doors)
+
+func _on_reward_collected(reward: Reward):
+	# TODO: Add to save state
+	reward.upgrade(player)
 
 func _on_room_completed(room_id: String):
 	save_game.add_completed_room(room_id)

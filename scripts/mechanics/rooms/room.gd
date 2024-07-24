@@ -2,6 +2,7 @@ class_name Room
 extends Node3D
 
 signal doors_changed
+signal reward_collected(reward: Reward)
 signal room_completed(room_id: String)
 signal room_reentered(room_id: String)
 
@@ -34,7 +35,7 @@ func on_first_entry():
 	if completed:
 		return
 	if len(data.waves) <= 0:
-		set_room_complete()
+		on_room_complete()
 		return
 
 	close_all_doors()
@@ -81,11 +82,30 @@ func on_wave_complete():
 	if wave_index < len(data.waves):
 		set_room_configuration(data.waves[wave_index])
 		return
-	set_room_complete()
+	on_room_complete()
+
+func on_room_complete():
+	if data.reward:
+		create_reward()
+	else:
+		set_room_complete()
+
+func create_reward():
+	var config: RoomItem = RoomItem.new()
+	config.item_type = RoomItem.RoomItemType.Reward
+
+	var reward_pickup = await add_item(config) as RewardPickup
+	reward_pickup.reward = data.reward
+	reward_pickup.reward_collected.connect(_on_reward_collected)
+
+	add_child(reward_pickup)
+
+func _on_reward_collected(reward: Reward):
+	reward_collected.emit(reward)
+	call_deferred("set_room_complete")
 
 func set_room_complete():
 	set_doors(data.completed_doors)
-	set_room_configuration(data.completed_room)
 
 	completed = true
 	room_completed.emit(data.room_name)
