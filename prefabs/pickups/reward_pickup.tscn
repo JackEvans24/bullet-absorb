@@ -1,30 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://yrlkolmu7nna"]
+[gd_scene load_steps=3 format=3 uid="uid://yrlkolmu7nna"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/rewards/reward_pickup.gd" id="1_iwyks"]
-[ext_resource type="Material" uid="uid://c48k0txs7xf5p" path="res://materials/environment/wall_shine.tres" id="2_k145u"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_0cjgu"]
-material = ExtResource("2_k145u")
-size = Vector3(0.5, 0.5, 0.5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_xaism"]
-size = Vector3(0.8, 0.8, 0.8)
+[ext_resource type="PackedScene" uid="uid://inpjseyhox3m" path="res://prefabs/pickups/orb.tscn" id="2_47pl6"]
 
 [node name="RewardPickup" type="Node3D"]
 script = ExtResource("1_iwyks")
 
-[node name="Pivot" type="Node3D" parent="."]
-
-[node name="Mesh" type="MeshInstance3D" parent="Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_0cjgu")
-skeleton = NodePath("../..")
-
-[node name="Collider" type="Area3D" parent="Pivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-collision_layer = 0
-collision_mask = 2
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pivot/Collider"]
-shape = SubResource("BoxShape3D_xaism")
+[node name="Orb" parent="." instance=ExtResource("2_47pl6")]

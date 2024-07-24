@@ -4,11 +4,11 @@ signal reward_collected(reward_type: Reward.RewardType)
 
 @export var reward: Reward.RewardType
 
-@onready var collider: Area3D = $Pivot/Collider
+@onready var orb: AbsorbOrb = $Orb
 
 func _ready():
-    collider.body_entered.connect(_on_body_entered)
+    orb.orb_destroyed.connect(_on_orb_destroyed)
 
-func _on_body_entered(_body: Node3D):
+func _on_orb_destroyed():
     reward_collected.emit(reward)
     call_deferred("queue_free")
