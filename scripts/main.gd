@@ -19,7 +19,7 @@ func _ready():
 
 	cameras.target = player.camera_follow_point
 
-	hud.initialise_stats(save_game.data.player_stats)
+	hud.initialise_stats(player.stats)
 	hud._on_health_changed(player.current_health)
 
 func initialise_rooms():
@@ -29,7 +29,7 @@ func initialise_rooms():
 	rooms.room_reentered.connect(_on_room_reentered)
 
 func initialise_player():
-	player.update_stats(save_game.data.player_stats)
+	# TODO: Enable saved upgrades
 
 	if save_game.data.current_room:
 		var current_room = rooms.get_room(save_game.data.current_room)

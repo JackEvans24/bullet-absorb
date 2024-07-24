@@ -2,7 +2,6 @@ class_name SaveGameData
 
 var completed_rooms: Array = []
 var current_room: String
-var player_stats: PlayerStats = PlayerStats.new()
 
 func to_dictionary() -> Dictionary:
     var dict: Dictionary = {}
