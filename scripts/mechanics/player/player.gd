@@ -27,8 +27,6 @@ var power_count: float = 0.0
 
 var current_health:
 	get: return health.current_health
-var max_health:
-	get: return health.starting_health
 
 func _ready():
 	died.connect(body._on_player_died)
@@ -54,6 +52,7 @@ func _ready():
 
 	dash.initialise(move_state, body)
 
+# TODO: Replace with powerups
 func update_stats(player_stats: PlayerStats):
 	stats = player_stats
 

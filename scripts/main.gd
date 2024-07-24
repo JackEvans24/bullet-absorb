@@ -17,7 +17,7 @@ func _ready():
 
 	cameras.target = player.camera_follow_point
 
-	hud.initialise_stats(player.stats)
+	hud.update(player)
 	hud._on_health_changed(player.current_health)
 
 func initialise_rooms():
@@ -73,6 +73,9 @@ func _on_room_doors_changed():
 
 func _on_reward_collected(reward_type: Reward.RewardType):
 	enable_reward(reward_type)
+
+	hud.update(player)
+
 	save_game.add_collected_reward(reward_type)
 	save_game.save()
 

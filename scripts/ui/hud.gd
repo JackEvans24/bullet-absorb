@@ -8,10 +8,12 @@ extends Node
 @onready var stamina_bar: Bar = $StaminaBar
 @onready var death_overlay: ColorRect = $DeathOverlay
 
-func initialise_stats(stats: PlayerStats):
-	update_bar(health_bar, stats.max_health, stats.max_health)
-	update_bar(power_bar, stats.max_power, 0.0)
-	update_bar(stamina_bar, 1.0, 1.0)
+var saved_dash_state := true
+
+func update(player: Player):
+	update_bar(health_bar, player.stats.max_health, player.current_health)
+	update_bar(power_bar, player.stats.max_power, player.power_count)
+	update_bar(stamina_bar, 1.0, 1.0 if saved_dash_state else 0.0)
 
 func update_bar(bar: Bar, max_value: float, current_value: float):
 	bar.max_value = max_value
@@ -24,7 +26,8 @@ func _on_power_count_changed(count: float):
 	power_bar.update_value(count)
 
 func _on_can_dash_changed(can_dash: bool):
-		stamina_bar.update_value(1.0 if can_dash else 0.0)
+	saved_dash_state = can_dash
+	stamina_bar.update_value(1.0 if saved_dash_state else 0.0)
 
 func _on_player_died():
 	await get_tree().create_timer(death_overlay_timer).timeout
