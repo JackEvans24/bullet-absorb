@@ -8,7 +8,7 @@ enum RewardType {
     FireEfficiency,
     FireCooldown,
     AbsorbWindup,
-    # AbsorbArea
+    AbsorbArea
 }
 
 func upgrade(_player: Player):
