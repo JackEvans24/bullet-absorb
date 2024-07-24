@@ -56,6 +56,10 @@ func process_absorb_state(delta):
 func trigger_absorb():
 	is_absorbing = true
 
+	var area_scale = Vector3.ONE * stats.absorb_area_scale
+	destoy_area.scale = area_scale
+	mesh.scale = area_scale
+
 	absorb_triggered.emit()
 
 	var overlapping_areas: Array[Area3D] = destoy_area.get_overlapping_areas()
