@@ -7,7 +7,7 @@ enum RewardType {
     PowerConversion,
     FireEfficiency,
     FireCooldown,
-    # AbsorbWindup,
+    AbsorbWindup,
     # AbsorbArea
 }
 
