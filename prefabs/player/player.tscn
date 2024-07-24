@@ -1,9 +1,10 @@
-[gd_scene load_steps=44 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=46 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Script" path="res://scripts/state/move_state_machine.gd" id="2_pauji"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/health.gd" id="2_pcwtq"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/absorb.gd" id="2_sawo1"]
+[ext_resource type="Script" path="res://scripts/data/player_stats.gd" id="2_yn8bw"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/run.gd" id="3_60agh"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/dash.gd" id="4_5ub5d"]
 [ext_resource type="Material" uid="uid://f41eu4cbvian" path="res://materials/player/player_absorb.tres" id="4_ep8r4"]
@@ -25,6 +26,16 @@
 [ext_resource type="Script" path="res://scripts/mechanics/player/reticule.gd" id="21_tbx8f"]
 [ext_resource type="Material" uid="uid://hh5rgca6j4cq" path="res://materials/player/player_body_default.tres" id="21_yrqox"]
 [ext_resource type="PackedScene" uid="uid://bkexk607fieqm" path="res://prefabs/player/player_body.tscn" id="23_m7jo1"]
+
+[sub_resource type="Resource" id="Resource_a7igv"]
+script = ExtResource("2_yn8bw")
+max_health = 5
+max_power = 10
+power_conversion = 1.0
+fire_power_consumption_modifier = 1.0
+fire_cooldown_modifier = 2.0
+absorb_windup_modifier = 1.5
+absorb_area = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4kfv7"]
 radius = 5.0
@@ -376,6 +387,7 @@ _data = {
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
 script = ExtResource("1_u023k")
+stats = SubResource("Resource_a7igv")
 
 [node name="MoveState" type="Node" parent="."]
 script = ExtResource("2_pauji")
