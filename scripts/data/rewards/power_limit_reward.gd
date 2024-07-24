@@ -1,4 +1,4 @@
-class_name PowerReward extends Reward
+class_name PowerLimitReward extends Reward
 
 @export var power_increase := 3.0
 
