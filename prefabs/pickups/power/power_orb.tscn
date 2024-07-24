@@ -14,3 +14,4 @@ power_scene = ExtResource("3_fkl0r")
 power_drop_offset = 2.0
 
 [node name="Orb" parent="." instance=ExtResource("4_cjnl0")]
+absorb_from_ready = true
