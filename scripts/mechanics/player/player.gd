@@ -10,6 +10,8 @@ signal died
 
 enum AbsorbState {Started, Cancelled, Complete}
 
+@export var stats: PlayerStats
+
 @onready var move_state: MoveStateMachine = $MoveState
 @onready var health: Health = $Health
 @onready var aim: PlayerAim = $Aim
@@ -21,7 +23,6 @@ enum AbsorbState {Started, Cancelled, Complete}
 @onready var ground_detection: CollisionShape3D = $GroundDetection
 @onready var animator: AnimationPlayer = $Animator
 
-var stats: PlayerStats
 var power_count: float = 0.0
 
 var current_health:
