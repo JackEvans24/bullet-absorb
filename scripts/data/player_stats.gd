@@ -10,3 +10,6 @@ class_name PlayerStats extends Resource
 
 var fire_power_consumption: float:
     get: return 1.0 / fire_power_consumption_modifier
+
+func get_fire_cooldown(cooldown: float) -> float:
+    return cooldown / fire_cooldown_modifier

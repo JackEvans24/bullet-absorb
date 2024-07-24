@@ -10,7 +10,7 @@ signal died
 
 enum AbsorbState {Started, Cancelled, Complete}
 
-@export var stats: PlayerStats
+@export var stats: PlayerStats: set = update_stats
 
 @onready var move_state: MoveStateMachine = $MoveState
 @onready var health: Health = $Health
@@ -29,6 +29,8 @@ var current_health:
 	get: return health.current_health
 
 func _ready():
+	update_stats(stats)
+
 	died.connect(body._on_player_died)
 
 	move_state.state_entered.connect(_on_move_state_entered)
@@ -55,12 +57,13 @@ func _ready():
 # TODO: Replace with powerups
 func update_stats(player_stats: PlayerStats):
 	stats = player_stats
+	aim.stats = stats
 
-	health.initialise(stats.max_health)
-	aim.cooldown_modifier = stats.fire_cooldown_modifier
-	absorb.windup_modifier = stats.absorb_windup_modifier
-	absorb.destoy_area.scale = Vector3.ONE * stats.absorb_area
-	absorb.mesh.scale = Vector3.ONE * stats.absorb_area
+	# health.initialise(stats.max_health)
+	# aim.cooldown_modifier = stats.fire_cooldown_modifier
+	# absorb.windup_modifier = stats.absorb_windup_modifier
+	# absorb.destoy_area.scale = Vector3.ONE * stats.absorb_area
+	# absorb.mesh.scale = Vector3.ONE * stats.absorb_area
 
 func _physics_process(_delta):
 	velocity = move_state.movement

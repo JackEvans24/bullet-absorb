@@ -20,6 +20,8 @@ const SHOOT_RIGHT = "shoot_right"
 @onready var aim_point: Node3D = get_node(aim_point_ref)
 @onready var animator: AnimationPlayer = get_node(animator_ref)
 
+var stats: PlayerStats
+
 var arm_cannons: Array[ArmCannon]
 var arm_cannon_index := 0
 var aim_service: AimDirection
@@ -30,7 +32,6 @@ var can_aim = true
 var can_fire = true
 var is_firing = false
 var has_ammo = false
-var cooldown_modifier := 1.0
 
 func _ready():
 	aim_service = mouse_aim
@@ -83,7 +84,8 @@ func fire():
 
 		bullet_fired.emit()
 
-	await tree.create_timer(cooldown / cooldown_modifier).timeout
+	await tree.create_timer(stats.get_fire_cooldown(cooldown)).timeout
+
 	is_firing = false
 
 func get_next_cannon_for_fire() -> ArmCannon:
