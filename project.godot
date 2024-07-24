@@ -105,4 +105,4 @@ restart={
 3d_physics/layer_4="power"
 3d_physics/layer_5="player_bullet"
 3d_physics/layer_6="enemy"
-3d_physics/layer_7="power_orb"
+3d_physics/layer_7="orb"
