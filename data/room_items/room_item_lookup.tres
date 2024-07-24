@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RoomItemLookup" load_steps=13 format=3 uid="uid://dfp6bwqqsvt21"]
+[gd_resource type="Resource" script_class="RoomItemLookup" load_steps=15 format=3 uid="uid://dfp6bwqqsvt21"]
 
 [ext_resource type="PackedScene" uid="uid://btfsstt1biti7" path="res://prefabs/enemies/wanderer.tscn" id="1_12avm"]
 [ext_resource type="Script" path="res://scripts/data/rooms/room_item_mapping.gd" id="2_0xa5f"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dd7vuam6cs4fp" path="res://prefabs/power/power_orb.tscn" id="5_s0mow"]
 [ext_resource type="PackedScene" uid="uid://bcjb1jnr0y5mb" path="res://prefabs/power/power_generator.tscn" id="6_8wk7t"]
 [ext_resource type="Script" path="res://scripts/data/rooms/room_item_lookup.gd" id="7_22vx4"]
+[ext_resource type="PackedScene" uid="uid://yrlkolmu7nna" path="res://prefabs/reward_pickup.tscn" id="7_yibmw"]
 
 [sub_resource type="Resource" id="Resource_3wqml"]
 script = ExtResource("2_0xa5f")
@@ -48,6 +49,14 @@ is_enemy = false
 health = 0
 power_count = 0
 
+[sub_resource type="Resource" id="Resource_nybil"]
+script = ExtResource("2_0xa5f")
+item_type = 5
+scene = ExtResource("7_yibmw")
+is_enemy = false
+health = 0
+power_count = 0
+
 [resource]
 script = ExtResource("7_22vx4")
-lookup = Array[ExtResource("2_0xa5f")]([SubResource("Resource_3wqml"), SubResource("Resource_nu8n2"), SubResource("Resource_w0cpm"), SubResource("Resource_6nd6y"), SubResource("Resource_j8xqv")])
+lookup = Array[ExtResource("2_0xa5f")]([SubResource("Resource_3wqml"), SubResource("Resource_nu8n2"), SubResource("Resource_w0cpm"), SubResource("Resource_6nd6y"), SubResource("Resource_j8xqv"), SubResource("Resource_nybil")])
