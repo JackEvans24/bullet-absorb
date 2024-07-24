@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer_config.gd" id="4_ijtvr"]
 [ext_resource type="PackedScene" uid="uid://b4qc1nyol7os" path="res://prefabs/enemies/bodies/burster_half.tscn" id="4_pyb35"]
 [ext_resource type="PackedScene" uid="uid://dsnxe8cqmmow8" path="res://prefabs/particles/smoke_burst.tscn" id="5_mbiiu"]
-[ext_resource type="PackedScene" uid="uid://d1a50aebuqe1d" path="res://prefabs/spawn_tube.tscn" id="6_dcvw3"]
+[ext_resource type="PackedScene" uid="uid://d1a50aebuqe1d" path="res://prefabs/enemies/spawn_tube.tscn" id="6_dcvw3"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/fire_from_ring.gd" id="7_q2sbb"]
 [ext_resource type="PackedScene" uid="uid://bwb55ll2hiucv" path="res://prefabs/bullets/perfect_enemy_bullet.tscn" id="8_mra72"]
 

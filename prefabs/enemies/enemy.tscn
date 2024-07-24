@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/enemy.gd" id="1_wjmkf"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/health.gd" id="2_pjhvc"]
 [ext_resource type="PackedScene" uid="uid://cjvpl2fcwu246" path="res://prefabs/particles/hurt_particles.tscn" id="2_smu6b"]
-[ext_resource type="PackedScene" uid="uid://dd7vuam6cs4fp" path="res://prefabs/power/power_orb.tscn" id="3_yn8ly"]
+[ext_resource type="PackedScene" uid="uid://dd7vuam6cs4fp" path="res://prefabs/pickups/power/power_orb.tscn" id="3_yn8ly"]
 [ext_resource type="Material" uid="uid://bh15v0ftuakdk" path="res://materials/enemy/enemy_hurt.tres" id="4_3pfns"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/knockback.gd" id="4_t2vkt"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy/enemy_body.tres" id="5_ra3i6"]
