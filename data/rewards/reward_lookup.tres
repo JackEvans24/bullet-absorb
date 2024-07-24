@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="RewardLookup" load_steps=12 format=3 uid="uid://d1ymgrwqh2iw1"]
+[gd_resource type="Resource" script_class="RewardLookup" load_steps=15 format=3 uid="uid://d1ymgrwqh2iw1"]
 
 [ext_resource type="Script" path="res://scripts/data/rewards/reward_lookup.gd" id="1_dv3f8"]
 [ext_resource type="Script" path="res://scripts/data/rewards/health_reward.gd" id="1_i6x2d"]
 [ext_resource type="Script" path="res://scripts/data/rewards/reward_mapping.gd" id="2_cqu7s"]
 [ext_resource type="Script" path="res://scripts/data/rewards/power_limit_reward.gd" id="3_l05ov"]
 [ext_resource type="Script" path="res://scripts/data/rewards/power_conversion_reward.gd" id="4_cx3w7"]
+[ext_resource type="Script" path="res://scripts/data/rewards/fire_efficiency_reward.gd" id="5_6gpcb"]
 
 [sub_resource type="Resource" id="Resource_v7cgx"]
 script = ExtResource("1_i6x2d")
@@ -33,6 +34,15 @@ script = ExtResource("2_cqu7s")
 reward_type = 3
 reward = SubResource("Resource_2dara")
 
+[sub_resource type="Resource" id="Resource_xv2jc"]
+script = ExtResource("5_6gpcb")
+efficiency_increase = 0.5
+
+[sub_resource type="Resource" id="Resource_xdhtl"]
+script = ExtResource("2_cqu7s")
+reward_type = 4
+reward = SubResource("Resource_xv2jc")
+
 [resource]
 script = ExtResource("1_dv3f8")
-lookup = Array[ExtResource("2_cqu7s")]([SubResource("Resource_6jbps"), SubResource("Resource_6lth8"), SubResource("Resource_0arhh")])
+lookup = Array[ExtResource("2_cqu7s")]([SubResource("Resource_6jbps"), SubResource("Resource_6lth8"), SubResource("Resource_0arhh"), SubResource("Resource_xdhtl")])

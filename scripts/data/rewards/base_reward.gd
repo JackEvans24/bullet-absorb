@@ -5,7 +5,7 @@ enum RewardType {
     Health,
     MaxPower,
     PowerConversion,
-    # FireConsumption,
+    FireEfficiency,
     # FireCooldown,
     # AbsorbWindup,
     # AbsorbArea
