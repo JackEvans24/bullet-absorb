@@ -1,8 +1,8 @@
 class_name RewardPickup extends Node3D
 
-signal reward_collected(reward: Reward)
+signal reward_collected(reward_type: Reward.RewardType)
 
-@export var reward: Reward
+@export var reward: Reward.RewardType
 
 @onready var collider: Area3D = $Pivot/Collider
 

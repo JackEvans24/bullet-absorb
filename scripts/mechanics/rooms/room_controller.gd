@@ -1,6 +1,6 @@
 class_name RoomController extends Node
 
-signal reward_collected(reward: Reward)
+signal reward_collected(reward_type: Reward.RewardType)
 signal doors_changed
 signal room_completed(room_id: String)
 signal room_reentered(room_id: String)
@@ -38,8 +38,8 @@ func get_room(id: String) -> Room:
 func _on_room_doors_changed():
 	doors_changed.emit()
 
-func _on_reward_collected(reward: Reward):
-	reward_collected.emit(reward)
+func _on_reward_collected(reward_type: Reward.RewardType):
+	reward_collected.emit(reward_type)
 
 func _on_room_completed(room_id: String):
 	room_completed.emit(room_id)

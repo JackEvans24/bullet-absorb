@@ -1,8 +1,6 @@
 extends Node
 
-@export var doors_changed_screen_shake_profile: ScreenShakeProfile
-@export var fire_screen_shake_profile: ScreenShakeProfile
-@export var absorb_screen_shake_profile: ScreenShakeProfile
+@export var reward_lookup: RewardLookup
 
 @onready var hud: Hud = $HUD
 @onready var player: Player = $Player
@@ -72,8 +70,15 @@ func _on_absorb_state_changed(absorb_state: Player.AbsorbState):
 func _on_room_doors_changed():
 	cameras.add_impulse(ScreenShakeMapping.ScreenShakeId.Doors)
 
-func _on_reward_collected(reward: Reward):
-	# TODO: Add to save state
+func _on_reward_collected(reward_type: Reward.RewardType):
+	enable_reward(reward_type)
+	 # save_game.add_collected_reward(reward_type)
+
+func enable_reward(reward_type: Reward.RewardType):
+	var reward = reward_lookup.find(reward_type)
+	if not reward:
+		printerr("Unable to find reward for type: ", Reward.RewardType.keys()[reward_type])
+		return
 	reward.upgrade(player)
 
 func _on_room_completed(room_id: String):
