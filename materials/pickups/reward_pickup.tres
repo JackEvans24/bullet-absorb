@@ -1,8 +1,26 @@
-[gd_resource type="ORMMaterial3D" format=3 uid="uid://dvaxsa8nej8rd"]
+[gd_resource type="ORMMaterial3D" load_steps=4 format=3 uid="uid://dvaxsa8nej8rd"]
+
+[ext_resource type="Shader" path="res://shaders/reward_pickup.gdshader" id="1_prdxg"]
+[ext_resource type="Texture2D" uid="uid://bm7e5wml73aq7" path="res://textures/star.png" id="2_f26ff"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_85wqo"]
+render_priority = 0
+shader = ExtResource("1_prdxg")
+shader_parameter/x_rotation_speed = 0.6
+shader_parameter/x_repetitions = 3.0
+shader_parameter/spacing = Vector2(1.2, 2)
+shader_parameter/y_offset_distance = 0.05
+shader_parameter/y_offset_speed = 0.6
+shader_parameter/y_static_offset = 0.0
+shader_parameter/emission_colour = Vector3(5, 3.6, 0)
+shader_parameter/emission_strength = null
+shader_parameter/base_transparency = 0.4
+shader_parameter/surface_texture = ExtResource("2_f26ff")
 
 [resource]
+next_pass = SubResource("ShaderMaterial_85wqo")
 transparency = 1
-albedo_color = Color(1, 1, 1, 0.117647)
+albedo_color = Color(1, 0.683333, 0, 0.392157)
 emission_enabled = true
-emission = Color(1, 0.616667, 0, 1)
-emission_energy_multiplier = 4.0
+emission = Color(1, 0.662667, 0.12, 1)
+emission_energy_multiplier = 2.0

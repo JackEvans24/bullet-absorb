@@ -11,13 +11,16 @@ script = ExtResource("1_iwyks")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Mesh" parent="Orb" index="0"]
+transform = Transform3D(1.16735, 0, 0, 0, 0.825439, 0.825439, 0, -0.825439, 0.825439, 0, 1, 0)
 surface_material_override/0 = ExtResource("3_1kqet")
 
 [node name="CreateParticles" parent="Orb" index="2"]
 material_override = ExtResource("3_1kqet")
 
 [node name="IdleParticles" parent="Orb" index="3"]
+visible = false
 material_override = ExtResource("3_1kqet")
+emitting = true
 
 [node name="DeathParticles" parent="Orb" index="4"]
 material_override = ExtResource("3_1kqet")
