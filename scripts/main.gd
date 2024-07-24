@@ -28,7 +28,8 @@ func initialise_rooms():
 	rooms.room_reentered.connect(_on_room_reentered)
 
 func initialise_player():
-	# TODO: Enable saved upgrades
+	for reward_type in save_game.data.collected_rewards:
+		enable_reward(reward_type)
 
 	if save_game.data.current_room:
 		var current_room = rooms.get_room(save_game.data.current_room)
@@ -72,7 +73,8 @@ func _on_room_doors_changed():
 
 func _on_reward_collected(reward_type: Reward.RewardType):
 	enable_reward(reward_type)
-	 # save_game.add_collected_reward(reward_type)
+	save_game.add_collected_reward(reward_type)
+	save_game.save()
 
 func enable_reward(reward_type: Reward.RewardType):
 	var reward = reward_lookup.find(reward_type)

@@ -2,6 +2,7 @@ class_name SaveGameData
 
 var completed_rooms: Array = []
 var current_room: String
+var collected_rewards: Array = []
 
 func to_dictionary() -> Dictionary:
     var dict: Dictionary = {}

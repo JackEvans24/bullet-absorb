@@ -50,5 +50,8 @@ func add_completed_room(room_id: String):
 func set_current_room(room_id: String):
 	data.current_room = room_id
 
+func add_collected_reward(reward: Reward.RewardType):
+	data.collected_rewards.push_back(reward)
+
 func has_save_system() -> bool:
 	return OS.has_feature(GameFeatures.SAVE_SYSTEM)
