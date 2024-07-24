@@ -4,7 +4,7 @@ enum RewardType {
     None,
     Health,
     MaxPower,
-    # PowerConversion,
+    PowerConversion,
     # FireConsumption,
     # FireCooldown,
     # AbsorbWindup,
