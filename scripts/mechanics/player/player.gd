@@ -10,7 +10,7 @@ signal died
 
 enum AbsorbState {Started, Cancelled, Complete}
 
-@export var stats: PlayerStats: set = update_stats
+@export var stats: PlayerStats
 
 @onready var move_state: MoveStateMachine = $MoveState
 @onready var health: Health = $Health
@@ -26,10 +26,11 @@ enum AbsorbState {Started, Cancelled, Complete}
 var power_count: float = 0.0
 
 var current_health:
-	get: return health.current_health
+	get: return 0.0 if not health else health.current_health
 
 func _ready():
-	update_stats(stats)
+	aim.stats = stats
+	absorb.stats = stats
 
 	died.connect(body._on_player_died)
 
@@ -55,13 +56,6 @@ func _ready():
 	dash.initialise(move_state, body)
 
 # TODO: Replace with powerups
-func update_stats(player_stats: PlayerStats):
-	stats = player_stats
-	if aim:
-		aim.stats = stats
-	if absorb:
-		absorb.stats = stats
-
 	# health.initialise(stats.max_health)
 	# aim.cooldown_modifier = stats.fire_cooldown_modifier
 	# absorb.windup_modifier = stats.absorb_windup_modifier
