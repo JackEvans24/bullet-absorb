@@ -1,9 +1,16 @@
 class_name RewardLookup extends Resource
 
-@export var lookup: Array[RewardMapping]
+@export var rewards: Array[Reward]
+var lookup: Dictionary
+
+func initialise():
+	for reward in rewards:
+		lookup[reward.get_reward_type()] = reward
 
 func find(reward_type: Reward.RewardType) -> Reward:
-	var matching = lookup.filter(func(x): return x.reward_type == reward_type)
-	if matching.is_empty():
+	if lookup.is_empty():
+		initialise()
+
+	if not lookup.has(reward_type):
 		return null
-	return matching[0].reward
+	return lookup[reward_type]

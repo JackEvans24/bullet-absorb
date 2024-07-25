@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="RewardLookup" load_steps=24 format=3 uid="uid://d1ymgrwqh2iw1"]
+[gd_resource type="Resource" script_class="RewardLookup" load_steps=16 format=3 uid="uid://d1ymgrwqh2iw1"]
 
 [ext_resource type="Script" path="res://scripts/data/rewards/reward_lookup.gd" id="1_dv3f8"]
 [ext_resource type="Script" path="res://scripts/data/rewards/health_reward.gd" id="1_i6x2d"]
-[ext_resource type="Script" path="res://scripts/data/rewards/reward_mapping.gd" id="2_cqu7s"]
 [ext_resource type="Script" path="res://scripts/data/rewards/power_limit_reward.gd" id="3_l05ov"]
 [ext_resource type="Script" path="res://scripts/data/rewards/power_conversion_reward.gd" id="4_cx3w7"]
 [ext_resource type="Script" path="res://scripts/data/rewards/fire_efficiency_reward.gd" id="5_6gpcb"]
@@ -10,69 +9,34 @@
 [ext_resource type="Script" path="res://scripts/data/rewards/absorb_windup_reward.gd" id="7_mqnqt"]
 [ext_resource type="Script" path="res://scripts/data/rewards/absorb_area_reward.gd" id="8_t7vec"]
 
-[sub_resource type="Resource" id="Resource_v7cgx"]
-script = ExtResource("1_i6x2d")
-health_increase = 1
+[sub_resource type="Resource" id="Resource_354se"]
+script = ExtResource("8_t7vec")
+area_scale_increase = 0.5
 
-[sub_resource type="Resource" id="Resource_6jbps"]
-script = ExtResource("2_cqu7s")
-reward_type = 1
-reward = SubResource("Resource_v7cgx")
-
-[sub_resource type="Resource" id="Resource_s12ie"]
-script = ExtResource("3_l05ov")
-power_increase = 3.0
-
-[sub_resource type="Resource" id="Resource_6lth8"]
-script = ExtResource("2_cqu7s")
-reward_type = 2
-reward = SubResource("Resource_s12ie")
-
-[sub_resource type="Resource" id="Resource_2dara"]
-script = ExtResource("4_cx3w7")
-power_increase = 0.5
-
-[sub_resource type="Resource" id="Resource_0arhh"]
-script = ExtResource("2_cqu7s")
-reward_type = 3
-reward = SubResource("Resource_2dara")
-
-[sub_resource type="Resource" id="Resource_xv2jc"]
-script = ExtResource("5_6gpcb")
-efficiency_increase = 0.5
-
-[sub_resource type="Resource" id="Resource_xdhtl"]
-script = ExtResource("2_cqu7s")
-reward_type = 4
-reward = SubResource("Resource_xv2jc")
-
-[sub_resource type="Resource" id="Resource_sjpqo"]
-script = ExtResource("6_1tdes")
-fire_efficiency_increase = 0.5
-
-[sub_resource type="Resource" id="Resource_lo7b7"]
-script = ExtResource("2_cqu7s")
-reward_type = 5
-reward = SubResource("Resource_sjpqo")
-
-[sub_resource type="Resource" id="Resource_0i26x"]
+[sub_resource type="Resource" id="Resource_73lny"]
 script = ExtResource("7_mqnqt")
 efficiency_increase = 0.25
 
-[sub_resource type="Resource" id="Resource_meuii"]
-script = ExtResource("2_cqu7s")
-reward_type = 6
-reward = SubResource("Resource_0i26x")
+[sub_resource type="Resource" id="Resource_u48j3"]
+script = ExtResource("6_1tdes")
+fire_efficiency_increase = 0.5
 
-[sub_resource type="Resource" id="Resource_61pqr"]
-script = ExtResource("8_t7vec")
-area_scale_increase = 0.2
+[sub_resource type="Resource" id="Resource_lehvc"]
+script = ExtResource("5_6gpcb")
+efficiency_increase = 0.5
 
-[sub_resource type="Resource" id="Resource_by5u3"]
-script = ExtResource("2_cqu7s")
-reward_type = 7
-reward = SubResource("Resource_61pqr")
+[sub_resource type="Resource" id="Resource_ai0v6"]
+script = ExtResource("1_i6x2d")
+health_increase = 1
+
+[sub_resource type="Resource" id="Resource_88f0h"]
+script = ExtResource("4_cx3w7")
+power_increase = 0.5
+
+[sub_resource type="Resource" id="Resource_opvhj"]
+script = ExtResource("3_l05ov")
+power_increase = 3.0
 
 [resource]
 script = ExtResource("1_dv3f8")
-lookup = Array[ExtResource("2_cqu7s")]([SubResource("Resource_6jbps"), SubResource("Resource_6lth8"), SubResource("Resource_0arhh"), SubResource("Resource_xdhtl"), SubResource("Resource_lo7b7"), SubResource("Resource_meuii"), SubResource("Resource_by5u3")])
+rewards = Array[Resource("res://scripts/data/rewards/base_reward.gd")]([SubResource("Resource_354se"), SubResource("Resource_73lny"), SubResource("Resource_u48j3"), SubResource("Resource_lehvc"), SubResource("Resource_ai0v6"), SubResource("Resource_88f0h"), SubResource("Resource_opvhj")])
