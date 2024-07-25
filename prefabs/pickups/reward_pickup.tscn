@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://yrlkolmu7nna"]
+[gd_scene load_steps=5 format=3 uid="uid://yrlkolmu7nna"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/rewards/reward_pickup.gd" id="1_iwyks"]
 [ext_resource type="PackedScene" uid="uid://inpjseyhox3m" path="res://prefabs/pickups/orb.tscn" id="2_47pl6"]
+[ext_resource type="Texture2D" uid="uid://bt6dax8yaqcf" path="res://textures/question-mark.png" id="2_v73mc"]
 [ext_resource type="Material" uid="uid://dvaxsa8nej8rd" path="res://materials/pickups/reward_pickup.tres" id="3_1kqet"]
 
 [node name="RewardPickup" type="Node3D"]
 script = ExtResource("1_iwyks")
+fallback_texture = ExtResource("2_v73mc")
 
 [node name="Orb" parent="." instance=ExtResource("2_47pl6")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
