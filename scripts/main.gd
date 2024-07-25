@@ -21,7 +21,10 @@ func _ready():
 	hud._on_health_changed(player.current_health)
 
 func initialise_rooms():
+	rooms.reward_lookup = reward_lookup
+
 	rooms.initialise(save_game.data)
+
 	rooms.doors_changed.connect(_on_room_doors_changed)
 	rooms.reward_collected.connect(_on_reward_collected)
 	rooms.room_completed.connect(_on_room_completed)

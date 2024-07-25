@@ -6,6 +6,7 @@ signal room_completed(room_id: String)
 signal room_reentered(room_id: String)
 
 @export var room_item_lookup: RoomItemLookup
+var reward_lookup: RewardLookup
 
 var rooms: Dictionary
 
@@ -19,6 +20,8 @@ func initialise(data: SaveGameData):
 			continue
 
 		room.room_item_lookup = room_item_lookup
+		room.reward_lookup = reward_lookup
+
 		room.doors_changed.connect(_on_room_doors_changed)
 		room.reward_collected.connect(_on_reward_collected)
 		room.room_completed.connect(_on_room_completed)
