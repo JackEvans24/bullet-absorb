@@ -533,9 +533,7 @@ mesh = SubResource("TextMesh_6c04p")
 skeleton = NodePath("../..")
 
 [node name="DistanceCheck" type="RayCast3D" parent="Pivot/Reticule"]
-
-[node name="RayCast3D" type="RayCast3D" parent="Pivot"]
-debug_shape_custom_color = Color(0, 1, 0, 1)
+collision_mask = 33
 
 [node name="GroundDetection" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
