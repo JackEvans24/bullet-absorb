@@ -24,7 +24,7 @@ func set_shader_texture():
 	shader_material.set_shader_parameter("surface_texture", fallback_texture)
 
 func _on_orb_absorbed():
-	reward_collected.emit(reward.get_reward_type())
+	reward_collected.emit(reward.reward_type)
 
 func _on_orb_destroyed():
 	call_deferred("queue_free")

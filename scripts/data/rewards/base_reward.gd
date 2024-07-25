@@ -11,8 +11,7 @@ enum RewardType {
     AbsorbArea
 }
 
-func get_reward_type() -> RewardType:
-    return RewardType.None
+@export var reward_type: RewardType
 
 func upgrade(_player: Player):
     printerr("Using base reward in game, use inherited class instead")

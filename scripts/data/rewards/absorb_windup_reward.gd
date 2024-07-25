@@ -2,9 +2,6 @@ class_name AbsorbWindupReward extends Reward
 
 @export var efficiency_increase := 0.25
 
-func get_reward_type() -> RewardType:
-    return RewardType.AbsorbWindup
-
 func upgrade(player: Player):
     var old_absorb_time := player.stats.absorb_windup
     var old_absorb_modifier := player.stats.absorb_windup_modifier

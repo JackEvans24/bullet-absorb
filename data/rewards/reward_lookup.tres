@@ -12,30 +12,37 @@
 [sub_resource type="Resource" id="Resource_354se"]
 script = ExtResource("8_t7vec")
 area_scale_increase = 0.5
+reward_type = 7
 
 [sub_resource type="Resource" id="Resource_73lny"]
 script = ExtResource("7_mqnqt")
 efficiency_increase = 0.25
+reward_type = 6
 
 [sub_resource type="Resource" id="Resource_u48j3"]
 script = ExtResource("6_1tdes")
 fire_efficiency_increase = 0.5
+reward_type = 5
 
 [sub_resource type="Resource" id="Resource_lehvc"]
 script = ExtResource("5_6gpcb")
 efficiency_increase = 0.5
+reward_type = 4
 
 [sub_resource type="Resource" id="Resource_ai0v6"]
 script = ExtResource("1_i6x2d")
 health_increase = 1
+reward_type = 1
 
 [sub_resource type="Resource" id="Resource_88f0h"]
 script = ExtResource("4_cx3w7")
 power_increase = 0.5
+reward_type = 3
 
 [sub_resource type="Resource" id="Resource_opvhj"]
 script = ExtResource("3_l05ov")
 power_increase = 3.0
+reward_type = 2
 
 [resource]
 script = ExtResource("1_dv3f8")

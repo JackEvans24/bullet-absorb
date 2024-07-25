@@ -5,7 +5,11 @@ var lookup: Dictionary
 
 func initialise():
 	for reward in rewards:
-		lookup[reward.get_reward_type()] = reward
+		if reward.reward_type == Reward.RewardType.None:
+			printerr("Reward type is none for resource: ", reward.resource_name)
+			continue
+
+		lookup[reward.reward_type] = reward
 
 func find(reward_type: Reward.RewardType) -> Reward:
 	if lookup.is_empty():
