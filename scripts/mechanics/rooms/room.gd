@@ -101,9 +101,11 @@ func create_reward():
 		printerr("Unable to find reward (%s) in lookup" % Reward.RewardType.keys()[data.reward])
 		return
 
-	var reward_pickup = await add_item(config) as RewardPickup
+	var reward_pickup = room_item_lookup.build_from_config(config) as RewardPickup
 	reward_pickup.reward = reward_data
 	reward_pickup.reward_collected.connect(_on_reward_collected)
+
+	add_child(reward_pickup)
 
 func _on_reward_collected(reward_type: Reward.RewardType):
 	reward_collected.emit(reward_type)

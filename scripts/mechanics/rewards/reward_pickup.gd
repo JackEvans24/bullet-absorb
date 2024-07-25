@@ -21,7 +21,8 @@ func set_shader_texture():
 		printerr("Shader not found in reward pickup")
 		return
 
-	shader_material.set_shader_parameter("surface_texture", fallback_texture)
+	var texture = fallback_texture if not reward.pickup_texture else reward.pickup_texture
+	shader_material.set_shader_parameter("surface_texture", texture)
 
 func _on_orb_absorbed():
 	reward_collected.emit(reward.reward_type)

@@ -12,6 +12,7 @@ enum RewardType {
 }
 
 @export var reward_type: RewardType
+@export var pickup_texture: Texture2D
 
 func upgrade(_player: Player):
     printerr("Using base reward in game, use inherited class instead")
