@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cglktlghuy7dm" path="res://prefabs/enemies/bodies/turret_swivel.tscn" id="6_h1s5b"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer_config.gd" id="6_kudmq"]
 [ext_resource type="PackedScene" uid="uid://seksaxoklgbi" path="res://prefabs/particles/windup_particles.tscn" id="7_cvbpj"]
-[ext_resource type="PackedScene" uid="uid://d1a50aebuqe1d" path="res://prefabs/spawn_tube.tscn" id="7_fcakt"]
+[ext_resource type="PackedScene" uid="uid://d1a50aebuqe1d" path="res://prefabs/enemies/spawn_tube.tscn" id="7_fcakt"]
 [ext_resource type="PackedScene" uid="uid://dsnxe8cqmmow8" path="res://prefabs/particles/smoke_burst.tscn" id="7_sc58i"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_wys4c"]

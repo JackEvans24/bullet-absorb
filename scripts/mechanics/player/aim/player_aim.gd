@@ -10,7 +10,7 @@ const SHOOT_RIGHT = "shoot_right"
 @export var arm_cannon_refs: Array[NodePath]
 @export var aim_point_ref: NodePath
 @export var animator_ref: NodePath
-@export var cooldown = 0.05
+@export var cooldown = 0.4
 @export var bullet_scene: PackedScene
 @export var fire_fail_particles_scene: PackedScene
 
@@ -19,6 +19,8 @@ const SHOOT_RIGHT = "shoot_right"
 @onready var pivot: Node3D = get_node(pivot_ref)
 @onready var aim_point: Node3D = get_node(aim_point_ref)
 @onready var animator: AnimationPlayer = get_node(animator_ref)
+
+var stats: PlayerStats
 
 var arm_cannons: Array[ArmCannon]
 var arm_cannon_index := 0
@@ -67,22 +69,23 @@ func fire():
 	if is_firing:
 		return
 
-	var arm_cannon = get_next_cannon_for_fire()
-	if not has_ammo:
-		arm_cannon.trigger_fire_fail()
-		return
-
 	is_firing = true
 
 	var tree = get_tree()
-	var bullet = bullet_scene.instantiate()
-	tree.root.add_child(bullet)
+	var arm_cannon = get_next_cannon_for_fire()
 
-	arm_cannon.initialise_bullet(bullet)
+	if not has_ammo:
+		arm_cannon.trigger_fire_fail()
+	else:
+		var bullet = bullet_scene.instantiate()
+		tree.root.add_child(bullet)
 
-	bullet_fired.emit()
+		arm_cannon.initialise_bullet(bullet)
 
-	await tree.create_timer(cooldown).timeout
+		bullet_fired.emit()
+
+	await tree.create_timer(stats.get_fire_cooldown(cooldown)).timeout
+
 	is_firing = false
 
 func get_next_cannon_for_fire() -> ArmCannon:
@@ -95,6 +98,3 @@ func get_next_cannon_for_fire() -> ArmCannon:
 		arm_cannon_index = 0
 
 	return next_cannon
-
-func _on_power_count_changed(power_count: int):
-	has_ammo = power_count > 0

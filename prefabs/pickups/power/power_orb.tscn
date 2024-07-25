@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://dd7vuam6cs4fp"]
+
+[ext_resource type="Script" path="res://scripts/mechanics/power/power_orb.gd" id="1_3y1fs"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/drop_power.gd" id="2_ed2h5"]
+[ext_resource type="PackedScene" uid="uid://bkirx1sxnwhq" path="res://prefabs/pickups/power/dropped_power_ball.tscn" id="3_fkl0r"]
+[ext_resource type="PackedScene" uid="uid://inpjseyhox3m" path="res://prefabs/pickups/orb.tscn" id="4_cjnl0"]
+
+[node name="PowerOrb" type="Node3D"]
+script = ExtResource("1_3y1fs")
+
+[node name="DropPower" type="Node3D" parent="."]
+script = ExtResource("2_ed2h5")
+power_scene = ExtResource("3_fkl0r")
+power_drop_offset = 2.0
+
+[node name="Orb" parent="." instance=ExtResource("4_cjnl0")]
+absorb_from_ready = true

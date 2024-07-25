@@ -2,6 +2,7 @@ class_name Room
 extends Node3D
 
 signal doors_changed
+signal reward_collected(reward_type: Reward.RewardType)
 signal room_completed(room_id: String)
 signal room_reentered(room_id: String)
 
@@ -11,6 +12,7 @@ signal room_reentered(room_id: String)
 @onready var player_detection: Area3D = $PlayerDetection
 
 var room_item_lookup: RoomItemLookup
+var reward_lookup: RewardLookup
 
 var player: Node3D
 var enemy_count = 0
@@ -34,7 +36,7 @@ func on_first_entry():
 	if completed:
 		return
 	if len(data.waves) <= 0:
-		set_room_complete()
+		on_room_complete()
 		return
 
 	close_all_doors()
@@ -81,11 +83,36 @@ func on_wave_complete():
 	if wave_index < len(data.waves):
 		set_room_configuration(data.waves[wave_index])
 		return
-	set_room_complete()
+	on_room_complete()
+
+func on_room_complete():
+	if data.reward:
+		close_all_doors()
+		create_reward()
+	else:
+		set_room_complete()
+
+func create_reward():
+	var config: RoomItem = RoomItem.new()
+	config.item_type = RoomItem.RoomItemType.Reward
+
+	var reward_data = reward_lookup.find(data.reward)
+	if not reward_data:
+		printerr("Unable to find reward (%s) in lookup" % Reward.RewardType.keys()[data.reward])
+		return
+
+	var reward_pickup = room_item_lookup.build_from_config(config) as RewardPickup
+	reward_pickup.reward = reward_data
+	reward_pickup.reward_collected.connect(_on_reward_collected)
+
+	add_child(reward_pickup)
+
+func _on_reward_collected(reward_type: Reward.RewardType):
+	reward_collected.emit(reward_type)
+	call_deferred("set_room_complete")
 
 func set_room_complete():
 	set_doors(data.completed_doors)
-	set_room_configuration(data.completed_room)
 
 	completed = true
 	room_completed.emit(data.room_name)

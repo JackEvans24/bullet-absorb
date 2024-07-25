@@ -3,14 +3,14 @@ extends CharacterBody3D
 
 signal bullet_fired
 signal absorb_state_changed(absorb_state: AbsorbState)
-signal power_count_changed(count: int)
+signal power_count_changed(count: float)
 signal damage_taken
 signal can_dash_changed(can_dash: bool)
 signal died
 
 enum AbsorbState {Started, Cancelled, Complete}
 
-@export var max_power = 20
+@export var stats: PlayerStats
 
 @onready var move_state: MoveStateMachine = $MoveState
 @onready var health: Health = $Health
@@ -23,15 +23,15 @@ enum AbsorbState {Started, Cancelled, Complete}
 @onready var ground_detection: CollisionShape3D = $GroundDetection
 @onready var animator: AnimationPlayer = $Animator
 
-var power_count: int = 0
+var power_count: float = 0.0
 
 var current_health:
-	get: return health.current_health
-var max_health:
-	get: return health.starting_health
+	get: return 0.0 if not health else health.current_health
 
 func _ready():
-	power_count_changed.connect(aim._on_power_count_changed)
+	aim.stats = stats
+	absorb.stats = stats
+
 	died.connect(body._on_player_died)
 
 	move_state.state_entered.connect(_on_move_state_entered)
@@ -54,6 +54,13 @@ func _ready():
 	hit_detection.area_entered.connect(_on_hit)
 
 	dash.initialise(move_state, body)
+
+# TODO: Replace with powerups
+	# health.initialise(stats.max_health)
+	# aim.cooldown_modifier = stats.fire_cooldown_modifier
+	# absorb.windup_modifier = stats.absorb_windup_modifier
+	# absorb.destoy_area.scale = Vector3.ONE * stats.absorb_area
+	# absorb.mesh.scale = Vector3.ONE * stats.absorb_area
 
 func _physics_process(_delta):
 	velocity = move_state.movement
@@ -109,18 +116,19 @@ func knockback(taken_from: Node3D):
 	move_state.transition_to(MoveStateConstants.STATE_KNOCKBACK, ctx)
 
 func _on_absorb():
-	if power_count == max_power:
+	if power_count == stats.max_power:
 		return
-	power_count += 1
+	power_count = min(stats.max_power, power_count + stats.power_conversion)
 	update_power_count()
 
 func _on_bullet_fired():
-	power_count = max(0, power_count - 1)
+	power_count = max(0, power_count - stats.fire_power_consumption)
 	update_power_count()
 	bullet_fired.emit()
 
 func update_power_count():
 	power_count_changed.emit(power_count)
+	aim.has_ammo = power_count >= stats.fire_power_consumption
 
 func _on_hit(area: Area3D):
 	health.take_damage(1.0, area)
@@ -128,10 +136,12 @@ func _on_hit(area: Area3D):
 func _on_slowdown_started():
 	move_state.transition_to(MoveStateConstants.STATE_ABSORB)
 	absorb_state_changed.emit(AbsorbState.Started)
+	animator.speed_scale = stats.absorb_windup
 
 func _on_slowdown_ended():
 	move_state.transition_to(MoveStateConstants.STATE_RUN)
 	absorb_state_changed.emit(AbsorbState.Cancelled)
+	animator.speed_scale = 1.0
 
 func _on_absorb_triggered():
 	absorb_state_changed.emit(AbsorbState.Complete)

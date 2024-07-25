@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/wanderer.gd" id="2_ga1uy"]
 [ext_resource type="PackedScene" uid="uid://xbjgfdd800te" path="res://prefabs/enemies/bodies/wanderer.tscn" id="3_6g5qc"]
 [ext_resource type="PackedScene" uid="uid://uqduo71b13ee" path="res://prefabs/behaviours/fire_bullet.tscn" id="3_vvdtc"]
-[ext_resource type="PackedScene" uid="uid://d1a50aebuqe1d" path="res://prefabs/spawn_tube.tscn" id="4_oxhtf"]
+[ext_resource type="PackedScene" uid="uid://d1a50aebuqe1d" path="res://prefabs/enemies/spawn_tube.tscn" id="4_oxhtf"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/variable_timer.gd" id="5_b2h5o"]
 [ext_resource type="PackedScene" uid="uid://seksaxoklgbi" path="res://prefabs/particles/windup_particles.tscn" id="5_m2mse"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/basic_movement.gd" id="6_fwebo"]

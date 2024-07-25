@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/mechanics/power/power.gd" id="1_n4h2h"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/follow_body.gd" id="2_7cgiv"]
-[ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/power.tres" id="2_netkk"]
+[ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/pickups/power.tres" id="2_netkk"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/smooth_movement.gd" id="3_gix6h"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_6vkiy"]

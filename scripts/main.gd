@@ -1,8 +1,6 @@
 extends Node
 
-@export var doors_changed_screen_shake_profile: ScreenShakeProfile
-@export var fire_screen_shake_profile: ScreenShakeProfile
-@export var absorb_screen_shake_profile: ScreenShakeProfile
+@export var reward_lookup: RewardLookup
 
 @onready var hud: Hud = $HUD
 @onready var player: Player = $Player
@@ -19,16 +17,23 @@ func _ready():
 
 	cameras.target = player.camera_follow_point
 
-	hud.initialise_max_values(player.max_health, player.max_power)
+	hud.update(player)
 	hud._on_health_changed(player.current_health)
 
 func initialise_rooms():
+	rooms.reward_lookup = reward_lookup
+
 	rooms.initialise(save_game.data)
+
 	rooms.doors_changed.connect(_on_room_doors_changed)
+	rooms.reward_collected.connect(_on_reward_collected)
 	rooms.room_completed.connect(_on_room_completed)
 	rooms.room_reentered.connect(_on_room_reentered)
 
 func initialise_player():
+	for reward_type in save_game.data.collected_rewards:
+		enable_reward(reward_type)
+
 	if save_game.data.current_room:
 		var current_room = rooms.get_room(save_game.data.current_room)
 		if current_room:
@@ -37,7 +42,7 @@ func initialise_player():
 	player.damage_taken.connect(_on_damage_taken)
 	player.bullet_fired.connect(_on_bullet_fired)
 	player.absorb_state_changed.connect(_on_absorb_state_changed)
-	player.power_count_changed.connect(hud._on_absorb_count_changed)
+	player.power_count_changed.connect(hud._on_power_count_changed)
 	player.can_dash_changed.connect(hud._on_can_dash_changed)
 	player.died.connect(hud._on_player_died)
 
@@ -68,6 +73,21 @@ func _on_absorb_state_changed(absorb_state: Player.AbsorbState):
 
 func _on_room_doors_changed():
 	cameras.add_impulse(ScreenShakeMapping.ScreenShakeId.Doors)
+
+func _on_reward_collected(reward_type: Reward.RewardType):
+	enable_reward(reward_type)
+
+	hud.update(player)
+
+	save_game.add_collected_reward(reward_type)
+	save_game.save()
+
+func enable_reward(reward_type: Reward.RewardType):
+	var reward = reward_lookup.find(reward_type)
+	if not reward:
+		printerr("Unable to find reward for type: ", Reward.RewardType.keys()[reward_type])
+		return
+	reward.upgrade(player)
 
 func _on_room_completed(room_id: String):
 	save_game.add_completed_room(room_id)
