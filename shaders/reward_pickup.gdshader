@@ -31,7 +31,7 @@ void fragment() {
 	vec2 translated_uv = vec2(translated_x, translated_y);
 	vec4 texture_result = texture(surface_texture, translated_uv);
 
-	float use_texture = step(texture_result.r, 0.1);
+	float use_texture = step(texture_result.r, 0.1) * step(0.1, texture_result.a);
 	float use_source = 1.0 - use_texture;
 
 	ALBEDO = vec3(1.0) * use_texture;
