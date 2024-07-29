@@ -2,6 +2,7 @@ class_name Dash
 extends Node
 
 signal dash_triggered(direction: Vector3)
+signal dash_failed
 
 @export var dash_timeout: float = 0.8
 
@@ -24,7 +25,10 @@ func _process(_delta):
 		try_dash()
 
 func try_dash():
-	if is_dashing or not has_dash_power:
+	if is_dashing:
+		return
+	if not has_dash_power:
+		dash_failed.emit()
 		return
 	is_dashing = true
 

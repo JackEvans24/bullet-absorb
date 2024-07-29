@@ -44,6 +44,7 @@ func _ready():
 	aim.fire_failed.connect(_on_fire_failed)
 
 	dash.dash_triggered.connect(_on_dash_triggered)
+	dash.dash_failed.connect(_on_dash_failed)
 
 	absorb.bullet_absorbed.connect(_on_absorb)
 	absorb.slowdown_started.connect(_on_slowdown_started)
@@ -86,6 +87,9 @@ func _on_dash_triggered(dash_direction: Vector3):
 	var ctx: Dictionary = {}
 	ctx[MoveStateConstants.DASH_DIRECTION] = dash_direction
 	move_state.transition_to(MoveStateConstants.STATE_DASH, ctx)
+
+func _on_dash_failed():
+	power_check_failed.emit()
 
 func _on_damage_taken(_damage_taken: float, taken_from: Node3D):
 	damage_taken.emit()
