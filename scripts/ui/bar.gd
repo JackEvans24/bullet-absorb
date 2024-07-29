@@ -12,7 +12,7 @@ var max_value := 1.0
 var current_value := 0.0
 var new_value := 0.0
 
-var color_lerp := 0.0
+var foreground_color_lerp := 0.0
 
 func _ready():
 	foreground.color = bar_colour
@@ -20,11 +20,11 @@ func _ready():
 
 func update_value(value: float):
 	new_value = value
-	color_lerp = 1.0
+	foreground_color_lerp = 1.0
 
 func _process(delta):
 	update_bar_height(delta)
-	update_color(delta)
+	update_foreground_color(delta)
 
 func update_bar_height(delta):
 	if current_value == new_value:
@@ -39,8 +39,8 @@ func update_bar_height(delta):
 	)
 	foreground.size.y = clampf(size.y * (current_value / max_value), 0.0, size.y)
 
-func update_color(delta):
-	if color_lerp == 0.0:
+func update_foreground_color(delta):
+	if foreground_color_lerp == 0.0:
 		return
-	color_lerp = max(0, color_lerp - color_decay * delta)
-	foreground.color = lerp(bar_colour, flash_colour, color_lerp)
+	foreground_color_lerp = max(0, foreground_color_lerp - color_decay * delta)
+	foreground.color = lerp(bar_colour, flash_colour, foreground_color_lerp)
