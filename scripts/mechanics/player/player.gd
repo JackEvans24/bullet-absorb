@@ -5,7 +5,6 @@ signal bullet_fired
 signal absorb_state_changed(absorb_state: AbsorbState)
 signal power_count_changed(count: float)
 signal damage_taken
-signal can_dash_changed(can_dash: bool)
 signal died
 
 enum AbsorbState {Started, Cancelled, Complete}
@@ -43,8 +42,6 @@ func _ready():
 	aim.bullet_fired.connect(_on_bullet_fired)
 
 	dash.dash_triggered.connect(_on_dash_triggered)
-	dash.dash_triggered.connect(body._on_dash_triggered)
-	dash.can_dash_changed.connect(_on_can_dash_changed)
 
 	absorb.bullet_absorbed.connect(_on_absorb)
 	absorb.slowdown_started.connect(_on_slowdown_started)
@@ -79,13 +76,14 @@ func _on_move_state_entered(state: MoveState):
 	body._on_move_state_changed(state)
 
 func _on_dash_triggered(dash_direction: Vector3):
+	power_count = max(0, power_count - stats.dash_power_consumption)
+	update_power_count()
+
+	body._on_dash_triggered(dash_direction)
+
 	var ctx: Dictionary = {}
 	ctx[MoveStateConstants.DASH_DIRECTION] = dash_direction
 	move_state.transition_to(MoveStateConstants.STATE_DASH, ctx)
-	can_dash_changed.emit(false)
-
-func _on_can_dash_changed(can_dash: bool):
-	can_dash_changed.emit(can_dash)
 
 func _on_damage_taken(_damage_taken: float, taken_from: Node3D):
 	damage_taken.emit()
@@ -122,6 +120,7 @@ func _on_bullet_fired():
 func update_power_count():
 	power_count_changed.emit(power_count)
 	aim.has_ammo = power_count >= stats.fire_power_consumption
+	dash.has_dash_power = power_count >= stats.dash_power_consumption
 
 func _on_bullet_connected(bullet: Node3D):
 	health.take_damage(1.0, bullet)
