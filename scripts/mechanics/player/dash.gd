@@ -2,7 +2,7 @@ class_name Dash
 extends Node
 
 signal dash_triggered(direction: Vector3)
-signal can_dash_changed(can_dash: bool)
+signal dash_failed
 
 @export var dash_timeout: float = 0.8
 
@@ -11,6 +11,7 @@ var move_state: MoveStateMachine
 var body: Node3D
 
 var is_dashing = false
+var has_dash_power = false
 
 func initialise(passed_msm: MoveStateMachine, passed_body: Node3D):
 	move_state = passed_msm
@@ -26,6 +27,9 @@ func _process(_delta):
 func try_dash():
 	if is_dashing:
 		return
+	if not has_dash_power:
+		dash_failed.emit()
+		return
 	is_dashing = true
 
 	var dash_direction = move_state.movement
@@ -33,9 +37,7 @@ func try_dash():
 		dash_direction = -body.basis.z
 
 	dash_triggered.emit(dash_direction)
-	can_dash_changed.emit(false)
 
 	await get_tree().create_timer(dash_timeout).timeout
 
 	is_dashing = false
-	can_dash_changed.emit(true)

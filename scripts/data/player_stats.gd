@@ -7,9 +7,13 @@ class_name PlayerStats extends Resource
 @export var fire_cooldown_modifier := 1.0
 @export var absorb_windup_modifier := 1.0
 @export var absorb_area_scale := 1.0
+@export var dash_power_consumption_modifier := 0.5
 
 var fire_power_consumption: float:
     get: return 1.0 / fire_power_consumption_modifier
+
+var dash_power_consumption: float:
+    get: return 1.0 / dash_power_consumption_modifier
 
 var absorb_windup: float:
     get: return 1.0 / absorb_windup_modifier

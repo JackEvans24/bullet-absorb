@@ -39,11 +39,12 @@ func initialise_player():
 		if current_room:
 			player.global_position = current_room.global_position
 
-	player.damage_taken.connect(_on_damage_taken)
 	player.bullet_fired.connect(_on_bullet_fired)
 	player.absorb_state_changed.connect(_on_absorb_state_changed)
+	player.damage_taken.connect(_on_damage_taken)
+
 	player.power_count_changed.connect(hud._on_power_count_changed)
-	player.can_dash_changed.connect(hud._on_can_dash_changed)
+	player.power_check_failed.connect(hud._on_power_check_failed)
 	player.died.connect(hud._on_player_died)
 
 func _input(event: InputEvent):
