@@ -19,8 +19,8 @@ enum AbsorbState {Started, Cancelled, Complete}
 @onready var absorb: Absorb = $Absorb
 @onready var body: PlayerBody = $Pivot
 @onready var camera_follow_point: Node3D = $Pivot/CameraFollowPoint
-@onready var hit_detection: Area3D = $HitDetection
-@onready var ground_detection: CollisionShape3D = $GroundDetection
+@onready var collider: CollisionShape3D = $Collider
+@onready var bullet_handler: BulletHitHandler = $BulletHitHandler
 @onready var animator: AnimationPlayer = $Animator
 
 var power_count: float = 0.0
@@ -51,16 +51,9 @@ func _ready():
 	absorb.slowdown_ended.connect(_on_slowdown_ended)
 	absorb.absorb_triggered.connect(_on_absorb_triggered)
 
-	hit_detection.area_entered.connect(_on_hit)
+	bullet_handler.bullet_connected.connect(_on_bullet_connected)
 
 	dash.initialise(move_state, body)
-
-# TODO: Replace with powerups
-	# health.initialise(stats.max_health)
-	# aim.cooldown_modifier = stats.fire_cooldown_modifier
-	# absorb.windup_modifier = stats.absorb_windup_modifier
-	# absorb.destoy_area.scale = Vector3.ONE * stats.absorb_area
-	# absorb.mesh.scale = Vector3.ONE * stats.absorb_area
 
 func _physics_process(_delta):
 	velocity = move_state.movement
@@ -104,7 +97,7 @@ func _on_damage_taken(_damage_taken: float, taken_from: Node3D):
 
 func die():
 	move_state.transition_to(MoveStateConstants.STATE_DEAD)
-	ground_detection.set_deferred("disabled", true)
+	collider.set_deferred("disabled", true)
 	died.emit()
 
 func knockback(taken_from: Node3D):
@@ -130,8 +123,8 @@ func update_power_count():
 	power_count_changed.emit(power_count)
 	aim.has_ammo = power_count >= stats.fire_power_consumption
 
-func _on_hit(area: Area3D):
-	health.take_damage(1.0, area)
+func _on_bullet_connected(bullet: Node3D):
+	health.take_damage(1.0, bullet)
 
 func _on_slowdown_started():
 	move_state.transition_to(MoveStateConstants.STATE_ABSORB)

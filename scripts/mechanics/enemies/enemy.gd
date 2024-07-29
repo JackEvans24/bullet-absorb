@@ -9,9 +9,9 @@ signal died
 
 @onready var health: Health = $Health
 @onready var knockback: Knockback = $Knockback
-@onready var hit_detection: Area3D = $HitDetection
 @onready var pivot: Node3D = $Pivot
 @onready var collider: CollisionShape3D = $Collider
+@onready var bullet_handler: BulletHitHandler = $BulletHitHandler
 
 var meshes: Array[MeshInstance3D] = []
 
@@ -35,7 +35,7 @@ func get_meshes_recursive(node: Node):
 		get_meshes_recursive(child)
 
 func set_hit_detection():
-	hit_detection.area_entered.connect(_on_area_entered)
+	bullet_handler.bullet_connected.connect(_on_bullet_connected)
 	health.damage_taken.connect(_on_damage_taken)
 	knockback.knockback_changed.connect(_on_knockback_changed)
 
@@ -50,8 +50,8 @@ func _physics_process(_delta):
 	velocity = knockback.knockback_direction
 	move_and_slide()
 
-func _on_area_entered(area: Area3D):
-	health.take_damage(1.0, area)
+func _on_bullet_connected(bullet: Node3D):
+	health.take_damage(1.0, bullet)
 
 func _on_damage_taken(damage_taken: float, taken_from: Node3D):
 	if damage_taken <= 0:

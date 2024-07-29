@@ -46,9 +46,6 @@ mesh = ExtResource("2_d1la3")
 [node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_s5aai")
 
-[node name="OnScreenNotifier" type="VisibleOnScreenNotifier3D" parent="."]
-aabb = AABB(-2, -2, -2, 4, 4, 4)
-
 [node name="SplashParticles" type="GPUParticles3D" parent="."]
 transparency = 0.2
 cast_shadow = 0

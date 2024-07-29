@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dcmefiejwfjyq"]
+[gd_scene load_steps=17 format=3 uid="uid://dcmefiejwfjyq"]
 
 [ext_resource type="PackedScene" uid="uid://c3ytmjd7pe4pg" path="res://prefabs/enemies/enemy.tscn" id="1_no1yi"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/basic_movement.gd" id="2_1evv8"]
@@ -11,9 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://d1a50aebuqe1d" path="res://prefabs/enemies/spawn_tube.tscn" id="6_dcvw3"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/fire_from_ring.gd" id="7_q2sbb"]
 [ext_resource type="PackedScene" uid="uid://bwb55ll2hiucv" path="res://prefabs/bullets/perfect_enemy_bullet.tscn" id="8_mra72"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_5hfv7"]
-radius = 0.75
 
 [sub_resource type="BoxMesh" id="BoxMesh_hvq68"]
 material = ExtResource("2_i8v7u")
@@ -169,10 +166,7 @@ script = ExtResource("2_4a7pp")
 [node name="Health" parent="." index="0"]
 starting_health = 5.0
 
-[node name="CollisionShape3D" parent="HitDetection" index="0"]
-shape = SubResource("SphereShape3D_5hfv7")
-
-[node name="Pivot" parent="." index="3"]
+[node name="Pivot" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Body" parent="Pivot" index="0"]
@@ -190,10 +184,10 @@ transform = Transform3D(0.75, 0, 0, 0, -0.75, 1.90139e-06, 0, -1.90139e-06, -0.7
 [node name="SpawnTube" parent="Pivot" index="4" instance=ExtResource("6_dcvw3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
-[node name="Collider" parent="." index="4"]
+[node name="Collider" parent="." index="3"]
 shape = SubResource("SphereShape3D_3263e")
 
-[node name="Movement" type="Node3D" parent="." index="5"]
+[node name="Movement" type="Node3D" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("2_1evv8")
 drift_max = 0.0
@@ -203,13 +197,13 @@ drift_change = 0.0
 target_position = Vector3(0, 0, 0)
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
-[node name="Fire" type="Node" parent="." index="6"]
+[node name="Fire" type="Node" parent="." index="5"]
 script = ExtResource("7_q2sbb")
 pivot_ref = NodePath("../Pivot")
 bullet_scene = ExtResource("8_mra72")
 rotation_interval = 0.3
 
-[node name="BehaviourTimer" type="Timer" parent="." index="7"]
+[node name="BehaviourTimer" type="Timer" parent="." index="6"]
 script = ExtResource("3_a2sv1")
 
 [node name="Walk" type="Node" parent="BehaviourTimer" index="0"]
@@ -231,7 +225,7 @@ iterations = 3
 script = ExtResource("4_ijtvr")
 duration = 0.7
 
-[node name="Animator" type="AnimationPlayer" parent="." index="8"]
+[node name="Animator" type="AnimationPlayer" parent="." index="7"]
 libraries = {
 "": SubResource("AnimationLibrary_hlk6v")
 }
