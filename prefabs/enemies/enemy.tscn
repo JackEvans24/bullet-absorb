@@ -7,8 +7,7 @@
 [ext_resource type="Material" uid="uid://bh15v0ftuakdk" path="res://materials/enemy/enemy_hurt.tres" id="4_3pfns"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/knockback.gd" id="4_t2vkt"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy/enemy_body.tres" id="5_ra3i6"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_64qd1"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/bullet_hit_handler.gd" id="8_tqpp8"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_jkita"]
 material = ExtResource("5_ra3i6")
@@ -18,6 +17,7 @@ radius = 0.45
 
 [node name="Enemy" type="CharacterBody3D"]
 collision_layer = 32
+collision_mask = 17
 script = ExtResource("1_wjmkf")
 hurt_particles_scene = ExtResource("2_smu6b")
 orb_scene = ExtResource("3_yn8ly")
@@ -33,15 +33,6 @@ script = ExtResource("4_t2vkt")
 knockback_time = 0.05
 knockback_power = 15.0
 
-[node name="HitDetection" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-collision_layer = 0
-collision_mask = 16
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitDetection"]
-shape = SubResource("SphereShape3D_64qd1")
-
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
 
@@ -51,3 +42,6 @@ mesh = SubResource("SphereMesh_jkita")
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("SphereShape3D_vhdor")
+
+[node name="BulletHitHandler" type="Node" parent="."]
+script = ExtResource("8_tqpp8")

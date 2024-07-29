@@ -7,16 +7,15 @@ extends Area3D
 @onready var mesh: MeshInstance3D = $Mesh
 @onready var collider: CollisionShape3D = $Collider
 @onready var splash_particles: GPUParticles3D = $SplashParticles
-@onready var on_screen_notifier: VisibleOnScreenNotifier3D = $OnScreenNotifier
 @onready var drop_power: DropPower = $DropPower
 @onready var absorb_handler: AbsorbHandler = $AbsorbHandler
 
 var dead = false
+var absorbed = false
 
 func _ready():
 	body_entered.connect(_on_body_entered)
-	on_screen_notifier.screen_exited.connect(_on_screen_exited)
-	absorb_handler.absorb_triggered.connect(handle_destruction_with_power)
+	absorb_handler.absorb_triggered.connect(_on_absorb_handler_triggered)
 
 func initialise(turret_basis: Basis):
 	basis = turret_basis.orthonormalized()
@@ -29,11 +28,14 @@ func _physics_process(_delta):
 	var forward = -global_transform.basis.z
 	position += forward * speed * _delta
 
-func _on_body_entered(_body: Node3D):
-	call_deferred("handle_destruction")
+func _on_body_entered(body: Node3D):
+	if absorbed:
+		return
 
-func _on_screen_exited():
-	queue_free()
+	if body.has_node("BulletHitHandler"):
+		body.get_node("BulletHitHandler").trigger(self)
+
+	call_deferred("handle_destruction")
 
 func handle_destruction():
 	dead = true
@@ -45,6 +47,8 @@ func handle_destruction():
 
 	call_deferred("queue_free")
 
-func handle_destruction_with_power():
+func _on_absorb_handler_triggered():
+	absorbed = true
+
 	drop_power.drop_all_power()
 	handle_destruction()
