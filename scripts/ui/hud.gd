@@ -24,7 +24,7 @@ func _on_power_count_changed(count: float):
 	power_bar.update_value(count)
 
 func _on_power_check_failed():
-	power_bar.trigger_empty_animation()
+	power_bar.trigger_flash_animation()
 
 func _on_player_died():
 	await get_tree().create_timer(death_overlay_timer).timeout

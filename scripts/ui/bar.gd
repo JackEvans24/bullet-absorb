@@ -8,7 +8,9 @@ extends Control
 @export var flash_colour: Color = Color.WHITE
 
 @export_group("Empty animation")
-@export var background_flash_colour = Color.WHITE_SMOKE
+@export var background_flash_colour := Color.WHITE_SMOKE
+@export var background_grow := 1.1
+@export var background_decay := 1.5
 
 @onready var foreground: ColorRect = $Foreground
 @onready var background: ColorRect = $Background
@@ -20,7 +22,7 @@ var current_value := 0.0
 var new_value := 0.0
 
 var foreground_color_lerp := 0.0
-var background_color_lerp := 0.0
+var background_lerp := 0.0
 
 func _ready():
 	foreground.color = bar_colour
@@ -30,8 +32,8 @@ func update_value(value: float):
 	new_value = value
 	foreground_color_lerp = 1.0
 
-func trigger_empty_animation():
-	background_color_lerp = 1.0
+func trigger_flash_animation():
+	background_lerp = 1.0
 
 func _process(delta):
 	update_bar_height(delta)
@@ -58,7 +60,8 @@ func update_foreground_color(delta):
 	foreground.color = lerp(bar_colour, flash_colour, foreground_color_lerp)
 
 func update_background_color(delta):
-	if background_color_lerp == 0.0:
+	if background_lerp == 0.0:
 		return
-	background_color_lerp = max(0, background_color_lerp - color_decay * delta)
-	background.color = lerp(background_colour, background_flash_colour, background_color_lerp)
+	background_lerp = max(0, background_lerp - background_decay * delta)
+	background.color = lerp(background_colour, background_flash_colour, background_lerp)
+	scale = Vector2.ONE * lerp(1.0, background_grow, background_lerp)
