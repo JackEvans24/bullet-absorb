@@ -2,6 +2,7 @@ class_name PlayerAim
 extends Node
 
 signal bullet_fired
+signal fire_failed
 
 const SHOOT_LEFT = "shoot_left"
 const SHOOT_RIGHT = "shoot_right"
@@ -76,6 +77,7 @@ func fire():
 
 	if not has_ammo:
 		arm_cannon.trigger_fire_fail()
+		fire_failed.emit()
 	else:
 		var bullet = bullet_scene.instantiate()
 		tree.root.add_child(bullet)

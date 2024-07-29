@@ -4,6 +4,7 @@ extends CharacterBody3D
 signal bullet_fired
 signal absorb_state_changed(absorb_state: AbsorbState)
 signal power_count_changed(count: float)
+signal power_check_failed
 signal damage_taken
 signal died
 
@@ -40,6 +41,7 @@ func _ready():
 	health.invincibility_changed.connect(body._on_invincibility_changed)
 
 	aim.bullet_fired.connect(_on_bullet_fired)
+	aim.fire_failed.connect(_on_fire_failed)
 
 	dash.dash_triggered.connect(_on_dash_triggered)
 
@@ -116,6 +118,9 @@ func _on_bullet_fired():
 	power_count = max(0, power_count - stats.fire_power_consumption)
 	update_power_count()
 	bullet_fired.emit()
+
+func _on_fire_failed():
+	power_check_failed.emit()
 
 func update_power_count():
 	power_count_changed.emit(power_count)
