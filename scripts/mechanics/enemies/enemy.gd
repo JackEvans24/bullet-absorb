@@ -16,7 +16,7 @@ signal died
 var meshes: Array[MeshInstance3D] = []
 
 var orb_power_count := 3
-var starting_health := 3.0
+var max_health := 3.0
 
 var is_dead := false
 var knockback_active := false
@@ -24,7 +24,7 @@ var knockback_active := false
 func _ready():
 	get_meshes_recursive(pivot)
 	set_hit_detection()
-	health.current_health = starting_health
+	health.current_health = max_health
 
 func get_meshes_recursive(node: Node):
 	for child in node.get_children():
@@ -42,9 +42,9 @@ func set_hit_detection():
 func activate_knockback():
 	knockback_active = true
 
-func initialise(max_health: float, power_count: int):
+func initialise(new_max_health: float, power_count: int):
 	orb_power_count = power_count
-	starting_health = max_health
+	max_health = new_max_health
 
 func _physics_process(_delta):
 	velocity = knockback.knockback_direction
