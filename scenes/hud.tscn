@@ -1,13 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhxrs6pph350t"]
+[gd_scene load_steps=4 format=3 uid="uid://bhxrs6pph350t"]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_fnqek"]
 [ext_resource type="PackedScene" uid="uid://dnhgfpvh8onaq" path="res://prefabs/ui/bar.tscn" id="2_pxq8q"]
+[ext_resource type="Script" path="res://scripts/ui/boss_ui.gd" id="3_cjg5j"]
 
-[node name="HUD" type="Node"]
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_fnqek")
 death_overlay_timer = 1.2
 
 [node name="HealthBar" parent="." instance=ExtResource("2_pxq8q")]
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_right = 0.0
@@ -22,6 +30,7 @@ background_grow = 1.2
 background_decay = 3.0
 
 [node name="PowerBar" parent="." instance=ExtResource("2_pxq8q")]
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_right = 0.0
@@ -39,6 +48,7 @@ background_decay = 5.0
 
 [node name="DeathOverlay" type="ColorRect" parent="."]
 visible = false
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -77,3 +87,41 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 32
 text = "Press Start to retry"
+
+[node name="BossUI" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = -172.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
+script = ExtResource("3_cjg5j")
+label_path = NodePath("Container/Label")
+bar_path = NodePath("Container/Bar")
+
+[node name="Container" type="VBoxContainer" parent="BossUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BossUI/Container"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "BOSS NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters_behavior = 1
+
+[node name="Bar" parent="BossUI/Container" instance=ExtResource("2_pxq8q")]
+custom_minimum_size = Vector2(500, 40)
+layout_mode = 2
+is_vertical = false
+bar_speed = 15.0

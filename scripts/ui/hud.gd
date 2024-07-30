@@ -6,6 +6,7 @@ extends Node
 @onready var health_bar: Bar = $HealthBar
 @onready var power_bar: Bar = $PowerBar
 @onready var death_overlay: ColorRect = $DeathOverlay
+@onready var boss_ui: BossUI = $BossUI
 
 var saved_dash_state := true
 
@@ -16,6 +17,10 @@ func update(player: Player):
 func update_bar(bar: Bar, max_value: float, current_value: float):
 	bar.max_value = max_value
 	bar.update_value(current_value)
+
+func initialise_boss_ui(data: BossSignalData):
+	boss_ui.initialise(data)
+	boss_ui.visible = true
 
 func _on_health_changed(current_health: float):
 	health_bar.update_value(current_health)
