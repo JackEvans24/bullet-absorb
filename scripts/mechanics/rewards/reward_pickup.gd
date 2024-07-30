@@ -14,7 +14,7 @@ func _ready():
 	set_shader_texture()
 
 	orb.orb_absorbed.connect(_on_orb_absorbed)
-	orb.orb_destroyed.connect(_on_orb_destroyed)
+	drop_power.all_power_absorbed.connect(_on_power_absorbed)
 
 func set_shader_texture():
 	var shader_material: ShaderMaterial = orb_mesh.get_surface_override_material(0).next_pass
@@ -26,8 +26,8 @@ func set_shader_texture():
 	shader_material.set_shader_parameter("surface_texture", texture)
 
 func _on_orb_absorbed():
-	reward_collected.emit(reward.reward_type)
 	drop_power.drop_all_power()
 
-func _on_orb_destroyed():
+func _on_power_absorbed():
+	reward_collected.emit(reward.reward_type)
 	call_deferred("queue_free")

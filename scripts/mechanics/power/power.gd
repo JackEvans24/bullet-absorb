@@ -1,6 +1,8 @@
 class_name Power
 extends Node3D
 
+signal absorbed
+
 @export var wall_check_distance := 0.3
 @export var attraction_delay := 0.3
 @export var trigger_power_handler := true
@@ -51,6 +53,8 @@ func _on_body_entered_attraction(body: Node3D):
 func _on_body_entered_collision(body: Node3D):
 	if trigger_power_handler and body.has_node("PowerHitHandler"):
 		body.get_node("PowerHitHandler").trigger(self)
+
+	absorbed.emit()
 
 	call_deferred("queue_free")
 
