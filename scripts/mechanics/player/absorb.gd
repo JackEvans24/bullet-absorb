@@ -1,7 +1,6 @@
 class_name Absorb
 extends Node3D
 
-signal bullet_absorbed
 signal slowdown_started
 signal slowdown_ended
 signal absorb_triggered
@@ -10,7 +9,6 @@ signal absorb_triggered
 @export var mesh_display_time = 0.2
 
 @onready var destoy_area: Area3D = $DestroyArea
-@onready var absorb_area: Area3D = $AbsorbArea
 @onready var mesh: MeshInstance3D = $AbsorbMesh
 @onready var particles: GPUParticles3D = $AbsorbParticles
 
@@ -20,9 +18,6 @@ var can_absorb = true
 var is_absorb_started = false
 var is_absorbing = false
 var current_windup_time = 0.0
-
-func _ready():
-	absorb_area.area_entered.connect(absorb_power)
 
 func _process(delta):
 	if Input.is_action_just_pressed("absorb"):
@@ -90,10 +85,6 @@ func absorb_entity(area: Area3D):
 		printerr("Area has no absorb handler: %s" % area.name)
 
 	absorb_handler.trigger_absorb()
-
-func absorb_power(area: Area3D):
-	area.get_parent().call_deferred("queue_free")
-	bullet_absorbed.emit()
 
 func handle_cooldown():
 	await get_tree().create_timer(absorb_cooldown).timeout

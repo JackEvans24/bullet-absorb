@@ -21,6 +21,7 @@ enum AbsorbState {Started, Cancelled, Complete}
 @onready var camera_follow_point: Node3D = $Pivot/CameraFollowPoint
 @onready var collider: CollisionShape3D = $Collider
 @onready var bullet_handler: BulletHitHandler = $BulletHitHandler
+@onready var power_handler: PowerHitHandler = $PowerHitHandler
 @onready var animator: AnimationPlayer = $Animator
 
 var power_count: float = 0.0
@@ -46,12 +47,12 @@ func _ready():
 	dash.dash_triggered.connect(_on_dash_triggered)
 	dash.dash_failed.connect(_on_dash_failed)
 
-	absorb.bullet_absorbed.connect(_on_absorb)
 	absorb.slowdown_started.connect(_on_slowdown_started)
 	absorb.slowdown_ended.connect(_on_slowdown_ended)
 	absorb.absorb_triggered.connect(_on_absorb_triggered)
 
 	bullet_handler.bullet_connected.connect(_on_bullet_connected)
+	power_handler.power_connected.connect(_on_power_connected)
 
 	dash.initialise(move_state, body)
 
@@ -112,12 +113,6 @@ func knockback(taken_from: Node3D):
 	ctx[MoveStateConstants.HIT_DIRECTION] = direction
 	move_state.transition_to(MoveStateConstants.STATE_KNOCKBACK, ctx)
 
-func _on_absorb():
-	if power_count == stats.max_power:
-		return
-	power_count = min(stats.max_power, power_count + stats.power_conversion)
-	update_power_count()
-
 func _on_bullet_fired():
 	power_count = max(0, power_count - stats.fire_power_consumption)
 	update_power_count()
@@ -126,13 +121,14 @@ func _on_bullet_fired():
 func _on_fire_failed():
 	power_check_failed.emit()
 
-func update_power_count():
-	power_count_changed.emit(power_count)
-	aim.has_ammo = power_count >= stats.fire_power_consumption
-	dash.has_dash_power = power_count >= stats.dash_power_consumption
-
 func _on_bullet_connected(bullet: Node3D):
 	health.take_damage(1.0, bullet)
+
+func _on_power_connected(_power: Node3D):
+	if power_count == stats.max_power:
+		return
+	power_count = min(stats.max_power, power_count + stats.power_conversion)
+	update_power_count()
 
 func _on_slowdown_started():
 	move_state.transition_to(MoveStateConstants.STATE_ABSORB)
@@ -146,3 +142,8 @@ func _on_slowdown_ended():
 
 func _on_absorb_triggered():
 	absorb_state_changed.emit(AbsorbState.Complete)
+
+func update_power_count():
+	power_count_changed.emit(power_count)
+	aim.has_ammo = power_count >= stats.fire_power_consumption
+	dash.has_dash_power = power_count >= stats.dash_power_consumption

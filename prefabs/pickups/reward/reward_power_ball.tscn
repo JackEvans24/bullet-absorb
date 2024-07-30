@@ -1,12 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cm1wj0vbe4wn8"]
+[gd_scene load_steps=10 format=3 uid="uid://cf66c5gqvvktj"]
 
-[ext_resource type="Script" path="res://scripts/mechanics/power/power.gd" id="1_n4h2h"]
-[ext_resource type="Script" path="res://scripts/mechanics/shared/movement/follow_body.gd" id="2_7cgiv"]
-[ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/pickups/power.tres" id="2_netkk"]
-[ext_resource type="Script" path="res://scripts/mechanics/shared/movement/smooth_movement.gd" id="3_gix6h"]
+[ext_resource type="Script" path="res://scripts/mechanics/power/power.gd" id="1_kgc7f"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/movement/follow_body.gd" id="2_8fwpw"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/movement/smooth_movement.gd" id="3_n5v3o"]
+[ext_resource type="Material" uid="uid://bnq2limsm5p7d" path="res://materials/pickups/reward_power_ball.tres" id="4_wwfxy"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_6vkiy"]
-material = ExtResource("2_netkk")
+[sub_resource type="SphereMesh" id="SphereMesh_osolq"]
+material = ExtResource("4_wwfxy")
 
 [sub_resource type="Animation" id="Animation_41a3g"]
 resource_name = "default"
@@ -37,25 +37,26 @@ radius = 5.0
 radius = 0.1
 
 [node name="Power" type="Node3D" groups=["bullet"]]
-script = ExtResource("1_n4h2h")
-attraction_delay = 0.0
+script = ExtResource("1_kgc7f")
+attraction_delay = 1.0
+trigger_power_handler = false
 
 [node name="FollowBody" type="Node3D" parent="."]
-script = ExtResource("2_7cgiv")
+script = ExtResource("2_8fwpw")
 max_speed = 3.0
 acceleration = 0.5
 
 [node name="SmoothMovement" type="Node3D" parent="."]
-script = ExtResource("3_gix6h")
+script = ExtResource("3_n5v3o")
 max_speed = 50.0
 dampening = 0.0
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
-mesh = SubResource("SphereMesh_6vkiy")
+mesh = SubResource("SphereMesh_osolq")
 
 [node name="BulletLight" type="OmniLight3D" parent="."]
-light_color = Color(0.607843, 1, 1, 1)
+light_color = Color(0.95, 0.93765, 0.5795, 1)
 light_energy = 0.5
 omni_range = 2.0
 omni_attenuation = 0.435275

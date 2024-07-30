@@ -1,35 +1,45 @@
 class_name Power
 extends Node3D
 
+signal absorbed
+
 @export var wall_check_distance := 0.3
 @export var attraction_delay := 0.3
-@export_flags_3d_physics var collision_layer
+@export var trigger_power_handler := true
 
-@onready var attraction_area = $PlayerAttractionArea
+@onready var attraction_area: Area3D = $PlayerAttractionArea
 @onready var collision_area: Area3D = $PlayerCollisionArea
 @onready var follow_body: FollowBody3D = $FollowBody
 @onready var smooth_movement: SmoothMovement = $SmoothMovement
 @onready var wall_check: RayCast3D = $WallCheck
 
+var current_attraction_timer := 0.0
 var can_attract = false
 var target: Node3D
 
 func _ready():
-	attraction_area.body_entered.connect(_on_body_entered)
+	attraction_area.body_entered.connect(_on_body_entered_attraction)
 
-	await get_tree().create_timer(attraction_delay).timeout
-	can_attract = true
+func _process(delta):
+	if not can_attract:
+		update_attraction_timer(delta)
+		return
 
-	collision_area.collision_layer = collision_layer
-
-func _process(_delta):
-	if target == null or not can_attract:
+	if target == null:
 		return
 
 	follow_body.target = target
 	target = null
 	smooth_movement.clear_target()
 	wall_check.enabled = false
+
+func update_attraction_timer(delta: float):
+	current_attraction_timer += delta
+	if current_attraction_timer < attraction_delay:
+		return
+
+	can_attract = true
+	collision_area.body_entered.connect(_on_body_entered_collision)
 
 func _physics_process(_delta):
 	if follow_body.target != null:
@@ -42,11 +52,19 @@ func _physics_process(_delta):
 
 	translate(smooth_movement.movement)
 
-func _on_body_entered(body: Node3D):
+func _on_body_entered_attraction(body: Node3D):
 	if body.has_node("Pivot"):
 		target = body.get_node("Pivot")
 	else:
 		target = body
+
+func _on_body_entered_collision(body: Node3D):
+	if trigger_power_handler and body.has_node("PowerHitHandler"):
+		body.get_node("PowerHitHandler").trigger(self)
+
+	absorbed.emit()
+
+	call_deferred("queue_free")
 
 func set_target_position(target_position: Vector3):
 	var direction = target_position - global_position
