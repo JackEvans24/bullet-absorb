@@ -16,7 +16,7 @@ signal died
 var meshes: Array[MeshInstance3D] = []
 
 var orb_power_count := 3
-var starting_health := 3
+var starting_health := 3.0
 
 var is_dead := false
 var knockback_active := false
@@ -42,7 +42,7 @@ func set_hit_detection():
 func activate_knockback():
 	knockback_active = true
 
-func initialise(max_health: int, power_count: int):
+func initialise(max_health: float, power_count: int):
 	orb_power_count = power_count
 	starting_health = max_health
 
