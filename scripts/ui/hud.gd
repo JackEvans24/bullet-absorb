@@ -22,6 +22,9 @@ func initialise_boss_ui(data: BossSignalData):
 	boss_ui.initialise(data)
 	boss_ui.visible = true
 
+func hide_boss_ui():
+	boss_ui.visible = false
+
 func _on_health_changed(current_health: float):
 	health_bar.update_value(current_health)
 	health_bar.trigger_flash_animation()

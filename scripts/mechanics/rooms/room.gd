@@ -2,6 +2,8 @@ class_name Room
 extends Node3D
 
 signal doors_changed
+signal boss_entered(data: BossSignalData)
+signal boss_defeated
 signal reward_collected(reward_type: Reward.RewardType)
 signal room_completed(room_id: String)
 signal room_reentered(room_id: String)
@@ -17,7 +19,7 @@ var reward_lookup: RewardLookup
 var player: Node3D
 var enemy_count = 0
 var wave_index = 0
-var boss_defeated := false
+var boss_created := false
 var completed := false
 
 func _ready():
@@ -51,7 +53,7 @@ func do_room_step():
 		set_room_configuration(data.waves[wave_index])
 		return
 
-	if data.boss_data and not boss_defeated:
+	if data.boss_data and not boss_created:
 		create_boss()
 		return
 
@@ -116,10 +118,12 @@ func create_boss():
 	boss.set_target(player)
 	boss.died.connect(_on_boss_died)
 
-	enemy_count = 1
+	boss_created = true
+
+	boss_entered.emit(data.boss_data.to_signal_data())
 
 func _on_boss_died():
-	boss_defeated = true
+	boss_defeated.emit()
 	call_deferred("do_next_room_step")
 
 func create_reward():
