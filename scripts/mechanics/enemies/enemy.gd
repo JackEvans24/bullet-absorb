@@ -102,4 +102,4 @@ func drop_orb():
 	var orb = orb_scene.instantiate()
 	orb.power_count = orb_power_count
 	get_tree().root.add_child(orb)
-	orb.global_position = global_position
+	orb.global_position = pivot.global_position
