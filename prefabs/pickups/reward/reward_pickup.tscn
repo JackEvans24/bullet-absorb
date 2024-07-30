@@ -35,5 +35,7 @@ script = ExtResource("5_pdulk")
 power_scene = ExtResource("6_ip3wi")
 power_drop_count = 12
 power_drop_offset = 2.0
+offset_deviation = 0.0
+attraction_delay_range = 1.0
 
 [editable path="Orb"]

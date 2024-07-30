@@ -13,25 +13,33 @@ signal absorbed
 @onready var smooth_movement: SmoothMovement = $SmoothMovement
 @onready var wall_check: RayCast3D = $WallCheck
 
+var current_attraction_timer := 0.0
 var can_attract = false
 var target: Node3D
 
 func _ready():
 	attraction_area.body_entered.connect(_on_body_entered_attraction)
 
-	await get_tree().create_timer(attraction_delay).timeout
-	can_attract = true
+func _process(delta):
+	if not can_attract:
+		update_attraction_timer(delta)
+		return
 
-	collision_area.body_entered.connect(_on_body_entered_collision)
-
-func _process(_delta):
-	if target == null or not can_attract:
+	if target == null:
 		return
 
 	follow_body.target = target
 	target = null
 	smooth_movement.clear_target()
 	wall_check.enabled = false
+
+func update_attraction_timer(delta: float):
+	current_attraction_timer += delta
+	if current_attraction_timer < attraction_delay:
+		return
+
+	can_attract = true
+	collision_area.body_entered.connect(_on_body_entered_collision)
 
 func _physics_process(_delta):
 	if follow_body.target != null:

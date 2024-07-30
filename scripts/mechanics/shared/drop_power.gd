@@ -5,8 +5,9 @@ signal all_power_absorbed
 
 @export var power_scene: PackedScene
 @export_range(0, 20) var power_drop_count := 3
-@export var power_drop_offset = 0.5
-@export var offset_deviation = 0.05
+@export var power_drop_offset := 0.5
+@export var offset_deviation := 0.05
+@export var attraction_delay_range := 0.0
 
 var absorbed_power_count := 0
 
@@ -16,16 +17,18 @@ func drop_all_power():
 	for i in range(power_drop_count):
 		drop_single_power(float(i) / power_drop_count)
 
-func drop_single_power(offset_angle: float):
+func drop_single_power(offset_ratio: float):
 	var power = power_scene.instantiate()
 	get_tree().root.add_child(power)
 
 	power.global_position = global_position
 
 	var deviation = randf_range(-offset_deviation, offset_deviation)
-	var angle = PI * 2 * (offset_angle + deviation)
+	var angle = PI * 2 * (offset_ratio + deviation)
 	var offset = Vector3.FORWARD.rotated(Vector3.UP, angle) * power_drop_offset
 	power.set_target_position(global_position + offset)
+
+	power.attraction_delay += attraction_delay_range * offset_ratio
 
 	power.absorbed.connect(_on_power_absorbed)
 
