@@ -13,7 +13,6 @@ offset_bottom = -700.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_uaued")
-bar_speed = 5.0
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1

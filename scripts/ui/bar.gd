@@ -1,6 +1,8 @@
 class_name Bar
 extends Control
 
+@export var is_vertical := true
+
 @export_group("Update animation")
 @export var bar_speed = 1.0
 @export var bar_colour: Color = Color.RED
@@ -47,11 +49,17 @@ func update_bar_height(delta):
 	var direction = sign(new_value - current_value)
 
 	current_value = clamp(
-		current_value + bar_speed * direction * delta,
+		current_value + bar_speed * max_value * direction * delta,
 		current_value if direction > 0 else new_value,
 		new_value if direction > 0 else current_value
 	)
-	foreground.size.y = clampf(size.y * (current_value / max_value), 0.0, size.y)
+
+	if is_vertical:
+		foreground.size.x = size.x
+		foreground.size.y = clampf(size.y * (current_value / max_value), 0.0, size.y)
+	else:
+		foreground.size.x = clampf(size.x * (current_value / max_value), 0.0, size.x)
+		foreground.size.y = size.y
 
 func update_foreground_color(delta):
 	if foreground_color_lerp == 0.0:

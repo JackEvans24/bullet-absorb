@@ -2,6 +2,7 @@ class_name Room
 extends Node3D
 
 signal doors_changed
+signal boss_entered(boss: Boss)
 signal reward_collected(reward_type: Reward.RewardType)
 signal room_completed(room_id: String)
 signal room_reentered(room_id: String)
@@ -17,6 +18,7 @@ var reward_lookup: RewardLookup
 var player: Node3D
 var enemy_count = 0
 var wave_index = 0
+var boss_created := false
 var completed := false
 
 func _ready():
@@ -35,16 +37,42 @@ func _on_player_entered(body: Node3D):
 func on_first_entry():
 	if completed:
 		return
-	if len(data.waves) <= 0:
-		on_room_complete()
-		return
+
+	wave_index = 0
 
 	close_all_doors()
-	set_room_configuration(data.waves[wave_index])
+	do_room_step()
+
+func do_next_room_step():
+	wave_index += 1
+	do_room_step()
+
+func do_room_step():
+	if wave_index < len(data.waves):
+		set_room_configuration(data.waves[wave_index])
+		return
+
+	if data.boss_data and not boss_created:
+		create_boss()
+		return
+
+	if data.reward:
+		close_all_doors()
+		create_reward()
+		return
+
+	set_room_complete()
 
 func set_room_configuration(config: RoomConfiguration):
 	if config == null:
+		do_next_room_step()
 		return
+	if not config.enemies and not config.items:
+		do_next_room_step()
+		return
+
+	enemy_count = 0
+
 	for enemy_config in config.enemies:
 		add_enemy(enemy_config)
 		enemy_count += 1
@@ -75,22 +103,26 @@ func _on_enemy_died():
 		printerr("ENEMY DIED CALLED WHEN ALL ENEMIES ARE DEAD")
 
 	enemy_count -= 1
-	if enemy_count == 0:
-		call_deferred("on_wave_complete")
-
-func on_wave_complete():
-	wave_index += 1
-	if wave_index < len(data.waves):
-		set_room_configuration(data.waves[wave_index])
+	if enemy_count > 0:
 		return
-	on_room_complete()
 
-func on_room_complete():
-	if data.reward:
-		close_all_doors()
-		create_reward()
-	else:
-		set_room_complete()
+	call_deferred("do_next_room_step")
+
+func create_boss():
+	var boss = data.boss_data.boss_scene.instantiate() as Enemy
+	boss.initialise(data.boss_data.max_health, data.boss_data.power_count)
+
+	add_child(boss)
+
+	boss.set_target(player)
+	boss.died.connect(_on_boss_died)
+
+	boss_created = true
+
+	boss_entered.emit(boss)
+
+func _on_boss_died():
+	call_deferred("do_next_room_step")
 
 func create_reward():
 	var config: RoomItem = RoomItem.new()

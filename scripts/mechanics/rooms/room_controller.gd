@@ -1,7 +1,8 @@
 class_name RoomController extends Node
 
-signal reward_collected(reward_type: Reward.RewardType)
 signal doors_changed
+signal boss_entered(boss: Boss)
+signal reward_collected(reward_type: Reward.RewardType)
 signal room_completed(room_id: String)
 signal room_reentered(room_id: String)
 
@@ -23,6 +24,7 @@ func initialise(data: SaveGameData):
 		room.reward_lookup = reward_lookup
 
 		room.doors_changed.connect(_on_room_doors_changed)
+		room.boss_entered.connect(_on_boss_entered)
 		room.reward_collected.connect(_on_reward_collected)
 		room.room_completed.connect(_on_room_completed)
 		room.room_reentered.connect(_on_room_reentered)
@@ -40,6 +42,9 @@ func get_room(id: String) -> Room:
 
 func _on_room_doors_changed():
 	doors_changed.emit()
+
+func _on_boss_entered(boss: Boss):
+	boss_entered.emit(boss)
 
 func _on_reward_collected(reward_type: Reward.RewardType):
 	reward_collected.emit(reward_type)
