@@ -1,17 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://wcooa5c7ivpk"]
+[gd_scene load_steps=9 format=3 uid="uid://wcooa5c7ivpk"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room.gd" id="1_fhmn2"]
-[ext_resource type="PackedScene" uid="uid://btfsstt1biti7" path="res://prefabs/enemies/wanderer.tscn" id="2_44jki"]
-[ext_resource type="Script" path="res://scripts/data/rooms/boss_data.gd" id="3_ev13o"]
 [ext_resource type="Script" path="res://scripts/data/rooms/room_data.gd" id="4_d0pga"]
 [ext_resource type="MeshLibrary" uid="uid://bydmgvg8cpigh" path="res://models/rooms/room_mesh_library.tres" id="5_cg01b"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room_doors.gd" id="6_1t2ei"]
 [ext_resource type="PackedScene" uid="uid://ok4gfjcs3kol" path="res://prefabs/room/door.tscn" id="7_c1gl2"]
-
-[sub_resource type="Resource" id="Resource_650my"]
-script = ExtResource("3_ev13o")
-title = "THE BOSS"
-boss_scene = ExtResource("2_44jki")
 
 [sub_resource type="Resource" id="Resource_5aw1g"]
 script = ExtResource("4_d0pga")
@@ -19,7 +12,6 @@ room_name = "MainRoom"
 untouched_doors = 2
 completed_doors = 14
 waves = Array[Resource("res://scripts/data/rooms/room_configuration.gd")]([])
-boss_data = SubResource("Resource_650my")
 reward = 0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xq1m6"]
