@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://dl5unqhv0x3ox" path="res://prefabs/bullets/player_bullet.tscn" id="5_twt6l"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/knockback.gd" id="5_unin6"]
 [ext_resource type="Material" uid="uid://ch75junnd3ws8" path="res://materials/player/player_body_dash.tres" id="5_x6ib0"]
-[ext_resource type="Shape3D" uid="uid://c4tuvev8wasc3" path="res://models/player/player_internal.tres" id="7_iumbl"]
 [ext_resource type="Material" uid="uid://c4sm0bxdm8qtm" path="res://materials/player/player_body_knockback.tres" id="8_bi3ql"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/player_body.gd" id="10_18rdm"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/aim/player_aim.gd" id="10_gaav5"]
@@ -27,6 +26,7 @@
 [ext_resource type="Material" uid="uid://hh5rgca6j4cq" path="res://materials/player/player_body_default.tres" id="21_yrqox"]
 [ext_resource type="PackedScene" uid="uid://bkexk607fieqm" path="res://prefabs/player/player_body.tscn" id="23_m7jo1"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/bullet_hit_handler.gd" id="27_ldo1c"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/power_hit_handler.gd" id="27_nh1u2"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4kfv7"]
 radius = 5.0
@@ -377,7 +377,7 @@ _data = {
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
-collision_mask = 5
+collision_mask = 13
 script = ExtResource("1_u023k")
 stats = ExtResource("2_vy3n2")
 
@@ -453,14 +453,6 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Absorb/DestroyArea"]
 shape = SubResource("SphereShape3D_4kfv7")
-
-[node name="AbsorbArea" type="Area3D" parent="Absorb"]
-collision_layer = 0
-collision_mask = 8
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Absorb/AbsorbArea"]
-shape = ExtResource("7_iumbl")
 
 [node name="AbsorbMesh" type="MeshInstance3D" parent="Absorb"]
 visible = false
@@ -543,6 +535,9 @@ shape = ExtResource("11_p7nyd")
 
 [node name="BulletHitHandler" type="Node" parent="."]
 script = ExtResource("27_ldo1c")
+
+[node name="PowerHitHandler" type="Node" parent="."]
+script = ExtResource("27_nh1u2")
 
 [node name="Animator" type="AnimationPlayer" parent="."]
 libraries = {
