@@ -109,6 +109,7 @@ func _on_enemy_died():
 
 func create_boss():
 	var boss = data.boss_data.boss_scene.instantiate() as Enemy
+	boss.initialise(data.boss_data.max_health, data.boss_data.power_count)
 
 	add_child(boss)
 
