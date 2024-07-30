@@ -12,6 +12,7 @@ script = ExtResource("1_3y1fs")
 script = ExtResource("2_ed2h5")
 power_scene = ExtResource("3_fkl0r")
 power_drop_offset = 2.0
+attraction_delay_range = 0.5
 
 [node name="Orb" parent="." instance=ExtResource("4_cjnl0")]
 absorb_from_ready = true
