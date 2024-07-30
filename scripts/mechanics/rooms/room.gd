@@ -2,8 +2,7 @@ class_name Room
 extends Node3D
 
 signal doors_changed
-signal boss_entered(data: BossSignalData)
-signal boss_defeated
+signal boss_entered(boss: Boss)
 signal reward_collected(reward_type: Reward.RewardType)
 signal room_completed(room_id: String)
 signal room_reentered(room_id: String)
@@ -120,10 +119,9 @@ func create_boss():
 
 	boss_created = true
 
-	boss_entered.emit(data.boss_data.to_signal_data())
+	boss_entered.emit(boss)
 
 func _on_boss_died():
-	boss_defeated.emit()
 	call_deferred("do_next_room_step")
 
 func create_reward():

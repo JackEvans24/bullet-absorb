@@ -18,11 +18,17 @@ func update_bar(bar: Bar, max_value: float, current_value: float):
 	bar.max_value = max_value
 	bar.update_value(current_value)
 
-func initialise_boss_ui(data: BossSignalData):
-	boss_ui.initialise(data)
+func initialise_boss_ui(boss: Boss):
+	boss_ui.initialise(boss.title, boss.max_health)
 	boss_ui.visible = true
 
-func hide_boss_ui():
+	boss.health_changed.connect(_on_boss_health_changed)
+	boss.died.connect(_on_boss_died)
+
+func _on_boss_health_changed(current_health: float):
+	boss_ui.update_health(current_health)
+
+func _on_boss_died():
 	boss_ui.visible = false
 
 func _on_health_changed(current_health: float):

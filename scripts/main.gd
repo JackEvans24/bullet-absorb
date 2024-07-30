@@ -27,7 +27,6 @@ func initialise_rooms():
 
 	rooms.doors_changed.connect(_on_room_doors_changed)
 	rooms.boss_entered.connect(_on_boss_entered)
-	rooms.boss_defeated.connect(_on_boss_defeated)
 	rooms.reward_collected.connect(_on_reward_collected)
 	rooms.room_completed.connect(_on_room_completed)
 	rooms.room_reentered.connect(_on_room_reentered)
@@ -77,11 +76,8 @@ func _on_absorb_state_changed(absorb_state: Player.AbsorbState):
 func _on_room_doors_changed():
 	cameras.add_impulse(ScreenShakeMapping.ScreenShakeId.Doors)
 
-func _on_boss_entered(data: BossSignalData):
-	hud.initialise_boss_ui(data)
-
-func _on_boss_defeated():
-	hud.hide_boss_ui()
+func _on_boss_entered(boss: Boss):
+	hud.initialise_boss_ui(boss)
 
 func _on_reward_collected(reward_type: Reward.RewardType):
 	enable_reward(reward_type)
