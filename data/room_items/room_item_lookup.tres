@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dd7vuam6cs4fp" path="res://prefabs/pickups/power/power_orb.tscn" id="5_s0mow"]
 [ext_resource type="PackedScene" uid="uid://bcjb1jnr0y5mb" path="res://prefabs/pickups/power/power_generator.tscn" id="6_8wk7t"]
 [ext_resource type="Script" path="res://scripts/data/rooms/room_item_lookup.gd" id="7_22vx4"]
-[ext_resource type="PackedScene" uid="uid://yrlkolmu7nna" path="res://prefabs/pickups/reward_pickup.tscn" id="7_yibmw"]
+[ext_resource type="PackedScene" uid="uid://yrlkolmu7nna" path="res://prefabs/pickups/reward/reward_pickup.tscn" id="7_yibmw"]
 
 [sub_resource type="Resource" id="Resource_3wqml"]
 script = ExtResource("2_0xa5f")

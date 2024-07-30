@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://yrlkolmu7nna"]
+
+[ext_resource type="Script" path="res://scripts/mechanics/rewards/reward_pickup.gd" id="1_xbiwn"]
+[ext_resource type="Texture2D" uid="uid://bt6dax8yaqcf" path="res://textures/question-mark.png" id="2_kufyv"]
+[ext_resource type="PackedScene" uid="uid://inpjseyhox3m" path="res://prefabs/pickups/orb.tscn" id="3_w0gyt"]
+[ext_resource type="Material" uid="uid://dvaxsa8nej8rd" path="res://materials/pickups/reward_pickup.tres" id="4_smrix"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/drop_power.gd" id="5_pdulk"]
+[ext_resource type="PackedScene" uid="uid://cf66c5gqvvktj" path="res://prefabs/pickups/reward/reward_power_ball.tscn" id="6_ip3wi"]
+
+[node name="RewardPickup" type="Node3D"]
+script = ExtResource("1_xbiwn")
+fallback_texture = ExtResource("2_kufyv")
+
+[node name="Orb" parent="." instance=ExtResource("3_w0gyt")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Mesh" parent="Orb" index="0"]
+transform = Transform3D(1.16735, 0, 0, 0, 0.825439, 0.825439, 0, -0.825439, 0.825439, 0, 1, 0)
+surface_material_override/0 = ExtResource("4_smrix")
+
+[node name="CreateParticles" parent="Orb" index="2"]
+material_override = ExtResource("4_smrix")
+
+[node name="IdleParticles" parent="Orb" index="3"]
+visible = false
+material_override = ExtResource("4_smrix")
+emitting = true
+
+[node name="DeathParticles" parent="Orb" index="4"]
+material_override = ExtResource("4_smrix")
+
+[node name="DropPower" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("5_pdulk")
+power_scene = ExtResource("6_ip3wi")
+power_drop_count = 12
+power_drop_offset = 2.0
+
+[editable path="Orb"]

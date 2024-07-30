@@ -8,6 +8,7 @@ var reward: Reward
 
 @onready var orb: AbsorbOrb = $Orb
 @onready var orb_mesh: MeshInstance3D = $Orb/Mesh
+@onready var drop_power: DropPower = $DropPower
 
 func _ready():
 	set_shader_texture()
@@ -26,6 +27,7 @@ func set_shader_texture():
 
 func _on_orb_absorbed():
 	reward_collected.emit(reward.reward_type)
+	drop_power.drop_all_power()
 
 func _on_orb_destroyed():
 	call_deferred("queue_free")
