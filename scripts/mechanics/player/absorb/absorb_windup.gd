@@ -49,7 +49,7 @@ func _process(delta):
 
 func get_absorb_size() -> float:
     if not should_absorb:
-        return 0.0
+        return 0.01
     if current_windup_time > start_delay + stats.absorb_windup:
         return max_absorb_size
 
