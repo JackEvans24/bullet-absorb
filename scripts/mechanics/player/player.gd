@@ -32,6 +32,7 @@ var current_health:
 func _ready():
 	aim.stats = stats
 	absorb.stats = stats
+	absorb.windup.stats = stats
 
 	died.connect(body._on_player_died)
 
