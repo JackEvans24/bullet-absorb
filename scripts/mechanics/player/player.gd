@@ -57,6 +57,8 @@ func _ready():
 
 	dash.initialise(move_state, body)
 
+	animator.animation_set_next("absorb", "absorb_idle")
+
 func _physics_process(_delta):
 	velocity = move_state.movement
 	body.current_movement = velocity

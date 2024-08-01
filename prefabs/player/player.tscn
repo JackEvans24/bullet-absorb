@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=57 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Script" path="res://scripts/state/move_state_machine.gd" id="2_pauji"]
@@ -418,9 +418,76 @@ tracks/1/keys = {
 "values": [Vector3(1.2, 1.2, 1.2), Vector3(1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_iri7x"]
+resource_name = "absorb_idle"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/PlayerModel/Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.523599, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/PlayerModel/Arm_Left:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.4, 0.5, -0.5), Vector3(-0.45, 0.5, -0.5), Vector3(-0.4, 0.5, -0.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/PlayerModel/Arm_Left:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.309, 0, 0), Vector3(1.309, 0, 0.0872665), Vector3(1.309, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/PlayerModel/Arm_Right:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.4, 0.5, -0.5), Vector3(0.45, 0.5, -0.5), Vector3(0.4, 0.5, -0.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pivot/PlayerModel/Arm_Right:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.309, 0, 0), Vector3(1.309, 0, -0.0872665), Vector3(1.309, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7y837"]
 _data = {
 "absorb": SubResource("Animation_g3g4i"),
+"absorb_idle": SubResource("Animation_iri7x"),
 "hurt": SubResource("Animation_cwn71"),
 "idle": SubResource("Animation_vvrfd"),
 "shoot_left": SubResource("Animation_pdepb"),
@@ -528,8 +595,8 @@ draw_pass_1 = SubResource("SphereMesh_cp26l")
 
 [node name="OutwardParticles" type="GPUParticles3D" parent="Absorb/AbsorbWindup"]
 emitting = false
-amount = 5
-lifetime = 0.4
+amount = 10
+lifetime = 0.5
 interpolate = false
 fract_delta = false
 local_coords = true
