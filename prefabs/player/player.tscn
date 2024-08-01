@@ -1,9 +1,9 @@
-[gd_scene load_steps=46 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=57 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Script" path="res://scripts/state/move_state_machine.gd" id="2_pauji"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/health.gd" id="2_pcwtq"]
-[ext_resource type="Script" path="res://scripts/mechanics/player/absorb.gd" id="2_sawo1"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/absorb/absorb.gd" id="2_sawo1"]
 [ext_resource type="Resource" uid="uid://did1tcy4p0ud2" path="res://data/rewards/player_base_stats.tres" id="2_vy3n2"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/run.gd" id="3_60agh"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/dash.gd" id="4_5ub5d"]
@@ -22,6 +22,8 @@
 [ext_resource type="Script" path="res://scripts/mechanics/player/aim/controller_aim_direction.gd" id="12_j1ytq"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/aim/mouse_aim_direction.gd" id="12_j7rkf"]
 [ext_resource type="Material" uid="uid://bl15jqbmjfvys" path="res://materials/player/player_dash_particle.tres" id="20_n80do"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/absorb/absorb_windup.gd" id="20_rqr6o"]
+[ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/pickups/power.tres" id="21_phfpr"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/reticule.gd" id="21_tbx8f"]
 [ext_resource type="Material" uid="uid://hh5rgca6j4cq" path="res://materials/player/player_body_default.tres" id="21_yrqox"]
 [ext_resource type="PackedScene" uid="uid://bkexk607fieqm" path="res://prefabs/player/player_body.tscn" id="23_m7jo1"]
@@ -30,6 +32,10 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4kfv7"]
 radius = 5.0
+
+[sub_resource type="Curve" id="Curve_c1w54"]
+_data = [Vector2(0, 0), 0.0, 3.20587, 0, 0, Vector2(0.121951, 0.514458), 1.65129, 1.65129, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="SphereMesh" id="SphereMesh_epkrr"]
 material = ExtResource("4_poddg")
@@ -44,8 +50,9 @@ point_count = 3
 curve = SubResource("Curve_syo44")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jewto"]
+emission_shape_scale = Vector3(5, 5, 5)
 emission_shape = 2
-emission_sphere_radius = 5.0
+emission_sphere_radius = 1.0
 radial_velocity_min = -20.0
 radial_velocity_max = -10.0
 gravity = Vector3(0, 0, 0)
@@ -56,6 +63,51 @@ scale_curve = SubResource("CurveTexture_isa1t")
 material = ExtResource("4_ep8r4")
 radius = 0.2
 height = 0.4
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vu306"]
+emission_shape_scale = Vector3(5, 5, 5)
+emission_shape = 2
+emission_sphere_radius = 1.0
+radial_velocity_min = 1.0
+radial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_isa1t")
+
+[sub_resource type="Curve" id="Curve_oo5a8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.67029, 0), -2.77689, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2jx8u"]
+curve = SubResource("Curve_oo5a8")
+
+[sub_resource type="Curve" id="Curve_jenfi"]
+_data = [Vector2(0, 0), 0.0, 22.2844, 0, 0, Vector2(0.0973783, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.85693, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_dceoy"]
+curve = SubResource("Curve_jenfi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v1lvv"]
+particle_flag_align_y = true
+emission_shape_scale = Vector3(5, 5, 5)
+emission_shape = 2
+emission_sphere_radius = 1.0
+spread = 90.0
+flatness = 0.96
+radial_velocity_min = 2.0
+radial_velocity_max = 10.0
+radial_velocity_curve = SubResource("CurveTexture_2jx8u")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.05
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_dceoy")
+
+[sub_resource type="SphereMesh" id="SphereMesh_02wge"]
+material = ExtResource("21_phfpr")
+radius = 0.3
+height = 0.6
 
 [sub_resource type="Curve" id="Curve_d1fyx"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.81353, 0.0, 0, 0]
@@ -366,9 +418,76 @@ tracks/1/keys = {
 "values": [Vector3(1.2, 1.2, 1.2), Vector3(1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_iri7x"]
+resource_name = "absorb_idle"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/PlayerModel/Head:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.523599, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/PlayerModel/Arm_Left:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.4, 0.5, -0.5), Vector3(-0.45, 0.5, -0.5), Vector3(-0.4, 0.5, -0.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/PlayerModel/Arm_Left:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.309, 0, 0), Vector3(1.309, 0, 0.0872665), Vector3(1.309, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/PlayerModel/Arm_Right:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.4, 0.5, -0.5), Vector3(0.45, 0.5, -0.5), Vector3(0.4, 0.5, -0.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pivot/PlayerModel/Arm_Right:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.309, 0, 0), Vector3(1.309, 0, -0.0872665), Vector3(1.309, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7y837"]
 _data = {
 "absorb": SubResource("Animation_g3g4i"),
+"absorb_idle": SubResource("Animation_iri7x"),
 "hurt": SubResource("Animation_cwn71"),
 "idle": SubResource("Animation_vvrfd"),
 "shoot_left": SubResource("Animation_pdepb"),
@@ -454,12 +573,18 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Absorb/DestroyArea"]
 shape = SubResource("SphereShape3D_4kfv7")
 
-[node name="AbsorbMesh" type="MeshInstance3D" parent="Absorb"]
+[node name="AbsorbWindup" type="Node3D" parent="Absorb"]
+script = ExtResource("20_rqr6o")
+interpolation_curve = SubResource("Curve_c1w54")
+max_emission = 5.0
+absorb_material = ExtResource("4_poddg")
+
+[node name="Mesh" type="MeshInstance3D" parent="Absorb/AbsorbWindup"]
 visible = false
 mesh = SubResource("SphereMesh_epkrr")
-skeleton = NodePath("../DestroyArea")
+skeleton = NodePath("../../DestroyArea")
 
-[node name="AbsorbParticles" type="GPUParticles3D" parent="Absorb"]
+[node name="InwardParticles" type="GPUParticles3D" parent="Absorb/AbsorbWindup"]
 emitting = false
 amount = 20
 interpolate = false
@@ -467,6 +592,26 @@ fract_delta = false
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_jewto")
 draw_pass_1 = SubResource("SphereMesh_cp26l")
+
+[node name="OutwardParticles" type="GPUParticles3D" parent="Absorb/AbsorbWindup"]
+emitting = false
+amount = 10
+lifetime = 0.5
+interpolate = false
+fract_delta = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_vu306")
+draw_pass_1 = SubResource("SphereMesh_cp26l")
+
+[node name="AbsorbParticles" type="GPUParticles3D" parent="Absorb"]
+cast_shadow = 0
+emitting = false
+amount = 20
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_v1lvv")
+draw_pass_1 = SubResource("SphereMesh_02wge")
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(0.999999, 0.00120908, 0.00080387, -0.00120983, 0.999999, 0.000936247, -0.000802739, -0.000937216, 0.999999, 0, 1, 0)

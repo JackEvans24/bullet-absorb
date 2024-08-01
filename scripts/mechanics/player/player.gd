@@ -32,6 +32,7 @@ var current_health:
 func _ready():
 	aim.stats = stats
 	absorb.stats = stats
+	absorb.windup.stats = stats
 
 	died.connect(body._on_player_died)
 
@@ -55,6 +56,8 @@ func _ready():
 	power_handler.power_connected.connect(_on_power_connected)
 
 	dash.initialise(move_state, body)
+
+	animator.animation_set_next("absorb", "absorb_idle")
 
 func _physics_process(_delta):
 	velocity = move_state.movement

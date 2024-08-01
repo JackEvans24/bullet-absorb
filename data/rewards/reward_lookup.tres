@@ -41,7 +41,7 @@ reward_type = 3
 
 [sub_resource type="Resource" id="Resource_opvhj"]
 script = ExtResource("3_l05ov")
-power_increase = 3.0
+power_increase = 5.0
 reward_type = 2
 
 [resource]

@@ -8,3 +8,5 @@ class_name ScreenShakeProfile extends Resource
 
 @export var impulse_max = Vector3(2.5, 2.0, 0)
 @export var roll_max = 0.1
+
+@export var max_intensity := 1000.0
