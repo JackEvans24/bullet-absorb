@@ -2,8 +2,11 @@ class_name AbsorbWindup
 extends Node3D
 
 @export var start_delay := 0.5
-@export var max_absorb_size := 1.0
 @export var interpolation_curve: Curve
+
+@export_group("Emission")
+@export var max_emission := 3.0
+@export var absorb_material: BaseMaterial3D
 
 @onready var mesh: MeshInstance3D = $Mesh
 @onready var particles: GPUParticles3D = $Particles
@@ -45,14 +48,21 @@ func _process(delta):
         return
 
     mesh.scale = Vector3.ONE * get_absorb_size()
+    absorb_material.emission_energy_multiplier = max_emission * get_t()
     mesh.visible = true
 
 func get_absorb_size() -> float:
     if not should_absorb:
         return 0.01
     if current_windup_time > start_delay + stats.absorb_windup:
-        return max_absorb_size
+        return stats.absorb_area_scale
 
-    var t = (current_windup_time - start_delay) / stats.absorb_windup
-    var projected_t = interpolation_curve.sample(t)
+    var projected_t = get_lerp_value()
     return lerp(0.0, stats.absorb_area_scale, projected_t)
+
+func get_t() -> float:
+    return (current_windup_time - start_delay) / stats.absorb_windup
+
+func get_lerp_value() -> float:
+    var t = get_t()
+    return interpolation_curve.sample(t)
