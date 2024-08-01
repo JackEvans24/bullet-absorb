@@ -6,6 +6,7 @@ extends Node3D
 @export var interpolation_curve: Curve
 
 @onready var mesh: MeshInstance3D = $Mesh
+@onready var particles: GPUParticles3D = $Particles
 
 var stats: PlayerStats
 
@@ -20,11 +21,17 @@ var absorb_scale: float:
 func start_windup():
     current_windup_time = 0.0
     is_windup_active = true
+    enable_particles(true)
 
 func end_windup():
     is_windup_active = false
     current_windup_time = 0.0
     mesh.visible = false
+    enable_particles(false)
+
+func enable_particles(enabled: bool):
+    particles.emitting = enabled
+    particles.visible = enabled
 
 func _process(delta):
     if not is_windup_active:

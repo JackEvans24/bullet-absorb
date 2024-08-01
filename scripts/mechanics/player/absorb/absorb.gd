@@ -10,7 +10,6 @@ signal absorb_triggered
 
 @onready var windup: AbsorbWindup = $AbsorbWindup
 @onready var destoy_area: Area3D = $DestroyArea
-@onready var particles: GPUParticles3D = $AbsorbParticles
 
 var stats: PlayerStats
 
@@ -29,7 +28,6 @@ func process_absorb_start():
 
 	slowdown_started.emit()
 	windup.start_windup()
-	enable_particles(true)
 
 func process_absorb_state(_delta):
 	if is_absorbing or not can_absorb:
@@ -63,11 +61,6 @@ func end_absorb():
 
 func end_windup():
 	windup.end_windup()
-	enable_particles(false)
-
-func enable_particles(enabled: bool):
-	particles.emitting = enabled
-	particles.visible = enabled
 
 func absorb_entity(area: Area3D):
 	var absorb_handler = area.find_child("AbsorbHandler")

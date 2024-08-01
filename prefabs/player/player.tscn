@@ -32,6 +32,15 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_4kfv7"]
 radius = 5.0
 
+[sub_resource type="Curve" id="Curve_c1w54"]
+_data = [Vector2(0, 0), 0.0, 3.20587, 0, 0, Vector2(0.509146, 0.859036), 0.749196, 0.749196, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="SphereMesh" id="SphereMesh_epkrr"]
+material = ExtResource("4_poddg")
+radius = 5.0
+height = 10.0
+
 [sub_resource type="Curve" id="Curve_syo44"]
 _data = [Vector2(0, 0), -2.37274, -2.37274, 0, 0, Vector2(0.104623, 1), -1.13942e-06, -1.13942e-06, 0, 0, Vector2(1, 0), -0.0990366, 0.0, 0, 0]
 point_count = 3
@@ -52,15 +61,6 @@ scale_curve = SubResource("CurveTexture_isa1t")
 material = ExtResource("4_ep8r4")
 radius = 0.2
 height = 0.4
-
-[sub_resource type="Curve" id="Curve_c1w54"]
-_data = [Vector2(0, 0), 0.0, 3.20587, 0, 0, Vector2(0.509146, 0.859036), 0.749196, 0.749196, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="SphereMesh" id="SphereMesh_epkrr"]
-material = ExtResource("4_poddg")
-radius = 5.0
-height = 10.0
 
 [sub_resource type="Curve" id="Curve_d1fyx"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.81353, 0.0, 0, 0]
@@ -459,15 +459,6 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Absorb/DestroyArea"]
 shape = SubResource("SphereShape3D_4kfv7")
 
-[node name="AbsorbParticles" type="GPUParticles3D" parent="Absorb"]
-emitting = false
-amount = 20
-interpolate = false
-fract_delta = false
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_jewto")
-draw_pass_1 = SubResource("SphereMesh_cp26l")
-
 [node name="AbsorbWindup" type="Node3D" parent="Absorb"]
 script = ExtResource("20_rqr6o")
 interpolation_curve = SubResource("Curve_c1w54")
@@ -476,6 +467,15 @@ interpolation_curve = SubResource("Curve_c1w54")
 visible = false
 mesh = SubResource("SphereMesh_epkrr")
 skeleton = NodePath("../../DestroyArea")
+
+[node name="Particles" type="GPUParticles3D" parent="Absorb/AbsorbWindup"]
+emitting = false
+amount = 20
+interpolate = false
+fract_delta = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_jewto")
+draw_pass_1 = SubResource("SphereMesh_cp26l")
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(0.999999, 0.00120908, 0.00080387, -0.00120983, 0.999999, 0.000936247, -0.000802739, -0.000937216, 0.999999, 0, 1, 0)
