@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=48 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Script" path="res://scripts/state/move_state_machine.gd" id="2_pauji"]
@@ -52,6 +52,10 @@ scale_curve = SubResource("CurveTexture_isa1t")
 material = ExtResource("4_ep8r4")
 radius = 0.2
 height = 0.4
+
+[sub_resource type="Curve" id="Curve_c1w54"]
+_data = [Vector2(0, 0), 0.0, 3.20587, 0, 0, Vector2(0.509146, 0.859036), 0.749196, 0.749196, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="SphereMesh" id="SphereMesh_epkrr"]
 material = ExtResource("4_poddg")
@@ -466,8 +470,10 @@ draw_pass_1 = SubResource("SphereMesh_cp26l")
 
 [node name="AbsorbWindup" type="Node3D" parent="Absorb"]
 script = ExtResource("20_rqr6o")
+interpolation_curve = SubResource("Curve_c1w54")
 
 [node name="Mesh" type="MeshInstance3D" parent="Absorb/AbsorbWindup"]
+visible = false
 mesh = SubResource("SphereMesh_epkrr")
 skeleton = NodePath("../../DestroyArea")
 

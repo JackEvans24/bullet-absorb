@@ -3,6 +3,7 @@ extends Node3D
 
 @export var start_delay := 0.5
 @export var max_absorb_size := 1.0
+@export var interpolation_curve: Curve
 
 @onready var mesh: MeshInstance3D = $Mesh
 
@@ -44,4 +45,7 @@ func get_absorb_size() -> float:
         return 0.0
     if current_windup_time > start_delay + stats.absorb_windup:
         return max_absorb_size
-    return lerp(0.0, stats.absorb_area_scale, (current_windup_time - start_delay) / stats.absorb_windup)
+
+    var t = (current_windup_time - start_delay) / stats.absorb_windup
+    var projected_t = interpolation_curve.sample(t)
+    return lerp(0.0, stats.absorb_area_scale, projected_t)
