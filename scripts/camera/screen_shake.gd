@@ -51,7 +51,7 @@ func cancel_impulse(id: ScreenShakeMapping.ScreenShakeId):
 func _process(delta):
 	if impulse <= 0.0:
 		return
-	impulse = max(impulse - profile.decay * delta, 0)
+	impulse = clampf(impulse - profile.decay * delta, 0, profile.max_intensity)
 	shake()
 
 func shake():
