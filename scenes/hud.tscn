@@ -26,6 +26,7 @@ offset_bottom = -20.0
 grow_horizontal = 1
 grow_vertical = 0
 pivot_offset = Vector2(20, 200)
+bar_speed = 100.0
 background_grow = 1.2
 background_decay = 3.0
 
@@ -41,7 +42,7 @@ offset_bottom = -20.0
 grow_horizontal = 1
 grow_vertical = 0
 pivot_offset = Vector2(20, 200)
-bar_speed = 2.0
+bar_speed = 100.0
 bar_colour = Color(0.37, 0.958, 1, 1)
 color_decay = 2.0
 background_decay = 5.0
