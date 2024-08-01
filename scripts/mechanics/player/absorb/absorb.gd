@@ -35,6 +35,7 @@ func process_absorb_state(_delta):
 	if is_absorbing or not can_absorb:
 		return
 
+	destoy_area.scale = Vector3.ONE * windup.absorb_scale
 	if not Input.is_action_pressed("absorb"):
 		trigger_absorb()
 
@@ -45,14 +46,11 @@ func trigger_absorb():
 
 	is_absorbing = true
 
-	destoy_area.scale = Vector3.ONE * windup.absorb_scale
-
-	absorb_triggered.emit()
-
 	var overlapping_areas: Array[Area3D] = destoy_area.get_overlapping_areas()
 	for overlapping_area in overlapping_areas:
 		absorb_entity(overlapping_area)
 
+	absorb_triggered.emit()
 	end_absorb()
 
 	await handle_cooldown()
