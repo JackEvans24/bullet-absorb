@@ -9,7 +9,8 @@ extends Node3D
 @export var absorb_material: BaseMaterial3D
 
 @onready var mesh: MeshInstance3D = $Mesh
-@onready var particles: GPUParticles3D = $Particles
+@onready var in_particles: GPUParticles3D = $InwardParticles
+@onready var out_particles: GPUParticles3D = $OutwardParticles
 
 var stats: PlayerStats
 
@@ -24,17 +25,22 @@ var absorb_scale: float:
 func start_windup():
     current_windup_time = 0.0
     is_windup_active = true
-    enable_particles(true)
+    enable_in_particles(true)
 
 func end_windup():
     is_windup_active = false
     current_windup_time = 0.0
     mesh.visible = false
-    enable_particles(false)
+    enable_in_particles(false)
+    enable_out_particles(false)
 
-func enable_particles(enabled: bool):
-    particles.emitting = enabled
-    particles.visible = enabled
+func enable_in_particles(enabled: bool):
+    in_particles.emitting = enabled
+    in_particles.visible = enabled
+
+func enable_out_particles(enabled: bool):
+    out_particles.emitting = enabled
+    out_particles.process_material.emission_sphere_radius = 0.01
 
 func _process(delta):
     if not is_windup_active:
@@ -47,9 +53,14 @@ func _process(delta):
     if current_windup_time > start_delay + stats.absorb_windup:
         return
 
-    mesh.scale = Vector3.ONE * get_absorb_size()
+    var absorb_size = get_absorb_size()
+    mesh.scale = Vector3.ONE * absorb_size
+    out_particles.process_material.emission_sphere_radius = absorb_size
     absorb_material.emission_energy_multiplier = max_emission * get_t()
-    mesh.visible = true
+
+    if not mesh.visible:
+        mesh.visible = true
+        enable_out_particles(true)
 
 func get_absorb_size() -> float:
     if not should_absorb:

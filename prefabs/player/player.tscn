@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=56 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Script" path="res://scripts/state/move_state_machine.gd" id="2_pauji"]
@@ -50,8 +50,9 @@ point_count = 3
 curve = SubResource("Curve_syo44")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jewto"]
+emission_shape_scale = Vector3(5, 5, 5)
 emission_shape = 2
-emission_sphere_radius = 5.0
+emission_sphere_radius = 1.0
 radial_velocity_min = -20.0
 radial_velocity_max = -10.0
 gravity = Vector3(0, 0, 0)
@@ -62,6 +63,17 @@ scale_curve = SubResource("CurveTexture_isa1t")
 material = ExtResource("4_ep8r4")
 radius = 0.2
 height = 0.4
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vu306"]
+emission_shape_scale = Vector3(5, 5, 5)
+emission_shape = 2
+emission_sphere_radius = 1.0
+radial_velocity_min = 1.0
+radial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_isa1t")
 
 [sub_resource type="Curve" id="Curve_oo5a8"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.67029, 0), -2.77689, 0.0, 0, 0]
@@ -505,13 +517,23 @@ visible = false
 mesh = SubResource("SphereMesh_epkrr")
 skeleton = NodePath("../../DestroyArea")
 
-[node name="Particles" type="GPUParticles3D" parent="Absorb/AbsorbWindup"]
+[node name="InwardParticles" type="GPUParticles3D" parent="Absorb/AbsorbWindup"]
 emitting = false
 amount = 20
 interpolate = false
 fract_delta = false
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_jewto")
+draw_pass_1 = SubResource("SphereMesh_cp26l")
+
+[node name="OutwardParticles" type="GPUParticles3D" parent="Absorb/AbsorbWindup"]
+emitting = false
+amount = 5
+lifetime = 0.4
+interpolate = false
+fract_delta = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_vu306")
 draw_pass_1 = SubResource("SphereMesh_cp26l")
 
 [node name="AbsorbParticles" type="GPUParticles3D" parent="Absorb"]
