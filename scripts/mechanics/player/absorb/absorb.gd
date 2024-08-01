@@ -10,6 +10,7 @@ signal absorb_triggered
 
 @onready var windup: AbsorbWindup = $AbsorbWindup
 @onready var destoy_area: Area3D = $DestroyArea
+@onready var particles: GPUParticles3D = $AbsorbParticles
 
 var stats: PlayerStats
 
@@ -34,6 +35,8 @@ func process_absorb_state(_delta):
 		return
 
 	destoy_area.scale = Vector3.ONE * windup.absorb_scale
+	particles.process_material.emission_sphere_radius = windup.absorb_scale
+
 	if not Input.is_action_pressed("absorb"):
 		trigger_absorb()
 
@@ -49,6 +52,7 @@ func trigger_absorb():
 		absorb_entity(overlapping_area)
 
 	absorb_triggered.emit()
+	particles.emitting = true
 	end_absorb()
 
 	await handle_cooldown()
