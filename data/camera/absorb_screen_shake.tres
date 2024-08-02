@@ -6,7 +6,8 @@
 script = ExtResource("1_6xe5b")
 priority = 2
 punch = 1.0
-tremolo = 2
-decay = 5.0
+tremolo = 10
+decay = 4.0
 impulse_max = Vector3(1.4, 1, 0)
 roll_max = 0.02
+max_intensity = 1000.0
