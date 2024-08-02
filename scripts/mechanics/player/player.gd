@@ -10,6 +10,7 @@ signal died
 
 enum AbsorbState {Started, Cancelled, Complete}
 
+@export var camera_follow_ref: NodePath
 @export var stats: PlayerStats
 
 @onready var move_state: MoveStateMachine = $MoveState
@@ -18,7 +19,7 @@ enum AbsorbState {Started, Cancelled, Complete}
 @onready var dash: Dash = $Dash
 @onready var absorb: Absorb = $Absorb
 @onready var body: PlayerBody = $Pivot
-@onready var camera_follow_point: Node3D = $Pivot/CameraFollowPoint
+@onready var camera_follow_point: Node3D = get_node(camera_follow_ref)
 @onready var collider: CollisionShape3D = $Collider
 @onready var bullet_handler: BulletHitHandler = $BulletHitHandler
 @onready var power_handler: PowerHitHandler = $PowerHitHandler

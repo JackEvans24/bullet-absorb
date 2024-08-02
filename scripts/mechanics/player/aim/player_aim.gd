@@ -10,6 +10,7 @@ const SHOOT_RIGHT = "shoot_right"
 @export var pivot_ref: NodePath
 @export var arm_cannon_refs: Array[NodePath]
 @export var aim_point_ref: NodePath
+@export var reticule_ref: NodePath
 @export var animator_ref: NodePath
 @export var cooldown = 0.4
 @export var bullet_scene: PackedScene
@@ -19,6 +20,7 @@ const SHOOT_RIGHT = "shoot_right"
 @onready var mouse_aim: MouseAimDirection = $MouseAim
 @onready var pivot: Node3D = get_node(pivot_ref)
 @onready var aim_point: Node3D = get_node(aim_point_ref)
+@onready var reticule: Reticule = get_node(reticule_ref)
 @onready var animator: AnimationPlayer = get_node(animator_ref)
 
 var stats: PlayerStats
@@ -37,6 +39,7 @@ var has_ammo = false
 func _ready():
 	aim_service = mouse_aim
 	mouse_aim.player = pivot
+	controller_aim.max_aim_distance = reticule.max_reticule_distance
 
 	for arm_cannon_ref in arm_cannon_refs:
 		arm_cannons.push_back(get_node(arm_cannon_ref))
@@ -51,6 +54,7 @@ func _process(_delta: float):
 	var direction = aim_service.get_aim_direction()
 	if direction:
 		aim_direction = direction
+		reticule.aim_distance = aim_direction.length()
 
 func _input(event: InputEvent):
 	check_input_method(event)
