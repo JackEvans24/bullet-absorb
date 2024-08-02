@@ -27,5 +27,5 @@ func _physics_process(_delta):
     set_mesh_positions(reticule_distance, look_at_distance)
 
 func set_mesh_positions(reticule_distance: float, look_at_distance: float):
-    reticule_mesh.position.z = reticule_distance
-    look_at_node.position.z = look_at_distance
+    reticule_mesh.position.z = -reticule_distance
+    look_at_node.position.z = -look_at_distance
