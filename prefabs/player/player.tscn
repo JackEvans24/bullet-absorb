@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=57 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Script" path="res://scripts/state/move_state_machine.gd" id="2_pauji"]
@@ -142,19 +142,6 @@ disable_receive_shadows = true
 
 [sub_resource type="TextMesh" id="TextMesh_6c04p"]
 material = SubResource("StandardMaterial3D_ujjva")
-text = "X"
-font_size = 64
-uppercase = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m4eoe"]
-render_priority = 22
-no_depth_test = true
-shading_mode = 0
-albedo_color = Color(0.64, 1, 0.7, 1)
-disable_receive_shadows = true
-
-[sub_resource type="TextMesh" id="TextMesh_2hdgb"]
-material = SubResource("StandardMaterial3D_m4eoe")
 text = "X"
 font_size = 64
 uppercase = true
@@ -561,6 +548,7 @@ script = ExtResource("10_gaav5")
 pivot_ref = NodePath("../Pivot")
 arm_cannon_refs = Array[NodePath]([NodePath("../Pivot/PlayerModel/Arm_Left"), NodePath("../Pivot/PlayerModel/Arm_Right")])
 aim_point_ref = NodePath("../Pivot/Reticule/Mesh")
+reticule_ref = NodePath("../Pivot/Reticule")
 animator_ref = NodePath("../Animator")
 bullet_scene = ExtResource("5_twt6l")
 fire_fail_particles_scene = ExtResource("12_d68f3")
@@ -683,14 +671,10 @@ cast_shadow = 0
 mesh = SubResource("TextMesh_6c04p")
 skeleton = NodePath("../..")
 
-[node name="LookAt" type="MeshInstance3D" parent="Pivot/Reticule"]
+[node name="LookAt" type="Node3D" parent="Pivot/Reticule"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, -5)
-cast_shadow = 0
-mesh = SubResource("TextMesh_2hdgb")
-skeleton = NodePath("../..")
 
 [node name="DistanceCheck" type="RayCast3D" parent="Pivot/Reticule"]
-collision_mask = 33
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
