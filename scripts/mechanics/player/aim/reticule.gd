@@ -18,6 +18,9 @@ var aim_distance := 1.0
 func _ready():
     distance_check.target_position = Vector3.FORWARD * max_reticule_distance
 
+func enable_reticule(enable: bool):
+    reticule_mesh.visible = enable
+
 func _physics_process(_delta):
     var target_distance = aim_distance
     if distance_check.is_colliding():

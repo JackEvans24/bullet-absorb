@@ -24,7 +24,7 @@
 [ext_resource type="Material" uid="uid://bl15jqbmjfvys" path="res://materials/player/player_dash_particle.tres" id="20_n80do"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/absorb/absorb_windup.gd" id="20_rqr6o"]
 [ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/pickups/power.tres" id="21_phfpr"]
-[ext_resource type="Script" path="res://scripts/mechanics/player/reticule.gd" id="21_tbx8f"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/aim/reticule.gd" id="21_tbx8f"]
 [ext_resource type="Material" uid="uid://hh5rgca6j4cq" path="res://materials/player/player_body_default.tres" id="21_yrqox"]
 [ext_resource type="PackedScene" uid="uid://bkexk607fieqm" path="res://prefabs/player/player_body.tscn" id="23_m7jo1"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/bullet_hit_handler.gd" id="27_ldo1c"]
@@ -633,12 +633,6 @@ transform = Transform3D(1, 0, 0, 0, 0.999906, -0.0137353, 0, 0.0137353, 0.999906
 [node name="Head" parent="Pivot/PlayerModel" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3)
 
-[node name="Arm_Left" parent="Pivot/PlayerModel" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="Arm_Right" parent="Pivot/PlayerModel" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
 [node name="HurtParticles" type="GPUParticles3D" parent="Pivot"]
 cast_shadow = 0
 emitting = false
@@ -662,11 +656,11 @@ draw_pass_1 = SubResource("SphereMesh_3tq4p")
 [node name="Reticule" type="Node3D" parent="Pivot"]
 script = ExtResource("21_tbx8f")
 min_reticule_distance = 1.5
-min_look_at_distance = 4.0
-max_look_at_distance = 8.0
+max_reticule_distance = 100.0
+min_look_at_distance = 6.0
 
 [node name="Mesh" type="MeshInstance3D" parent="Pivot/Reticule"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, -5)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -5)
 cast_shadow = 0
 mesh = SubResource("TextMesh_6c04p")
 skeleton = NodePath("../..")
