@@ -39,7 +39,6 @@ var has_ammo = false
 func _ready():
 	aim_service = mouse_aim
 	mouse_aim.player = pivot
-	controller_aim.max_aim_distance = reticule.max_reticule_distance
 
 	for arm_cannon_ref in arm_cannon_refs:
 		arm_cannons.push_back(get_node(arm_cannon_ref))
@@ -64,11 +63,16 @@ func _input(event: InputEvent):
 
 func check_input_method(event: InputEvent):
 	if event is InputEventMouseMotion:
-		aim_service = mouse_aim
-	elif aim_service == controller_aim:
+		if aim_service != mouse_aim:
+			aim_service = mouse_aim
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		return
-	elif controller_aim.get_aim_direction().length() > 0.1:
-		aim_service = controller_aim
+
+	if aim_service == controller_aim or controller_aim.get_aim_direction().length() <= 0.1:
+		return
+
+	aim_service = controller_aim
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func fire():
 	if is_firing:
