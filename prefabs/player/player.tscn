@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://c3tj0pdcum4wd"]
+[gd_scene load_steps=55 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
 [ext_resource type="Script" path="res://scripts/state/move_state_machine.gd" id="2_pauji"]
@@ -24,7 +24,7 @@
 [ext_resource type="Material" uid="uid://bl15jqbmjfvys" path="res://materials/player/player_dash_particle.tres" id="20_n80do"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/absorb/absorb_windup.gd" id="20_rqr6o"]
 [ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/pickups/power.tres" id="21_phfpr"]
-[ext_resource type="Script" path="res://scripts/mechanics/player/aim/reticule.gd" id="21_tbx8f"]
+[ext_resource type="Script" path="res://scripts/mechanics/player/aim/aim_points.gd" id="21_tbx8f"]
 [ext_resource type="Material" uid="uid://hh5rgca6j4cq" path="res://materials/player/player_body_default.tres" id="21_yrqox"]
 [ext_resource type="PackedScene" uid="uid://bkexk607fieqm" path="res://prefabs/player/player_body.tscn" id="23_m7jo1"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/bullet_hit_handler.gd" id="27_ldo1c"]
@@ -132,19 +132,6 @@ turbulence_noise_speed_random = 0.27
 material = ExtResource("20_n80do")
 radius = 0.1
 height = 0.2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ujjva"]
-render_priority = 22
-no_depth_test = true
-shading_mode = 0
-albedo_color = Color(1, 0.964, 0.64, 1)
-disable_receive_shadows = true
-
-[sub_resource type="TextMesh" id="TextMesh_6c04p"]
-material = SubResource("StandardMaterial3D_ujjva")
-text = "X"
-font_size = 64
-uppercase = true
 
 [sub_resource type="Animation" id="Animation_g3g4i"]
 resource_name = "absorb"
@@ -498,7 +485,7 @@ _data = {
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_u023k")
-camera_follow_ref = NodePath("Pivot/Reticule/LookAt")
+camera_follow_ref = NodePath("Pivot/AimPoints/CameraFollow")
 stats = ExtResource("2_vy3n2")
 
 [node name="MoveState" type="Node" parent="."]
@@ -547,8 +534,8 @@ recovery_time = 1.6
 script = ExtResource("10_gaav5")
 pivot_ref = NodePath("../Pivot")
 arm_cannon_refs = Array[NodePath]([NodePath("../Pivot/PlayerModel/Arm_Left"), NodePath("../Pivot/PlayerModel/Arm_Right")])
-aim_point_ref = NodePath("../Pivot/Reticule/Mesh")
-reticule_ref = NodePath("../Pivot/Reticule")
+aim_point_ref = NodePath("../Pivot/AimPoints/AimAt")
+reticule_ref = NodePath("../Pivot/AimPoints")
 animator_ref = NodePath("../Animator")
 bullet_scene = ExtResource("5_twt6l")
 fire_fail_particles_scene = ExtResource("12_d68f3")
@@ -633,6 +620,19 @@ transform = Transform3D(1, 0, 0, 0, 0.999906, -0.0137353, 0, 0.0137353, 0.999906
 [node name="Head" parent="Pivot/PlayerModel" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3)
 
+[node name="AimPoints" type="Node3D" parent="Pivot"]
+transform = Transform3D(1, 1.78659e-10, 0, -2.8308e-10, 1, 0, -1.16415e-10, 1.16415e-10, 1, 0, 0, 0)
+script = ExtResource("21_tbx8f")
+min_reticule_distance = 1.5
+max_reticule_distance = 100.0
+min_look_at_distance = 6.0
+
+[node name="AimAt" type="Node3D" parent="Pivot/AimPoints"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -5)
+
+[node name="CameraFollow" type="Node3D" parent="Pivot/AimPoints"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, -5)
+
 [node name="HurtParticles" type="GPUParticles3D" parent="Pivot"]
 cast_shadow = 0
 emitting = false
@@ -652,23 +652,6 @@ lifetime = 0.2
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_wwwn5")
 draw_pass_1 = SubResource("SphereMesh_3tq4p")
-
-[node name="Reticule" type="Node3D" parent="Pivot"]
-script = ExtResource("21_tbx8f")
-min_reticule_distance = 1.5
-max_reticule_distance = 100.0
-min_look_at_distance = 6.0
-
-[node name="Mesh" type="MeshInstance3D" parent="Pivot/Reticule"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -5)
-cast_shadow = 0
-mesh = SubResource("TextMesh_6c04p")
-skeleton = NodePath("../..")
-
-[node name="LookAt" type="Node3D" parent="Pivot/Reticule"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, -5)
-
-[node name="DistanceCheck" type="RayCast3D" parent="Pivot/Reticule"]
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
