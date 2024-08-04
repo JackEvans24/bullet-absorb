@@ -14,9 +14,6 @@ extends Node3D
 
 var aim_distance := 1.0
 
-func enable_reticule(enable: bool):
-    aim_at_node.visible = enable
-
 func _physics_process(_delta):
     var reticule_distance = clampf(aim_distance, min_reticule_distance, max_reticule_distance)
     var look_at_distance = clampf(aim_distance, min_look_at_distance, max_look_at_distance)
