@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://w7ih3hp27xm1"]
+
+[ext_resource type="Script" path="res://scripts/mechanics/rooms/destructible_wall.gd" id="1_ec28j"]
+[ext_resource type="ArrayMesh" uid="uid://bjihkpofvtk1o" path="res://models/environment/wall.res" id="1_ul0l3"]
+[ext_resource type="Script" path="res://scripts/mechanics/shared/bullet_hit_handler.gd" id="2_ck6lx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwv07"]
+albedo_color = Color(0.278431, 0.388235, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8n6ef"]
+size = Vector3(4, 2, 1)
+
+[node name="DestructibleWall" type="Node3D"]
+script = ExtResource("1_ec28j")
+bullet_hit_handler_ref = NodePath("Pivot/StaticBody3D/BulletHitHandler")
+mesh_container_ref = NodePath("Pivot/Meshes")
+collision_shape_ref = NodePath("Pivot/StaticBody3D/CollisionShape3D")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Meshes" type="Node3D" parent="Pivot"]
+
+[node name="MeshInstance3DL" type="MeshInstance3D" parent="Pivot/Meshes"]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0.5, 0, 0)
+mesh = ExtResource("1_ul0l3")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_dwv07")
+
+[node name="MeshInstance3DL2" type="MeshInstance3D" parent="Pivot/Meshes"]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 1.5, 0, 0)
+mesh = ExtResource("1_ul0l3")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_dwv07")
+
+[node name="MeshInstance3DR" type="MeshInstance3D" parent="Pivot/Meshes"]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, -0.5, 0, 0)
+mesh = ExtResource("1_ul0l3")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_dwv07")
+
+[node name="MeshInstance3DR2" type="MeshInstance3D" parent="Pivot/Meshes"]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, -1.5, 0, 0)
+mesh = ExtResource("1_ul0l3")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_dwv07")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Pivot"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pivot/StaticBody3D"]
+shape = SubResource("BoxShape3D_8n6ef")
+
+[node name="BulletHitHandler" type="Node" parent="Pivot/StaticBody3D"]
+script = ExtResource("2_ck6lx")
