@@ -27,7 +27,7 @@ is_hidden_room = false
 untouched_doors = 2
 completed_doors = 14
 waves = Array[ExtResource("4_rpk1a")]([SubResource("Resource_2pyg8")])
-reward = 2
+reward = 0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xq1m6"]
 
@@ -38,6 +38,7 @@ size = Vector3(16, 2, 16)
 script = ExtResource("1_fhmn2")
 data = SubResource("Resource_5aw1g")
 destructible_wall = NodePath("Grid/DestructibleWall")
+linked_room_name = "HiddenBursterRoom01"
 
 [node name="Grid" type="GridMap" parent="."]
 mesh_library = ExtResource("5_cg01b")
