@@ -10,6 +10,7 @@ signal wall_destroyed
 @onready var bullet_handler: BulletHitHandler = get_node(bullet_hit_handler_ref)
 @onready var mesh_container: Node3D = get_node(mesh_container_ref)
 @onready var collider: CollisionShape3D = get_node(collision_shape_ref)
+@onready var particles: GPUParticles3D = $Pivot/SmokeBurst
 
 var can_destroy := false
 var is_hit := false
@@ -30,6 +31,7 @@ func _on_bullet_connected(_bullet: Node3D):
 
 func destroy_wall():
 	mesh_container.visible = false
+	particles.emitting = true
 	collider.queue_free()
 
 	wall_destroyed.emit()
