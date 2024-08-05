@@ -23,6 +23,9 @@ func initialise(data: SaveGameData):
 		room.room_item_lookup = room_item_lookup
 		room.reward_lookup = reward_lookup
 
+		if room.data.is_hidden_room:
+			room.visible = false
+
 		room.doors_changed.connect(_on_room_doors_changed)
 		room.boss_entered.connect(_on_boss_entered)
 		room.reward_collected.connect(_on_reward_collected)
