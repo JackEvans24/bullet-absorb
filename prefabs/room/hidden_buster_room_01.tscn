@@ -1,0 +1,68 @@
+[gd_scene load_steps=14 format=3 uid="uid://bftjjya0ttahf"]
+
+[ext_resource type="Script" path="res://scripts/mechanics/rooms/room.gd" id="1_30clh"]
+[ext_resource type="Script" path="res://scripts/data/rooms/room_data.gd" id="2_82p6x"]
+[ext_resource type="Script" path="res://scripts/data/rooms/room_item.gd" id="3_ppwi7"]
+[ext_resource type="Script" path="res://scripts/data/rooms/room_configuration.gd" id="4_83ehw"]
+[ext_resource type="MeshLibrary" uid="uid://bydmgvg8cpigh" path="res://models/rooms/room_mesh_library.tres" id="5_olssf"]
+[ext_resource type="Script" path="res://scripts/mechanics/rooms/room_doors.gd" id="6_lxn6u"]
+[ext_resource type="PackedScene" uid="uid://ok4gfjcs3kol" path="res://prefabs/room_items/door.tscn" id="7_1favx"]
+
+[sub_resource type="Resource" id="Resource_3w8k0"]
+script = ExtResource("3_ppwi7")
+item_type = 2
+position = Vector3(-2, 0, -4)
+delay = 4.0
+
+[sub_resource type="Resource" id="Resource_4y4g8"]
+script = ExtResource("3_ppwi7")
+item_type = 0
+position = Vector3(2, 0, -4)
+delay = 2.0
+
+[sub_resource type="Resource" id="Resource_5kvmy"]
+script = ExtResource("4_83ehw")
+enemies = Array[ExtResource("3_ppwi7")]([SubResource("Resource_3w8k0"), SubResource("Resource_4y4g8")])
+items = Array[ExtResource("3_ppwi7")]([])
+
+[sub_resource type="Resource" id="Resource_tjhjp"]
+script = ExtResource("2_82p6x")
+room_name = "HiddenBursterRoom01"
+is_hidden_room = true
+untouched_doors = 2
+completed_doors = 2
+waves = Array[ExtResource("4_83ehw")]([SubResource("Resource_5kvmy")])
+reward = 5
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xq1m6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x6347"]
+size = Vector3(8, 2, 12)
+
+[node name="HiddenBursterRoom01" type="Node3D"]
+script = ExtResource("1_30clh")
+data = SubResource("Resource_tjhjp")
+
+[node name="Grid" type="GridMap" parent="."]
+mesh_library = ExtResource("5_olssf")
+physics_material = SubResource("PhysicsMaterial_xq1m6")
+cell_size = Vector3(1, 2, 1)
+data = {
+"cells": PackedInt32Array(65530, 65528, 1441795, 65531, 65528, 655360, 65532, 65528, 655360, 65533, 65528, 655360, 65534, 65528, 655360, 65535, 65528, 655360, 0, 65528, 655360, 1, 65528, 655360, 2, 65528, 655360, 3, 65528, 655360, 4, 65528, 655360, 5, 65528, 1048579, 65530, 65529, 1441795, 65531, 65529, 1, 65532, 65529, 1, 65533, 65529, 1, 65534, 65529, 1, 65535, 65529, 1, 0, 65529, 1, 1, 65529, 1, 2, 65529, 1, 3, 65529, 1, 4, 65529, 1, 5, 65529, 1048579, 65530, 65530, 1441795, 65531, 65530, 1, 65532, 65530, 1, 65533, 65530, 1, 65534, 65530, 1, 65535, 65530, 1, 0, 65530, 1, 1, 65530, 1, 2, 65530, 1, 3, 65530, 1, 4, 65530, 1, 5, 65530, 1048579, 65530, 65531, 1441795, 65531, 65531, 1, 65532, 65531, 1, 65533, 65531, 1, 65534, 65531, 1, 65535, 65531, 1, 0, 65531, 1, 1, 65531, 1, 2, 65531, 1, 3, 65531, 1, 4, 65531, 1, 5, 65531, 1048579, 65530, 65532, 1441795, 65531, 65532, 1, 65532, 65532, 1, 65533, 65532, 1, 65534, 65532, 1, 65535, 65532, 1, 0, 65532, 1, 1, 65532, 1, 2, 65532, 1, 3, 65532, 1, 4, 65532, 1, 5, 65532, 1048579, 65530, 65533, 1441795, 65531, 65533, 1, 65532, 65533, 1, 65533, 65533, 1, 65534, 65533, 1, 65535, 65533, 1, 0, 65533, 1, 1, 65533, 1, 2, 65533, 1, 3, 65533, 1, 4, 65533, 1, 5, 65533, 1048579, 65530, 65534, 1441795, 65531, 65534, 1, 65532, 65534, 1, 65533, 65534, 1, 65534, 65534, 1, 65535, 65534, 1, 0, 65534, 1, 1, 65534, 1, 2, 65534, 1, 3, 65534, 1, 4, 65534, 1, 5, 65534, 1048579, 65530, 65535, 1441795, 65531, 65535, 1, 65532, 65535, 1, 65533, 65535, 1, 65534, 65535, 1, 65535, 65535, 1, 0, 65535, 1, 1, 65535, 1, 2, 65535, 1, 3, 65535, 1, 4, 65535, 1, 5, 65535, 1048579, 65530, 0, 1441795, 65531, 0, 1, 65532, 0, 1, 65533, 0, 1, 65534, 0, 1, 65535, 0, 1, 0, 0, 1, 1, 0, 1, 2, 0, 1, 3, 0, 1, 4, 0, 1, 5, 0, 1048579, 65530, 1, 1441795, 65531, 1, 1, 65532, 1, 1, 65533, 1, 1, 65534, 1, 1, 65535, 1, 1, 0, 1, 1, 1, 1, 1, 2, 1, 1, 3, 1, 1, 4, 1, 1, 5, 1, 1048579, 65530, 2, 1441795, 65531, 2, 1, 65532, 2, 1, 65533, 2, 1, 65534, 2, 1, 65535, 2, 1, 0, 2, 1, 1, 2, 1, 2, 2, 1, 3, 2, 1, 4, 2, 1, 5, 2, 1048579, 65530, 3, 1441795, 65531, 3, 1, 65532, 3, 1, 65533, 3, 1, 65534, 3, 1, 65535, 3, 1, 0, 3, 1, 1, 3, 1, 2, 3, 1, 3, 3, 1, 4, 3, 1, 5, 3, 1048579, 65530, 4, 1441795, 65531, 4, 1, 65532, 4, 1, 65533, 4, 1, 65534, 4, 1, 65535, 4, 1, 0, 4, 1, 1, 4, 1, 2, 4, 1, 3, 4, 1, 4, 4, 1, 5, 4, 1048579, 65530, 5, 1441795, 65531, 5, 1, 65532, 5, 1, 65533, 5, 1, 65534, 5, 1, 65535, 5, 1, 0, 5, 1, 1, 5, 1, 2, 5, 1, 3, 5, 1, 4, 5, 1, 5, 5, 1048579, 65530, 6, 1441795, 65531, 6, 1, 65532, 6, 1, 65533, 6, 1, 65534, 6, 1, 65535, 6, 1, 0, 6, 1, 1, 6, 1, 2, 6, 1, 3, 6, 1, 4, 6, 1, 5, 6, 1048579, 65530, 7, 1441795, 65531, 7, 3, 65532, 7, 3, 65533, 7, 655362, 65534, 7, 1, 65535, 7, 1, 0, 7, 1, 1, 7, 1, 2, 7, 2, 3, 7, 3, 4, 7, 3, 5, 7, 1048579)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Boundary" type="Node3D" parent="."]
+script = ExtResource("6_lxn6u")
+
+[node name="DoorSouth" parent="Boundary" instance=ExtResource("7_1favx")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7.5)
+
+[node name="PlayerDetection" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="Shape" type="CollisionShape3D" parent="PlayerDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_x6347")
