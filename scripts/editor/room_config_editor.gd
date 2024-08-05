@@ -95,4 +95,3 @@ func set_new_room(_value: bool):
 		printerr("ROOM IS NOT OF TYPE ROOM")
 		return
 	room.data.waves = []
-	room.data.completed_room = null

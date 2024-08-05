@@ -1,6 +1,7 @@
 class_name RoomController extends Node
 
 signal doors_changed
+signal wall_destroyed
 signal boss_entered(boss: Boss)
 signal reward_collected(reward_type: Reward.RewardType)
 signal room_completed(room_id: String)
@@ -23,7 +24,11 @@ func initialise(data: SaveGameData):
 		room.room_item_lookup = room_item_lookup
 		room.reward_lookup = reward_lookup
 
+		if room.data.is_hidden_room:
+			room.visible = false
+
 		room.doors_changed.connect(_on_room_doors_changed)
+		room.wall_destroyed.connect(_on_room_wall_destroyed)
 		room.boss_entered.connect(_on_boss_entered)
 		room.reward_collected.connect(_on_reward_collected)
 		room.room_completed.connect(_on_room_completed)
@@ -42,6 +47,18 @@ func get_room(id: String) -> Room:
 
 func _on_room_doors_changed():
 	doors_changed.emit()
+
+func _on_room_wall_destroyed(linked_room_name: String):
+	if not rooms.has(linked_room_name):
+		printerr("Destroyed wall is linked to room that doesn't exist: ", linked_room_name)
+		return
+
+	var linked_room = rooms[linked_room_name] as Room
+	if not linked_room.data.is_hidden_room:
+		printerr("Destroyed wall is linked to a room that isn't marked as hidden: ", linked_room_name)
+
+	wall_destroyed.emit()
+	linked_room.visible = true
 
 func _on_boss_entered(boss: Boss):
 	boss_entered.emit(boss)

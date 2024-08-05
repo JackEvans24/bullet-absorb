@@ -26,6 +26,7 @@ func initialise_rooms():
 	rooms.initialise(save_game.data)
 
 	rooms.doors_changed.connect(_on_room_doors_changed)
+	rooms.wall_destroyed.connect(_on_room_wall_destroyed)
 	rooms.boss_entered.connect(_on_boss_entered)
 	rooms.reward_collected.connect(_on_reward_collected)
 	rooms.room_completed.connect(_on_room_completed)
@@ -74,6 +75,9 @@ func _on_absorb_state_changed(absorb_state: Player.AbsorbState):
 			cameras.cancel_impulse(ScreenShakeMapping.ScreenShakeId.AbsorbWindup)
 
 func _on_room_doors_changed():
+	cameras.add_impulse(ScreenShakeMapping.ScreenShakeId.Doors)
+
+func _on_room_wall_destroyed():
 	cameras.add_impulse(ScreenShakeMapping.ScreenShakeId.Doors)
 
 func _on_boss_entered(boss: Boss):

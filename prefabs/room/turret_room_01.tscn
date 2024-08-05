@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/data/rooms/room_data.gd" id="4_2iqfq"]
 [ext_resource type="MeshLibrary" uid="uid://bydmgvg8cpigh" path="res://models/rooms/room_mesh_library.tres" id="5_wbv4l"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room_doors.gd" id="6_ubq17"]
-[ext_resource type="PackedScene" uid="uid://ok4gfjcs3kol" path="res://prefabs/room/door.tscn" id="7_71grb"]
+[ext_resource type="PackedScene" uid="uid://ok4gfjcs3kol" path="res://prefabs/room_items/door.tscn" id="7_71grb"]
 
 [sub_resource type="Resource" id="Resource_faeb8"]
 script = ExtResource("2_ap718")
