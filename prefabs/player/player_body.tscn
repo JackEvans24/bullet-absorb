@@ -39,6 +39,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0.5, -2)
 [node name="ReferencePoint" type="Node3D" parent="Arm_Left" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0.5, -0.8)
 
+[node name="FireSFX" type="FmodEventEmitter3D" parent="Arm_Left" index="2"]
+event_name = "event:/fire"
+event_guid = "{5f4c3483-e39b-422e-9e7b-d8e6fc1cb12f}"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0.5, -2)
+
+[node name="FireFailSFX" type="FmodEventEmitter3D" parent="Arm_Left" index="3"]
+event_name = "event:/fire_fail"
+event_guid = "{afc6abb1-b577-4754-8a1b-64a860bc7635}"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0.5, -2)
+
 [node name="Arm_Right" parent="." index="3" node_paths=PackedStringArray("fire_point", "aim_reference_point")]
 surface_material_override/0 = ExtResource("2_b5lf6")
 surface_material_override/1 = ExtResource("3_wyqam")
@@ -54,3 +64,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0.5, -2)
 
 [node name="ReferencePoint" type="Node3D" parent="Arm_Right" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0.5, -0.8)
+
+[node name="FireSFX" type="FmodEventEmitter3D" parent="Arm_Right" index="2"]
+event_name = "event:/fire"
+event_guid = "{5f4c3483-e39b-422e-9e7b-d8e6fc1cb12f}"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0.5, -2)
+
+[node name="FireFailSFX" type="FmodEventEmitter3D" parent="Arm_Right" index="3"]
+event_name = "event:/fire_fail"
+event_guid = "{afc6abb1-b577-4754-8a1b-64a860bc7635}"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0.5, -2)
