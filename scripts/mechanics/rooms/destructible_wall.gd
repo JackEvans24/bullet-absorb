@@ -10,7 +10,7 @@ signal wall_destroyed
 @onready var bullet_handler: BulletHitHandler = get_node(bullet_hit_handler_ref)
 @onready var mesh_container: Node3D = get_node(mesh_container_ref)
 @onready var collider: CollisionShape3D = get_node(collision_shape_ref)
-@onready var particles: GPUParticles3D = $Pivot/SmokeBurst
+@onready var particles: GPUParticles3D = $Pivot/Rubble
 
 var can_destroy := false
 var is_hit := false
