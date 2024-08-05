@@ -669,4 +669,6 @@ libraries = {
 }
 autoplay = "idle"
 
+[node name="FmodListener3D" type="FmodListener3D" parent="."]
+
 [editable path="Pivot/PlayerModel"]
