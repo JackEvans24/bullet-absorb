@@ -2,13 +2,17 @@ class_name Room
 extends Node3D
 
 signal doors_changed
+signal wall_destroyed(linked_room: String)
 signal boss_entered(boss: Boss)
 signal reward_collected(reward_type: Reward.RewardType)
 signal room_completed(room_id: String)
 signal room_reentered(room_id: String)
 
 @export var data: RoomData
+
+@export_group("Hidden room")
 @export var destructible_wall: DestructibleWall
+@export var linked_room_name: String
 
 @onready var boundary: RoomBoundary = $Boundary
 @onready var player_detection: Area3D = $PlayerDetection
@@ -147,11 +151,20 @@ func _on_reward_collected(reward_type: Reward.RewardType):
 func set_room_complete():
 	set_doors(data.completed_doors)
 
-	if destructible_wall:
-		destructible_wall.mark_ready_to_destroy()
+	handle_destructible_wall()
 
 	completed = true
 	room_completed.emit(data.room_name)
+
+func handle_destructible_wall():
+	if not destructible_wall:
+		return
+
+	destructible_wall.wall_destroyed.connect(_on_wall_destroyed)
+	destructible_wall.mark_ready_to_destroy()
+
+func _on_wall_destroyed():
+	wall_destroyed.emit(linked_room_name)
 
 func close_all_doors():
 	set_doors(0)
