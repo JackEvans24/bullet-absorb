@@ -29,7 +29,7 @@ var doorway_rotations: Array[int] = [ROT_SOUTH, ROT_EAST, ROT_NORTH, ROT_WEST]
 @export var detection_height := 2.0
 
 @export_group("Doors")
-@export var door_scene: PackedScene = preload ("res://prefabs/room/door.tscn")
+@export var door_scene: PackedScene = preload("res://prefabs/room_items/door.tscn")
 @export_flags("NORTH", "SOUTH", "EAST", "WEST") var start_doors := 2
 @export_flags("NORTH", "SOUTH", "EAST", "WEST") var end_doors := 14
 @export var door_offsets: Vector4 = Vector4(0, 0, 4, -4)
@@ -61,15 +61,15 @@ func generate_room():
 
 	# Build walls
 	var pos := Vector3(0, 0, 0)
-	for z in range( - depth, depth):
-		for x in range( - width, width):
+	for z in range(-depth, depth):
+		for x in range(-width, width):
 			pos.x = x
 			pos.z = z
-			if x == - width:
+			if x == -width:
 				grid.set_cell_item(pos, INVISIBLE_WALL_ITEM, ROT_EAST)
 			elif x == width - 1:
 				grid.set_cell_item(pos, INVISIBLE_WALL_ITEM, ROT_WEST)
-			elif z == - depth:
+			elif z == -depth:
 				grid.set_cell_item(pos, WALL_ITEM, ROT_NORTH)
 			elif z == depth - 1:
 				grid.set_cell_item(pos, INVISIBLE_WALL_ITEM, ROT_SOUTH)
@@ -77,14 +77,14 @@ func generate_room():
 				grid.set_cell_item(pos, FLOOR_ITEM)
 
 	# Set start_doors
-	if (start_doors&1 != 0) or (end_doors&1 != 0):
+	if (start_doors & 1 != 0) or (end_doors & 1 != 0):
 		add_door(Vector3(0, 0, -depth), DoorDirection.North, door_offsets.x)
-	if (start_doors&2 != 0) or (end_doors&2 != 0):
+	if (start_doors & 2 != 0) or (end_doors & 2 != 0):
 		add_door(Vector3(0.0, 0.0, depth - 1.0), DoorDirection.South, door_offsets.y)
-	if (start_doors&4 != 0) or (end_doors&4 != 0):
+	if (start_doors & 4 != 0) or (end_doors & 4 != 0):
 		add_door(Vector3(width - 1, 0, 0), DoorDirection.East, door_offsets.z)
-	if (start_doors&8 != 0) or (end_doors&8 != 0):
-		add_door(Vector3( - width, 0, 0), DoorDirection.West, door_offsets.w)
+	if (start_doors & 8 != 0) or (end_doors & 8 != 0):
+		add_door(Vector3(-width, 0, 0), DoorDirection.West, door_offsets.w)
 
 	# Set player detection space
 	var detection_shape: CollisionShape3D = scene.get_node("Room/PlayerDetection/Shape")
