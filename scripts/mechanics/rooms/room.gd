@@ -8,6 +8,7 @@ signal room_completed(room_id: String)
 signal room_reentered(room_id: String)
 
 @export var data: RoomData
+@export var destructible_wall: DestructibleWall
 
 @onready var boundary: RoomBoundary = $Boundary
 @onready var player_detection: Area3D = $PlayerDetection
@@ -145,6 +146,9 @@ func _on_reward_collected(reward_type: Reward.RewardType):
 
 func set_room_complete():
 	set_doors(data.completed_doors)
+
+	if destructible_wall:
+		destructible_wall.mark_ready_to_destroy()
 
 	completed = true
 	room_completed.emit(data.room_name)
