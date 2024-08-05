@@ -1,9 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://ccgpc6v5lruew"]
+[gd_scene load_steps=19 format=3 uid="uid://ccgpc6v5lruew"]
 
 [ext_resource type="PackedScene" uid="uid://c3tj0pdcum4wd" path="res://prefabs/player/player.tscn" id="1_e5x1h"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_rtjol"]
 [ext_resource type="Resource" uid="uid://d1ymgrwqh2iw1" path="res://data/rewards/reward_lookup.tres" id="2_3jey1"]
-[ext_resource type="PackedScene" uid="uid://bhxrs6pph350t" path="res://scenes/hud.tscn" id="2_bqahq"]
+[ext_resource type="PackedScene" uid="uid://bhxrs6pph350t" path="res://prefabs/ui/hud.tscn" id="2_bqahq"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room_controller.gd" id="3_yfuie"]
 [ext_resource type="PackedScene" uid="uid://cl1dul38xrvt2" path="res://prefabs/cameras.tscn" id="4_nws0m"]
 [ext_resource type="Resource" uid="uid://dfp6bwqqsvt21" path="res://data/room_items/room_item_lookup.tres" id="5_n6ls3"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b3otul1w7kovw" path="res://prefabs/room/turret_room_02.tscn" id="9_74kno"]
 [ext_resource type="PackedScene" uid="uid://c1mqri24a2jrw" path="res://prefabs/room/burster_room_01.tscn" id="10_7eh75"]
 [ext_resource type="PackedScene" uid="uid://dgtr6vndvupwl" path="res://prefabs/room/burster_room_02.tscn" id="11_ob6mw"]
+[ext_resource type="PackedScene" uid="uid://bftjjya0ttahf" path="res://prefabs/room/hidden_buster_room_01.tscn" id="11_sdt03"]
 [ext_resource type="Script" path="res://scripts/save/save_game.gd" id="18_k1gw7"]
 
 [sub_resource type="Environment" id="Environment_v60oa"]
@@ -74,6 +75,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -32)
 
 [node name="BursterRoom02" parent="World/Rooms" instance=ExtResource("11_ob6mw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, -70)
+
+[node name="HiddenBursterRoom01" parent="World/Rooms" instance=ExtResource("11_sdt03")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -51)
 
 [node name="HUD" parent="." instance=ExtResource("2_bqahq")]
 
