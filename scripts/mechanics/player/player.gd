@@ -24,6 +24,7 @@ enum AbsorbState {Started, Cancelled, Complete}
 @onready var bullet_handler: BulletHitHandler = $BulletHitHandler
 @onready var power_handler: PowerHitHandler = $PowerHitHandler
 @onready var animator: AnimationPlayer = $Animator
+@onready var sfx: PlayerSounds = $Pivot/SFX
 
 var power_count: float = 0.0
 
@@ -86,6 +87,8 @@ func _on_move_state_entered(state: MoveState):
 func _on_dash_triggered(dash_direction: Vector3):
 	power_count = max(0, power_count - stats.dash_power_consumption)
 	update_power_count()
+
+	sfx.play("dash")
 
 	body._on_dash_triggered(dash_direction)
 
