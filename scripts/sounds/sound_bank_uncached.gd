@@ -1,5 +1,8 @@
 class_name SoundBankUncached
-extends Node3D
+extends SoundBank
+
+func _ready():
+	pass
 
 func play(sfx: String):
 	var sound = find_child(sfx)
