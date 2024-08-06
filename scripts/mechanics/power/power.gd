@@ -63,8 +63,6 @@ func _on_body_entered_attraction(body: Node3D):
 		target = body
 
 func _on_body_entered_collision(body: Node3D):
-	if dead:
-		return
 	if trigger_power_handler and body.has_node("PowerHitHandler"):
 		body.get_node("PowerHitHandler").trigger(self)
 
@@ -78,7 +76,11 @@ func handle_destruction():
 	dead = true
 
 	pivot.visible = false
+	follow_body.target = null
 	sfx.play("Splash")
+
+	attraction_area.body_entered.disconnect(_on_body_entered_attraction)
+	collision_area.body_entered.disconnect(_on_body_entered_collision)
 
 	await get_tree().create_timer(destroy_offset).timeout
 	queue_free()
