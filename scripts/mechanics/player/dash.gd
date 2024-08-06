@@ -5,6 +5,7 @@ signal dash_triggered(direction: Vector3)
 signal dash_failed
 
 @export var dash_timeout: float = 0.8
+@export var dash_sfx: FmodEventEmitter3D
 
 var initialised = false
 var move_state: MoveStateMachine
@@ -36,6 +37,7 @@ func try_dash():
 	if dash_direction.length() < 0.01:
 		dash_direction = -body.basis.z
 
+	dash_sfx.play()
 	dash_triggered.emit(dash_direction)
 
 	await get_tree().create_timer(dash_timeout).timeout
