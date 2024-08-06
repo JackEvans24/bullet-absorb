@@ -49,8 +49,8 @@ event_name = "event:/enemy_hit"
 event_guid = "{3599082d-c736-4f11-9789-fb5b1f7a97ee}"
 
 [node name="Fire" type="FmodEventEmitter3D" parent="Pivot/SoundBank"]
-event_name = "event:/fire"
-event_guid = "{5f4c3483-e39b-422e-9e7b-d8e6fc1cb12f}"
+event_name = "event:/enemy_fire"
+event_guid = "{f12da8af-f38b-4b84-8521-cb608107fac6}"
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
