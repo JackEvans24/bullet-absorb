@@ -657,6 +657,16 @@ draw_pass_1 = SubResource("SphereMesh_3tq4p")
 [node name="SFX" type="Node3D" parent="Pivot"]
 script = ExtResource("27_cfq5x")
 
+[node name="AbsorbBoom" type="FmodEventEmitter3D" parent="Pivot/SFX"]
+event_name = "event:/absorb_boom"
+event_guid = "{aadeaaf6-bb22-4207-ab44-cc0b0b56ae8d}"
+transform = Transform3D(1, 6.22435e-11, 0, -1.66722e-10, 1, 0, -5.82077e-11, 5.82077e-11, 1, 0, 0, 0)
+
+[node name="AbsorbWindup" type="FmodEventEmitter3D" parent="Pivot/SFX"]
+event_name = "event:/absorb_windup"
+event_guid = "{d0b812f3-707f-4138-a3ec-e11c55f5d6c7}"
+transform = Transform3D(1, 6.22435e-11, 0, -1.66722e-10, 1, 0, -5.82077e-11, 5.82077e-11, 1, 0, 0, 0)
+
 [node name="Dash" type="FmodEventEmitter3D" parent="Pivot/SFX"]
 event_name = "event:/dash"
 event_guid = "{f53337c9-4226-4fe1-9bd8-94e678229bd7}"

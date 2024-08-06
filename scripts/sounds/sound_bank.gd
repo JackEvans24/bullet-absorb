@@ -17,3 +17,10 @@ func play(sfx: String):
 		return
 
 	sounds[sfx].play()
+
+func stop(sfx: String):
+	if not sounds.has(sfx):
+		printerr("Trying to stop sound that doesn't exist: ", sfx)
+		return
+
+	sounds[sfx].stop()

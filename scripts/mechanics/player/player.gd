@@ -75,6 +75,7 @@ func _on_move_state_entered(state: MoveState):
 
 	absorb.can_absorb = state.can_absorb
 	if not state.can_absorb:
+		handle_absorb_cancelled()
 		absorb.end_windup()
 
 	health.can_take_damage = state.can_take_damage
@@ -143,14 +144,21 @@ func _on_slowdown_started():
 	move_state.transition_to(MoveStateConstants.STATE_ABSORB)
 	absorb_state_changed.emit(AbsorbState.Started)
 	animator.speed_scale = stats.absorb_windup
+	sfx.play("AbsorbWindup")
+	print("start")
 
 func _on_slowdown_ended():
 	move_state.transition_to(MoveStateConstants.STATE_RUN)
+	handle_absorb_cancelled()
+
+func handle_absorb_cancelled():
 	absorb_state_changed.emit(AbsorbState.Cancelled)
 	animator.speed_scale = 1.0
+	sfx.stop("AbsorbWindup")
 
 func _on_absorb_triggered():
 	absorb_state_changed.emit(AbsorbState.Complete)
+	sfx.play("AbsorbBoom")
 
 func update_power_count():
 	power_count_changed.emit(power_count)
