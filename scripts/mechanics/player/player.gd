@@ -88,7 +88,7 @@ func _on_dash_triggered(dash_direction: Vector3):
 	power_count = max(0, power_count - stats.dash_power_consumption)
 	update_power_count()
 
-	sfx.play("dash")
+	sfx.play("Dash")
 
 	body._on_dash_triggered(dash_direction)
 
@@ -102,7 +102,7 @@ func _on_dash_failed():
 func _on_damage_taken(_damage_taken: float, taken_from: Node3D):
 	damage_taken.emit()
 
-	sfx.play("hit")
+	sfx.play("Hit")
 
 	if current_health <= 0:
 		die()
