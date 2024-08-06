@@ -194,7 +194,7 @@ _data = {
 script = ExtResource("1_wxu3i")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 1, 0)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 1, 0)
 mesh = SubResource("SphereMesh_x6y6o")
 
 [node name="Collider" type="Area3D" parent="."]
@@ -221,7 +221,6 @@ draw_pass_1 = SubResource("SphereMesh_pvaaq")
 [node name="IdleParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 cast_shadow = 0
-emitting = false
 amount = 5
 process_material = SubResource("ParticleProcessMaterial_y8b55")
 draw_pass_1 = SubResource("SphereMesh_ryj1u")
@@ -242,3 +241,13 @@ libraries = {
 "": SubResource("AnimationLibrary_0gtoc")
 }
 autoplay = "start"
+
+[node name="SFX" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/orb"
+event_guid = "{e143fca8-9c9b-4f06-b63d-6759ca5a8147}"
+event_parameter/orb_scale/id = -366328197520839174
+event_parameter/orb_scale/value = 0.0
+event_parameter/orb_scale/min_value = 0.0
+event_parameter/orb_scale/max_value = 1.0
+event_parameter/orb_scale/default_value = 0.0
+event_parameter/orb_scale/variant_type = 3

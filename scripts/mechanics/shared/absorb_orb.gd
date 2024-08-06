@@ -16,6 +16,7 @@ signal orb_destroyed
 func _ready():
 	if absorb_from_ready:
 		set_absorb_handler()
+	$SFX.play()
 
 func _on_start_animation_complete():
 	if not absorb_from_ready:
