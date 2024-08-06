@@ -52,6 +52,7 @@ func _ready():
 
 	absorb.slowdown_started.connect(_on_slowdown_started)
 	absorb.slowdown_ended.connect(_on_slowdown_ended)
+	absorb.absorb_cancelled.connect(_on_absorb_cancelled)
 	absorb.absorb_triggered.connect(_on_absorb_triggered)
 
 	bullet_handler.bullet_connected.connect(_on_bullet_connected)
@@ -154,6 +155,9 @@ func handle_absorb_cancelled():
 	absorb_state_changed.emit(AbsorbState.Cancelled)
 	animator.speed_scale = 1.0
 	sfx.stop("AbsorbWindup")
+
+func _on_absorb_cancelled():
+	sfx.play("AbsorbCancel")
 
 func _on_absorb_triggered():
 	absorb_state_changed.emit(AbsorbState.Complete)

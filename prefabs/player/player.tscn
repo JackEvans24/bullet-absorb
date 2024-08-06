@@ -658,21 +658,26 @@ draw_pass_1 = SubResource("SphereMesh_3tq4p")
 script = ExtResource("27_cfq5x")
 
 [node name="AbsorbBoom" type="FmodEventEmitter3D" parent="Pivot/SFX"]
-event_name = "event:/absorb_boom"
+event_name = "event:/Player/absorb_boom"
 event_guid = "{aadeaaf6-bb22-4207-ab44-cc0b0b56ae8d}"
 transform = Transform3D(1, 6.22435e-11, 0, -1.66722e-10, 1, 0, -5.82077e-11, 5.82077e-11, 1, 0, 0, 0)
 
+[node name="AbsorbCancel" type="FmodEventEmitter3D" parent="Pivot/SFX"]
+event_name = "event:/Player/absorb_cancel"
+event_guid = "{0375284a-2939-4d5e-ad28-01ceae7fc0de}"
+transform = Transform3D(1, 6.22435e-11, 0, -1.66722e-10, 1, 0, -5.82077e-11, 5.82077e-11, 1, 0, 0, 0)
+
 [node name="AbsorbWindup" type="FmodEventEmitter3D" parent="Pivot/SFX"]
-event_name = "event:/absorb_windup"
+event_name = "event:/Player/absorb_windup"
 event_guid = "{d0b812f3-707f-4138-a3ec-e11c55f5d6c7}"
 transform = Transform3D(1, 6.22435e-11, 0, -1.66722e-10, 1, 0, -5.82077e-11, 5.82077e-11, 1, 0, 0, 0)
 
 [node name="Dash" type="FmodEventEmitter3D" parent="Pivot/SFX"]
-event_name = "event:/dash"
+event_name = "event:/Player/dash"
 event_guid = "{f53337c9-4226-4fe1-9bd8-94e678229bd7}"
 
 [node name="Hit" type="FmodEventEmitter3D" parent="Pivot/SFX"]
-event_name = "event:/player_hit"
+event_name = "event:/Player/player_hit"
 event_guid = "{405435d2-a632-4d41-ac75-8382cb1c10ad}"
 
 [node name="Collider" type="CollisionShape3D" parent="."]
