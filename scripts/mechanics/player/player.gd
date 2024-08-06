@@ -24,7 +24,7 @@ enum AbsorbState {Started, Cancelled, Complete}
 @onready var bullet_handler: BulletHitHandler = $BulletHitHandler
 @onready var power_handler: PowerHitHandler = $PowerHitHandler
 @onready var animator: AnimationPlayer = $Animator
-@onready var sfx: PlayerSounds = $Pivot/SFX
+@onready var sfx: SoundBank = $Pivot/SFX
 
 var power_count: float = 0.0
 

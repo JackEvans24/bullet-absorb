@@ -1,4 +1,4 @@
-class_name PlayerSounds
+class_name SoundBank
 extends Node3D
 
 var sounds: Dictionary
