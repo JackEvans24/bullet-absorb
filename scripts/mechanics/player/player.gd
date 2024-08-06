@@ -145,7 +145,6 @@ func _on_slowdown_started():
 	absorb_state_changed.emit(AbsorbState.Started)
 	animator.speed_scale = stats.absorb_windup
 	sfx.play("AbsorbWindup")
-	print("start")
 
 func _on_slowdown_ended():
 	move_state.transition_to(MoveStateConstants.STATE_RUN)
