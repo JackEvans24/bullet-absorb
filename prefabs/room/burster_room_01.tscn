@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c1mqri24a2jrw"]
+[gd_scene load_steps=17 format=3 uid="uid://c1mqri24a2jrw"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room.gd" id="1_56yug"]
 [ext_resource type="Script" path="res://scripts/data/rooms/room_data.gd" id="2_05qob"]
@@ -7,6 +7,7 @@
 [ext_resource type="MeshLibrary" uid="uid://bydmgvg8cpigh" path="res://models/rooms/room_mesh_library.tres" id="5_6tto7"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/room_doors.gd" id="6_ndfdv"]
 [ext_resource type="PackedScene" uid="uid://ok4gfjcs3kol" path="res://prefabs/room_items/door.tscn" id="7_jcry8"]
+[ext_resource type="Script" path="res://scripts/sounds/sound_bank.gd" id="8_vo26d"]
 
 [sub_resource type="Resource" id="Resource_r6fky"]
 script = ExtResource("3_8ks7b")
@@ -39,9 +40,11 @@ items = Array[ExtResource("3_8ks7b")]([])
 [sub_resource type="Resource" id="Resource_rh0dp"]
 script = ExtResource("2_05qob")
 room_name = "BursterRoom01"
+is_hidden_room = false
 untouched_doors = 8
 completed_doors = 9
 waves = Array[ExtResource("4_q3kpk")]([SubResource("Resource_j75ye"), SubResource("Resource_bagf6")])
+reward = 0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xq1m6"]
 
@@ -78,3 +81,10 @@ monitorable = false
 [node name="Shape" type="CollisionShape3D" parent="PlayerDetection"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_x6347")
+
+[node name="SoundBank" type="Node3D" parent="."]
+script = ExtResource("8_vo26d")
+
+[node name="Doors" type="FmodEventEmitter3D" parent="SoundBank"]
+event_name = "event:/door_close"
+event_guid = "{0c795f69-c1d7-41d8-83f1-5792a83209dd}"
