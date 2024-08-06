@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://inpjseyhox3m"]
+[gd_scene load_steps=27 format=3 uid="uid://inpjseyhox3m"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/shared/absorb_orb.gd" id="1_wxu3i"]
 [ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/pickups/power.tres" id="2_4bge2"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/absorb_handler.gd" id="3_acu7b"]
+[ext_resource type="Script" path="res://scripts/sounds/sound_bank_uncached.gd" id="4_t7cg1"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_x6y6o"]
 material = ExtResource("2_4bge2")
@@ -242,12 +243,13 @@ libraries = {
 }
 autoplay = "start"
 
-[node name="SFX" type="FmodEventEmitter3D" parent="."]
+[node name="SoundBank" type="Node3D" parent="."]
+script = ExtResource("4_t7cg1")
+
+[node name="Drone" type="FmodEventEmitter3D" parent="SoundBank"]
+event_name = "event:/PowerOrb/orb_drone"
+event_guid = "{e143fca8-9c9b-4f06-b63d-6759ca5a8147}"
+
+[node name="Splash" type="FmodEventEmitter3D" parent="SoundBank"]
 event_name = "event:/orb"
 event_guid = "{e143fca8-9c9b-4f06-b63d-6759ca5a8147}"
-event_parameter/orb_scale/id = -366328197520839174
-event_parameter/orb_scale/value = 0.0
-event_parameter/orb_scale/min_value = 0.0
-event_parameter/orb_scale/max_value = 1.0
-event_parameter/orb_scale/default_value = 0.0
-event_parameter/orb_scale/variant_type = 3

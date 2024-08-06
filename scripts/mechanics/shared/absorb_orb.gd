@@ -12,11 +12,12 @@ signal orb_destroyed
 @onready var create_particles: GPUParticles3D = $CreateParticles
 @onready var idle_particles: GPUParticles3D = $IdleParticles
 @onready var death_particles: GPUParticles3D = $DeathParticles
+@onready var sfx: SoundBank = $SoundBank
 
 func _ready():
 	if absorb_from_ready:
 		set_absorb_handler()
-	$SFX.play()
+	sfx.play("Drone")
 
 func _on_start_animation_complete():
 	if not absorb_from_ready:
@@ -37,6 +38,7 @@ func destroy():
 	create_particles.emitting = false
 	idle_particles.emitting = false
 
+	sfx.play("Splash")
 	orb_absorbed.emit()
 
 	death_particles.emitting = true
