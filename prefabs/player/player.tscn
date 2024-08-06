@@ -661,6 +661,10 @@ script = ExtResource("27_wrtea")
 event_name = "event:/dash"
 event_guid = "{f53337c9-4226-4fe1-9bd8-94e678229bd7}"
 
+[node name="HitSFX" type="FmodEventEmitter3D" parent="Pivot/SFX"]
+event_name = "event:/player_hit"
+event_guid = "{405435d2-a632-4d41-ac75-8382cb1c10ad}"
+
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = ExtResource("11_p7nyd")

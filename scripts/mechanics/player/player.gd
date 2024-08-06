@@ -102,6 +102,8 @@ func _on_dash_failed():
 func _on_damage_taken(_damage_taken: float, taken_from: Node3D):
 	damage_taken.emit()
 
+	sfx.play("hit")
+
 	if current_health <= 0:
 		die()
 	else:
