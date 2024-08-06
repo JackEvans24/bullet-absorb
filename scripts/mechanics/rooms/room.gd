@@ -16,6 +16,7 @@ signal room_reentered(room_id: String)
 
 @onready var boundary: RoomBoundary = $Boundary
 @onready var player_detection: Area3D = $PlayerDetection
+@onready var sfx: SoundBank = $SoundBank
 
 var room_item_lookup: RoomItemLookup
 var reward_lookup: RewardLookup
@@ -23,12 +24,14 @@ var reward_lookup: RewardLookup
 var player: Node3D
 var enemy_count = 0
 var wave_index = 0
+var initialised := false
 var boss_created := false
 var completed := false
 
 func _ready():
 	set_doors(data.untouched_doors)
 	player_detection.body_entered.connect(_on_player_entered)
+	initialised = true
 
 func _on_player_entered(body: Node3D):
 	if completed:
@@ -174,3 +177,5 @@ func set_doors(doors: int):
 		return
 	boundary.set_doors(doors)
 	doors_changed.emit()
+	if initialised:
+		sfx.play("Doors")

@@ -46,6 +46,7 @@ func do_windup():
 
 func do_fire():
 	animation.play("fire")
+	sfx.play("Fire")
 	fire.fire()
 
 func die():

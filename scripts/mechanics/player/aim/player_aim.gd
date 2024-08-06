@@ -90,7 +90,7 @@ func fire():
 		var bullet = bullet_scene.instantiate()
 		tree.root.add_child(bullet)
 
-		arm_cannon.initialise_bullet(bullet)
+		arm_cannon.fire(bullet)
 
 		bullet_fired.emit()
 

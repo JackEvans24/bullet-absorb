@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://inpjseyhox3m"]
+[gd_scene load_steps=27 format=3 uid="uid://inpjseyhox3m"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/shared/absorb_orb.gd" id="1_wxu3i"]
 [ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/pickups/power.tres" id="2_4bge2"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/absorb_handler.gd" id="3_acu7b"]
+[ext_resource type="Script" path="res://scripts/sounds/sound_bank_uncached.gd" id="4_t7cg1"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_x6y6o"]
 material = ExtResource("2_4bge2")
@@ -194,7 +195,7 @@ _data = {
 script = ExtResource("1_wxu3i")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 1, 0)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 1, 0)
 mesh = SubResource("SphereMesh_x6y6o")
 
 [node name="Collider" type="Area3D" parent="."]
@@ -221,7 +222,6 @@ draw_pass_1 = SubResource("SphereMesh_pvaaq")
 [node name="IdleParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 cast_shadow = 0
-emitting = false
 amount = 5
 process_material = SubResource("ParticleProcessMaterial_y8b55")
 draw_pass_1 = SubResource("SphereMesh_ryj1u")
@@ -242,3 +242,14 @@ libraries = {
 "": SubResource("AnimationLibrary_0gtoc")
 }
 autoplay = "start"
+
+[node name="SoundBank" type="Node3D" parent="."]
+script = ExtResource("4_t7cg1")
+
+[node name="Drone" type="FmodEventEmitter3D" parent="SoundBank"]
+event_name = "event:/PowerOrb/orb_drone"
+event_guid = "{e143fca8-9c9b-4f06-b63d-6759ca5a8147}"
+
+[node name="Splash" type="FmodEventEmitter3D" parent="SoundBank"]
+event_name = "event:/orb"
+event_guid = "{e143fca8-9c9b-4f06-b63d-6759ca5a8147}"

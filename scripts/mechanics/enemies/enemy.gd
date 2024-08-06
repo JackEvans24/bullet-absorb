@@ -12,6 +12,7 @@ signal died
 @onready var pivot: Node3D = $Pivot
 @onready var collider: CollisionShape3D = $Collider
 @onready var bullet_handler: BulletHitHandler = $BulletHitHandler
+@onready var sfx: SoundBank = $Pivot/SoundBank
 
 var meshes: Array[MeshInstance3D] = []
 
@@ -59,6 +60,7 @@ func _on_damage_taken(damage_taken: float, taken_from: Node3D):
 
 	add_hurt_particles()
 	do_knockback(taken_from)
+	sfx.play("Hit")
 
 	if health.current_health <= 0:
 		call_deferred("die")

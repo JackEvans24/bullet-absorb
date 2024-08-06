@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c3ytmjd7pe4pg"]
+[gd_scene load_steps=12 format=3 uid="uid://c3ytmjd7pe4pg"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/enemies/enemy.gd" id="1_wjmkf"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/health.gd" id="2_pjhvc"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/knockback.gd" id="4_t2vkt"]
 [ext_resource type="Material" uid="uid://jxq13s8vw71v" path="res://materials/enemy/enemy_body.tres" id="5_ra3i6"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/bullet_hit_handler.gd" id="8_tqpp8"]
+[ext_resource type="Script" path="res://scripts/sounds/sound_bank.gd" id="9_rmvxw"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_jkita"]
 material = ExtResource("5_ra3i6")
@@ -38,6 +39,18 @@ transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
 
 [node name="Body" type="MeshInstance3D" parent="Pivot"]
 mesh = SubResource("SphereMesh_jkita")
+
+[node name="SoundBank" type="Node3D" parent="Pivot"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+script = ExtResource("9_rmvxw")
+
+[node name="Hit" type="FmodEventEmitter3D" parent="Pivot/SoundBank"]
+event_name = "event:/enemy_hit"
+event_guid = "{3599082d-c736-4f11-9789-fb5b1f7a97ee}"
+
+[node name="Fire" type="FmodEventEmitter3D" parent="Pivot/SoundBank"]
+event_name = "event:/enemy_fire"
+event_guid = "{f12da8af-f38b-4b84-8521-cb608107fac6}"
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

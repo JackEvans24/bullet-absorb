@@ -3,6 +3,7 @@ extends Node3D
 
 signal slowdown_started
 signal slowdown_ended
+signal absorb_cancelled
 signal absorb_triggered
 
 @export var absorb_cooldown = 0.5
@@ -42,6 +43,7 @@ func process_absorb_state(_delta):
 
 func trigger_absorb():
 	if not windup.should_absorb:
+		absorb_cancelled.emit()
 		end_absorb()
 		return
 

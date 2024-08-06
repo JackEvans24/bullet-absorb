@@ -9,6 +9,7 @@ extends Area3D
 @onready var splash_particles: GPUParticles3D = $SplashParticles
 @onready var drop_power: DropPower = $DropPower
 @onready var absorb_handler: AbsorbHandler = $AbsorbHandler
+@onready var sfx: SoundBankUncached = $SoundBank
 
 var dead = false
 var absorbed = false
@@ -20,7 +21,7 @@ func _ready():
 func initialise(turret_basis: Basis):
 	basis = turret_basis.orthonormalized()
 	# add some random rotation to look direction
-	rotate_y(randf_range( - PI * accuracy, PI * accuracy))
+	rotate_y(randf_range(-PI * accuracy, PI * accuracy))
 
 func _physics_process(_delta):
 	if dead:
@@ -41,6 +42,8 @@ func handle_destruction():
 	dead = true
 	collider.disabled = true
 	mesh.visible = false
+
+	sfx.play("Splash")
 
 	splash_particles.restart()
 	await splash_particles.finished

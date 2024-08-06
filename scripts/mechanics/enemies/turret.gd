@@ -34,6 +34,7 @@ func _on_behaviour_timer_timeout(timer_name: String):
 func do_fire():
 	animation.play("fire")
 	fire.fire()
+	sfx.play("Fire")
 
 func die():
 	super()

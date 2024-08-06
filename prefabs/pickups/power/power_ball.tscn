@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cm1wj0vbe4wn8"]
+[gd_scene load_steps=11 format=3 uid="uid://cm1wj0vbe4wn8"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/power/power.gd" id="1_n4h2h"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/follow_body.gd" id="2_7cgiv"]
 [ext_resource type="Material" uid="uid://cby3cclkw40gu" path="res://materials/pickups/power.tres" id="2_netkk"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/movement/smooth_movement.gd" id="3_gix6h"]
+[ext_resource type="Script" path="res://scripts/sounds/sound_bank_uncached.gd" id="5_p6cl0"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_6vkiy"]
 material = ExtResource("2_netkk")
@@ -15,7 +16,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Mesh:position")
+tracks/0/path = NodePath("Pivot/Mesh:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -40,6 +41,19 @@ radius = 0.1
 script = ExtResource("1_n4h2h")
 attraction_delay = 0.0
 
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Mesh" type="MeshInstance3D" parent="Pivot"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("SphereMesh_6vkiy")
+skeleton = NodePath("../..")
+
+[node name="BulletLight" type="OmniLight3D" parent="Pivot"]
+light_color = Color(0.607843, 1, 1, 1)
+light_energy = 0.5
+omni_range = 2.0
+omni_attenuation = 0.435275
+
 [node name="FollowBody" type="Node3D" parent="."]
 script = ExtResource("2_7cgiv")
 max_speed = 3.0
@@ -49,16 +63,6 @@ acceleration = 0.5
 script = ExtResource("3_gix6h")
 max_speed = 50.0
 dampening = 0.0
-
-[node name="Mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
-mesh = SubResource("SphereMesh_6vkiy")
-
-[node name="BulletLight" type="OmniLight3D" parent="."]
-light_color = Color(0.607843, 1, 1, 1)
-light_energy = 0.5
-omni_range = 2.0
-omni_attenuation = 0.435275
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -83,3 +87,10 @@ monitorable = false
 shape = SubResource("SphereShape3D_crqyd")
 
 [node name="WallCheck" type="RayCast3D" parent="."]
+
+[node name="SoundBank" type="Node3D" parent="."]
+script = ExtResource("5_p6cl0")
+
+[node name="Splash" type="FmodEventEmitter3D" parent="SoundBank"]
+event_name = "event:/Power_collect"
+event_guid = "{6d6722c3-b36f-4dc8-bf99-e646c031d67d}"

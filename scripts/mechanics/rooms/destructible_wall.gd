@@ -11,6 +11,7 @@ signal wall_destroyed
 @onready var meshes: DestructibleWallMeshes = get_node(meshes_ref)
 @onready var collider: CollisionShape3D = get_node(collision_shape_ref)
 @onready var particles: GPUParticles3D = $Pivot/Rubble
+@onready var sfx: SoundBankUncached = $Pivot/SoundBank
 
 func _ready():
 	bullet_handler.bullet_connected.connect(_on_bullet_connected)
@@ -27,6 +28,8 @@ func destroy_wall():
 		return
 
 	particles.emitting = true
+	sfx.play("Break")
+
 	if destruction_state == DestructibleWallMeshes.DestructionState.Crumbling:
 		return
 

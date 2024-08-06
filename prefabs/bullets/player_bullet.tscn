@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dl5unqhv0x3ox"]
+[gd_scene load_steps=12 format=3 uid="uid://dl5unqhv0x3ox"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/bullet.gd" id="1_idcyk"]
 [ext_resource type="SphereMesh" uid="uid://idlaqhuqbbdn" path="res://models/bullets/player_bullet.tres" id="2_d1la3"]
 [ext_resource type="Material" uid="uid://caaotrthyvusd" path="res://materials/bullets/player_bullet.tres" id="3_vi40b"]
 [ext_resource type="PackedScene" uid="uid://b0g4qn342fbge" path="res://prefabs/behaviours/drop_power.tscn" id="4_xhme2"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/absorb_handler.gd" id="5_bjvqu"]
+[ext_resource type="Script" path="res://scripts/sounds/sound_bank_uncached.gd" id="6_csniv"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_s5aai"]
 radius = 0.45
@@ -62,3 +63,10 @@ power_drop_offset = 0.0
 
 [node name="AbsorbHandler" type="Node" parent="."]
 script = ExtResource("5_bjvqu")
+
+[node name="SoundBank" type="Node3D" parent="."]
+script = ExtResource("6_csniv")
+
+[node name="Splash" type="FmodEventEmitter3D" parent="SoundBank"]
+event_name = "event:/bullet_splash"
+event_guid = "{3beff84b-1ad7-4677-9c02-84b3f973355b}"

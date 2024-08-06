@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://w7ih3hp27xm1"]
+[gd_scene load_steps=27 format=3 uid="uid://w7ih3hp27xm1"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/destructible_wall.gd" id="1_ec28j"]
 [ext_resource type="Script" path="res://scripts/mechanics/rooms/destructible_wall_meshes.gd" id="2_04jdu"]
@@ -8,6 +8,7 @@
 [ext_resource type="ArrayMesh" uid="uid://b2b6irtbfrfee" path="res://models/environment/floor.res" id="4_8waxr"]
 [ext_resource type="Material" uid="uid://dga7w1qkxh0t3" path="res://materials/darkness.tres" id="4_eh2m4"]
 [ext_resource type="ArrayMesh" uid="uid://trcgp1pls34w" path="res://models/environment/rubble.tres" id="8_7bey0"]
+[ext_resource type="Script" path="res://scripts/sounds/sound_bank_uncached.gd" id="9_qg0e4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0xl0"]
 resource_name = "Wall.006"
@@ -344,3 +345,11 @@ preprocess = 0.1
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_8kpdb")
 draw_pass_1 = ExtResource("8_7bey0")
+
+[node name="SoundBank" type="Node3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+script = ExtResource("9_qg0e4")
+
+[node name="Break" type="FmodEventEmitter3D" parent="Pivot/SoundBank"]
+event_name = "event:/wall_break"
+event_guid = "{ad6ac7b9-2b77-4c14-9a6d-1bdab1773b46}"

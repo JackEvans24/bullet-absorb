@@ -30,12 +30,16 @@ func _on_behaviour_timer_timeout(timer_name: String):
 	match timer_name.to_lower():
 		"walk": move.set_new_movement()
 		"windup": do_windup()
-		"fire": fire.fire()
+		"fire": do_fire()
 		_: move.stop()
 
 func do_windup():
 	move.stop()
 	animation.play("fire")
+
+func do_fire():
+	fire.fire()
+	sfx.play("Fire")
 
 func die():
 	super()
