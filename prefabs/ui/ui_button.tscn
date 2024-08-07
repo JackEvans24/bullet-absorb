@@ -22,3 +22,8 @@ script = ExtResource("1_ctnow")
 event_name = "event:/UI/ui_select"
 event_guid = "{9487624d-e7c5-48e4-81ab-2b9ba84e5680}"
 attached = false
+
+[node name="PressSFX" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/UI/ui_accept"
+event_guid = "{82e5f9ac-f95f-4d99-9685-fd6750174f11}"
+attached = false
