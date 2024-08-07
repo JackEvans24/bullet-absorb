@@ -13,8 +13,8 @@ extends Node
 var game_data: GameData
 
 func _ready():
-	Save.start_room_override = start_room_override
-	game_data = Save.load()
+	SaveGame.start_room_override = start_room_override
+	game_data = SaveGame.load()
 
 	initialise_rooms()
 	initialise_player()
@@ -88,8 +88,8 @@ func _on_reward_collected(reward_type: Reward.RewardType):
 
 	hud.update(player)
 
-	Save.add_collected_reward(reward_type)
-	game_data = Save.save()
+	SaveGame.add_collected_reward(reward_type)
+	game_data = SaveGame.save()
 
 func enable_reward(reward_type: Reward.RewardType):
 	var reward = reward_lookup.find(reward_type)
@@ -99,10 +99,10 @@ func enable_reward(reward_type: Reward.RewardType):
 	reward.upgrade(player)
 
 func _on_room_completed(room_id: String):
-	Save.add_completed_room(room_id)
-	Save.set_current_room(room_id)
-	game_data = Save.save()
+	SaveGame.add_completed_room(room_id)
+	SaveGame.set_current_room(room_id)
+	game_data = SaveGame.save()
 
 func _on_room_reentered(room_id: String):
-	Save.set_current_room(room_id)
-	game_data = Save.save()
+	SaveGame.set_current_room(room_id)
+	game_data = SaveGame.save()
