@@ -10,7 +10,7 @@ extends Node
 @onready var hit_stop: HitStop = $HitStop
 @onready var pause: Pause = $Pause
 
-var game_data: SaveGameData
+var game_data: GameData
 
 func _ready():
 	Save.start_room_override = start_room_override

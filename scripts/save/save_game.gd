@@ -1,31 +1,32 @@
 class_name SaveGame
 extends Node
 
-@export var start_room_override: String
+var start_room_override: String
 
-var SAVE_FILE_PATH := "user://bullet_absorb.save"
-var game_data := SaveGameData.new()
+var SAVE_GAME_FILE_PATH := "user://bullet_absorb_game.save"
 
-func save() -> SaveGameData:
+var game_data := GameData.new()
+
+func save() -> GameData:
 	if not has_save_system():
 		return game_data
 
-	var save_file = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
+	var save_file = FileAccess.open(SAVE_GAME_FILE_PATH, FileAccess.WRITE)
 	var serialised_data = JSON.stringify(game_data.to_dictionary())
 	save_file.store_string(serialised_data)
 
 	return game_data
 
-func load() -> SaveGameData:
+func load() -> GameData:
 	if not has_save_system():
 		overwrite_start_room()
 		return game_data
 
-	if not FileAccess.file_exists(SAVE_FILE_PATH):
+	if not FileAccess.file_exists(SAVE_GAME_FILE_PATH):
 		print("File not found")
 		return game_data
 
-	var save_file = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)
+	var save_file = FileAccess.open(SAVE_GAME_FILE_PATH, FileAccess.READ)
 
 	var json: JSON = JSON.new()
 	var parse_result = json.parse(save_file.get_as_text())

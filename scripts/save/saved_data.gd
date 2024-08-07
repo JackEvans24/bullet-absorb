@@ -1,8 +1,4 @@
-class_name SaveGameData
-
-var completed_rooms: Array = []
-var current_room: String
-var collected_rewards: Array = []
+class_name SavedData
 
 func to_dictionary() -> Dictionary:
     var dict: Dictionary = {}
@@ -44,4 +40,4 @@ func unpack_dictionary(obj: Object, dict: Dictionary) -> Object:
     return obj
 
 func is_script_variable(prop: Dictionary):
-    return prop.usage&PROPERTY_USAGE_SCRIPT_VARIABLE != 0
+    return prop.usage & PROPERTY_USAGE_SCRIPT_VARIABLE != 0
