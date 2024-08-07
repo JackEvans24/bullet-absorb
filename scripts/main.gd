@@ -10,11 +10,9 @@ extends Node
 @onready var hit_stop: HitStop = $HitStop
 @onready var pause: PauseService = $Pause
 
-var game_data: GameData
-
 func _ready():
 	SaveGame.start_room_override = start_room_override
-	game_data = SaveGame.load()
+	SaveGame.load()
 
 	initialise_settings()
 	initialise_rooms()
@@ -32,7 +30,7 @@ func initialise_settings():
 func initialise_rooms():
 	rooms.reward_lookup = reward_lookup
 
-	rooms.initialise(game_data)
+	rooms.initialise(SaveGame.game_data)
 
 	rooms.doors_changed.connect(_on_room_doors_changed)
 	rooms.wall_destroyed.connect(_on_room_wall_destroyed)
@@ -42,6 +40,8 @@ func initialise_rooms():
 	rooms.room_reentered.connect(_on_room_reentered)
 
 func initialise_player():
+	var game_data = SaveGame.game_data
+
 	for reward_type in game_data.collected_rewards:
 		enable_reward(reward_type)
 
@@ -94,7 +94,7 @@ func _on_reward_collected(reward_type: Reward.RewardType):
 	hud.update(player)
 
 	SaveGame.add_collected_reward(reward_type)
-	game_data = SaveGame.save()
+	SaveGame.save()
 
 func enable_reward(reward_type: Reward.RewardType):
 	var reward = reward_lookup.find(reward_type)
@@ -106,8 +106,8 @@ func enable_reward(reward_type: Reward.RewardType):
 func _on_room_completed(room_id: String):
 	SaveGame.add_completed_room(room_id)
 	SaveGame.set_current_room(room_id)
-	game_data = SaveGame.save()
+	SaveGame.save()
 
 func _on_room_reentered(room_id: String):
 	SaveGame.set_current_room(room_id)
-	game_data = SaveGame.save()
+	SaveGame.save()
