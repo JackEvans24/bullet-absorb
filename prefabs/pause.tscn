@@ -1,0 +1,94 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2ueg1odtax8s"]
+
+[ext_resource type="Script" path="res://scripts/services/pause_service.gd" id="1_q2tnj"]
+[ext_resource type="Script" path="res://scripts/ui/pause_overlay.gd" id="2_2ufqu"]
+[ext_resource type="Theme" uid="uid://u7yomgp3qfdn" path="res://themes/default_theme.tres" id="2_bxu5t"]
+[ext_resource type="PackedScene" uid="uid://bh0xjehckf71i" path="res://prefabs/ui/debounced_slider.tscn" id="4_ysaie"]
+[ext_resource type="Script" path="res://scripts/sounds/sound_bank.gd" id="5_5cunl"]
+[ext_resource type="PackedScene" uid="uid://dppq0gwovue0h" path="res://prefabs/ui/ui_button.tscn" id="5_cxduo"]
+
+[node name="Pause" type="Node"]
+process_mode = 3
+script = ExtResource("1_q2tnj")
+
+[node name="PauseOverlay" type="ColorRect" parent="."]
+process_mode = 2
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_bxu5t")
+color = Color(0, 0, 0, 0.313726)
+script = ExtResource("2_2ufqu")
+
+[node name="PauseLabel" type="Label" parent="PauseOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -316.0
+offset_top = -41.0
+offset_right = 316.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"HeaderLarge"
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="SFX" type="VBoxContainer" parent="PauseOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 80.0
+offset_right = 150.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Slider" parent="PauseOverlay/SFX" instance=ExtResource("4_ysaie")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PauseOverlay/SFX"]
+layout_mode = 2
+text = "SFX Volume"
+horizontal_alignment = 1
+
+[node name="RestartButton" parent="PauseOverlay" instance=ExtResource("5_cxduo")]
+layout_mode = 1
+offset_top = 200.0
+offset_bottom = 254.0
+text = "Restart Level"
+
+[node name="QuitButton" parent="PauseOverlay" instance=ExtResource("5_cxduo")]
+layout_mode = 1
+offset_top = 270.0
+offset_bottom = 324.0
+text = "Quit"
+
+[node name="SoundBank" type="Node3D" parent="."]
+script = ExtResource("5_5cunl")
+
+[node name="Pause" type="FmodEventEmitter3D" parent="SoundBank"]
+event_name = "event:/UI/pause"
+event_guid = "{afd1b6bd-d3cd-40b4-97ed-aa9abb98e33e}"
+attached = false
+
+[node name="Unpause" type="FmodEventEmitter3D" parent="SoundBank"]
+event_name = "event:/UI/unpause"
+event_guid = "{647ae986-0c56-4f8b-a064-91b8449fbae2}"
+attached = false
+
+[node name="VolumeUpdate" type="FmodEventEmitter3D" parent="SoundBank"]
+event_name = "event:/UI/volume_change"
+event_guid = "{d5c78303-1329-42f9-b68a-a3749bf5522e}"
+attached = false

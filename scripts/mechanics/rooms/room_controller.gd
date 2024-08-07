@@ -12,7 +12,7 @@ var reward_lookup: RewardLookup
 
 var rooms: Dictionary
 
-func initialise(data: SaveGameData):
+func initialise(data: GameData):
 	var children = get_children()
 	for child in children:
 		var room = child as Room
@@ -27,15 +27,15 @@ func initialise(data: SaveGameData):
 		if room.data.is_hidden_room:
 			room.visible = false
 
+		if data.completed_rooms.has(room.data.room_name):
+			room.set_room_complete(true)
+
 		room.doors_changed.connect(_on_room_doors_changed)
 		room.wall_destroyed.connect(_on_room_wall_destroyed)
 		room.boss_entered.connect(_on_boss_entered)
 		room.reward_collected.connect(_on_reward_collected)
 		room.room_completed.connect(_on_room_completed)
 		room.room_reentered.connect(_on_room_reentered)
-
-		if data.completed_rooms.has(room.data.room_name):
-			room.set_room_complete()
 
 		rooms[room.data.room_name] = room
 

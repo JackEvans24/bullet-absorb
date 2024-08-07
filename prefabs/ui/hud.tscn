@@ -1,16 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhxrs6pph350t"]
+[gd_scene load_steps=5 format=3 uid="uid://bhxrs6pph350t"]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_fnqek"]
+[ext_resource type="Theme" uid="uid://u7yomgp3qfdn" path="res://themes/default_theme.tres" id="1_lrgkr"]
 [ext_resource type="PackedScene" uid="uid://dnhgfpvh8onaq" path="res://prefabs/ui/bar.tscn" id="2_pxq8q"]
 [ext_resource type="Script" path="res://scripts/ui/boss_ui.gd" id="3_cjg5j"]
 
 [node name="HUD" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_lrgkr")
 script = ExtResource("1_fnqek")
 death_overlay_timer = 1.2
 
@@ -70,8 +73,9 @@ offset_right = 218.5
 offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 56
+theme_type_variation = &"HeaderLarge"
 text = "You frickin' died"
+horizontal_alignment = 1
 
 [node name="DeathLabel2" type="Label" parent="DeathOverlay"]
 layout_mode = 1
@@ -86,8 +90,8 @@ offset_right = 108.0
 offset_bottom = 65.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 32
 text = "Press Start to retry"
+horizontal_alignment = 1
 
 [node name="BossUI" type="MarginContainer" parent="."]
 visible = false
@@ -115,7 +119,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="BossUI/Container"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
+theme_type_variation = &"HeaderLarge"
 text = "BOSS NAME"
 horizontal_alignment = 1
 vertical_alignment = 1

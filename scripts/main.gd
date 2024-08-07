@@ -1,17 +1,20 @@
 extends Node
 
 @export var reward_lookup: RewardLookup
+@export var start_room_override: String
 
 @onready var hud: Hud = $HUD
 @onready var player: Player = $Player
 @onready var rooms: RoomController = $World/Rooms
 @onready var cameras: CameraController = $Cameras
 @onready var hit_stop: HitStop = $HitStop
-@onready var save_game: SaveGame = $SaveGame
+@onready var pause: PauseService = $Pause
 
 func _ready():
-	save_game.load()
+	SaveGame.start_room_override = start_room_override
+	SaveGame.load()
 
+	initialise_settings()
 	initialise_rooms()
 	initialise_player()
 
@@ -20,10 +23,14 @@ func _ready():
 	hud.update(player)
 	hud._on_health_changed(player.current_health)
 
+func initialise_settings():
+	var settings_data = SaveSettings.load() as SettingsData
+	Sounds.set_sfx_volume(settings_data.sfx_volume)
+
 func initialise_rooms():
 	rooms.reward_lookup = reward_lookup
 
-	rooms.initialise(save_game.data)
+	rooms.initialise(SaveGame.game_data)
 
 	rooms.doors_changed.connect(_on_room_doors_changed)
 	rooms.wall_destroyed.connect(_on_room_wall_destroyed)
@@ -33,34 +40,32 @@ func initialise_rooms():
 	rooms.room_reentered.connect(_on_room_reentered)
 
 func initialise_player():
-	for reward_type in save_game.data.collected_rewards:
+	var game_data = SaveGame.game_data
+
+	for reward_type in game_data.collected_rewards:
 		enable_reward(reward_type)
 
-	if save_game.data.current_room:
-		var current_room = rooms.get_room(save_game.data.current_room)
+	if game_data.current_room:
+		var current_room = rooms.get_room(game_data.current_room)
 		if current_room:
 			player.global_position = current_room.global_position
 
 	player.bullet_fired.connect(_on_bullet_fired)
 	player.absorb_state_changed.connect(_on_absorb_state_changed)
 	player.damage_taken.connect(_on_damage_taken)
+	player.died.connect(_on_player_died)
 
 	player.power_count_changed.connect(hud._on_power_count_changed)
 	player.power_check_failed.connect(hud._on_power_check_failed)
-	player.died.connect(hud._on_player_died)
-
-func _input(event: InputEvent):
-	if event.is_action_pressed("restart"):
-		restart_game()
-
-func restart_game():
-	get_tree().call_group("bullet", "queue_free")
-	get_tree().reload_current_scene()
 
 func _on_damage_taken():
 	hit_stop.freeze()
 	cameras.add_impulse(ScreenShakeMapping.ScreenShakeId.Hurt)
 	hud._on_health_changed(player.current_health)
+
+func _on_player_died():
+	hud._on_player_died()
+	pause.is_game_over = true
 
 func _on_bullet_fired():
 	cameras.add_impulse(ScreenShakeMapping.ScreenShakeId.Fire)
@@ -88,8 +93,8 @@ func _on_reward_collected(reward_type: Reward.RewardType):
 
 	hud.update(player)
 
-	save_game.add_collected_reward(reward_type)
-	save_game.save()
+	SaveGame.add_collected_reward(reward_type)
+	SaveGame.save()
 
 func enable_reward(reward_type: Reward.RewardType):
 	var reward = reward_lookup.find(reward_type)
@@ -99,10 +104,10 @@ func enable_reward(reward_type: Reward.RewardType):
 	reward.upgrade(player)
 
 func _on_room_completed(room_id: String):
-	save_game.add_completed_room(room_id)
-	save_game.set_current_room(room_id)
-	save_game.save()
+	SaveGame.add_completed_room(room_id)
+	SaveGame.set_current_room(room_id)
+	SaveGame.save()
 
 func _on_room_reentered(room_id: String):
-	save_game.set_current_room(room_id)
-	save_game.save()
+	SaveGame.set_current_room(room_id)
+	SaveGame.save()

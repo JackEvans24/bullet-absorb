@@ -38,6 +38,7 @@ func destroy():
 	create_particles.emitting = false
 	idle_particles.emitting = false
 
+	sfx.stop("Drone")
 	sfx.play("Splash")
 	orb_absorbed.emit()
 

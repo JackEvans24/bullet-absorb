@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c1mqri24a2jrw" path="res://prefabs/room/burster_room_01.tscn" id="10_7eh75"]
 [ext_resource type="PackedScene" uid="uid://dgtr6vndvupwl" path="res://prefabs/room/burster_room_02.tscn" id="11_ob6mw"]
 [ext_resource type="PackedScene" uid="uid://bftjjya0ttahf" path="res://prefabs/room/hidden_buster_room_01.tscn" id="11_sdt03"]
-[ext_resource type="Script" path="res://scripts/save/save_game.gd" id="18_k1gw7"]
+[ext_resource type="PackedScene" uid="uid://b2ueg1odtax8s" path="res://prefabs/pause.tscn" id="17_5fyhn"]
 
 [sub_resource type="Environment" id="Environment_v60oa"]
 background_mode = 1
@@ -36,9 +36,6 @@ volumetric_fog_gi_inject = 0.12
 [node name="Main" type="Node"]
 script = ExtResource("1_rtjol")
 reward_lookup = ExtResource("2_3jey1")
-
-[node name="FmodBankLoader" type="FmodBankLoader" parent="."]
-bank_paths = ["res://sounds/banks/Master.strings.bank", "res://sounds/banks/Master.bank", "res://sounds/banks/SFX.bank"]
 
 [node name="World" type="Node" parent="."]
 
@@ -97,7 +94,6 @@ freeze_duration = 0.06
 
 [node name="Player" parent="." instance=ExtResource("1_e5x1h")]
 
-[node name="SaveGame" type="Node" parent="."]
-script = ExtResource("18_k1gw7")
+[node name="Pause" parent="." instance=ExtResource("17_5fyhn")]
 
 [editable path="World/Rooms/HiddenBursterRoom01"]
