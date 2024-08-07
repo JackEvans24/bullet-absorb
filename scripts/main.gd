@@ -8,7 +8,7 @@ extends Node
 @onready var rooms: RoomController = $World/Rooms
 @onready var cameras: CameraController = $Cameras
 @onready var hit_stop: HitStop = $HitStop
-@onready var pause: Pause = $Pause
+@onready var pause: PauseService = $Pause
 
 var game_data: GameData
 
@@ -16,6 +16,7 @@ func _ready():
 	SaveGame.start_room_override = start_room_override
 	game_data = SaveGame.load()
 
+	initialise_settings()
 	initialise_rooms()
 	initialise_player()
 
@@ -23,6 +24,10 @@ func _ready():
 
 	hud.update(player)
 	hud._on_health_changed(player.current_health)
+
+func initialise_settings():
+	var settings_data = SaveSettings.load()
+
 
 func initialise_rooms():
 	rooms.reward_lookup = reward_lookup

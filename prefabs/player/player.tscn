@@ -1,11 +1,11 @@
 [gd_scene load_steps=56 format=3 uid="uid://c3tj0pdcum4wd"]
 
 [ext_resource type="Script" path="res://scripts/mechanics/player/player.gd" id="1_u023k"]
-[ext_resource type="Script" path="res://scripts/state/move_state_machine.gd" id="2_pauji"]
 [ext_resource type="Script" path="res://scripts/mechanics/shared/health.gd" id="2_pcwtq"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/absorb/absorb.gd" id="2_sawo1"]
 [ext_resource type="Resource" uid="uid://did1tcy4p0ud2" path="res://data/rewards/player_base_stats.tres" id="2_vy3n2"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/run.gd" id="3_60agh"]
+[ext_resource type="Script" path="res://scripts/services/state/move_state_machine.gd" id="3_n2so6"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/dash.gd" id="4_5ub5d"]
 [ext_resource type="Material" uid="uid://f41eu4cbvian" path="res://materials/player/player_absorb.tres" id="4_ep8r4"]
 [ext_resource type="Script" path="res://scripts/mechanics/player/movement/dead.gd" id="4_koxfs"]
@@ -490,7 +490,7 @@ camera_follow_ref = NodePath("Pivot/AimPoints/CameraFollow")
 stats = ExtResource("2_vy3n2")
 
 [node name="MoveState" type="Node" parent="."]
-script = ExtResource("2_pauji")
+script = ExtResource("3_n2so6")
 initial_state = NodePath("Run")
 
 [node name="Absorb" type="Node" parent="MoveState"]

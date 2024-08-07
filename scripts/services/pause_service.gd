@@ -1,4 +1,4 @@
-class_name Pause
+class_name PauseService
 extends Node
 
 const SFX_BUS_PATH = "bus:/SFX"
@@ -12,7 +12,11 @@ var is_game_over := false
 @onready var sfx_bus: FmodBus = FmodServer.get_bus(SFX_BUS_PATH)
 @onready var ui_bus: FmodBus = FmodServer.get_bus(UI_BUS_PATH)
 
+@onready var settings_data: SettingsData = SaveSettings.load()
+
 func _ready():
+	pause_overlay.initialise(settings_data.sfx_volume)
+
 	pause_overlay.sfx_volume_changed.connect(_on_sfx_volume_changed)
 	pause_overlay.restart_requested.connect(_on_restart_requested)
 	pause_overlay.quit_requested.connect(on_quit_requested)

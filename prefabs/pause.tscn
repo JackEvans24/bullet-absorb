@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b2ueg1odtax8s"]
 
-[ext_resource type="Script" path="res://scripts/pause.gd" id="1_x275a"]
+[ext_resource type="Script" path="res://scripts/services/pause_service.gd" id="1_q2tnj"]
 [ext_resource type="Script" path="res://scripts/ui/pause_overlay.gd" id="2_2ufqu"]
 [ext_resource type="Theme" uid="uid://u7yomgp3qfdn" path="res://themes/default_theme.tres" id="2_bxu5t"]
 [ext_resource type="PackedScene" uid="uid://bh0xjehckf71i" path="res://prefabs/ui/debounced_slider.tscn" id="4_ysaie"]
@@ -9,7 +9,7 @@
 
 [node name="Pause" type="Node"]
 process_mode = 3
-script = ExtResource("1_x275a")
+script = ExtResource("1_q2tnj")
 
 [node name="PauseOverlay" type="ColorRect" parent="."]
 process_mode = 2

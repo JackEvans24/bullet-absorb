@@ -28,7 +28,7 @@ func save() -> SavedData:
 
     return data
 
-func load() -> GameData:
+func load() -> SavedData:
     if not has_save_system():
        do_debug_overwrites()
        return data
