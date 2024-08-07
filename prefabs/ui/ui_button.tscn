@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://dppq0gwovue0h"]
+
+[ext_resource type="Script" path="res://scripts/ui/button_with_sfx.gd" id="1_ctnow"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(240, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = 210.0
+offset_right = 120.0
+offset_bottom = 264.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Button"
+script = ExtResource("1_ctnow")
+
+[node name="SelectSFX" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/UI/ui_select"
+event_guid = "{9487624d-e7c5-48e4-81ab-2b9ba84e5680}"
+attached = false
