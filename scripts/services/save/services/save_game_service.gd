@@ -1,7 +1,7 @@
 class_name SaveGameService
 extends SaveServiceBase
 
-const SAVE_GAME_FILE_PATH := "user://bullet_absorb_game.save_game"
+const SAVE_GAME_FILE_PATH := "user://bullet_absorb_game.save"
 
 var start_room_override: String
 
