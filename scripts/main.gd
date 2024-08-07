@@ -7,11 +7,12 @@ extends Node
 @onready var rooms: RoomController = $World/Rooms
 @onready var cameras: CameraController = $Cameras
 @onready var hit_stop: HitStop = $HitStop
-@onready var save_game: SaveGame = $SaveGame
 @onready var pause: Pause = $Pause
 
+var game_data: SaveGameData
+
 func _ready():
-	save_game.load()
+	game_data = Save.load()
 
 	initialise_rooms()
 	initialise_player()
@@ -24,7 +25,7 @@ func _ready():
 func initialise_rooms():
 	rooms.reward_lookup = reward_lookup
 
-	rooms.initialise(save_game.data)
+	rooms.initialise(game_data)
 
 	rooms.doors_changed.connect(_on_room_doors_changed)
 	rooms.wall_destroyed.connect(_on_room_wall_destroyed)
@@ -34,11 +35,11 @@ func initialise_rooms():
 	rooms.room_reentered.connect(_on_room_reentered)
 
 func initialise_player():
-	for reward_type in save_game.data.collected_rewards:
+	for reward_type in game_data.collected_rewards:
 		enable_reward(reward_type)
 
-	if save_game.data.current_room:
-		var current_room = rooms.get_room(save_game.data.current_room)
+	if game_data.current_room:
+		var current_room = rooms.get_room(game_data.current_room)
 		if current_room:
 			player.global_position = current_room.global_position
 
@@ -85,8 +86,8 @@ func _on_reward_collected(reward_type: Reward.RewardType):
 
 	hud.update(player)
 
-	save_game.add_collected_reward(reward_type)
-	save_game.save()
+	Save.add_collected_reward(reward_type)
+	game_data = Save.save()
 
 func enable_reward(reward_type: Reward.RewardType):
 	var reward = reward_lookup.find(reward_type)
@@ -96,10 +97,10 @@ func enable_reward(reward_type: Reward.RewardType):
 	reward.upgrade(player)
 
 func _on_room_completed(room_id: String):
-	save_game.add_completed_room(room_id)
-	save_game.set_current_room(room_id)
-	save_game.save()
+	Save.add_completed_room(room_id)
+	Save.set_current_room(room_id)
+	game_data = Save.save()
 
 func _on_room_reentered(room_id: String):
-	save_game.set_current_room(room_id)
-	save_game.save()
+	Save.set_current_room(room_id)
+	game_data = Save.save()
