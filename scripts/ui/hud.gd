@@ -5,6 +5,7 @@ extends Node
 
 @onready var health_bar: Bar = $HealthBar
 @onready var power_bar: Bar = $PowerBar
+@onready var pause_overlay: ColorRect = $PauseOverlay
 @onready var death_overlay: ColorRect = $DeathOverlay
 @onready var boss_ui: BossUI = $BossUI
 
@@ -17,6 +18,9 @@ func update(player: Player):
 func update_bar(bar: Bar, max_value: float, current_value: float):
 	bar.max_value = max_value
 	bar.update_value(current_value)
+
+func set_pause_overlay(active: bool):
+	pause_overlay.visible = active
 
 func initialise_boss_ui(boss: Boss):
 	boss_ui.initialise(boss.title, boss.max_health)

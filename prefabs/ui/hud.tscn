@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhxrs6pph350t"]
+[gd_scene load_steps=6 format=3 uid="uid://bhxrs6pph350t"]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_fnqek"]
 [ext_resource type="PackedScene" uid="uid://dnhgfpvh8onaq" path="res://prefabs/ui/bar.tscn" id="2_pxq8q"]
 [ext_resource type="Script" path="res://scripts/ui/boss_ui.gd" id="3_cjg5j"]
+[ext_resource type="Theme" uid="uid://t0s81v3qtxwi" path="res://themes/text_h1.tres" id="3_qweo1"]
+[ext_resource type="Theme" uid="uid://byol2h2dkk7fs" path="res://themes/text_p.tres" id="4_s3vlu"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -70,8 +72,9 @@ offset_right = 218.5
 offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 56
+theme = ExtResource("3_qweo1")
 text = "You frickin' died"
+horizontal_alignment = 1
 
 [node name="DeathLabel2" type="Label" parent="DeathOverlay"]
 layout_mode = 1
@@ -86,8 +89,37 @@ offset_right = 108.0
 offset_bottom = 65.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 32
+theme = ExtResource("4_s3vlu")
 text = "Press Start to retry"
+horizontal_alignment = 1
+
+[node name="PauseOverlay" type="ColorRect" parent="."]
+process_mode = 2
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.313726)
+
+[node name="PauseLabel" type="Label" parent="PauseOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -316.0
+offset_top = -41.0
+offset_right = 316.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_qweo1")
+text = "Paused"
+horizontal_alignment = 1
 
 [node name="BossUI" type="MarginContainer" parent="."]
 visible = false
@@ -115,7 +147,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="BossUI/Container"]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
+theme = ExtResource("3_qweo1")
 text = "BOSS NAME"
 horizontal_alignment = 1
 vertical_alignment = 1
