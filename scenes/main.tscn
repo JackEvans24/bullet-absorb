@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ccgpc6v5lruew"]
+[gd_scene load_steps=20 format=3 uid="uid://ccgpc6v5lruew"]
 
 [ext_resource type="PackedScene" uid="uid://c3tj0pdcum4wd" path="res://prefabs/player/player.tscn" id="1_e5x1h"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_rtjol"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c1mqri24a2jrw" path="res://prefabs/room/burster_room_01.tscn" id="10_7eh75"]
 [ext_resource type="PackedScene" uid="uid://dgtr6vndvupwl" path="res://prefabs/room/burster_room_02.tscn" id="11_ob6mw"]
 [ext_resource type="PackedScene" uid="uid://bftjjya0ttahf" path="res://prefabs/room/hidden_buster_room_01.tscn" id="11_sdt03"]
+[ext_resource type="Script" path="res://scripts/pause.gd" id="17_5565i"]
 [ext_resource type="Script" path="res://scripts/save/save_game.gd" id="18_k1gw7"]
 
 [sub_resource type="Environment" id="Environment_v60oa"]
@@ -98,6 +99,12 @@ freeze_duration = 0.06
 [node name="Player" parent="." instance=ExtResource("1_e5x1h")]
 
 [node name="SaveGame" type="Node" parent="."]
+process_mode = 3
 script = ExtResource("18_k1gw7")
+
+[node name="Pause" type="Node" parent="." node_paths=PackedStringArray("hud")]
+process_mode = 3
+script = ExtResource("17_5565i")
+hud = NodePath("../HUD")
 
 [editable path="World/Rooms/HiddenBursterRoom01"]

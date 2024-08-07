@@ -8,6 +8,7 @@ extends Node
 @onready var cameras: CameraController = $Cameras
 @onready var hit_stop: HitStop = $HitStop
 @onready var save_game: SaveGame = $SaveGame
+@onready var pause: Pause = $Pause
 
 func _ready():
 	save_game.load()
@@ -44,23 +45,19 @@ func initialise_player():
 	player.bullet_fired.connect(_on_bullet_fired)
 	player.absorb_state_changed.connect(_on_absorb_state_changed)
 	player.damage_taken.connect(_on_damage_taken)
+	player.died.connect(_on_player_died)
 
 	player.power_count_changed.connect(hud._on_power_count_changed)
 	player.power_check_failed.connect(hud._on_power_check_failed)
-	player.died.connect(hud._on_player_died)
-
-func _input(event: InputEvent):
-	if event.is_action_pressed("restart"):
-		restart_game()
-
-func restart_game():
-	get_tree().call_group("bullet", "queue_free")
-	get_tree().reload_current_scene()
 
 func _on_damage_taken():
 	hit_stop.freeze()
 	cameras.add_impulse(ScreenShakeMapping.ScreenShakeId.Hurt)
 	hud._on_health_changed(player.current_health)
+
+func _on_player_died():
+	hud._on_player_died()
+	pause.is_game_over = true
 
 func _on_bullet_fired():
 	cameras.add_impulse(ScreenShakeMapping.ScreenShakeId.Fire)
