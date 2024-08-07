@@ -176,6 +176,10 @@ func set_doors(doors: int, quiet: bool = false):
 	if not boundary.doors_need_changing(doors):
 		return
 	boundary.set_doors(doors)
+
+	if quiet:
+		return
+
 	doors_changed.emit()
-	if initialised and not quiet:
+	if initialised:
 		sfx.play("Doors")
