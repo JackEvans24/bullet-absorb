@@ -7,6 +7,7 @@ var is_game_over := false
 
 func _ready():
 	pause_overlay.restart_requested.connect(restart_game)
+	pause_overlay.quit_requested.connect(quit_game)
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("pause"):
@@ -29,3 +30,6 @@ func restart_game():
 	tree.call_group("bullet", "queue_free")
 	tree.reload_current_scene()
 	tree.paused = false
+
+func quit_game():
+	get_tree().quit()
