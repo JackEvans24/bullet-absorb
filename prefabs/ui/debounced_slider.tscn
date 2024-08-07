@@ -17,3 +17,4 @@ grow_vertical = 2
 max_value = 1.0
 step = 0.01
 script = ExtResource("1_gh4ot")
+debounce_time_ms = 100
