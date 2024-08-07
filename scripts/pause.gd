@@ -3,7 +3,10 @@ extends Node
 
 var is_game_over := false
 
-@export var hud: Hud
+@onready var pause_overlay: PauseOverlay = $PauseOverlay
+
+func _ready():
+	pause_overlay.restart_requested.connect(restart_game)
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("restart"):
@@ -16,8 +19,10 @@ func handle_escape():
 
 	var tree = get_tree()
 	tree.paused = !tree.paused
-	hud.set_pause_overlay(tree.paused)
+	pause_overlay.visible = tree.paused
 
 func restart_game():
-	get_tree().call_group("bullet", "queue_free")
-	get_tree().reload_current_scene()
+	var tree = get_tree()
+	tree.call_group("bullet", "queue_free")
+	tree.reload_current_scene()
+	tree.paused = false

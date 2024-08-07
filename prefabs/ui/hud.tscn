@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://byol2h2dkk7fs" path="res://themes/text_p.tres" id="4_s3vlu"]
 
 [node name="HUD" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -91,34 +92,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_s3vlu")
 text = "Press Start to retry"
-horizontal_alignment = 1
-
-[node name="PauseOverlay" type="ColorRect" parent="."]
-process_mode = 2
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.313726)
-
-[node name="PauseLabel" type="Label" parent="PauseOverlay"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -316.0
-offset_top = -41.0
-offset_right = 316.0
-offset_bottom = 41.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("3_qweo1")
-text = "Paused"
 horizontal_alignment = 1
 
 [node name="BossUI" type="MarginContainer" parent="."]
