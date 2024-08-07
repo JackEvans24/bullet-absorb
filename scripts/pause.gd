@@ -45,8 +45,12 @@ func restart_game():
 	tree.reload_current_scene()
 
 func _on_sfx_volume_changed(sfx_volume: float):
+	if is_equal_approx(sfx_bus.volume, sfx_volume):
+		return
+
 	sfx_bus.volume = sfx_volume
 	ui_bus.volume = sfx_volume
+	sfx.play("VolumeUpdate")
 
 func _on_restart_requested():
 	get_tree().paused = false

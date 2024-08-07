@@ -87,3 +87,8 @@ attached = false
 event_name = "event:/UI/unpause"
 event_guid = "{647ae986-0c56-4f8b-a064-91b8449fbae2}"
 attached = false
+
+[node name="VolumeUpdate" type="FmodEventEmitter3D" parent="SoundBank"]
+event_name = "event:/UI/volume_change"
+event_guid = "{d5c78303-1329-42f9-b68a-a3749bf5522e}"
+attached = false
