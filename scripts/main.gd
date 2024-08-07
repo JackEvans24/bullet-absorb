@@ -1,6 +1,7 @@
 extends Node
 
 @export var reward_lookup: RewardLookup
+@export var start_room_override: String
 
 @onready var hud: Hud = $HUD
 @onready var player: Player = $Player
@@ -12,6 +13,7 @@ extends Node
 var game_data: SaveGameData
 
 func _ready():
+	Save.start_room_override = start_room_override
 	game_data = Save.load()
 
 	initialise_rooms()
