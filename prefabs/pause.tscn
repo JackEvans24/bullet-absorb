@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2ueg1odtax8s"]
+[gd_scene load_steps=7 format=3 uid="uid://b2ueg1odtax8s"]
 
 [ext_resource type="Script" path="res://scripts/pause.gd" id="1_x275a"]
 [ext_resource type="Script" path="res://scripts/ui/pause_overlay.gd" id="2_2ufqu"]
 [ext_resource type="Theme" uid="uid://u7yomgp3qfdn" path="res://themes/default_theme.tres" id="2_bxu5t"]
 [ext_resource type="PackedScene" uid="uid://bh0xjehckf71i" path="res://prefabs/ui/debounced_slider.tscn" id="4_ysaie"]
 [ext_resource type="Script" path="res://scripts/sounds/sound_bank.gd" id="5_5cunl"]
+[ext_resource type="PackedScene" uid="uid://dppq0gwovue0h" path="res://prefabs/ui/ui_button.tscn" id="5_cxduo"]
 
 [node name="Pause" type="Node"]
 process_mode = 3
@@ -62,38 +63,17 @@ layout_mode = 2
 text = "SFX Volume"
 horizontal_alignment = 1
 
-[node name="RestartButton" type="Button" parent="PauseOverlay"]
-custom_minimum_size = Vector2(240, 0)
+[node name="RestartButton" parent="PauseOverlay" instance=ExtResource("5_cxduo")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = 210.0
-offset_right = 120.0
-offset_bottom = 264.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_top = 200.0
+offset_bottom = 254.0
 text = "Restart Level"
 
-[node name="QuitButton" type="Button" parent="PauseOverlay"]
-custom_minimum_size = Vector2(240, 0)
+[node name="QuitButton" parent="PauseOverlay" instance=ExtResource("5_cxduo")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = 280.0
-offset_right = 120.0
-offset_bottom = 334.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Quit
-"
+offset_top = 270.0
+offset_bottom = 324.0
+text = "Quit"
 
 [node name="SoundBank" type="Node3D" parent="."]
 script = ExtResource("5_5cunl")
