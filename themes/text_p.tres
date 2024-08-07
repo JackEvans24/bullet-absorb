@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://byol2h2dkk7fs"]
+
+[ext_resource type="FontFile" uid="uid://qagwv88qi3k5" path="res://themes/fonts/robot_2/Robot_Font.otf" id="1_mupt4"]
+
+[resource]
+default_font = ExtResource("1_mupt4")
+default_font_size = 32
