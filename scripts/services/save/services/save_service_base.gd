@@ -38,8 +38,8 @@ func load() -> SavedData:
         return data
 
     if not FileAccess.file_exists(path):
-        print("File not found")
-        return data
+        print("File not found (%s), creating new data" % name)
+        return save()
 
     var save_file = FileAccess.open(path, FileAccess.READ)
 
