@@ -151,8 +151,8 @@ func _on_reward_collected(reward_type: Reward.RewardType):
 	reward_collected.emit(reward_type)
 	call_deferred("set_room_complete")
 
-func set_room_complete():
-	set_doors(data.completed_doors)
+func set_room_complete(quiet: bool = false):
+	set_doors(data.completed_doors, quiet)
 
 	handle_destructible_wall()
 
@@ -172,10 +172,10 @@ func _on_wall_destroyed():
 func close_all_doors():
 	set_doors(0)
 
-func set_doors(doors: int):
+func set_doors(doors: int, quiet: bool = false):
 	if not boundary.doors_need_changing(doors):
 		return
 	boundary.set_doors(doors)
 	doors_changed.emit()
-	if initialised:
+	if initialised and not quiet:
 		sfx.play("Doors")
