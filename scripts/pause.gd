@@ -9,7 +9,7 @@ func _ready():
 	pause_overlay.restart_requested.connect(restart_game)
 
 func _input(event: InputEvent):
-	if event.is_action_pressed("restart"):
+	if event.is_action_pressed("pause"):
 		handle_escape()
 
 func handle_escape():
