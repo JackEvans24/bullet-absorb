@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2ueg1odtax8s"]
+[gd_scene load_steps=6 format=3 uid="uid://b2ueg1odtax8s"]
 
 [ext_resource type="Script" path="res://scripts/pause.gd" id="1_x275a"]
 [ext_resource type="Script" path="res://scripts/ui/pause_overlay.gd" id="2_2ufqu"]
 [ext_resource type="Theme" uid="uid://u7yomgp3qfdn" path="res://themes/default_theme.tres" id="2_bxu5t"]
 [ext_resource type="PackedScene" uid="uid://bh0xjehckf71i" path="res://prefabs/ui/debounced_slider.tscn" id="4_ysaie"]
+[ext_resource type="Script" path="res://scripts/sounds/sound_bank.gd" id="5_5cunl"]
 
 [node name="Pause" type="Node"]
 process_mode = 3
@@ -93,3 +94,16 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Quit
 "
+
+[node name="SoundBank" type="Node3D" parent="."]
+script = ExtResource("5_5cunl")
+
+[node name="Pause" type="FmodEventEmitter3D" parent="SoundBank"]
+event_name = "event:/UI/pause"
+event_guid = "{afd1b6bd-d3cd-40b4-97ed-aa9abb98e33e}"
+attached = false
+
+[node name="Unpause" type="FmodEventEmitter3D" parent="SoundBank"]
+event_name = "event:/UI/unpause"
+event_guid = "{647ae986-0c56-4f8b-a064-91b8449fbae2}"
+attached = false

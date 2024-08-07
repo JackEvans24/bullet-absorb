@@ -2,11 +2,15 @@ class_name Pause
 extends Node
 
 const SFX_BUS_PATH = "bus:/SFX"
+const UI_BUS_PATH = "bus:/UI"
 
 var is_game_over := false
 
 @onready var pause_overlay: PauseOverlay = $PauseOverlay
+@onready var sfx: SoundBank = $SoundBank
+
 @onready var sfx_bus: FmodBus = FmodServer.get_bus(SFX_BUS_PATH)
+@onready var ui_bus: FmodBus = FmodServer.get_bus(UI_BUS_PATH)
 
 func _ready():
 	pause_overlay.sfx_volume_changed.connect(_on_sfx_volume_changed)
@@ -26,6 +30,11 @@ func handle_escape():
 	tree.paused = !tree.paused
 
 	pause_overlay.visible = tree.paused
+	sfx_bus.paused = tree.paused
+
+	var sfx_name = "Pause" if tree.paused else "Unpause"
+	sfx.play(sfx_name)
+
 	if tree.paused:
 		pause_overlay.set_active()
 		pause_overlay.initialise(sfx_bus.volume)
@@ -37,6 +46,7 @@ func restart_game():
 
 func _on_sfx_volume_changed(sfx_volume: float):
 	sfx_bus.volume = sfx_volume
+	ui_bus.volume = sfx_volume
 
 func _on_restart_requested():
 	get_tree().paused = false
