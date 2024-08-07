@@ -19,7 +19,10 @@ func handle_escape():
 
 	var tree = get_tree()
 	tree.paused = !tree.paused
+
 	pause_overlay.visible = tree.paused
+	if tree.paused:
+		pause_overlay.set_active()
 
 func restart_game():
 	var tree = get_tree()
