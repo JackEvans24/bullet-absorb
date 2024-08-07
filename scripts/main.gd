@@ -26,8 +26,8 @@ func _ready():
 	hud._on_health_changed(player.current_health)
 
 func initialise_settings():
-	var settings_data = SaveSettings.load()
-
+	var settings_data = SaveSettings.load() as SettingsData
+	Sounds.set_sfx_volume(settings_data.sfx_volume)
 
 func initialise_rooms():
 	rooms.reward_lookup = reward_lookup

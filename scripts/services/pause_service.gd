@@ -47,6 +47,9 @@ func _on_sfx_volume_changed(sfx_volume: float):
 	Sounds.set_sfx_volume(sfx_volume)
 	sfx.play("VolumeUpdate")
 
+	SaveSettings.settings_data.sfx_volume = sfx_volume
+	SaveSettings.save()
+
 func _on_restart_requested():
 	get_tree().paused = false
 	restart_game()

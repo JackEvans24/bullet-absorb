@@ -37,9 +37,6 @@ volumetric_fog_gi_inject = 0.12
 script = ExtResource("1_rtjol")
 reward_lookup = ExtResource("2_3jey1")
 
-[node name="FmodBankLoader" type="FmodBankLoader" parent="."]
-bank_paths = ["res://sounds/banks/Master.strings.bank", "res://sounds/banks/Master.bank", "res://sounds/banks/SFX.bank", "res://sounds/banks/UI.bank"]
-
 [node name="World" type="Node" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
