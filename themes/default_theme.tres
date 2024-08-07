@@ -1,21 +1,22 @@
 [gd_resource type="Theme" load_steps=6 format=3 uid="uid://u7yomgp3qfdn"]
 
-[ext_resource type="StyleBox" uid="uid://csv5kg04ctbd6" path="res://themes/button_layouts/button_disabled.tres" id="1_2545x"]
-[ext_resource type="StyleBox" uid="uid://b83kkme5o0ah4" path="res://themes/button_layouts/button_normal.tres" id="1_fmpx0"]
-[ext_resource type="FontFile" uid="uid://vvhciktksfj0" path="res://themes/fonts/hybrid/Hybrid_b.ttf" id="2_1wj3s"]
-[ext_resource type="FontFile" uid="uid://qagwv88qi3k5" path="res://themes/fonts/robot_2/Robot_Font.otf" id="2_4p4wh"]
-[ext_resource type="StyleBox" uid="uid://b54jr8vdkn0kg" path="res://themes/button_layouts/button_focus.tres" id="2_360hl"]
+[ext_resource type="StyleBox" uid="uid://csv5kg04ctbd6" path="res://themes/button_layouts/button_disabled.tres" id="1_8ao28"]
+[ext_resource type="StyleBox" uid="uid://b54jr8vdkn0kg" path="res://themes/button_layouts/button_focus.tres" id="2_3xcpi"]
+[ext_resource type="StyleBox" uid="uid://b83kkme5o0ah4" path="res://themes/button_layouts/button_normal.tres" id="3_cycys"]
+[ext_resource type="FontFile" uid="uid://vvhciktksfj0" path="res://themes/fonts/hybrid/Hybrid_b.ttf" id="4_vfpql"]
+[ext_resource type="FontFile" uid="uid://qagwv88qi3k5" path="res://themes/fonts/robot_2/Robot_Font.otf" id="5_l0mco"]
 
 [resource]
 default_base_scale = 1.0
-default_font = ExtResource("2_4p4wh")
+default_font = ExtResource("5_l0mco")
 default_font_size = 32
 Button/colors/font_disabled_color = Color(0.87451, 0.87451, 0.87451, 0.258824)
-Button/styles/disabled = ExtResource("1_2545x")
-Button/styles/focus = ExtResource("2_360hl")
-Button/styles/hover = ExtResource("2_360hl")
-Button/styles/normal = ExtResource("1_fmpx0")
+Button/styles/disabled = ExtResource("1_8ao28")
+Button/styles/focus = ExtResource("2_3xcpi")
+Button/styles/hover = ExtResource("2_3xcpi")
+Button/styles/normal = ExtResource("3_cycys")
 HeaderLarge/base_type = &"Label"
 HeaderLarge/colors/font_color = Color(1, 1, 1, 1)
 HeaderLarge/font_sizes/font_size = 64
-HeaderLarge/fonts/font = ExtResource("2_1wj3s")
+HeaderLarge/fonts/font = ExtResource("4_vfpql")
+VBoxContainer/constants/separation = 15
