@@ -38,6 +38,7 @@ config/icon="res://icon.svg"
 FmodManager="*res://addons/fmod/FmodManager.gd"
 SaveGame="*res://scripts/services/save/services/save_game_service.gd"
 SaveSettings="*res://scripts/services/save/services/save_settings_service.gd"
+Sounds="*res://scripts/services/sound_service.gd"
 
 [display]
 
