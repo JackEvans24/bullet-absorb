@@ -22,21 +22,29 @@ func handle_escape():
 		restart_game()
 		return
 
+	set_pause_state(!get_tree().paused)
+
+func set_pause_state(paused: bool, quiet: bool = false):
 	var tree = get_tree()
-	tree.paused = !tree.paused
+	tree.paused = paused
 
-	pause_overlay.visible = tree.paused
-	Sounds.set_sounds_paused(tree.paused)
+	pause_overlay.visible = paused
+	Sounds.set_sounds_paused(paused)
 
-	var sfx_name = "Pause" if tree.paused else "Unpause"
-	sfx.play(sfx_name)
+	if not quiet:
+		var sfx_name = "Pause" if paused else "Unpause"
+		sfx.play(sfx_name)
 
-	if tree.paused:
+	if paused:
 		pause_overlay.set_active()
 		pause_overlay.initialise(Sounds.sfx_volume)
 
 func restart_game():
 	var tree = get_tree()
+	await tree.create_timer(0.2).timeout
+
+	set_pause_state(false, true)
+
 	tree.call_group("bullet", "queue_free")
 	tree.reload_current_scene()
 

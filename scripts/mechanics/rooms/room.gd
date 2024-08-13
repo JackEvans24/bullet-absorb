@@ -2,11 +2,10 @@ class_name Room
 extends Node3D
 
 signal doors_changed
-signal wall_destroyed(linked_room: String)
+signal wall_destroyed(room_id: String, linked_room: String)
 signal boss_entered(boss: Boss)
 signal reward_collected(reward_type: Reward.RewardType)
 signal room_completed(room_id: String)
-signal room_reentered(room_id: String)
 
 @export var data: RoomData
 
@@ -34,9 +33,6 @@ func _ready():
 	initialised = true
 
 func _on_player_entered(body: Node3D):
-	if completed:
-		room_reentered.emit(data.room_name)
-
 	if player != null:
 		return
 	player = body
@@ -166,8 +162,11 @@ func handle_destructible_wall():
 	destructible_wall.wall_destroyed.connect(_on_wall_destroyed)
 	destructible_wall.mark_ready_to_destroy()
 
+func quiet_destroy_wall():
+	destructible_wall.quiet_destroy()
+
 func _on_wall_destroyed():
-	wall_destroyed.emit(linked_room_name)
+	wall_destroyed.emit(data.room_name, linked_room_name)
 
 func close_all_doors():
 	set_doors(0)

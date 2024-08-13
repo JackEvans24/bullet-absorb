@@ -37,18 +37,12 @@ func initialise_rooms():
 	rooms.boss_entered.connect(_on_boss_entered)
 	rooms.reward_collected.connect(_on_reward_collected)
 	rooms.room_completed.connect(_on_room_completed)
-	rooms.room_reentered.connect(_on_room_reentered)
 
 func initialise_player():
 	var game_data = SaveGame.game_data
 
 	for reward_type in game_data.collected_rewards:
 		enable_reward(reward_type)
-
-	if game_data.current_room:
-		var current_room = rooms.get_room(game_data.current_room)
-		if current_room:
-			player.global_position = current_room.global_position
 
 	player.bullet_fired.connect(_on_bullet_fired)
 	player.absorb_state_changed.connect(_on_absorb_state_changed)
@@ -82,8 +76,11 @@ func _on_absorb_state_changed(absorb_state: Player.AbsorbState):
 func _on_room_doors_changed():
 	cameras.add_impulse(ScreenShakeMapping.ScreenShakeId.Doors)
 
-func _on_room_wall_destroyed():
+func _on_room_wall_destroyed(room_id: String):
 	cameras.add_impulse(ScreenShakeMapping.ScreenShakeId.Doors)
+
+	SaveGame.add_broken_wall(room_id)
+	SaveGame.save()
 
 func _on_boss_entered(boss: Boss):
 	hud.initialise_boss_ui(boss)
@@ -105,9 +102,4 @@ func enable_reward(reward_type: Reward.RewardType):
 
 func _on_room_completed(room_id: String):
 	SaveGame.add_completed_room(room_id)
-	SaveGame.set_current_room(room_id)
-	SaveGame.save()
-
-func _on_room_reentered(room_id: String):
-	SaveGame.set_current_room(room_id)
 	SaveGame.save()
