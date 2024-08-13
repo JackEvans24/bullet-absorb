@@ -6,7 +6,6 @@ signal wall_destroyed(linked_room: String)
 signal boss_entered(boss: Boss)
 signal reward_collected(reward_type: Reward.RewardType)
 signal room_completed(room_id: String)
-signal room_reentered(room_id: String)
 
 @export var data: RoomData
 
@@ -34,9 +33,6 @@ func _ready():
 	initialised = true
 
 func _on_player_entered(body: Node3D):
-	if completed:
-		room_reentered.emit(data.room_name)
-
 	if player != null:
 		return
 	player = body

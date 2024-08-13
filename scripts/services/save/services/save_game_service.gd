@@ -22,7 +22,6 @@ func overwrite_start_room():
        return
     if not game_data.completed_rooms.has(start_room_override):
        game_data.completed_rooms.push_back(start_room_override)
-    game_data.current_room = start_room_override
 
 func add_completed_room(room_id: String):
     if game_data.completed_rooms.has(room_id):
@@ -30,9 +29,6 @@ func add_completed_room(room_id: String):
        return
 
     game_data.completed_rooms.push_back(room_id)
-
-func set_current_room(room_id: String):
-    game_data.current_room = room_id
 
 func add_collected_reward(reward: Reward.RewardType):
     game_data.collected_rewards.push_back(reward)

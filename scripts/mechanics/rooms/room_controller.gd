@@ -5,7 +5,6 @@ signal wall_destroyed
 signal boss_entered(boss: Boss)
 signal reward_collected(reward_type: Reward.RewardType)
 signal room_completed(room_id: String)
-signal room_reentered(room_id: String)
 
 @export var room_item_lookup: RoomItemLookup
 var reward_lookup: RewardLookup
@@ -35,7 +34,6 @@ func initialise(data: GameData):
 		room.boss_entered.connect(_on_boss_entered)
 		room.reward_collected.connect(_on_reward_collected)
 		room.room_completed.connect(_on_room_completed)
-		room.room_reentered.connect(_on_room_reentered)
 
 		rooms[room.data.room_name] = room
 
@@ -68,6 +66,3 @@ func _on_reward_collected(reward_type: Reward.RewardType):
 
 func _on_room_completed(room_id: String):
 	room_completed.emit(room_id)
-
-func _on_room_reentered(room_id: String):
-	room_reentered.emit(room_id)
