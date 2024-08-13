@@ -24,7 +24,6 @@ material_override = ExtResource("4_smrix")
 [node name="IdleParticles" parent="Orb" index="3"]
 visible = false
 material_override = ExtResource("4_smrix")
-emitting = true
 
 [node name="DeathParticles" parent="Orb" index="4"]
 material_override = ExtResource("4_smrix")
