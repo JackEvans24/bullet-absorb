@@ -1,7 +1,7 @@
 class_name RoomController extends Node
 
 signal doors_changed
-signal wall_destroyed
+signal wall_destroyed(room_id: String)
 signal boss_entered(boss: Boss)
 signal reward_collected(reward_type: Reward.RewardType)
 signal room_completed(room_id: String)
@@ -14,28 +14,43 @@ var rooms: Dictionary
 func initialise(data: GameData):
 	var children = get_children()
 	for child in children:
-		var room = child as Room
+		add_to_rooms(child)
 
-		if rooms.has(room.data.room_name):
-			printerr("Duplicate room name found whilst processing ", room.name, ": ", room.data.room_name)
-			continue
+	for room_key in rooms.keys():
+		var room = rooms[room_key]
+		initialise_room(room, data)
 
-		room.room_item_lookup = room_item_lookup
-		room.reward_lookup = reward_lookup
+	for room_key in rooms.keys():
+		var room = rooms[room_key]
+		unhide_found_room(room, data)
 
-		if room.data.is_hidden_room:
-			room.visible = false
+func add_to_rooms(child: Node):
+	var room = child as Room
+	if rooms.has(room.data.room_name):
+		printerr("Duplicate room name found whilst processing ", room.name, ": ", room.data.room_name)
+		return
+	rooms[room.data.room_name] = room
 
-		if data.completed_rooms.has(room.data.room_name):
-			room.set_room_complete(true)
+func initialise_room(room: Room, data: GameData):
+	room.room_item_lookup = room_item_lookup
+	room.reward_lookup = reward_lookup
 
-		room.doors_changed.connect(_on_room_doors_changed)
-		room.wall_destroyed.connect(_on_room_wall_destroyed)
-		room.boss_entered.connect(_on_boss_entered)
-		room.reward_collected.connect(_on_reward_collected)
-		room.room_completed.connect(_on_room_completed)
+	if room.data.is_hidden_room:
+		room.visible = false
 
-		rooms[room.data.room_name] = room
+	if data.completed_rooms.has(room.data.room_name):
+		room.set_room_complete(true)
+
+	room.doors_changed.connect(_on_room_doors_changed)
+	room.wall_destroyed.connect(_on_room_wall_destroyed)
+	room.boss_entered.connect(_on_boss_entered)
+	room.reward_collected.connect(_on_reward_collected)
+	room.room_completed.connect(_on_room_completed)
+
+func unhide_found_room(room: Room, data: GameData):
+	if data.broken_walls.has(room.data.room_name):
+		room.quiet_destroy_wall()
+		show_linked_room(room.linked_room_name)
 
 func get_room(id: String) -> Room:
 	if not rooms.has(id):
@@ -46,7 +61,11 @@ func get_room(id: String) -> Room:
 func _on_room_doors_changed():
 	doors_changed.emit()
 
-func _on_room_wall_destroyed(linked_room_name: String):
+func _on_room_wall_destroyed(room_id: String, linked_room_name: String):
+	show_linked_room(linked_room_name)
+	wall_destroyed.emit(room_id)
+
+func show_linked_room(linked_room_name: String):
 	if not rooms.has(linked_room_name):
 		printerr("Destroyed wall is linked to room that doesn't exist: ", linked_room_name)
 		return
@@ -55,7 +74,6 @@ func _on_room_wall_destroyed(linked_room_name: String):
 	if not linked_room.data.is_hidden_room:
 		printerr("Destroyed wall is linked to a room that isn't marked as hidden: ", linked_room_name)
 
-	wall_destroyed.emit()
 	linked_room.visible = true
 
 func _on_boss_entered(boss: Boss):

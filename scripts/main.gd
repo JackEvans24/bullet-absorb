@@ -76,8 +76,11 @@ func _on_absorb_state_changed(absorb_state: Player.AbsorbState):
 func _on_room_doors_changed():
 	cameras.add_impulse(ScreenShakeMapping.ScreenShakeId.Doors)
 
-func _on_room_wall_destroyed():
+func _on_room_wall_destroyed(room_id: String):
 	cameras.add_impulse(ScreenShakeMapping.ScreenShakeId.Doors)
+
+	SaveGame.add_broken_wall(room_id)
+	SaveGame.save()
 
 func _on_boss_entered(boss: Boss):
 	hud.initialise_boss_ui(boss)

@@ -30,5 +30,12 @@ func add_completed_room(room_id: String):
 
     game_data.completed_rooms.push_back(room_id)
 
+func add_broken_wall(room_id: String):
+    if game_data.broken_walls.has(room_id):
+       printerr("Wall in room %s already marked as broken" % room_id)
+       return
+
+    game_data.broken_walls.push_back(room_id)
+
 func add_collected_reward(reward: Reward.RewardType):
     game_data.collected_rewards.push_back(reward)

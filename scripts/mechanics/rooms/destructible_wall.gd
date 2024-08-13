@@ -35,3 +35,8 @@ func destroy_wall():
 
 	collider.queue_free()
 	wall_destroyed.emit()
+
+func quiet_destroy():
+	meshes.current_state = DestructibleWallMeshes.DestructionState.Destroyed
+	meshes.set_meshes()
+	collider.queue_free()
