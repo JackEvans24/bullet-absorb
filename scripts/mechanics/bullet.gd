@@ -7,8 +7,10 @@ extends Area3D
 @onready var mesh: MeshInstance3D = $Mesh
 @onready var collider: CollisionShape3D = $Collider
 @onready var splash_particles: GPUParticles3D = $SplashParticles
+@onready var pre_absorb_particles: GPUParticles3D = $PreAbsorbParticles
 @onready var drop_power: DropPower = $DropPower
 @onready var absorb_handler: AbsorbHandler = $AbsorbHandler
+@onready var pre_absorb_handler: PreAbsorbHandler = $PreAbsorbHandler
 @onready var sfx: SoundBankUncached = $SoundBank
 
 var dead = false
@@ -17,11 +19,15 @@ var absorbed = false
 func _ready():
 	body_entered.connect(_on_body_entered)
 	absorb_handler.absorb_triggered.connect(_on_absorb_handler_triggered)
+	pre_absorb_handler.pre_absorb_triggered.connect(_on_bullet_preabsorb_triggered)
 
 func initialise(turret_basis: Basis):
 	basis = turret_basis.orthonormalized()
 	# add some random rotation to look direction
 	rotate_y(randf_range(-PI * accuracy, PI * accuracy))
+
+func _on_bullet_preabsorb_triggered(active: bool):
+	pre_absorb_particles.emitting = active
 
 func _physics_process(_delta):
 	if dead:

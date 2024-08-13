@@ -18,6 +18,22 @@ var stats: PlayerStats
 var can_absorb = true
 var is_absorbing = false
 
+func _ready():
+	destoy_area.area_entered.connect(_on_bullet_entered)
+	destoy_area.area_exited.connect(_on_bullet_exited)
+
+func _on_bullet_entered(bullet: Area3D):
+	if not windup.is_windup_active:
+		return
+	if not bullet.has_node("PreAbsorbHandler"):
+		return
+	bullet.get_node("PreAbsorbHandler").trigger_enter()
+
+func _on_bullet_exited(bullet: Area3D):
+	if not bullet.has_node("PreAbsorbHandler"):
+		return
+	bullet.get_node("PreAbsorbHandler").trigger_exit()
+
 func _process(delta):
 	if Input.is_action_just_pressed("absorb"):
 		process_absorb_start()
