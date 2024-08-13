@@ -101,8 +101,8 @@ radial_velocity_min = 2.0
 radial_velocity_max = 10.0
 radial_velocity_curve = SubResource("CurveTexture_2jx8u")
 gravity = Vector3(0, 0, 0)
-scale_min = 0.05
-scale_max = 0.2
+scale_min = 0.2
+scale_max = 0.4
 scale_curve = SubResource("CurveTexture_dceoy")
 
 [sub_resource type="SphereMesh" id="SphereMesh_02wge"]
@@ -596,7 +596,7 @@ draw_pass_1 = SubResource("SphereMesh_cp26l")
 [node name="AbsorbParticles" type="GPUParticles3D" parent="Absorb"]
 cast_shadow = 0
 emitting = false
-amount = 20
+amount = 30
 lifetime = 0.4
 one_shot = true
 explosiveness = 1.0
