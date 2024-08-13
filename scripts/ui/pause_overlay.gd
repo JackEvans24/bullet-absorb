@@ -15,7 +15,7 @@ func _ready():
 	quit_button.pressed.connect(_on_quit_pressed)
 
 func initialise(sfx_volume: float):
-	sfx_slider.value = sfx_volume
+	sfx_slider.set_value_no_signal(sfx_volume)
 
 func set_active():
 	restart_button.grab_focus()
