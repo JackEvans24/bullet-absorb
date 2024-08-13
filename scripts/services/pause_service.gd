@@ -36,6 +36,8 @@ func handle_escape():
 		pause_overlay.initialise(Sounds.sfx_volume)
 
 func restart_game():
+	Sounds.set_sounds_paused(false)
+
 	var tree = get_tree()
 	tree.call_group("bullet", "queue_free")
 	tree.reload_current_scene()
