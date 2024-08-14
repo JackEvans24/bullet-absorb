@@ -565,7 +565,8 @@ shape = SubResource("SphereShape3D_4kfv7")
 
 [node name="AbsorbWindup" type="Node3D" parent="Absorb"]
 script = ExtResource("20_rqr6o")
-fade_out_scale = 1.4
+fade_out_time = 0.05
+fade_out_scale = 0.01
 interpolation_curve = SubResource("Curve_c1w54")
 final_emission = 6.0
 absorb_material = ExtResource("4_poddg")
