@@ -33,6 +33,7 @@ func start_windup():
     is_fade_out_active = false
     current_windup_time = 0.0
     current_fade_out_time = 0.0
+    shader.set("shader_parameter/showRings", true)
     is_windup_active = true
     enable_in_particles(true)
 
@@ -41,6 +42,7 @@ func end_windup():
     current_fade_out_time = 0.0
     fade_out_starting_t = get_lerp_value()
     is_fade_out_active = true
+    shader.set("shader_parameter/showRings", false)
     enable_in_particles(false)
     enable_out_particles(false)
 
