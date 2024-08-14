@@ -14,6 +14,7 @@ extends Node3D
 @onready var mesh: MeshInstance3D = $Mesh
 @onready var in_particles: GPUParticles3D = $InwardParticles
 @onready var out_particles: GPUParticles3D = $OutwardParticles
+@onready var shader: ShaderMaterial = absorb_material.next_pass
 
 var stats: PlayerStats
 
@@ -75,7 +76,7 @@ func update_windup(delta: float):
     var absorb_size = get_absorb_size()
     mesh.scale = Vector3.ONE * absorb_size
     out_particles.process_material.emission_sphere_radius = absorb_size
-    absorb_material.emission_energy_multiplier = max_windup_emission * get_t()
+    set_emission(max_windup_emission * get_t())
 
     if not mesh.visible:
         mesh.visible = true
@@ -93,7 +94,11 @@ func update_fadeout(delta: float):
     var absorb_size = lerp(min_size, max_size, t)
 
     mesh.scale = Vector3.ONE * absorb_size
-    absorb_material.emission_energy_multiplier = final_emission * (1 - t)
+    set_emission(final_emission * (1 - t))
+
+func set_emission(emission: float):
+    absorb_material.emission_energy_multiplier = emission
+    shader.set("shader_parameter/sourceEmission", emission)
 
 func get_absorb_size() -> float:
     if not should_absorb:
