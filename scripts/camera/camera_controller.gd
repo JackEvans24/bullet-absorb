@@ -10,7 +10,6 @@ var target: Node3D:
 
 func _ready():
 	screen_shake.register(camera)
-	pass
 
 func add_impulse(id: ScreenShakeMapping.ScreenShakeId):
 	screen_shake.add_impulse(id)

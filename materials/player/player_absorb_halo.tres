@@ -1,8 +1,23 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://dq2ufo1kpypca"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dq2ufo1kpypca"]
+
+[ext_resource type="Shader" path="res://shaders/absorb_halo.gdshader" id="1_eb0pe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rfbdp"]
+render_priority = 0
+shader = ExtResource("1_eb0pe")
+shader_parameter/color = Color(0.196078, 1, 1, 1)
+shader_parameter/sourceEmission = 1.0
+shader_parameter/showRings = true
+shader_parameter/normalLimit = 0.8
+shader_parameter/fadeOff = 0.3
+shader_parameter/power = 3.0
+shader_parameter/ringCount = 1
+shader_parameter/ringSpeed = 1.6
+shader_parameter/ringAlphaMult = 0.2
 
 [resource]
+next_pass = SubResource("ShaderMaterial_rfbdp")
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.0392157)
 emission_enabled = true
 emission = Color(0.196078, 1, 1, 1)
-emission_energy_multiplier = 3.0

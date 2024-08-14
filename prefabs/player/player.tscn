@@ -565,8 +565,10 @@ shape = SubResource("SphereShape3D_4kfv7")
 
 [node name="AbsorbWindup" type="Node3D" parent="Absorb"]
 script = ExtResource("20_rqr6o")
+fade_out_time = 0.05
+fade_out_scale = 0.01
 interpolation_curve = SubResource("Curve_c1w54")
-max_emission = 5.0
+final_emission = 6.0
 absorb_material = ExtResource("4_poddg")
 
 [node name="Mesh" type="MeshInstance3D" parent="Absorb/AbsorbWindup"]
@@ -596,7 +598,7 @@ draw_pass_1 = SubResource("SphereMesh_cp26l")
 [node name="AbsorbParticles" type="GPUParticles3D" parent="Absorb"]
 cast_shadow = 0
 emitting = false
-amount = 20
+amount = 30
 lifetime = 0.4
 one_shot = true
 explosiveness = 1.0

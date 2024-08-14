@@ -46,6 +46,9 @@ func restart_game():
 	set_pause_state(false, true)
 
 	tree.call_group("bullet", "queue_free")
+	tree.call_group("power", "queue_free")
+	tree.call_group("power_orb", "queue_free")
+
 	tree.reload_current_scene()
 
 func _on_sfx_volume_changed(sfx_volume: float):

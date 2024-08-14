@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bkirx1sxnwhq" path="res://prefabs/pickups/power/dropped_power_ball.tscn" id="3_fkl0r"]
 [ext_resource type="PackedScene" uid="uid://inpjseyhox3m" path="res://prefabs/pickups/orb.tscn" id="4_cjnl0"]
 
-[node name="PowerOrb" type="Node3D"]
+[node name="PowerOrb" type="Node3D" groups=["power_orb"]]
 script = ExtResource("1_3y1fs")
 
 [node name="DropPower" type="Node3D" parent="."]

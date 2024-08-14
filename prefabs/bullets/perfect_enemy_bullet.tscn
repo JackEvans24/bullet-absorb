@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bwb55ll2hiucv"]
+[gd_scene load_steps=7 format=3 uid="uid://bwb55ll2hiucv"]
 
 [ext_resource type="PackedScene" uid="uid://dl5unqhv0x3ox" path="res://prefabs/bullets/player_bullet.tscn" id="1_jwyep"]
 [ext_resource type="SphereMesh" uid="uid://dwfxlir86ljls" path="res://models/bullets/default_bullet.tres" id="3_4por6"]
@@ -11,6 +11,13 @@ radius = 0.22
 material = ExtResource("4_ol50x")
 radius = 0.05
 height = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_kntqd"]
+material = ExtResource("4_ol50x")
+radius = 0.05
+height = 0.1
+radial_segments = 16
+rings = 8
 
 [node name="PerfectEnemyBullet" instance=ExtResource("1_jwyep")]
 collision_layer = 4
@@ -25,3 +32,6 @@ shape = SubResource("SphereShape3D_3fvnn")
 
 [node name="SplashParticles" parent="." index="2"]
 draw_pass_1 = SubResource("SphereMesh_41q4x")
+
+[node name="PreAbsorbParticles" parent="." index="3"]
+draw_pass_1 = SubResource("SphereMesh_kntqd")
