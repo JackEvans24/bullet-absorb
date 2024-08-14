@@ -571,6 +571,7 @@ final_emission = 6.0
 absorb_material = ExtResource("4_poddg")
 
 [node name="Mesh" type="MeshInstance3D" parent="Absorb/AbsorbWindup"]
+visible = false
 mesh = SubResource("SphereMesh_epkrr")
 skeleton = NodePath("../../DestroyArea")
 
