@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dw2qhr5e0dt47"
+path="res://.godot/imported/balcony-floor-corner.obj-b0fae2ddb6f07bf58da7cdb4a92e78ad.mesh"
+
+[deps]
+
+files=["res://.godot/imported/balcony-floor-corner.obj-b0fae2ddb6f07bf58da7cdb4a92e78ad.mesh"]
+
+source_file="res://models/environment/space_pack/balcony-floor-corner.obj"
+dest_files=["res://.godot/imported/balcony-floor-corner.obj-b0fae2ddb6f07bf58da7cdb4a92e78ad.mesh", "res://.godot/imported/balcony-floor-corner.obj-b0fae2ddb6f07bf58da7cdb4a92e78ad.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

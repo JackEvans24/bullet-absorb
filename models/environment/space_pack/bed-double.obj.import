@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bmlvmfefdunqw"
+path="res://.godot/imported/bed-double.obj-1ce5491420c49f6ddbacf52528b18bdd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bed-double.obj-1ce5491420c49f6ddbacf52528b18bdd.mesh"]
+
+source_file="res://models/environment/space_pack/bed-double.obj"
+dest_files=["res://.godot/imported/bed-double.obj-1ce5491420c49f6ddbacf52528b18bdd.mesh", "res://.godot/imported/bed-double.obj-1ce5491420c49f6ddbacf52528b18bdd.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

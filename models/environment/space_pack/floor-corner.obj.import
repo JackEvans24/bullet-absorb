@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bkpxwptck3js4"
+path="res://.godot/imported/floor-corner.obj-2102a5901b7571fd823b3334c115eb5e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/floor-corner.obj-2102a5901b7571fd823b3334c115eb5e.mesh"]
+
+source_file="res://models/environment/space_pack/floor-corner.obj"
+dest_files=["res://.godot/imported/floor-corner.obj-2102a5901b7571fd823b3334c115eb5e.mesh", "res://.godot/imported/floor-corner.obj-2102a5901b7571fd823b3334c115eb5e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

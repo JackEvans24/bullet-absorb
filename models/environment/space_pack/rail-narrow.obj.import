@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bny0yns3a8uqh"
+path="res://.godot/imported/rail-narrow.obj-79cf89f4b98ce0b312d6ff4a0f52cfd4.mesh"
+
+[deps]
+
+files=["res://.godot/imported/rail-narrow.obj-79cf89f4b98ce0b312d6ff4a0f52cfd4.mesh"]
+
+source_file="res://models/environment/space_pack/rail-narrow.obj"
+dest_files=["res://.godot/imported/rail-narrow.obj-79cf89f4b98ce0b312d6ff4a0f52cfd4.mesh", "res://.godot/imported/rail-narrow.obj-79cf89f4b98ce0b312d6ff4a0f52cfd4.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

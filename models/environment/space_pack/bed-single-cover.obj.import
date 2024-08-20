@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bat0l2oqwr22f"
+path="res://.godot/imported/bed-single-cover.obj-d2c03c3272a5c57425321b0de669842e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bed-single-cover.obj-d2c03c3272a5c57425321b0de669842e.mesh"]
+
+source_file="res://models/environment/space_pack/bed-single-cover.obj"
+dest_files=["res://.godot/imported/bed-single-cover.obj-d2c03c3272a5c57425321b0de669842e.mesh", "res://.godot/imported/bed-single-cover.obj-d2c03c3272a5c57425321b0de669842e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

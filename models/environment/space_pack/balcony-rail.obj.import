@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dnb10lpwv8gx7"
+path="res://.godot/imported/balcony-rail.obj-5b0a505e568f103901764a4f640032d0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/balcony-rail.obj-5b0a505e568f103901764a4f640032d0.mesh"]
+
+source_file="res://models/environment/space_pack/balcony-rail.obj"
+dest_files=["res://.godot/imported/balcony-rail.obj-5b0a505e568f103901764a4f640032d0.mesh", "res://.godot/imported/balcony-rail.obj-5b0a505e568f103901764a4f640032d0.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

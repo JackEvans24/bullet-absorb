@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b5x5m7mdfx5dq"
+path="res://.godot/imported/container-flat-open.obj-2230813ab84cd43962d590d4925e2309.mesh"
+
+[deps]
+
+files=["res://.godot/imported/container-flat-open.obj-2230813ab84cd43962d590d4925e2309.mesh"]
+
+source_file="res://models/environment/space_pack/container-flat-open.obj"
+dest_files=["res://.godot/imported/container-flat-open.obj-2230813ab84cd43962d590d4925e2309.mesh", "res://.godot/imported/container-flat-open.obj-2230813ab84cd43962d590d4925e2309.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

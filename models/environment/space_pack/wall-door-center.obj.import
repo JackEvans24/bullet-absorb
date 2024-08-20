@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b6gj4xd7exa5u"
+path="res://.godot/imported/wall-door-center.obj-f76b95635b1b2712268717a5021bf27c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wall-door-center.obj-f76b95635b1b2712268717a5021bf27c.mesh"]
+
+source_file="res://models/environment/space_pack/wall-door-center.obj"
+dest_files=["res://.godot/imported/wall-door-center.obj-f76b95635b1b2712268717a5021bf27c.mesh", "res://.godot/imported/wall-door-center.obj-f76b95635b1b2712268717a5021bf27c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
