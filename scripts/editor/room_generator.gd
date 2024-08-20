@@ -14,6 +14,8 @@ const ROT_NORTH := 10
 const ROT_EAST := 22
 const ROT_WEST := 16
 
+const FLOOR_OFFSET = Vector3(0, -1, 0)
+
 var DOOR_GRID_OFFSETS: Dictionary
 
 var doorway_rotations: Array[int] = [ROT_SOUTH, ROT_EAST, ROT_NORTH, ROT_WEST]
@@ -80,7 +82,7 @@ func generate_room():
 			elif z == depth - 1:
 				grid.set_cell_item(pos, INVISIBLE_WALL_ITEM, ROT_SOUTH)
 			else:
-				grid.set_cell_item(pos, FLOOR_ITEM)
+				grid.set_cell_item(pos + FLOOR_OFFSET, FLOOR_ITEM)
 
 	# Set start_doors
 	if (start_doors & 1 != 0) or (end_doors & 1 != 0):
@@ -111,6 +113,13 @@ func clear_grid(_value: bool):
 	grid.clear()
 
 func add_door(door_position: Vector3, door_rotation_index: DoorDirection, offset: float) -> Node3D:
+	var is_horizontal_door = door_rotation_index % 2 == 0
+	var grid_direction := Vector3.RIGHT if is_horizontal_door else Vector3.BACK
+
+	for x in range(offset - 1, offset + 1):
+		var cell = door_position + (grid_direction * x)
+		grid.set_cell_item(cell, -1)
+
 	var door: Node3D = door_scene.instantiate()
 	boundary.add_child(door)
 	var door_name = "Door%s" % DoorDirection.keys()[door_rotation_index]
