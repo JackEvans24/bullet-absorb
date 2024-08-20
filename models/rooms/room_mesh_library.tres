@@ -1,8 +1,14 @@
-[gd_resource type="MeshLibrary" load_steps=7 format=3 uid="uid://bydmgvg8cpigh"]
+[gd_resource type="MeshLibrary" load_steps=15 format=3 uid="uid://bydmgvg8cpigh"]
 
 [ext_resource type="ArrayMesh" uid="uid://cinc64e1aisgr" path="res://models/environment/space_pack/wall-banner.obj" id="1_gq5me"]
 [ext_resource type="ArrayMesh" uid="uid://b2b6irtbfrfee" path="res://models/environment/floor.res" id="2_2l5tp"]
 [ext_resource type="ArrayMesh" uid="uid://bg35h462mqaqm" path="res://models/environment/door_frame.res" id="2_tfbct"]
+[ext_resource type="ArrayMesh" uid="uid://lrfik7sp0mp2" path="res://models/environment/space_pack/container-flat.obj" id="3_bdae6"]
+[ext_resource type="ArrayMesh" uid="uid://dhqgjdj06phlv" path="res://models/environment/space_pack/pipe-end-colored.obj" id="4_d72tk"]
+[ext_resource type="ArrayMesh" uid="uid://ctyy6vo0ol8ck" path="res://models/environment/space_pack/pipe.obj" id="5_h6v2h"]
+[ext_resource type="ArrayMesh" uid="uid://b1xwkrd54uvjr" path="res://models/environment/space_pack/pipe-bend.obj" id="6_4iwde"]
+[ext_resource type="ArrayMesh" uid="uid://b2t6bixbhjv6f" path="res://models/environment/space_pack/structure-barrier-high.obj" id="7_41u1a"]
+[ext_resource type="ArrayMesh" uid="uid://cxklo12ae7166" path="res://models/environment/space_pack/container.obj" id="8_kdeom"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tbwxh"]
 
@@ -10,6 +16,11 @@
 size = Vector3(1, 2, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o31ow"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ce2s"]
+size = Vector3(0.5, 1, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lu0y7"]
 
 [resource]
 item/0/name = "wall"
@@ -20,7 +31,7 @@ item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 
 item/0/navigation_layers = 1
 item/1/name = "floor"
 item/1/mesh = ExtResource("2_2l5tp")
-item/1/mesh_transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, -0.5, 0)
+item/1/mesh_transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0.5, 0)
 item/1/shapes = []
 item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/1/navigation_layers = 1
@@ -30,13 +41,50 @@ item/2/mesh_transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0)
 item/2/shapes = [SubResource("BoxShape3D_uxc7s"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/2/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/2/navigation_layers = 1
-item/3/name = "InvisibleWall"
+item/3/name = "invisible_wall"
 item/3/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/3/shapes = [SubResource("BoxShape3D_o31ow"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/3/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/3/navigation_layers = 1
-item/4/name = ""
-item/4/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/4/shapes = []
+item/4/name = "pipe_end"
+item/4/mesh = ExtResource("4_d72tk")
+item/4/mesh_transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.5, 0)
+item/4/shapes = [SubResource("BoxShape3D_3ce2s"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
 item/4/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/4/navigation_layers = 1
+item/5/name = "pipe_up"
+item/5/mesh = ExtResource("5_h6v2h")
+item/5/mesh_transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.5, 0)
+item/5/shapes = []
+item/5/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/5/navigation_layers = 1
+item/6/name = "pipe_bend"
+item/6/mesh = ExtResource("6_4iwde")
+item/6/mesh_transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.5, 0)
+item/6/shapes = []
+item/6/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/6/navigation_layers = 1
+item/7/name = "pipe_along"
+item/7/mesh = ExtResource("5_h6v2h")
+item/7/mesh_transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.25, -0.25, 0)
+item/7/shapes = []
+item/7/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/7/navigation_layers = 1
+item/8/name = "struct"
+item/8/mesh = ExtResource("7_41u1a")
+item/8/mesh_transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.5, 0)
+item/8/shapes = []
+item/8/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/8/navigation_layers = 1
+item/9/name = "can"
+item/9/mesh = ExtResource("8_kdeom")
+item/9/mesh_transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.5, 0)
+item/9/shapes = [SubResource("BoxShape3D_lu0y7"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/9/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/9/navigation_layers = 1
+item/10/name = "can_flat"
+item/10/mesh = ExtResource("3_bdae6")
+item/10/mesh_transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.5, 0)
+item/10/shapes = []
+item/10/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/10/navigation_layers = 1
