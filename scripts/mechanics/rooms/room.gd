@@ -28,7 +28,7 @@ var boss_created := false
 var completed := false
 
 func _ready():
-	set_doors(data.untouched_doors)
+	set_doors(true)
 	player_detection.body_entered.connect(_on_player_entered)
 	initialised = true
 
@@ -148,7 +148,7 @@ func _on_reward_collected(reward_type: Reward.RewardType):
 	call_deferred("set_room_complete")
 
 func set_room_complete(quiet: bool = false):
-	set_doors(data.completed_doors, quiet)
+	set_doors(true, quiet)
 
 	handle_destructible_wall()
 
@@ -169,12 +169,12 @@ func _on_wall_destroyed():
 	wall_destroyed.emit(data.room_name, linked_room_name)
 
 func close_all_doors():
-	set_doors(0)
+	set_doors(false)
 
-func set_doors(doors: int, quiet: bool = false):
-	if not boundary.doors_need_changing(doors):
+func set_doors(open: bool, quiet: bool = false):
+	if not boundary.doors_need_changing(open):
 		return
-	boundary.set_doors(doors)
+	boundary.set_doors(open)
 
 	if quiet:
 		return

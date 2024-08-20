@@ -3,38 +3,18 @@ extends Node3D
 
 enum Walls {NORTH = 1, SOUTH = 2, EAST = 4, WEST = 8}
 
-var north_door: Door
-var south_door: Door
-var east_door: Door
-var west_door: Door
+var doors: Array[Door]
+var open: bool = false
 
 func _ready():
-	if has_node("DoorNorth"):
-		north_door = $DoorNorth
-	if has_node("DoorSouth"):
-		south_door = $DoorSouth
-	if has_node("DoorEast"):
-		east_door = $DoorEast
-	if has_node("DoorWest"):
-		west_door = $DoorWest
+	for child in get_children():
+		if child is Door:
+			doors.append(child)
 
-func doors_need_changing(doors: int) -> bool:
-	if north_door != null&&(doors&Walls.NORTH != 0) == north_door.is_closed:
-		return true
-	if south_door != null&&(doors&Walls.SOUTH != 0) == south_door.is_closed:
-		return true
-	if east_door != null&&(doors&Walls.EAST != 0) == east_door.is_closed:
-		return true
-	if west_door != null&&(doors&Walls.WEST != 0) == west_door.is_closed:
-		return true
-	return false
+func doors_need_changing(new_open: bool) -> bool:
+	return new_open != open
 
-func set_doors(doors: int):
-	if north_door != null:
-		north_door.set_closed(doors&Walls.NORTH == 0)
-	if south_door != null:
-		south_door.set_closed(doors&Walls.SOUTH == 0)
-	if west_door != null:
-		west_door.set_closed(doors&Walls.WEST == 0)
-	if east_door != null:
-		east_door.set_closed(doors&Walls.EAST == 0)
+func set_doors(new_open: bool):
+	open = new_open
+	for door in doors:
+		door.set_closed(not new_open)
