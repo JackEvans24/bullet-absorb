@@ -35,4 +35,4 @@ profile = ExtResource("6_b76ol")
 
 [resource]
 script = ExtResource("1_hurk4")
-lookup = Array[ExtResource("2_ij0wq")]([SubResource("Resource_s3gxh"), SubResource("Resource_u7qsj"), SubResource("Resource_lu5wv"), SubResource("Resource_epc82"), SubResource("Resource_8ng0f")])
+lookup = [SubResource("Resource_s3gxh"), SubResource("Resource_u7qsj"), SubResource("Resource_lu5wv"), SubResource("Resource_epc82"), SubResource("Resource_8ng0f")]

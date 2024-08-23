@@ -46,4 +46,4 @@ reward_type = 2
 
 [resource]
 script = ExtResource("1_dv3f8")
-rewards = Array[Resource("res://scripts/data/rewards/base_reward.gd")]([SubResource("Resource_354se"), SubResource("Resource_73lny"), SubResource("Resource_u48j3"), SubResource("Resource_lehvc"), SubResource("Resource_ai0v6"), SubResource("Resource_88f0h"), SubResource("Resource_opvhj")])
+rewards = [SubResource("Resource_354se"), SubResource("Resource_73lny"), SubResource("Resource_u48j3"), SubResource("Resource_lehvc"), SubResource("Resource_ai0v6"), SubResource("Resource_88f0h"), SubResource("Resource_opvhj")]
