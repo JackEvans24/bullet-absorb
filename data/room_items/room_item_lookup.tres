@@ -59,4 +59,4 @@ power_count = 0
 
 [resource]
 script = ExtResource("7_22vx4")
-lookup = [SubResource("Resource_3wqml"), SubResource("Resource_nu8n2"), SubResource("Resource_w0cpm"), SubResource("Resource_6nd6y"), SubResource("Resource_j8xqv"), SubResource("Resource_nybil")]
+lookup = Array[ExtResource("2_0xa5f")]([SubResource("Resource_3wqml"), SubResource("Resource_nu8n2"), SubResource("Resource_w0cpm"), SubResource("Resource_6nd6y"), SubResource("Resource_j8xqv"), SubResource("Resource_nybil")])
